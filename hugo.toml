@@ -1,4 +1,4 @@
-baseURL = "https://www.typo3lexikon.de/"
+baseURL = "http://hugo.typo3lexikon.de/"
 title = "Stefans TYPO3 Seite"
 languageCode = "de-DE"
 theme = "hugo-theme-relearn"
