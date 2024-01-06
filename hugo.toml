@@ -1,0 +1,34 @@
+baseURL = "https://www.typo3lexikon.de/"
+title = "Stefans TYPO3 Seite"
+languageCode = "de-DE"
+theme = "hugo-theme-relearn"
+
+[params]
+author.name = "Stefan Froemken"
+author.email = "froemken@gmail.com"
+description = "Stefan Frömken stellt auf seiner TYPO3-Seite Tutorials zu verschiedenen Themen von TYPO3 vor. Einfache Texte und Themen bezogene Bilder runden seine Tipps und Tricks ab"
+social.twitter = "StefanFroemken"
+themeVariant = [
+	{ identifier = "zen-auto",      name = "Zen Light/Dark", auto = [ "zen-light", "zen-dark" ] },
+	{ identifier = "zen-light"      },
+	{ identifier = "zen-dark"       },
+	{ identifier = "neon"           }
+]
+disableBreadcrumb = true
+disableNextPrev = false
+editURL = "https://github.com/froemken/typo3lexikon-hugo/edit/main/content/"
+disableSearch = false
+disableLandingPageButton = false
+ordersectionsby = "weight"
+showVisitedLinks = false
+disableLanguageSwitchingButton = true
+disableSearchHiddenPages = false
+disableSeoHiddenPages = true
+titleSeparator = "::"
+disableRootBreadcrumb = false
+disableInlineCopyToClipBoard = true
+disableHoverBlockCopyToClipBoard = false
+externalLinkTarget = "_blank"
+
+[outputs]
+  home = ["HTML", "RSS", "SEARCH"]
