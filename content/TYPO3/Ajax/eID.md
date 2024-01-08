@@ -139,7 +139,10 @@ class Request
 {
     public function variableText(ServerRequestInterface $request): ResponseInterface
     {
-        return new HtmlResponse(strip_tags($request->getQuery()['variable']));
+        $postParameters = $request->getBody();
+        $variable = $postParameters['variable'] ?? 'No Variable given';
+
+        return new HtmlResponse(strip_tags($variable));
     }
 }
 ```
