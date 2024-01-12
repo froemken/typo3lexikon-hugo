@@ -1,4 +1,5 @@
 +++
 title = "MySQL"
 date = 2024-01-09T21:01:02+01:00
+alwaysopen = false
 +++

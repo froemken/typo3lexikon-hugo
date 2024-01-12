@@ -3,12 +3,9 @@ title = "Die Log Levels"
 linkTitle = "Log Levels"
 date = 2024-01-06T23:38:01+01:00
 slug = "loglevels"
-weight = 1
 +++
 
-Die Logging-API arbeitet mit *unterschiedlichen Levels*, mittels denen Sie Ihre Informationen 
-nach Wichtigkeit gruppieren können. Unten sind die Levels, die in `\TYPO3\CMS\Core\Log\LogLevel`
-als Konstante deklariert wurden.
+Die Logging-API arbeitet mit *unterschiedlichen Levels*, mittels denen Sie Ihre Informationen nach Wichtigkeit gruppieren können. Unten sind die Levels, die in `\TYPO3\CMS\Core\Log\LogLevel` als Konstante deklariert wurden.
 
 ## Log Levels
 

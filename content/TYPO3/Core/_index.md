@@ -2,7 +2,6 @@
 title = "Core"
 date = 2024-01-06T19:10:57+01:00
 slug = "core"
-weight = 2
 alwaysopen = false
 +++
 

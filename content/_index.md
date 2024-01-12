@@ -3,6 +3,7 @@ archetype = "home"
 title = "Stefans TYPO3 Seite"
 linkTitle = "Startseite"
 alwaysopen = true
+ordersectionsby = "weight"
 +++
 
 ## Tutorials, Tipps und Tricks von Stefan Frömken

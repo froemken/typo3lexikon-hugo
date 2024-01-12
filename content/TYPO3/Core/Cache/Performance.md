@@ -3,7 +3,6 @@ title = "Cache: Performance"
 linkTitle = "Performance"
 date = 2024-01-06T22:32:33+01:00
 slug = "performance"
-weight = 4
 +++
 
 Für diesen Test habe ich die 4 Core Caches
@@ -13,10 +12,7 @@ Für diesen Test habe ich die 4 Core Caches
 - extbase_datamapfactory_datamap
 - cache_rootline
 
-auf die gleichen Cachebackends abgeändert. Ich habe sowohl das Listenmodul als auch den
-Extensionmanager mit jedem Backend 3 mal hintereinander aufgerufen. Dabei wurde die `set()`
-Methode des Backends 71 mal aufgerufen. Bei den Angaben handelt es sich um die Summe aller
-Zeiten in einem Request in Sekunden.
+auf die gleichen Cachebackends abgeändert. Ich habe sowohl das Listenmodul als auch den Extensionmanager mit jedem Backend 3 mal hintereinander aufgerufen. Dabei wurde die `set()` Methode des Backends 71 mal aufgerufen. Bei den Angaben handelt es sich um die Summe aller Zeiten in einem Request in Sekunden.
 
 ## ApcuBackend
 
@@ -66,8 +62,4 @@ Bei dem Testserver handelt es sich um ein SSD basiertes RAID10 mit 4 Festplatten
 
 ## Fazit
 
-Durch den Einsatz von APCu konnte gegenüber zum Typo3DatabaseBackend eine 41-fache
-Beschleunigung erreicht werden. Was mich jedoch erstaunt ist, dass das SimpleFileBackend 
-gegenüber dem Typo3DatabaseBackend um Faktor 4 schneller ist. Ich vermute, dass dieser
-Unterschied vor allem durch den Einsatz des SSD RAIDs kommt und dass keine Authorisierung
-und Analyse der Datenbankquery wie im Typo3DatabaseBackend von Nöten ist.
+Durch den Einsatz von APCu konnte gegenüber zum Typo3DatabaseBackend eine 41-fache Beschleunigung erreicht werden. Was mich jedoch erstaunt ist, dass das SimpleFileBackend gegenüber dem Typo3DatabaseBackend um Faktor 4 schneller ist. Ich vermute, dass dieser Unterschied vor allem durch den Einsatz des SSD RAIDs kommt und dass keine Authorisierung und Analyse der Datenbankquery wie im Typo3DatabaseBackend vonnöten ist.
