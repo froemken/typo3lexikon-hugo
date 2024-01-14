@@ -9,6 +9,4 @@ Stefan Frömken\
 Lerchenweg 3\
 51789 Lindlar
 
-[froemken(at)gmail.com](mailto:froemken@gmail.com)
-
 Telefon: 02266-9048510
