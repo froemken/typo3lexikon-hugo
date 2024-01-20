@@ -15,6 +15,7 @@ themeVariant = [
 	{ identifier = "neon"           }
 ]
 disableBreadcrumb = false
+disableExplicitIndexURLs = true
 disableNextPrev = false
 editURL = "https://github.com/froemken/typo3lexikon-hugo/edit/main/content/"
 disableSearch = false
