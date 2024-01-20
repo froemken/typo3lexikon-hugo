@@ -31,4 +31,9 @@ disableHoverBlockCopyToClipBoard = false
 externalLinkTarget = "_blank"
 
 [outputs]
-  home = ["HTML", "RSS", "SEARCH"]
+  home = ["html", "rss", "search"]
+#  page = ["html"]
+#  rss = ["rss"]
+#  section = ["html", "rss"]
+#  taxonomy = ["html", "rss"]
+#  term = ["html", "rss"]
