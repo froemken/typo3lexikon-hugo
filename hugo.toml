@@ -38,3 +38,7 @@ externalLinkTarget = "_blank"
 #  section = ["html", "rss"]
 #  taxonomy = ["html", "rss"]
 #  term = ["html", "rss"]
+
+# Allow HTML in Markdown. Mostly needed for "<br>"
+[markup.goldmark.renderer]
+    unsafe = true
