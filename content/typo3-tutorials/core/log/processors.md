@@ -8,23 +8,23 @@ aliases = ["processors.html"]
 
 Die von TYPO3 mitgelieferten Writer arbeiten mit der LogRecord Klasse zusammen, die die wichtigsten Zusatzinformationen zu Eurem Logeintrag bereithält:
 
-**requestId**: 
-> Eine eindeutige ID, die den aktuellen Request identifiziert
+**requestId**
+: Eine eindeutige ID, die den aktuellen Request identifiziert
 
 **created**:
-> Aktueller Zeitstempel. Realisiert mit PHP:microtime
+: Aktueller Zeitstempel. Realisiert mit `PHP:microtime`
 
 **component**:
-> Der Name des Loggers. Meist ein PHP Klassenname inkl. Namespace
+: Der Name des Loggers. Meist ein PHP Klassenname inkl. Namespace
 
 **level**:
-> Level, Wichtigkeit des Protokol Eintrages. Es wird der Integer des Levels geloggt. Also 4 für WARNING
+: Level, Wichtigkeit des Protokol Eintrages. Es wird der Integer des Levels geloggt. Also 4 für WARNING
 
 **message**:
-> Eure Nachricht, die protokolliert werden soll
+: Eure Nachricht, die protokolliert werden soll
 
 **data**:
-> Ein paar zusätzliche Daten, die parallel zu Eurer Nachricht als Arary mit abgespeichert werden sollen
+: Ein paar zusätzliche Daten, die parallel zu Eurer Nachricht als Arary mit abgespeichert werden sollen
 
 Mithilfe der Methode `__toString()` werden die Daten für den FileWriter und mit der Methode `toArray()` automatisch für den DatabaseWriter entsprechend aufbereitet.
 
