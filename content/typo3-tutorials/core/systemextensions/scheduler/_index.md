@@ -8,7 +8,7 @@ aliases = ["scheduler.html"]
 
 Die System-Extension `scheduler` listet alle im System registrierten Tasks auf und kann diese entsprechend starten, bearbeiten, löschen und den aktuellen Status des jeweiligen Tasks wiedergeben.
 
-In diesem Tutorial will ich euch zeigen, wie Ihr selbst einen Task anlegen könnt. Als Beispiel habe ich mir einen einfachen Pinger ausgedacht, der jede viertel Stunde überprüft, ob ein Server im Internet noch erreichbar ist.
+In diesem Tutorial will ich euch zeigen, wie ihr selbst einen Task anlegen könnt. Als Beispiel habe ich mir einen einfachen Pinger ausgedacht, der jede viertel Stunde überprüft, ob ein Server im Internet noch erreichbar ist.
 
 Wer mehr über die Entstehung der Extension `scheduler` erfahren will, sollte mal bei [typo3blogger](https://typo3blogger.de/vom-standalone-cli-zum-scheduler/) vorbeischauen.
 
@@ -26,7 +26,7 @@ Enable logging
 
 ## Installation überprüfen
 
-In der linken Navigation befindet sich nun ein neuer Menüpunkt `Planer`. In der Selectbox könnt Ihr nun auf `Konfiguration prüfen` wechseln und erhaltet eine Warnung dafür, dass der Planer noch nie ausgeführt wurde, eine Fehlermeldung, dass der User `_cli_scheduler` nicht existiert und eine OK-Meldung darüber, dass der Webuser Script ausführen darf.
+In der linken Navigation befindet sich nun ein neuer Menüpunkt `Planer`. In der Selectbox könnt ihr nun auf `Konfiguration prüfen` wechseln und erhaltet eine Warnung dafür, dass der Planer noch nie ausgeführt wurde, eine Fehlermeldung, dass der User `_cli_scheduler` nicht existiert und eine OK-Meldung darüber, dass der Webuser Script ausführen darf.
 
 ### Last run (letzte Ausführung)
 
@@ -34,7 +34,7 @@ Da wir die Extension frisch installiert haben sollte jedem klar sein, warum hier
 
 ### Backend-Benutzer für den Planer
 
-Wenn Ihr im Backend eingeloggt seid und einen Task manuell startet, dann wird der aktuelle BE-User dazu verwendet. Damit Ihr euch aber nicht jedes Mal einloggen müsst, um einen Task zu starten, benötigen wir einen nur-so-da-Backend-Benutzer, unter dem dann der Task ausgeführt werden kann. Dieser User ist fest vorgegeben und heißt:
+Wenn ihr im Backend eingeloggt seid und einen Task manuell startet, dann wird der aktuelle BE-User dazu verwendet. Damit ihr euch aber nicht jedes Mal einloggen müsst, um einen Task zu starten, benötigen wir einen nur-so-da-Backend-Benutzer, unter dem dann der Task ausgeführt werden kann. Dieser User ist fest vorgegeben und heißt:
 
 `_cli_scheduler`
 
@@ -44,7 +44,7 @@ Legt also jetzt diesen User an und dann weiter zum Server
 
 ## Server einrichten
 
-Das wird schon etwas schwieriger, denn wir benötigen einen SSH-Zugang zu unserem Server. Solche Zugänge werden meist aber nur von teureren Webpaketen angeboten. Als Alternative könnt Ihr es auch mal mit der phpshell versuchen. Das ist zwar kein echter Shellzugriff, aber damit könnt ihr zumindest mal versuchen einen Cronjob anzulegen. Einige Provider bieten auch eine Cronjob-Verwaltung im Hauseigenen Verwaltungstool an wie z.B. jweiland.de. Dort können Cronjobs sehr einfach eingerichtet, bearbeitet und gestartet werden.
+Das wird schon etwas schwieriger, denn wir benötigen einen SSH-Zugang zu unserem Server. Solche Zugänge werden meist aber nur von teureren Webpaketen angeboten. Als Alternative könnt ihr es auch mal mit der phpshell versuchen. Das ist zwar kein echter Shellzugriff, aber damit könnt ihr zumindest mal versuchen einen Cronjob anzulegen. Einige Provider bieten auch eine Cronjob-Verwaltung im Hauseigenen Verwaltungstool an wie z.B. jweiland.de. Dort können Cronjobs sehr einfach eingerichtet, bearbeitet und gestartet werden.
 
 Damals musste für jeden Task, der ausgeführt werden sollte, ein solcher Cronjob-Eintrag auf dem Server eingerichtet werden. Dank des Systems hinter scheduler brauchen wir jetzt nur noch einen globalen Cronjob einzurichten und können dann aber beliebig viele Tasks in TYPO3 selbst anlegen, die dann alle auf den globalen Cronjob zugreifen.
 
@@ -94,7 +94,7 @@ In unserem Fall reicht ein Cronjob mit einem Intervall von 15 Minuten völlig au
 */15 * * * * /usr/bin/php5 /var/www/cms/typo3/cli_dispatch.phpsh scheduler
 ```
 
-Hier seht Ihr auch endlich warum wir den php-Pfad benötigten.
+Hier seht ihr auch endlich warum wir den php-Pfad benötigten.
 
 Für Windows-Server gibt es einen eigenen Abschnitt in der englischen Originaldokumentation.
 
@@ -106,7 +106,7 @@ Deaktivieren
 : Haken rein und der Task ist deaktiviert.
 
 Klasse
-: Hier könnt Ihr auswählen, welchen Task Ihr einrichten wollt.
+: Hier könnt ihr auswählen, welchen Task ihr einrichten wollt.
 
 Typ
 : Soll der Task nur einmal zu einem bestimmten Termin oder "wiederkehrend" an Hand eines Intervalls gestartet werden.
@@ -114,6 +114,6 @@ Typ
 Start/Stop/Häufigkeit
 : Je nach Typ erscheinen diese Felder, die eigentlich selbsterklärend sein sollten.
 
-ALLE Felder, die ich hier nicht aufgelistet sind, gehören zum Task selbst. So gibt es bei dem einen Task ein zusätzliches E-Mail-Feld, weil Dieser mit jeder Ausführung eine E-Mail sendet und der Schlafen-Task hat ein eigenes Feld für wie lange er schlafen soll. Auch in unserer Extension werde ich zeigen, wie Ihr eigene Felder Eurem Task hinzufügen könnt.
+ALLE Felder, die ich hier nicht aufgelistet sind, gehören zum Task selbst. So gibt es bei dem einen Task ein zusätzliches E-Mail-Feld, weil Dieser mit jeder Ausführung eine E-Mail sendet und der Schlafen-Task hat ein eigenes Feld für wie lange er schlafen soll. Auch in unserer Extension werde ich zeigen, wie ihr eigene Felder Eurem Task hinzufügen könnt.
 
-Nach einem Klick auf Speichern landet Ihr wieder bei der Auflistung in der Euer erstellter Tasks nun auch erscheinen sollte.
+Nach einem Klick auf Speichern landet ihr wieder bei der Auflistung in der Euer erstellter Tasks nun auch erscheinen sollte.

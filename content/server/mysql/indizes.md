@@ -44,7 +44,7 @@ Diesmal enthalten die Spalten possible_keys und key den Wert alias. MySQL hat al
 EXPLAIN SELECT alias FROM pages WHERE alias="Impressum";
 ```
 
-Obwohl sich diese Abfrage nicht groß von Ihren Vorgängern unterscheidet, hat diese jedoch einen enormen Geschwindigkeitsschub erhalten. In Spalte `Extra` finden wir dieses Mal noch den zusätzlichen Hinweis auf "Using index". Das bedeutet, das MySQL auch in diesem Fall in seinem "Telefonbuch" nach "Impressum" sucht, aber dieses Mal hat MySQL anhand unserer Query festgestellt, dass wir nur den Wert aus der Spalte "alias" haben wollen. Dieser Wert steht aber schon im Index selbst drin. Warum also sollte MySQL nun noch den Positionseintrag aus dem Indes auslesen und die Spalte `alias` aus der Datenbanktabelle holen, wenn der vollständige Wert doch im Index selbst drin steht?
+Obwohl sich diese Abfrage nicht groß von ihren Vorgängern unterscheidet, hat diese jedoch einen enormen Geschwindigkeitsschub erhalten. In Spalte `Extra` finden wir dieses Mal noch den zusätzlichen Hinweis auf "Using index". Das bedeutet, das MySQL auch in diesem Fall in seinem "Telefonbuch" nach "Impressum" sucht, aber dieses Mal hat MySQL anhand unserer Query festgestellt, dass wir nur den Wert aus der Spalte "alias" haben wollen. Dieser Wert steht aber schon im Index selbst drin. Warum also sollte MySQL nun noch den Positionseintrag aus dem Indes auslesen und die Spalte `alias` aus der Datenbanktabelle holen, wenn der vollständige Wert doch im Index selbst drin steht?
 
 Jeder Zugriff auf die Festplatte kostet Zeit, weil die Festplatte das langsamste Glied (Flaschenhals) in einem PC-System ist. Der Arbeitsspeicher hingegen ist mehrere 1000x schneller und wir sollten uns immer bemühen unsere SQL-Abfragen in Verbindung mit Indizes zu erstellen.
 
@@ -128,7 +128,7 @@ Ihr könnt Spalten aus der Reihenfolge entfernen (in diesem Fall: sorting), aber
 EXPLAIN SELECT * FROM pages WHERE deleted=0 AND sorting=64 GROUP BY pid, hidden;
 ```
 
-Auch hier gilt wieder highspeed, wenn Ihr nur Felder aus dem Index benennt:
+Auch hier gilt wieder highspeed, wenn ihr nur Felder aus dem Index benennt:
 
 ```mysql
 EXPLAIN SELECT deleted, hidden, sorting FROM pages WHERE deleted=0 AND sorting=64 GROUP BY pid, hidden;

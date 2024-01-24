@@ -25,7 +25,7 @@ APCu Modul von PECL herunterladen und mit z.B. mc oder tar entpacken. Danach in 
 cd apcu-5.1.18
 ```
 
-Sonderbehandlung für PHP 7.3: Bei Domainfactory wird das PCRE2 Paket nicht gefunden. Also muss dies manuell heruntergeladen werden, entpacken und `./configure --enable-jit` mit anschließendem `make` ausführen. Im `src` Verzeichnis befindet sich eine `pcre.h` Datei. Diese muss in das include Verzeichnis von APCu kopiert werden, bevor Ihr mit dem nächsten Schritt weiter macht.
+Sonderbehandlung für PHP 7.3: Bei Domainfactory wird das PCRE2 Paket nicht gefunden. Also muss dies manuell heruntergeladen werden, entpacken und `./configure --enable-jit` mit anschließendem `make` ausführen. Im `src` Verzeichnis befindet sich eine `pcre.h` Datei. Diese muss in das include Verzeichnis von APCu kopiert werden, bevor ihr mit dem nächsten Schritt weiter macht.
 
 ## APCu kompilieren
 

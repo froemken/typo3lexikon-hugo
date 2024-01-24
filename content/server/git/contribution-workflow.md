@@ -22,19 +22,19 @@ und vielen mehr.
 
 Um am Quellcode von TYPO3 Flow mitzuentwickeln wird eine sogenannte Contributor License Agreement benötigt. Diese klärt die Nutzerrechte zwischen der TYPO3 Association und euch. Peter Kraume hat dazu einen sehr ausführlichen Bericht auf [typo3blogger](https://typo3blogger.de/was-ist-eigentlich-ein-contributor-license-agreement/) gepostet.
 
-Alle Projekte, die auf Basis von TYPO3 Flow entwickelt wurden und zurückportiert wurden in den Quellcode von TYPO3 CMS wie zum Beispiel `Extbase` und `Fluid` erfordern ebenfalls diese unterschriebene CLA. Ohne CLA könnt Ihr keine Patches für diese Extensions committen.
+Alle Projekte, die auf Basis von TYPO3 Flow entwickelt wurden und zurückportiert wurden in den Quellcode von TYPO3 CMS wie zum Beispiel `Extbase` und `Fluid` erfordern ebenfalls diese unterschriebene CLA. Ohne CLA könnt ihr keine Patches für diese Extensions committen.
 
 Nur der reine TYPO3-Quellcode und die nicht von TYPO3 Flow zurückportierten System-Extensions benötigen diese CLA nicht.
 
-Es gibt wohl schon Überlegungen, die CLA auch für den TYPO3 Quellcode erforderlich zu machen. Da es also nur noch eine Frage der Zeit ist, könnt Ihr die CLA auch jetzt schon unterschreiben.
+Es gibt wohl schon Überlegungen, die CLA auch für den TYPO3 Quellcode erforderlich zu machen. Da es also nur noch eine Frage der Zeit ist, könnt ihr die CLA auch jetzt schon unterschreiben.
 
 ## 3. Einen SSH-Key erstellen
 
 Die Verbindung zwischen euch und dem TYPO3-Server muss immer abgesichert sein. Dafür gibt es SSH-Keys. [Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) hat dazu eine gute englische Dokumentation.
 
 - Loggt Euch mit Eurem TYPO3-Account auf dem Review-Server ein
-- Klickt dann oben rechts auf `Settings` und dann links auf `SSH Public Keys`. Wenn Ihr bereits über einen public SSH-Key verfügt, dann könnt Ihr diesen nun hier eintragen und die weiteren Punkte von Schritt 3 überspringen.
-- Prüft, ob Ihr bereits einen SSH-Key eingerichtet habt
+- Klickt dann oben rechts auf `Settings` und dann links auf `SSH Public Keys`. Wenn ihr bereits über einen public SSH-Key verfügt, dann könnt ihr diesen nun hier eintragen und die weiteren Punkte von Schritt 3 überspringen.
+- Prüft, ob ihr bereits einen SSH-Key eingerichtet habt
 
   Öffnet eine Shell und wechselt in das versteckte `.ssh` -Verzeichnis:
 
@@ -44,11 +44,11 @@ Die Verbindung zwischen euch und dem TYPO3-Server muss immer abgesichert sein. D
 
   Mit `ls -l` lasst ihr euch den Inhalt dieses Verzeichnisses anzeigen.
 
-  Falls Ihr in diesem Verzeichnis bereits einen Key erstellt habt, dann editiert die Datei (üblicherweise `id_rsa.pub`) und kopiert den Inhalt auf den Review-Server.
+  Falls ihr in diesem Verzeichnis bereits einen Key erstellt habt, dann editiert die Datei (üblicherweise `id_rsa.pub`) und kopiert den Inhalt auf den Review-Server.
 
 - Das versteckte Verzeichnis erstellen:
 
-  Falls das Verzeichnis noch nicht existieren sollte, dann könnt Ihr es folgendermaßen erstellen:
+  Falls das Verzeichnis noch nicht existieren sollte, dann könnt ihr es folgendermaßen erstellen:
 
   ```shell
   mkdir ~/.ssh
@@ -62,7 +62,7 @@ Die Verbindung zwischen euch und dem TYPO3-Server muss immer abgesichert sein. D
   ssh-keygen -t rsa -C "DeineEmailAdresse"
   ```
 
-  Ihr werdet gefragt, wohin der SSH-Key abgelegt werden soll. Wenn Ihr noch keinen SSH-Key generiert habt, dann könnt Ihr den Pfad, wie vorgeschlagen, mit Enter bestätigen. Falls Ihr parallel zu Eurem bereits vorhandenem SSH-Key einen zusätzlichen, nur für TYPO3 gültigen SSH-Key generieren wollt, müsst Ihr den vorgeschlagenen Dateinamen anpassen. Z.B. `/home/stefan/.ssh/typo3`
+  Ihr werdet gefragt, wohin der SSH-Key abgelegt werden soll. Wenn ihr noch keinen SSH-Key generiert habt, dann könnt Ihr den Pfad, wie vorgeschlagen, mit Enter bestätigen. Falls Ihr parallel zu Eurem bereits vorhandenem SSH-Key einen zusätzlichen, nur für TYPO3 gültigen SSH-Key generieren wollt, müsst Ihr den vorgeschlagenen Dateinamen anpassen. Z.B. `/home/stefan/.ssh/typo3`
 
   Es folgt die Frage nach einer Passphrase. Nennen wir es mal vereinfacht `Passwort`. Ihr könnt selber entscheiden, ob ihr eurem SSH-Key ein Passwort mitgeben wollt. Wenn jedoch ein Passwort angegeben wird, dann wird euch der Review-Server mit jeder neuen SSH-Verbindung, die ihr später aufbauen werden nach diesem Passwort fragen. Sicherheit geht vor, aber kein Passwort anzugeben funktioniert später genauso gut.
 

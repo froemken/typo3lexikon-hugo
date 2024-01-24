@@ -11,7 +11,7 @@ aliases = ["be.html"]
 | Parameter | Erklärung | Standardwert |
 |-----------|-----------|--------------|
 | pageTitle | BE-Module werden in einem Frame dargestellt, von daher macht ein Seitentitel wenig sind. Einfach leer lassen | leer|
-| enableJumpToUrl | Lasst diesen Parameter eingeschaltet, wenn Ihr den ActionMenu-ViewHelper verwenden wollt, da dieser die entsprechenden JavaScripte dazu liefert. | aktiviert |
+| enableJumpToUrl | Lasst diesen Parameter eingeschaltet, wenn ihr den ActionMenu-ViewHelper verwenden wollt, da dieser die entsprechenden JavaScripte dazu liefert. | aktiviert |
 | enableClickMenu | Wenn aktiviert, wird das JavaScript für die Contextmenüs eingebunden | aktiviert |
 | loadPrototype | Wenn aktiviert, wird das Prototype-JS-Framework eingebunden | aktiviert |
 | loadScriptaculous | Wenn aktiviert, wird das Zusatzpaket für Prototype eingebunden | deaktiviert |
@@ -23,9 +23,9 @@ aliases = ["be.html"]
 | addCssFile | Eine CSS-Datei einbinden | keine |
 | addJsFile | Eine JavaScript-Datei einbinden | keine |
 
-Zuallererst solltet Ihr Euch eine grundsätzliche Frage stellen: Willst Du etwas entwickeln ganz im Stile von TYPO3 oder willst Du etwas völlig Eigenes bauen. Wenn Ihr Euch für etwas völlig Eigenes entscheidet, dann braucht Ihr diesen ViewHelper überhaupt nicht. Bindet in diesem Falle Eure benötigten StyleSheets und JavaScripte selbst ein.
+Zuallererst solltet ihr Euch eine grundsätzliche Frage stellen: Willst Du etwas entwickeln ganz im Stile von TYPO3 oder willst Du etwas völlig Eigenes bauen. Wenn ihr Euch für etwas völlig Eigenes entscheidet, dann braucht ihr diesen ViewHelper überhaupt nicht. Bindet in diesem Falle Eure benötigten StyleSheets und JavaScripte selbst ein.
 
-Wenn Ihr allerdings etwas bauen wollt, dass sich an das TYPO3-Design anlehnt und möglichst kompatibel ist, dann solltet Ihr diesen ViewHelper auf jeden Fall verwendet. Das was damals zu Zeiten von MediumDoc und Co. eingebunden wurde, benötigt heute nur noch diesen Zweizeiler mit knapp 10 Parametern.
+Wenn ihr allerdings etwas bauen wollt, dass sich an das TYPO3-Design anlehnt und möglichst kompatibel ist, dann solltet ihr diesen ViewHelper auf jeden Fall verwendet. Das was damals zu Zeiten von MediumDoc und Co. eingebunden wurde, benötigt heute nur noch diesen Zweizeiler mit knapp 10 Parametern.
 
 ## f:be.pageInfo
 
@@ -50,7 +50,7 @@ Sehr geiles Teil. Was wir aus dem Modul Web->Liste kennen können wir nun selbst
 | tableName | Der Name der Tabelle ||
 | fieldList | Welche Spalten der Tabelle sollen angezeigt werden (Arraynotation) ||
 | storagePid | Die Daten welcher Seite sollen angezeigt werden? Wenn nichts anderen angegeben wurde, werden die Datensätze der Seite angezeigt, die über persistence.storagePid angegeben wurde. ||
-| levels | Falls die Seite aus storagePid noch Unterordner enthält, könnt Ihr hier angeben wie viele Ebenen tiefer nach weiteren Datensätzen gesucht werden soll. | 1 |
+| levels | Falls die Seite aus storagePid noch Unterordner enthält, könnt ihr hier angeben wie viele Ebenen tiefer nach weiteren Datensätzen gesucht werden soll. | 1 |
 | filter | Gebt hier ein Suchwort ein, nach dem Eure Datensätze gefiltert werden sollen. ||
 | recordsPerPage | Wie viele Datensätze dürfen maximal auf einer Seite angezeigt werden. | Angabe aus TCA, sonst 100 |
 | sortField | Nach welchem Feld sollen die gefundenen Datensätze sortiert werden |
@@ -78,7 +78,7 @@ Obwohl wir hier den Parameter `recordsPerPage` nicht angegeben haben, werden uns
 
 ### Beispiel: Datensatz direkt anzeigen
 
-Normalerweise muss man immer über das Modul Web->Anzeigen oder über das Kontextmenü navigieren, um eine erste Preview seines gewählten Datensatzes zu erhalten. Viel einfacher geht es, wenn man den Titel eines Datensatzes (Der Wert aus der ersten Spalte) mit dieser Möglichkeit verlinkt. Hierfür gibt es den Parameter clickTitleMode, den Ihr auf "show" setzen müsst. Zusätzlich habe ich in dieses Beispiel nach einen Wechselnden Hintergrund je Datenzeile implementiert.
+Normalerweise muss man immer über das Modul Web->Anzeigen oder über das Kontextmenü navigieren, um eine erste Preview seines gewählten Datensatzes zu erhalten. Viel einfacher geht es, wenn man den Titel eines Datensatzes (Der Wert aus der ersten Spalte) mit dieser Möglichkeit verlinkt. Hierfür gibt es den Parameter clickTitleMode, den ihr auf "show" setzen müsst. Zusätzlich habe ich in dieses Beispiel nach einen Wechselnden Hintergrund je Datenzeile implementiert.
 
 ```html
 <f:be.tableList tableName="tt_content" fieldList="{0: 'header', 1: 'bodytext'}" storagePid="1" levels="5" alternateBackgroundColors="TRUE" clickTitleMode="show" />

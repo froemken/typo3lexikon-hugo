@@ -151,7 +151,7 @@ document.querySelector('#ajax').addEventListener('click', event => {
 
 ## Zugriff auf die Datenbank mit Callable
 
-Mit TYPO3 7.4 wurde PSR-7-Support für die eID-Schnittstelle implementiert. Wenn Ihr diesen neuen Standard verwenden wollt, müssen Eure eID-Scripte vom ControllerInterface erben. Ab TYPO3 7.5 ist diese Vererbung jedoch nicht mehr notwendig.
+Mit TYPO3 7.4 wurde PSR-7-Support für die eID-Schnittstelle implementiert. Wenn ihr diesen neuen Standard verwenden wollt, müssen Eure eID-Scripte vom ControllerInterface erben. Ab TYPO3 7.5 ist diese Vererbung jedoch nicht mehr notwendig.
 
 Die Registrierung der eID-Keys schaut in der `ext_localconf.php` nun ein wenig anders aus:
 
@@ -159,15 +159,15 @@ Die Registrierung der eID-Keys schaut in der `ext_localconf.php` nun ein wenig a
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['sfapi_database'] = \StefanFroemken\Sfapi\Ajax\Database::class . '::processRequest';
 ```
 
-Anstatt einfach nur die PHP-Datei anzugeben, müsst Ihr nun ein `callable` eintragen. Dabei handelt es sich um eine Kombination aus Klassennamen und Methodennamen getrennt durch 2 Doppelpunkte. Eine Array-Angabe wie `[$class, $method]` ist hier nicht erlaubt, weil TYPO3 intern mit `strpos()` auf das Vorhandensein von zwei Doppelpunkten `::` prüft, um zwischen Klassenname und Methodenname zu unterscheiden.
+Anstatt einfach nur die PHP-Datei anzugeben, müsst ihr nun ein `callable` eintragen. Dabei handelt es sich um eine Kombination aus Klassennamen und Methodennamen getrennt durch 2 Doppelpunkte. Eine Array-Angabe wie `[$class, $method]` ist hier nicht erlaubt, weil TYPO3 intern mit `strpos()` auf das Vorhandensein von zwei Doppelpunkten `::` prüft, um zwischen Klassenname und Methodenname zu unterscheiden.
 
-Der aufzurufenden Methode (in diesem Fall "processRequest") werden 2 Parameter übergeben. Einmal das Request-Objekt, das Daten wie GET und POST beinhaltet und zum anderen ein leeres Response-Objekt, das eine body-Eigenschaft vom Typ Stream beinhaltet, der mit php://temp initialisiert wurde. Somit könnt Ihr nicht einfach einen Text an die 
+Der aufzurufenden Methode (in diesem Fall "processRequest") werden 2 Parameter übergeben. Einmal das Request-Objekt, das Daten wie GET und POST beinhaltet und zum anderen ein leeres Response-Objekt, das eine body-Eigenschaft vom Typ Stream beinhaltet, der mit php://temp initialisiert wurde. Somit könnt ihr nicht einfach einen Text an die 
 body-Eigenschaft übergeben, sondern müsst diesen mithilfe von write() an den Stream übertragen. Schaut Euch dazu auch das Beispiel unten an.
 
 In dem Database-Objekt gibt es keine echos mehr. Die komplette Ausgabe wird mithilfe des Response-Objektes TYPO3-intern nach PRS-7-Standard automatisch realisiert. Hier nun der Inhalt meiner `Database.php`:
 
 **Database.php**
-*Verfügbar seit TYPO3 8.1. Für frühere Versionen müsst Ihr $GLOBALS['TYPO3_DB'] verwenden.*
+*Verfügbar seit TYPO3 8.1. Für frühere Versionen müsst ihr $GLOBALS['TYPO3_DB'] verwenden.*
 
 ```php
 <?php
@@ -233,11 +233,11 @@ class Database
 
 ### INSERTs in die Datenbank führen zu Cacheproblemen
 
-Neben einfachen SQL-Abfragen könnt Ihr natürlich auch Dateneingaben machen. Je nachdem WO in welche Tabelle Ihr diese Daten einpflegt, kann es durchaus passieren, dass diese Daten bei der Ausgabe jedoch nicht oder noch nicht angezeigt werden.
+Neben einfachen SQL-Abfragen könnt ihr natürlich auch Dateneingaben machen. Je nachdem WO in welche Tabelle ihr diese Daten einpflegt, kann es durchaus passieren, dass diese Daten bei der Ausgabe jedoch nicht oder noch nicht angezeigt werden.
 
 Sofern möglich cached TYPO3 jede Seite. Änderungen, die direkt über die Datenbank realisiert worden sind, bekommt TYPO3 überhaupt nicht mit und liefert somit den "alten" Stand aus den Cachetabellen aus.
 
-Mit folgendem Script ladet Ihr Euch den CacheManager und könnt dann mit flushCachesInGroup den kompletten Seitencache leeren oder aber Ihr nehmt flushCachesInGroupByTag() und könnt auf diese Weise den Cache für eine individuelle Seite leeren.
+Mit folgendem Script ladet ihr Euch den CacheManager und könnt dann mit flushCachesInGroup den kompletten Seitencache leeren oder aber ihr nehmt flushCachesInGroupByTag() und könnt auf diese Weise den Cache für eine individuelle Seite leeren.
 
 **Classes/Ajax/ClearCache.php**
 
@@ -262,7 +262,7 @@ Die angemeldeten Frontendbenutzer werden über das TypoScriptFrontendController-
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['sfapi_frontenduser'] = 'EXT:sfapi/Classes/Ajax/FrontEndUser.php';
 ```
 
-In der FrontEndUser.php erzeugt Ihr das Objekt TypoScriptFrontendController und gebt ihm noch die Parameter aus TYPO3_CONF_VARS, die Seiten ID und den PageType mit, der üblicherweise 0 ist. Mit initFEuser werden dann die Session- und Cookie-Daten ausgelesen und bei Erfolg der Frontendbenutzer-Datensatz in fe_user->user abgelegt. Hier ein einfaches Beispiel:
+In der FrontEndUser.php erzeugt ihr das Objekt TypoScriptFrontendController und gebt ihm noch die Parameter aus TYPO3_CONF_VARS, die Seiten ID und den PageType mit, der üblicherweise 0 ist. Mit initFEuser werden dann die Session- und Cookie-Daten ausgelesen und bei Erfolg der Frontendbenutzer-Datensatz in fe_user->user abgelegt. Hier ein einfaches Beispiel:
 
 ```php
 <?php

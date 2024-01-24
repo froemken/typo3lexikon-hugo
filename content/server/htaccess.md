@@ -24,7 +24,7 @@ RewriteEngine On
 
 ## Bestimmte Verzeichnisse nicht umschreiben
 
-Wenn Ihr RealUrl installiert habt, dann erhaltet ihr je nach Konfiguration URLs wie
+Wenn ihr RealUrl installiert habt, dann erhaltet ihr je nach Konfiguration URLs wie
 
 ```shell
 /meine-seite/kontakt/impressum.html
@@ -57,7 +57,7 @@ RewriteRule ^(.*)$ www.sfroemken.de/$1 [R=301,L]
 
 ### Erklärung
 
-`%{HTTP_HOST}` kann in diesem Fall `sfroemken.de` oder aber auch `www.sfroemken.de` sein. Mit `RewriteCond` könnt Ihr nun überprüfen, ob der `HTTP_HOST` mit dem Wert `sfroemken.de` übereinstimmt. Dank `[NC]` soll die Groß- und Kleinschreibung bei diesem Vergleich nicht berücksichtigt werden.
+`%{HTTP_HOST}` kann in diesem Fall `sfroemken.de` oder aber auch `www.sfroemken.de` sein. Mit `RewriteCond` könnt ihr nun überprüfen, ob der `HTTP_HOST` mit dem Wert `sfroemken.de` übereinstimmt. Dank `[NC]` soll die Groß- und Kleinschreibung bei diesem Vergleich nicht berücksichtigt werden.
 
 Wenn `RewriteCond` nun ein `true` zurück gibt, dann wird die Modifikation in `RewriteRule` ausgeführt. Alles, was durch die Klammern markiert wurde, kann im zweiten Parameter mit `$1` wiederverwendet werden. `[R=301]`: Das `R` steht für `redirect` und die `301` ist ein bestimmter Servercode, mit dem bestimmt wird, dass es sich bei dieser Weiterleitung, um eine `Parmanente Weiterleitung` handelt.
 
@@ -160,7 +160,7 @@ RewriteRule .* /index.php
 
 ## Scripmerger
 
-Dieses Script benötigt Ihr nur, wenn ihr die Extension `EXT:scriptmerger` verwenden wollt:
+Dieses Script benötigt ihr nur, wenn ihr die Extension `EXT:scriptmerger` verwenden wollt:
 
 ```ini
 # Expires Header + Removal of ETag

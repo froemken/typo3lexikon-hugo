@@ -82,7 +82,7 @@ Die Ausgabe im Quelltext:
 | value     | Der Inhalt des f:case ViewHelpers wird nur dann angezeigt, wenn der Wert von value dem expression-Argument aus dem f:switch ViewHelper übereinstimmt 
 | default   | Ein f:case ViewHelper, bei dem default aktiviert wurde, wird immer dann angezeigt, wenn kein anderer f:case ViewHelper zu der expression des f:switch ViewHelpers passt.
 
-Ein Beispiel findet Ihr beim f:switch ViewHelper
+Ein Beispiel findet ihr beim f:switch ViewHelper
 
 ## f:cObject
 
@@ -218,8 +218,8 @@ Zeigt den Inhalt einer Variable oben am Rand des Browsers an. Verschachtelte Ele
 |-----------|-----------|
 | title | Gibt der Debug-Ausgabe einen Titel. Bei mehreren Debug-Ausgaben können so die jeweiligen Ausgaben besser differenziert werden. |
 | maxDepth | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Durch die teilweise sehr tiefe Verschachtelung von Objekten kann die Debug-Ausgabe sehr groß werden. Mit `maxDepth` kann die Ausgabe nach Erreichen der angegebenen Tiefe unterbunden werden. |
-| plainText | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Anstatt einer HTML/JavaScript Ausgabe könnt Ihr die Ausgabe auch komplett als reinen Text ausgeben lassen. |
-| ansiColors | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Wenn `plainText` aktiv ist, könnt Ihr mit `ansiColors` die Textausgabe mit etwas Farbe aufhübschen |
+| plainText | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Anstatt einer HTML/JavaScript Ausgabe könnt ihr die Ausgabe auch komplett als reinen Text ausgeben lassen. |
+| ansiColors | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Wenn `plainText` aktiv ist, könnt ihr mit `ansiColors` die Textausgabe mit etwas Farbe aufhübschen |
 | inline | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Üblicherweise wird die Debug-Ausgabe oben am Rand des Browsers ausgegeben. Durch Aktivierung von `inline` wird die Ausgabe dort platziert, wo sich der `f:debug` ViewHelper im HTML befindet. |
 | blacklistedClassNames | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Einige Klassen werden bei der Debug-Ausgabe sehr groß. So z.B. der `ObjectManager`. Gebt deren Klassennamen als Array an, um deren Ausgabe zu verhindern |
 | blacklistedPropertyNames | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Ähnlich wie `blacklistedClassNames`, nur mit dem Unterschied, dass hiermit bestimmte Eigenschaften von der Debug-Ausgabe ausgeschlossen werden. |
@@ -254,13 +254,13 @@ Diesen ViewHelper gibt es nicht mehr. Bitte verwendet einen der `f:format.*` Vie
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.4{{% /badge %}}
 
-Dieser ViewHelper macht nur im Bereich selbstprogrammierter Extensions Sinn. Denn nur hier können Fehler auftauchen, die dem Webseitenbesucher mitgeteilt werden müssen. Hat der User z.B. bei einem Loginformular seinen Usernamen vergessen anzugeben und die dafür zuständige Action-Methode wurde so programmiert, dass der Username eine Pflichtangabe ist, dann wird dies dem Validator gemeldet, der daraufhin eine errorAction-Methode aufruft, die dann wiederum Fehlermeldungen zuerst sammelt und dann als "Bündel" an der Stelle ausgibt, an der Ihr diesen ViewHelper platziert habt.
+Dieser ViewHelper macht nur im Bereich selbstprogrammierter Extensions Sinn. Denn nur hier können Fehler auftauchen, die dem Webseitenbesucher mitgeteilt werden müssen. Hat der User z.B. bei einem Loginformular seinen Usernamen vergessen anzugeben und die dafür zuständige Action-Methode wurde so programmiert, dass der Username eine Pflichtangabe ist, dann wird dies dem Validator gemeldet, der daraufhin eine errorAction-Methode aufruft, die dann wiederum Fehlermeldungen zuerst sammelt und dann als "Bündel" an der Stelle ausgibt, an der ihr diesen ViewHelper platziert habt.
 
 | Parameter | Erklärung |
 |-----------|-----------|
 | renderMode | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.4{{% /badge %}} {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}}Sollen die Fehlermeldungen als Liste ul oder als Container div gerendert werden.
 | as | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} Die Angabe aus `as` wird zum Erstellen einer Variable für das Fluid-Template genutzt, die alle Benachrichtigungen beinhaltet. Um das Rendering dieser Nachrichten muss sich selbst gekümmert werden. |
-| queueIdentifier | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Alle Benachrichtigungen einer Extension landen normalerweise in einer Warteschlange mit dem Namen `extbase.flashmessages.[extension]_[plugin]`. Da Ihr aber auch eigene Namen vergeben könnt, war es bisher nicht möglich diese im Frontend rendern zu lassen. Dieser Parameter schafft Abhilfe. |
+| queueIdentifier | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Alle Benachrichtigungen einer Extension landen normalerweise in einer Warteschlange mit dem Namen `extbase.flashmessages.[extension]_[plugin]`. Da ihr aber auch eigene Namen vergeben könnt, war es bisher nicht möglich diese im Frontend rendern zu lassen. Dieser Parameter schafft Abhilfe. |
 
 {{% notice style="info" title="Information" icon="exclamation" %}}
 Seit TYPO3 8.6 gibt es den `FlashMessageRenderResolver`. Immer dann, wenn das `as` Attribut nicht angegeben wurde, springt der Resolver ein und rendert die Benachrichtigungen je nach Kontext. Im TYPO3 Backend findet also eine andere Ausgabe statt als im Frontend und nochmals anders, wenn die Ausgabe im CLI erfolgt.
@@ -295,7 +295,7 @@ Erzeugt eine Schleife. Jedes Element des übergebenen Arrays oder ObjectStorages
 |-----------|-----------|
 | each | Array oder Objekt, das durchlaufen werden soll |
 | as | Ein Variablenname, der Daten des aktuellen Durchlaufs enthält |
-| key | Falls Ihr den Key/Schlüssel des aktuellen Durchlaufes benötigt, könnt Ihr hiermit den Namen einer weiteren Variable definieren |
+| key | Falls ihr den Key/Schlüssel des aktuellen Durchlaufes benötigt, könnt ihr hiermit den Namen einer weiteren Variable definieren |
 | reverse | Der Durchlauf des Arrays oder Objektes geschieht rückwärts |
 | iteration | Eine Arrayvariable, die Informationen darüber beinhaltet, ob man sich im ersten oder letzten Durchlauf befindet. Außerdem enthalten: `index`, `cycle`, `total`, `isEven`, `isOdd` |
 
@@ -333,7 +333,7 @@ Ich weise der Variable mitarbeiter 6 Einträge zu, die dann eins nach dem Andere
 
 ### Beispiel mit Array-Key
 
-Ich weiß, das ist jetzt nicht das beste Beispiel, aber Ihr seht, wie ich mithilfe des `key` Attributes auf die Array-Keys der jeweiligen Einträge zugreifen kann.
+Ich weiß, das ist jetzt nicht das beste Beispiel, aber ihr seht, wie ich mithilfe des `key` Attributes auf die Array-Keys der jeweiligen Einträge zugreifen kann.
 
 ```html
 <f:alias map="{mitarbeiter: {0: {vorname: 'Stefan', stadt: 'Lindlar'},1: {vorname: 'Petra', stadt: 'Lindlar'},2: {vorname: 'Sascha', stadt: 'Remscheid'},3: {vorname: 'Patrick', stadt: 'Bonn'},4: {vorname: 'Sven', stadt: 'Gummersbach'},5: {vorname: 'Andrea', stadt: 'Wuppertal'}}}">
@@ -398,8 +398,8 @@ Dieser ViewHelper ist für die Erstellung von HTML Formularen zuständig und bil
 | format | Gibt an um welches Format es sich bei der Zielseite handelt. Alternativ ginge auch `xml`, obwohl das bei einer Formularzielseite wenig Sinn machen würde. Klappt nur wenn `actionUri` nicht gesetzt ist. |
 | additionalParams | Fügt weitere Variablen der Zielseite an. Im Gegensatz zu `arguments`, können hiermit Variablen hinzugefügt werden die nicht mit dem Extensionnamen geprefixed werden. Klappt nur, wenn `actionUri` nicht gesetzt ist. |
 | absolute | Nach Aktivierung wird der Zeilseite noch der Domainname und Pfad vorangestellt. Klappt nur, wenn `actionUri` nicht gesetzt ist. |
-| addQueryString | Falls dem Formular bereits Parameter über die URL mitgegeben wurden, könnt Ihr hier entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. Klappt nur, wenn actionUri nicht gesetzt ist. |
-| argumentsToBeExcludedFromQueryString | Falls Ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt Ihr hier diese Parameter ein. Klappt nur, wenn `actionUri` nicht gesetzt ist. |
+| addQueryString | Falls dem Formular bereits Parameter über die URL mitgegeben wurden, könnt ihr hier entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. Klappt nur, wenn actionUri nicht gesetzt ist. |
+| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein. Klappt nur, wenn `actionUri` nicht gesetzt ist. |
 | addQueryStringMethod | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Normalerweise werden nur die GET Parameter bei Verwendung von `addQueryString` an die Zielseite angehangen. Dieser Parameter erlaubt 4 Werte. `GET`: Standard. Die GET-Parameter werden übergeben. `POST`: Die POST Parameter werden mit übergeben. `GET,POST`: GET-Parameter sind die Basis und werden mit POST Parametern überschrieben, sofern beide Methoden gleichnamige Parameter beinhalten. `POST,GET`: POST-Parameter werden mit GET-Parametern überschrieben. |
 | fieldNamePrefix | Falls ein anderer Prefix gewünscht ist. Macht eigentlich nur Sinn, wenn die Formulardaten von einer anderen Extension abgearbeitet werden müssen. |
 | actionUri | Gebt hier Eure ganz eigene individuelle Zielseiten-URL ein. Viele der oberen Parameter haben aber dann keine Wirkung mehr. |

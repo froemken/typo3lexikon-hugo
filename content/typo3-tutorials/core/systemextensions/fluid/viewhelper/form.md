@@ -56,7 +56,7 @@ Schaut schon eine ganze Ecke kürzer aus.
 
 ## Beispiel Multiselect
 
-Der `EXT:extension_builder` kann bislang nur eine Checkbox erstellen. Nämlich dann, wenn der Typ `Boolean` gewählt wurde. Wollt ihr aber wie in den oberen Beispielen mehrere Checkboxen gleichzeitig setzen, dann müsst ihr euch vom Typ `Boolean` verabschieden. Ich will euch heute eine Möglichkeit zeigen, wie Ihr über 10 Checkboxen abspeichern könnt.
+Der `EXT:extension_builder` kann bislang nur eine Checkbox erstellen. Nämlich dann, wenn der Typ `Boolean` gewählt wurde. Wollt ihr aber wie in den oberen Beispielen mehrere Checkboxen gleichzeitig setzen, dann müsst ihr euch vom Typ `Boolean` verabschieden. Ich will euch heute eine Möglichkeit zeigen, wie ihr über 10 Checkboxen abspeichern könnt.
 
 Innerhalb des `EXT:extension_builder` wählt ihr nun den Typ `Text` aus. Damit wird in der Datenbank eine Spalte erstellt, die etwas über 65.000 Zeichen abspeichern kann. Vergesst nicht über Database Analyser den neuen Typ in die Datenbank zu schreiben.
 

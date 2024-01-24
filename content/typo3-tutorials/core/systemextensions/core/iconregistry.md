@@ -6,7 +6,7 @@ slug = "iconregistry"
 aliases = ["iconregistry.html", "imaging.html"]
 +++
 
-Jeder Extensionentwickler hat die Möglichkeit mit seiner Extension Datenbanktabellen anzulegen und jeder einzelnen Tabelle individuelle Icons zu vergeben. Geht in das Listen-Modul und wählt im Seitenbaum die Seite mit dem TYPO3-Logo aus (PID=0). Im rechten Frame erscheinen einige Tabellen und jede Tabelle hat Ihr eigenes Icon. Auf Seiten mit einer PID > 0 seht Ihr gerade bei der Inhalts-Tabelle (tt_content), dass Ihr sogar je nach verwendetem CType (Text, Bild, Plugin, Formular, ...) unterschiedliche Datensatz-Icons verwenden könnt. Auch bei den Buttons wie "Speichern", "Speichern und schließen" und "Speichern und Anzeigen" werden Icons verwendet. Selbst die TYPO3-Module in der linken Menüleiste haben alle Ihre eigenen individuellen Icons.
+Jeder Extensionentwickler hat die Möglichkeit mit seiner Extension Datenbanktabellen anzulegen und jeder einzelnen Tabelle individuelle Icons zu vergeben. Geht in das Listen-Modul und wählt im Seitenbaum die Seite mit dem TYPO3-Logo aus (PID=0). Im rechten Frame erscheinen einige Tabellen und jede Tabelle hat ihr eigenes Icon. Auf Seiten mit einer PID > 0 seht ihr gerade bei der Inhalts-Tabelle (tt_content), dass ihr sogar je nach verwendetem CType (Text, Bild, Plugin, Formular, ...) unterschiedliche Datensatz-Icons verwenden könnt. Auch bei den Buttons wie "Speichern", "Speichern und schließen" und "Speichern und Anzeigen" werden Icons verwendet. Selbst die TYPO3-Module in der linken Menüleiste haben alle ihre eigenen individuellen Icons.
 
 {{% notice style="note" title="Wichtig" icon="exclamation" %}}
 Es handelt sich in diesem Tutorial nicht um das Einbinden von Bildern. Verwendet dafür bitte den ImageViewHelper von Fluid. Dieser bindet dann Eure Bilder sowohl in Euren Plugins als auch im Inhaltsbereich Eurer Backend-Module ein unter Verwendung der FAL API.
@@ -20,7 +20,7 @@ Warum das geändert wurde? Dafür gibt es mehrere Gründe:
 - Mit der Einführung von SVG-Icons musste man vorsichtig sein, da diese Art von "Bildern" völlig anders zu handhaben sind. Sie dürfen nicht einfach an den GIFBUILDER gesendet oder in Graustufen reduziert werden. Man merkte, dass man für jeden Icontyp ein eigenes Iconrendering benötigte.
 - Viele Icons werden an mehreren Stellen verwendet. Wenn sich jetzt der Iconpfad ändert, musste man diesen auch an allen anderen verwendeten Positionen ändern. Mit Einführung der IconRegistry erhält jedes Icon einen individuellen Identifier, mit dem die IconFactory später die Ausgabe rendern kann.
 
-Riskiert mal einen Blick in die Datei IconRegistry.php. Ihr werden über 2000 Zeilen Quellcode finden, die nichts anderes tun, als diverse TYPO3-Icons zu registrieren. Eine gute Anlaufstelle, falls Ihr für Eure Extension die TYPO3-Icons verwenden wollt.
+Riskiert mal einen Blick in die Datei IconRegistry.php. Ihr werden über 2000 Zeilen Quellcode finden, die nichts anderes tun, als diverse TYPO3-Icons zu registrieren. Eine gute Anlaufstelle, falls ihr für Eure Extension die TYPO3-Icons verwenden wollt.
 
 Die wichtigste Methode in dieser Klasse ist die registerIcon() und wird aus Eurer ext_localconf.php heraus aufgerufen:
 
@@ -59,11 +59,11 @@ Spezieller IconProvider für SVG-Icons
 
 ### Eigene IconProvider
 
-Als zweiten Parameter könnt Ihr natürlich auch die Klasse Eures eigenen IconProviders verwenden. Wichtig ist nur, dass Eure Klasse vom IconProviderInterface erbt.
+Als zweiten Parameter könnt ihr natürlich auch die Klasse Eures eigenen IconProviders verwenden. Wichtig ist nur, dass Eure Klasse vom IconProviderInterface erbt.
 
 ## Bilder in TYPO3 Backend Modulen anzeigen lassen
 
-Normalerweise kommt Ihr mit der IconFactory nur sehr selten in Kontakt. Denn bei viele Konfigurationen wie beim newContentElementWizard, den TCA-Icons oder den Modul-Icons könnt Ihr direkt mit den Icon-Identifiern arbeiten. Einige Konfigurationen, wie beim newContentElementWizard, lassen Icon-Pfade nicht mals mehr zu.
+Normalerweise kommt ihr mit der IconFactory nur sehr selten in Kontakt. Denn bei viele Konfigurationen wie beim newContentElementWizard, den TCA-Icons oder den Modul-Icons könnt ihr direkt mit den Icon-Identifiern arbeiten. Einige Konfigurationen, wie beim newContentElementWizard, lassen Icon-Pfade nicht mals mehr zu.
 
 {{% notice style="info" title="Info" icon="exclamation" %}}
 Der TYPO3-Core will nicht mehr, dass bestimmte Einstellungen über mehrere Wege hinweg konfiguriert werden können. Deshalb werden derzeit viele Möglichkeiten als deprecated markiert und mit den nächsten Versionen entfernt. Auch hier im Bereich der Icons merke ich, dass die Angabe von Icon-Pfaden nicht immer funktioniert. Von daher empfehle ich Euch, sofern möglich, alle Eure Bilder mit der IconRegistry zu registrieren, damit Eure Icons auch beim nächsten Upgrade weiterhin erscheinen.{{% /notice %}}
@@ -77,10 +77,10 @@ $renderedIcon = $iconFactory->getIcon('actions-system-cache-clear-impact-low', I
 
 ## Die Icon-Klasse
 
-Mit der getIcon() Methode aus der IconFactory erhaltet Ihr zunächst ein Icon-Objekt. Damit daraus ein gerendeter HTML-Quelltext wird, muss noch die render() Methode aufgerufen werden.
+Mit der getIcon() Methode aus der IconFactory erhaltet ihr zunächst ein Icon-Objekt. Damit daraus ein gerendeter HTML-Quelltext wird, muss noch die render() Methode aufgerufen werden.
 
 getIcon() hat 4 Parameter
 : **$identifier**: Der eindeutige Name des Icons
-: **$size**: Icons sind üblicherweise quadratisch. Somit bezieht sich diese Angabe hier sowohl auf die Breite als auch auf die Höhe. Standard sind 32 Pixel. Ihr könnt entweder die 3 Vorgaben Icon::SIZE_SMALL (16 Pixel), Icon::SIZE_DEFAULT (32 Pixel) oder Icon::SIZE_LARGE (64 Pixel) verwenden. Natürlich könnt Ihr hier auch individuelle Werte verwenden.
-: **$overlayIdentifier**: Wenn Ihr eine Seite versteckt, dann erscheint auf dem Seiten-Icon im Seitenbaum unten rechts ein kleines Durchfahrtsverboten-Schild. Hierbei handelt es sich um einen Overlay: Ein Icon, dass ein anderes Icon überlagert. Solche Icons sollten Transparenzen aufweisen, damit das darunter liegende Icon weiterhin zu bestimmten Teilen sichtbar ist. Gebt hier den Identifier eines solchen Icons an.
+: **$size**: Icons sind üblicherweise quadratisch. Somit bezieht sich diese Angabe hier sowohl auf die Breite als auch auf die Höhe. Standard sind 32 Pixel. Ihr könnt entweder die 3 Vorgaben Icon::SIZE_SMALL (16 Pixel), Icon::SIZE_DEFAULT (32 Pixel) oder Icon::SIZE_LARGE (64 Pixel) verwenden. Natürlich könnt ihr hier auch individuelle Werte verwenden.
+: **$overlayIdentifier**: Wenn ihr eine Seite versteckt, dann erscheint auf dem Seiten-Icon im Seitenbaum unten rechts ein kleines Durchfahrtsverboten-Schild. Hierbei handelt es sich um einen Overlay: Ein Icon, dass ein anderes Icon überlagert. Solche Icons sollten Transparenzen aufweisen, damit das darunter liegende Icon weiterhin zu bestimmten Teilen sichtbar ist. Gebt hier den Identifier eines solchen Icons an.
 : **$state**: Wenn Icons auf Buttons angezeigt werden und dieser Button als deaktiviert dargestellt wird, sollte auch das Icon etwas halb-transparent dargestellt werden. Dafür gibt es die IconState, die Icons als disabled darstellen kann.

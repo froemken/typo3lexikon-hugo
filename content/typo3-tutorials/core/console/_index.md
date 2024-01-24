@@ -5,11 +5,11 @@ date = 2024-01-06T23:16:58+01:00
 aliases = ["console.html"]
 +++
 
-TYPO3 ist nicht nur über das Frontend oder dem Backend erreichbar, nein, es bietet auch die Möglichkeit bestimmte Aufgaben mithilfe der Konsole, auch Command Line Interface kurz CLI genannt, zu ermöglichen. Auf diese Weise können bestimmte Aufgaben automatisiert werden, ohne sich erst im Backend anmelden zu müssen. Zum Beispiel könnte auf diese Weise ein Export initiiert werden oder das Backend gesperrt werden. Wenn Euch ein Cronjob zur Verfügung steht, könntet Ihr auch jeden Tag oder alle paar Wochen mal den ReferenzIndex von TYPO3 aktualisieren.
+TYPO3 ist nicht nur über das Frontend oder dem Backend erreichbar, nein, es bietet auch die Möglichkeit bestimmte Aufgaben mithilfe der Konsole, auch Command Line Interface kurz CLI genannt, zu ermöglichen. Auf diese Weise können bestimmte Aufgaben automatisiert werden, ohne sich erst im Backend anmelden zu müssen. Zum Beispiel könnte auf diese Weise ein Export initiiert werden oder das Backend gesperrt werden. Wenn Euch ein Cronjob zur Verfügung steht, könntet ihr auch jeden Tag oder alle paar Wochen mal den ReferenzIndex von TYPO3 aktualisieren.
 
 Vor TYPO3 8.0 mussten diese Commands über `typo3/cli_dispatch.phpsh` gestartet werden. Jedoch ist die zugrunde liegende Programmierung etwas in die Jahre gekommen, weshalb man sich für die Implementation der Symfony Console entschieden hat. Durch die Verwendung bereits bestehender etablierter OpenSource Software wie Symfony, müssen die TYPO3 Entwickler das Rad nicht neu erfinden und können sich wieder wichtigeren Themen widmen.
 
-Die Schnittstelle zwischen TYPO3 und der Symfony Console besteht aus gerade mal 4 Dateien und mit keiner dieser Dateien kommt Ihr in Berührung. Die wohl wichtigste Datei ist der `CommandRequestHandler.php`. Dieser durchsucht alle installierten Extension nach folgender Datei
+Die Schnittstelle zwischen TYPO3 und der Symfony Console besteht aus gerade mal 4 Dateien und mit keiner dieser Dateien kommt ihr in Berührung. Die wohl wichtigste Datei ist der `CommandRequestHandler.php`. Dieser durchsucht alle installierten Extension nach folgender Datei
 
 `typo3conf/ext/[ExtKey]/Configuration/Commands.php`
 
@@ -28,7 +28,7 @@ return [
 ];
 ```
 
-Erstellt nun die dazugehörige `PrintCommand.php` Datei im `Classes/Command` Verzeichnis. Alle Commands müssen eine execute Methode aufweisen. Mit dem ersten Parameter $input könnt Ihr auf Eingaben aus der Shell reagieren. Mit dem zweiten Parameter $output könnt Ihr Ausgaben auf der Shell produzieren.
+Erstellt nun die dazugehörige `PrintCommand.php` Datei im `Classes/Command` Verzeichnis. Alle Commands müssen eine execute Methode aufweisen. Mit dem ersten Parameter $input könnt ihr auf Eingaben aus der Shell reagieren. Mit dem zweiten Parameter $output könnt ihr Ausgaben auf der Shell produzieren.
 
 ```php
 <?php
@@ -67,13 +67,13 @@ class PrintCommand extends Command
 }
 ```
 
-Als Einstiegspunkt bietet TYPO3 8.0 in der composer-basierten Version einen Symlink auf die neue typo3 Datei im bin Verzeichnis an. Bei nicht Composer basierten Versionen müsst Ihr das Original aufrufen:
+Als Einstiegspunkt bietet TYPO3 8.0 in der composer-basierten Version einen Symlink auf die neue typo3 Datei im bin Verzeichnis an. Bei nicht Composer basierten Versionen müsst ihr das Original aufrufen:
 
 ```shell
 php typo3/sysext/core/bin/typo3 list
 ```
 
-Mit diesem Kommando könnt Ihr Euch alle zur Verfügung stehenden Befehle anzeigen lassen. Nach einem Clear System Cache, sollte auch der obere `print:something` Command dabei sein. Mit `help` könnt Ihr Euch alle Argumente für einen spezifischen Command anzeigen lassen:
+Mit diesem Kommando könnt ihr Euch alle zur Verfügung stehenden Befehle anzeigen lassen. Nach einem Clear System Cache, sollte auch der obere `print:something` Command dabei sein. Mit `help` könnt ihr Euch alle Argumente für einen spezifischen Command anzeigen lassen:
 
 ```shell
 php typo3/sysext/core/bin/typo3 help print:something

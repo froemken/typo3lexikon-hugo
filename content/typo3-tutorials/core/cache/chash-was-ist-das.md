@@ -29,9 +29,9 @@ Wir benötigen demnach einen weiteren Parameter in der URL, um zwischen den News
 
 Laut dem englischen Beitrag von Kasper gibt es nun folgende 3 Möglichkeiten:
 
-Neben dem `id` und `type` Parameter gibt es noch den `no_cache` Parameter. Durch Anfügen dieses Parameters an die URL, wird zwar ein Eintrag in der cf_cache_pages-Tabelle erzeugt, aber dieser beinhaltet nun nur noch ein paar statische Werte. Jegliches TypoScript und auch das Verarbeiten des Templates geschieht nun mit jedem Seitenaufruf erneut, was diese Lösung zu der Langsamsten macht. Dieselbe Vorgehensweise erhaltet Ihr auch mit der Checkbox "no Cache" in den Seiteneingenschaften auf der Ihr Euer Plugin platziert habt. Als Extensionentwickler habt Ihr die Möglichkeit Euer Plugin als USER_INT einzubinden. Diese Vorgehensweise cacht das verarbeitete TypoScript und erstellt auch ein Template. In diesem Template wird nun jedoch nicht der Inhalt des Plugins eingefügt, sondern ein Platzhalter. Wenn die Seite geladen wird, wird das Template aus der Datenbank geholt und TYPO3 prüft nun, ob noch ein Platzhalter in diesem Template vorhanden ist. Wenn ja, dann weiß TYPO3 anhand der Platzhalter-ID, welcher Inhalt dort einzubinden ist. In diesem Fall der Inhalt Eures Plugins. Auf diese Weise ist das ganze Außendrum gecacht und nur Euer Plugin wird mit jedem Seitenaufruf erneut ausgeführt. Diese Lösung bietet eine mittlere Performance. Gerade für die Ansicht von Suchergebnissen sollte diese Umsetzung bevorzugt werden, da sonst für jedes Suchwort ein eigener Cacheeintrag erzeugt wird.
+Neben dem `id` und `type` Parameter gibt es noch den `no_cache` Parameter. Durch Anfügen dieses Parameters an die URL, wird zwar ein Eintrag in der cf_cache_pages-Tabelle erzeugt, aber dieser beinhaltet nun nur noch ein paar statische Werte. Jegliches TypoScript und auch das Verarbeiten des Templates geschieht nun mit jedem Seitenaufruf erneut, was diese Lösung zu der Langsamsten macht. Dieselbe Vorgehensweise erhaltet ihr auch mit der Checkbox "no Cache" in den Seiteneingenschaften auf der ihr Euer Plugin platziert habt. Als Extensionentwickler habt ihr die Möglichkeit Euer Plugin als USER_INT einzubinden. Diese Vorgehensweise cacht das verarbeitete TypoScript und erstellt auch ein Template. In diesem Template wird nun jedoch nicht der Inhalt des Plugins eingefügt, sondern ein Platzhalter. Wenn die Seite geladen wird, wird das Template aus der Datenbank geholt und TYPO3 prüft nun, ob noch ein Platzhalter in diesem Template vorhanden ist. Wenn ja, dann weiß TYPO3 anhand der Platzhalter-ID, welcher Inhalt dort einzubinden ist. In diesem Fall der Inhalt Eures Plugins. Auf diese Weise ist das ganze Außendrum gecacht und nur Euer Plugin wird mit jedem Seitenaufruf erneut ausgeführt. Diese Lösung bietet eine mittlere Performance. Gerade für die Ansicht von Suchergebnissen sollte diese Umsetzung bevorzugt werden, da sonst für jedes Suchwort ein eigener Cacheeintrag erzeugt wird.
 
-Die performanceorientierteste Lösung ist die Verwendung von dem TYPO3-eigenen URL-Parameter cHash. Wenn Ihr für Eure Extension weitere URL-Parameter benötigt, dann funktioniert das nur unter Verwendung des cHash-Parameters. Dieser bildet eine Art MD5-Hash über alle zusätzlichen Parameter in der URL. Sollte nun ein Hacker einen weiteren Parameter hinzufügen, dann stimmt die MD5-Summe der URL-Parameter nicht mehr mit der MD5-Summe des cHashes überein und es erscheint je nach Konfiguration (Installtool) eine Fehlermeldung oder die Seite wird ohne Cacheeintrag `no_cache` aufgerufen.
+Die performanceorientierteste Lösung ist die Verwendung von dem TYPO3-eigenen URL-Parameter cHash. Wenn ihr für Eure Extension weitere URL-Parameter benötigt, dann funktioniert das nur unter Verwendung des cHash-Parameters. Dieser bildet eine Art MD5-Hash über alle zusätzlichen Parameter in der URL. Sollte nun ein Hacker einen weiteren Parameter hinzufügen, dann stimmt die MD5-Summe der URL-Parameter nicht mehr mit der MD5-Summe des cHashes überein und es erscheint je nach Konfiguration (Installtool) eine Fehlermeldung oder die Seite wird ohne Cacheeintrag `no_cache` aufgerufen.
 
 ## Arbeitsweise des cHash-Parameters
 
@@ -39,7 +39,7 @@ Alle Methoden zur Generierung des cHash befinden sich hier:
 
 `TYPO3\CMS\Frontend\Page\CacheHashCalculator`
 
-Einfacher geht es jedoch, wenn Ihr in Euren Extensions immer die `typolink` Methoden verwendet. Diese generieren den cHash automatisch für Euch.
+Einfacher geht es jedoch, wenn ihr in Euren Extensions immer die `typolink` Methoden verwendet. Diese generieren den cHash automatisch für Euch.
 
 ## Erstellung eines cHash durch typolink
 
@@ -98,7 +98,7 @@ Erst durch ein Clear Cache im Backend wird die Tabelle cf_cache_pages geleert un
 
 ## Manuelle Erstellung eines Links mit cHash
 
-Die Generierung von Links mithilfe von `typolink` ist von der Performance her für vereinzelte Links OK. Wenn Ihr aber eine Listenansicht mit mehreren 1000 Datensätzen habt, oder Links für Veranstaltungen des kompletten Jahres erstellen wollt, dann kann Euch die Generierung von Links mithilfe von `typolink()` einiges an Sekunden kosten. Deshalb hier ein Beispiel, wie Ihr solche Links selbst zusammen bauen könnt:
+Die Generierung von Links mithilfe von `typolink` ist von der Performance her für vereinzelte Links OK. Wenn ihr aber eine Listenansicht mit mehreren 1000 Datensätzen habt, oder Links für Veranstaltungen des kompletten Jahres erstellen wollt, dann kann Euch die Generierung von Links mithilfe von `typolink()` einiges an Sekunden kosten. Deshalb hier ein Beispiel, wie ihr solche Links selbst zusammen bauen könnt:
 
 ```php
 $siteUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . 'index.php?';
@@ -173,7 +173,7 @@ Mit dieser Zeile in der `ext_localconf.php`
 $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_myotherext[search]';
 ```
 
-könnt Ihr weitere Parameter diesem Array hinzufügen.
+könnt ihr weitere Parameter diesem Array hinzufügen.
 
 Der cHashCalculator besitzt einen Konstruktor, der dieses Array automatisch als interne Konfiguration wieder einließt:
 

@@ -6,17 +6,17 @@ slug = "writer"
 aliases = ["writer.html"]
 +++
 
-Mithilfe der Writer könnt Ihr entscheiden, wohin geloggt werden soll.
+Mithilfe der Writer könnt ihr entscheiden, wohin geloggt werden soll.
 
 ## DatabaseWriter
 
-Mit diesem Writer werden eure Informationen in der Datenbank protokolliert. Dabei könnt Ihr sogar angeben, in welche Tabelle geschrieben werden soll. Standardmäßig wird in die Tabelle `sys_log` geschrieben.
+Mit diesem Writer werden eure Informationen in der Datenbank protokolliert. Dabei könnt ihr sogar angeben, in welche Tabelle geschrieben werden soll. Standardmäßig wird in die Tabelle `sys_log` geschrieben.
 
 ## FileWriter
 
-Dieser Writer protokolliert in die Datei `typo3temp/logs/typo3_%s.log`. Dabei wird das `%s` durch einen Hashwert, der auf Basis des Encryption Keys aus dem Installtool generiert wird, ersetzt. Falls Euch dieser Dateiname nicht gefällt, könnt Ihr diesen mit der Option `logFile` ändern.
+Dieser Writer protokolliert in die Datei `typo3temp/logs/typo3_%s.log`. Dabei wird das `%s` durch einen Hashwert, der auf Basis des Encryption Keys aus dem Installtool generiert wird, ersetzt. Falls Euch dieser Dateiname nicht gefällt, könnt ihr diesen mit der Option `logFile` ändern.
 
-Bei der Angabe einer eigenen Log-Datei müsst Ihr den kompletten Pfad ab DocumentRoot angeben. Also z.B. `typo3temp/myOwnLog/events/status.log`. Mit jedem Request wird geprüft, ob es diese Datei und diese Verzeichnisstruktur gibt. Wenn nicht, dann wird Verzeichnis und Datei für Euch automatisch angelegt.
+Bei der Angabe einer eigenen Log-Datei müsst ihr den kompletten Pfad ab DocumentRoot angeben. Also z.B. `typo3temp/myOwnLog/events/status.log`. Mit jedem Request wird geprüft, ob es diese Datei und diese Verzeichnisstruktur gibt. Wenn nicht, dann wird Verzeichnis und Datei für Euch automatisch angelegt.
 
 ## NullWriter
 

@@ -18,11 +18,11 @@ Im Folgenden erkläre ich Euch die Lade-Reihenfolge der unterschiedlichen Konfig
 
 ### config.tx_extbase
 
-In dem kompletten Seiten TypoScript wurde bereits das Standard TypoScript von Extbase eingebunden, dass Ihr in dieser Datei findet:
+In dem kompletten Seiten TypoScript wurde bereits das Standard TypoScript von Extbase eingebunden, dass ihr in dieser Datei findet:
 
 `typo3/sysext/extbase/ext_typoscript_setup.txt`
 
-Über TypoScript Templates hättet Ihr schon jetzt das erste Mal die Möglichkeit global für alle Extbase-Plugins auf dieser Seite und allen Unterseiten eine oder mehrere storagePids anzugeben. Hier ein Beispiel, auch wenn ich diese Art der Konfiguration als eher untypisch empfinde:
+Über TypoScript Templates hättet ihr schon jetzt das erste Mal die Möglichkeit global für alle Extbase-Plugins auf dieser Seite und allen Unterseiten eine oder mehrere storagePids anzugeben. Hier ein Beispiel, auch wenn ich diese Art der Konfiguration als eher untypisch empfinde:
 
 `config.tx_extbase.persistence.storagePid = 123`
 
@@ -30,7 +30,7 @@ In dem kompletten Seiten TypoScript wurde bereits das Standard TypoScript von Ex
 
 Im nächsten Schritt wird geprüft, ob im vorherigen Schritt eine StoragePid gesetzt wurde. Falls nicht, wird diese mithilfe der Konstante `DEFAULT_BACKEND_STORAGE_PID` auf 0 gesetzt.
 
-Heißt: Wenn Ihr vergessen solltet in den weiteren Konfigurationen eine StoragePid anzugeben, dann wird die Query mit pid=0 ausgeführt, was in den meisten Fällen zu einem leeren Ergebnis führen wird.
+Heißt: Wenn ihr vergessen solltet in den weiteren Konfigurationen eine StoragePid anzugeben, dann wird die Query mit pid=0 ausgeführt, was in den meisten Fällen zu einem leeren Ergebnis führen wird.
 
 ### plugin.tx_myext
 

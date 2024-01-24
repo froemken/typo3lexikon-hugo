@@ -5,9 +5,9 @@ slug = "temporaere-tabellen"
 aliases = ["temporaere-tabellen.html"]
 +++
 
-Ich hoffe, ihr habt meinen Beitrag Indizes durchgelesen, denn dort beschreibe ich wie Ihr die Erstellung von temporären Tabellen grundsätzlich vermeiden könnt. Das ist erstes schneller und zweitens braucht Ihr dann den Wert für temporäre Tabellen nicht so hoch anzusetzen. Daraus folgt: Mehr Arbeitsspeicher, den Ihr für wichtigere Optionen verwenden könnt.
+Ich hoffe, ihr habt meinen Beitrag Indizes durchgelesen, denn dort beschreibe ich wie ihr die Erstellung von temporären Tabellen grundsätzlich vermeiden könnt. Das ist erstes schneller und zweitens braucht ihr dann den Wert für temporäre Tabellen nicht so hoch anzusetzen. Daraus folgt: Mehr Arbeitsspeicher, den ihr für wichtigere Optionen verwenden könnt.
 
-Wenn Ihr dennoch ein GROUP BY oder ähnliches ausführen müsst, das temporäre Tabellen erzeugt, dann werden diese Tabellen zuallererst im Arbeitsspeicher erstellt. Erst wenn der kleinere Wert der Optionen tmp_tables_size oder max_heap_table_size erreicht wurde, dann erst wird die Tabelle auf die Festplatte kopiert. Ab dann wirds richtig langsam. Um herauszufinden, wie viele temporären Tabellen MySQL bereits erstellt hat, gibt es zwei Statuswerte, die Ihr abfragen könnt:
+Wenn ihr dennoch ein GROUP BY oder ähnliches ausführen müsst, das temporäre Tabellen erzeugt, dann werden diese Tabellen zuallererst im Arbeitsspeicher erstellt. Erst wenn der kleinere Wert der Optionen tmp_tables_size oder max_heap_table_size erreicht wurde, dann erst wird die Tabelle auf die Festplatte kopiert. Ab dann wirds richtig langsam. Um herauszufinden, wie viele temporären Tabellen MySQL bereits erstellt hat, gibt es zwei Statuswerte, die ihr abfragen könnt:
 
 **Created_tmp_tables**: Anzahl erstellter temporärer Tabellen seit Start des Servers. Die tatsächliche Anzahl temporärer Tabellen im Arbeitsspeicher ist natürlich Created_tmp_tables - Created_tmp_disk_tables.
 

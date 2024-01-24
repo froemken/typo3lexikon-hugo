@@ -6,7 +6,7 @@ slug = "loglevels"
 aliases = ["loglevels.html"]
 +++
 
-Die Logging-API arbeitet mit *unterschiedlichen Levels*, mittels denen Sie Ihre Informationen nach Wichtigkeit gruppieren können. Unten sind die Levels, die in `\TYPO3\CMS\Core\Log\LogLevel` als Konstante deklariert wurden.
+Die Logging-API arbeitet mit *unterschiedlichen Levels*, mittels denen Sie ihre Informationen nach Wichtigkeit gruppieren können. Unten sind die Levels, die in `\TYPO3\CMS\Core\Log\LogLevel` als Konstante deklariert wurden.
 
 ## Log Levels
 

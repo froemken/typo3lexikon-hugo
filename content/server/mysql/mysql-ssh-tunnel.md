@@ -17,7 +17,7 @@ In meinem Fall habe ich ein Projekt, dessen Datenbank knapp 6 GB beträgt. Reche
 
 ## Meine Lösung
 
-Ihr benötigt 2 Konsolenfenster. In dem ersten Fenster gebt Ihr ein:
+Ihr benötigt 2 Konsolenfenster. In dem ersten Fenster gebt ihr ein:
 
 ```shell
 ssh -l [Benutzername] -L 3307:127.0.0.3:3306 [Domainname]
@@ -27,7 +27,7 @@ Bei mir auf meinem Rechner läuft lokal bereits ein MySQL-Server weshalb ich mic
 
 Mit diesem Befehl haben wir nun eine Portweiterleitung konfiguriert. Alle Anfragen an den lokalen Port 3307 werden zu dem Port 3306 auf dem Server weiter geleitet.
 
-Falls Ihr mit Public-Key-Authentifizierung arbeitet und den Server in die `.ssh/config` eingetragen habt, dann könnt Ihr den Part mit dem `-l` auch weglassen:
+Falls ihr mit Public-Key-Authentifizierung arbeitet und den Server in die `.ssh/config` eingetragen habt, dann könnt ihr den Part mit dem `-l` auch weglassen:
 
 ```shell
 ssh -L 3307:127.0.0.3:3306 [Domainname]

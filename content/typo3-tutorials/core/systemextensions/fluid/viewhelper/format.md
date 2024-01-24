@@ -217,7 +217,7 @@ Mit diesem ViewHelper könnt ihr Zahlen formatieren. Er arbeitet ähnlich dem `f
 
 ergibt: `1,122,334,455.668`.
 
-Wie Ihr seht, wird sogar automatisch aufgerundet.
+Wie ihr seht, wird sogar automatisch aufgerundet.
 
 ## f:format.padding
 
@@ -263,7 +263,7 @@ Mit %1, %2 und %3 wird der jeweilige Wert aus dem Array geholt. Da es unterschie
 <f:format.printf arguments="{0: 'Stefan', 1: 2, 2: '4'}">%1$s hat eine %3$d-seitige Dokumentation geschrieben und %2$d Tage dafür gebraucht.</f:format.printf>
 ```
 
-Wenn dieser ViewHelper überhaupt nicht angezeigt wird, dann habt Ihr entweder einen Fehler in eurem Array oder ihr habe die Typdefinition der Variablen wie `$s` oder `$d` vergessen mit anzugeben.
+Wenn dieser ViewHelper überhaupt nicht angezeigt wird, dann habt ihr entweder einen Fehler in eurem Array oder ihr habe die Typdefinition der Variablen wie `$s` oder `$d` vergessen mit anzugeben.
 
 ## f:format.raw
 

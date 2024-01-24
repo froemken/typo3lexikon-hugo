@@ -111,8 +111,8 @@ Mit diesem ViewHelper erstellt ihr eine URL, die auf eine andere Seite verweist.
 | section | Auf welchen Anker soll die Zielseite springen (#anker) |
 | linkAccessRestrictedPages | Normalerweise werden Links auf geschützte Seiten nicht erzeugt. Hier mit kann man die Linkgeneration erzwingen. Standard: deaktiviert |
 | absolute | Nach Aktivierung wird der Zeilseite noch der Domainname und Pfad vorangestellt. Standard: deaktiviert |
-| addQueryString | Falls der aktuellen Seite bereits Parameter über die URL mitgegeben wurden, könnt Ihr hier nun entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. |
-| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt Ihr hier diese Parameter ein. |
+| addQueryString | Falls der aktuellen Seite bereits Parameter über die URL mitgegeben wurden, könnt ihr hier nun entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. |
+| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein. |
 
 ### Beispiel
 

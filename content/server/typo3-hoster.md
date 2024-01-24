@@ -17,9 +17,9 @@ Das Team von punkt.de GmbH habe ich erstmals auf den TYPO3 DevDays in Nürnberg 
 
 Ein ganzer Server, sei es virtuell oder dediziert, ist nichts für Anfänger! Solr z.B. ist vorinstalliert, aber den Solr Core müsst ihr schon selbst einrichten. Der Nginx liefert nach Bestellung eine Welcome-Seite aus. Es ist Eure Aufgabe den Nginx so zu konfigurieren, dass er Eure TYPO3 Seite ausliefert. Dateiberechtigungen, Let's Encrypt, Fail2ban, DNS, FTP, Datenbanken, Email (MTA), all das liegt in Eurer Hand und zwar ohne Konfigurationsoberfläche. Ihr wollt eine Domain konnektieren? Dann wendet Euch an den Support. Ihr wollt einen MySQL/MariaDB Benutzer anlegen, dann viel Spaß mit den GRANT-Befehlen auf der MariaDB-Shell.
 
-Der Support steht Euch bei Fragen gerne zur Verfügung und solltet Ihr es mal nicht hinbekommen einen Service so einzurichten, wie Ihr es Euch vorstellt, dann könnt Ihr die Aufgabe auch gerne mit minutengenauer Abrechnung an den Support übergeben.
+Der Support steht Euch bei Fragen gerne zur Verfügung und solltet ihr es mal nicht hinbekommen einen Service so einzurichten, wie ihr es Euch vorstellt, dann könnt ihr die Aufgabe auch gerne mit minutengenauer Abrechnung an den Support übergeben.
 
-Natürlich bekommt Ihr einen VPS für ein paar Euro in jeder Ecke, aber dabei handelt es sich oft um Massentourismus auf dem Hauptserver, was zu enormen Performanceeinbußen eines jeden VPS führt. Je weniger VPS ein Hauptserver verwalten muss, desto teurer, aber auch schneller der VPS. Das Portfolio für Server ohne Updatesorgen findet Ihr auf der Subdomain [infrastructure.punkt.de](https://infrastructure.punkt.de/de/produkte/proserver.html) und beginnt mit dem "Virtual S" zu einem Preis von 46,41 Euro (Stand: 19.11.2021).
+Natürlich bekommt ihr einen VPS für ein paar Euro in jeder Ecke, aber dabei handelt es sich oft um Massentourismus auf dem Hauptserver, was zu enormen Performanceeinbußen eines jeden VPS führt. Je weniger VPS ein Hauptserver verwalten muss, desto teurer, aber auch schneller der VPS. Das Portfolio für Server ohne Updatesorgen findet ihr auf der Subdomain [infrastructure.punkt.de](https://infrastructure.punkt.de/de/produkte/proserver.html) und beginnt mit dem "Virtual S" zu einem Preis von 46,41 Euro (Stand: 19.11.2021).
 
 ## dogado GmbH
 

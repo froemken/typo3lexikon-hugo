@@ -16,7 +16,7 @@ Es gibt eine Ausnahme: Der Login, der nur für mich ist. Dieser setzt nach erfol
 
 ## Kontakt
 
-Das Kontaktformular speichert keine Daten auf meiner Webseite. Alle eingetragenen Daten werden direkt an meine E-Mail-Adresse weitergeleitet. Diese liegt bei Google. Wenn Ihr nicht wollt, dass Euer Anliegen auf Googleservern als Mail gespeichert wird, dann kontaktiert mich bitte nicht. Wenn Euer Anliegen geklärt ist, dann lösche ich die Mail. Im Papierkorb wird sie binnen 30 Tagen automatisch gelöscht. Inwieweit Google die Mail tatsächlich vollständig von seinen Servern gelöscht hat? Keine Ahnung. Wenn Du mich öfters kontaktierst oder wenn wir uns kennen oder über die verschiedenen TYPO3Camps kennengelernt haben, dann kann es passieren, dass ich Eure Kontaktdaten in meinem Google-Adressbuch hinterlege.
+Das Kontaktformular speichert keine Daten auf meiner Webseite. Alle eingetragenen Daten werden direkt an meine E-Mail-Adresse weitergeleitet. Diese liegt bei Google. Wenn ihr nicht wollt, dass Euer Anliegen auf Googleservern als Mail gespeichert wird, dann kontaktiert mich bitte nicht. Wenn Euer Anliegen geklärt ist, dann lösche ich die Mail. Im Papierkorb wird sie binnen 30 Tagen automatisch gelöscht. Inwieweit Google die Mail tatsächlich vollständig von seinen Servern gelöscht hat? Keine Ahnung. Wenn Du mich öfters kontaktierst oder wenn wir uns kennen oder über die verschiedenen TYPO3Camps kennengelernt haben, dann kann es passieren, dass ich Eure Kontaktdaten in meinem Google-Adressbuch hinterlege.
 
 Nochmal: Dies ist eine private Seite. Wenn ich Eure Daten speichere, dann sind wir Freunde.
 

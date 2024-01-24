@@ -16,8 +16,8 @@ von PHP Euer eigenes TypoScript verarbeiten? Dann schaut mal bei dem ContentObje
 vorbei. Ihr braucht Methoden für Workspaces, Versioning und LanguageOverlay im Backend? 
 Das BackendUtility bringt genügend Methoden dafür mit. Ihr liebt Konventionen? Dann 
 haltet Euch daran, erstellt eigene AMD-Module in Euren Extensions und bindet diese 
-JavaScript-Dateien direkt mithilfe von RequireJS ins Backend ein. Alles was Ihr dafür
-braucht findet Ihr im PageRenderer. Für die Verschlüsselung von Passwörtern gibt es eigene
+JavaScript-Dateien direkt mithilfe von RequireJS ins Backend ein. Alles was ihr dafür
+braucht findet ihr im PageRenderer. Für die Verschlüsselung von Passwörtern gibt es eigene
 Systemextensions.
 
 Seit TYPO3 6.2 ist keine TYPO3-Klasse mehr da, wo sie einmal war. Alle Klassen wurden

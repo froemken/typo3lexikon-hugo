@@ -9,7 +9,7 @@ aliases = ["backend.html"]
 ## Caching Framework: Backend
 
 Mit den Cache Backends kann pro Cache angegeben werden WO die Daten gespeichert werden sollen. Bedenkt bitte, dass jeder Server andere Software, PHP-Module und Hardware installiert haben kann. TYPO3 kommt derzeit nur mit einer alternativen Konfiguration für den Extbase Object Cache daher, sofern das APC- oder APCu-Modul geladen ist und
-über 100 MB zur Verfügung stellt. Wenn Ihr keine andere Konfiguration vorgebt, dann verwendet TYPO3 das Typo3DatabaseBackend. Wenn Ihr einen Cache auf ein anderes Backend abändern wollt, dann müsst Ihr die Konfiguration selbst vornehmen. Das gilt nicht nur für Eure oder die mitgelieferten TYPO3 Core Caches, sondern auch für Caches, die durch Extensions angelegt wurden.
+über 100 MB zur Verfügung stellt. Wenn ihr keine andere Konfiguration vorgebt, dann verwendet TYPO3 das Typo3DatabaseBackend. Wenn ihr einen Cache auf ein anderes Backend abändern wollt, dann müsst ihr die Konfiguration selbst vornehmen. Das gilt nicht nur für Eure oder die mitgelieferten TYPO3 Core Caches, sondern auch für Caches, die durch Extensions angelegt wurden.
 
 ## \TYPO3\CMS\Core\Cache\Backend\ApcBackend
 
@@ -37,7 +37,7 @@ env -i /usr/local/bin/php7.0.13-cli -c /etc/php.ini/7/330366/2382053/php.ini -f 
 
 Mit diesem Backend werden die Daten in Dateien ausgelagert. Es handelt sich hierbei um den großen Bruder des SimpleFileBackends und kommt mit ein paar Spezialfeatures daher.
 
-Bei dem FileBackend kann jede Cache-Datei mit einem Tag oder mehreren Tags versehen werden. Eine Art der Zugehörigkeit, wie z.B. Kategorien. Auf diese Weise könnt Ihr alle Caches-Einträge eines oder mehreren Tags löschen. Da ein Dateiname in seiner Länge beschränkt ist, werden die Tags ans Ende einer jeden Cache-Datei eingebunden. Auch,
+Bei dem FileBackend kann jede Cache-Datei mit einem Tag oder mehreren Tags versehen werden. Eine Art der Zugehörigkeit, wie z.B. Kategorien. Auf diese Weise könnt ihr alle Caches-Einträge eines oder mehreren Tags löschen. Da ein Dateiname in seiner Länge beschränkt ist, werden die Tags ans Ende einer jeden Cache-Datei eingebunden. Auch,
 wenn die Entwickler hier sehr performanceorientiert programmiert haben, so muss bei Verwendung von Tags jede Datei geöffnet werden, was an sich schon erhebliche Geschwindigkeitseinbußen beinhaltet.
 
 Je größer dieser Cache ist, je mehr Tags ihr verwendet, desto langsamer wird dieser Cache. Ihr solltet Euch genau überlegen, ob ihr diesen Cache wirklich verwenden wollt oder lieber auf einen schnelleren Cache wechseln wollt.
@@ -51,7 +51,7 @@ Der Core verwendet diesen Cache von Haus aus nicht.
 
 ## \TYPO3\CMS\Core\Cache\Backend\MemcachedBackend
 
-Wenn euch das PHP Modul Memcached zur Verfügung steht und mindestens eine RAM-Datenbank angelegt habt, kann TYPO3 diese verwenden. Solltet Ihr die Größe der Datenbank im Arbeitsspeicher zu klein gewählt haben, dann werden bei einem überfüllten Speicher die neu zu speichernden Daten zwar gespeichert, aber dafür werden andere Cachedaten wieder rausgeschmissen. Im Bereich von Shared Hosting Paketen ist dieser Cache nur sehr selten zu finden.
+Wenn euch das PHP Modul Memcached zur Verfügung steht und mindestens eine RAM-Datenbank angelegt habt, kann TYPO3 diese verwenden. Solltet ihr die Größe der Datenbank im Arbeitsspeicher zu klein gewählt haben, dann werden bei einem überfüllten Speicher die neu zu speichernden Daten zwar gespeichert, aber dafür werden andere Cachedaten wieder rausgeschmissen. Im Bereich von Shared Hosting Paketen ist dieser Cache nur sehr selten zu finden.
 
 ## \TYPO3\CMS\Core\Cache\Backend\NullBackend
 
@@ -59,7 +59,7 @@ Dieses Backend ist einfach zu erklären. Alle Daten, die ihr an dieses Backend s
 
 ## \TYPO3\CMS\Core\Cache\Backend\PdoBackend
 
-Dank PHP:PDO könnt Ihr eine Verbindung zu einem anderen oder auch dem gleichen Server mit einer anderen Datenbank aufbauen, der sich dann um die Aufnahme der Cachedaten kümmern.
+Dank PHP:PDO könnt ihr eine Verbindung zu einem anderen oder auch dem gleichen Server mit einer anderen Datenbank aufbauen, der sich dann um die Aufnahme der Cachedaten kümmern.
 
 ## \TYPO3\CMS\Core\Cache\Backend\RedisBackend
 

@@ -16,15 +16,15 @@ Klar, die erste Lösung überhaupt ist, den Virus vom eigenen System zu verbanne
 
 Das Standard-Übertragungsprotokoll ist FTP. Bei diesem Protokoll werden die Daten und auch das Passwort unverschlüsselt (als lesbarer Text) über das Internet zum Server übertragen. Ich habe auf meinem Rechner extra mal die Software WireShark installiert und konnte das Passwort lesen!
 
-Öffnet FileZilla und geht dann auf Datei->Servermanager. Dort angekommen wählt Ihr nun den gewünschten Server aus oder legt einen neuen an. Rechts im Tab "Allgemein" findet ihr eine Einstellung mit dem Namen `Servertyp`. In dieser Selectbox wählt ihr `SFTP - SSH File Transfer Protocol` aus.
+Öffnet FileZilla und geht dann auf Datei->Servermanager. Dort angekommen wählt ihr nun den gewünschten Server aus oder legt einen neuen an. Rechts im Tab "Allgemein" findet ihr eine Einstellung mit dem Namen `Servertyp`. In dieser Selectbox wählt ihr `SFTP - SSH File Transfer Protocol` aus.
 
-Nach einem Klick auf `OK`, könnt Ihr Euch nun verschlüsselt mit dem Server verbinden. Auch das habe ich mit WireShark getestet. Es wird nichts mehr per FTP (Port 21) gesendet. Ab jetzt läuft alles über den Port 22 (SSH) und von leserlichen Daten fehlt jede Spur. Ich bin wirklich jedes Paket durchgegangen.
+Nach einem Klick auf `OK`, könnt ihr Euch nun verschlüsselt mit dem Server verbinden. Auch das habe ich mit WireShark getestet. Es wird nichts mehr per FTP (Port 21) gesendet. Ab jetzt läuft alles über den Port 22 (SSH) und von leserlichen Daten fehlt jede Spur. Ich bin wirklich jedes Paket durchgegangen.
 
 ## Es klappt nicht mit dem SFTP?
 
 ![Korrekte Shell einstellen](sftp-hosteurope.png "Korrekte Shell für den FTP Account im Kundenmenü einstellen")
 
-Der Server zu dem Ihr Euch verbinden wollt, muss Anfragen auf den Port 22 erlauben, sonst läuft da gar nichts. Bei jWeiland (meinem Provider) ist Port 22 geöffnet und ich kann mich über Port 22 und meinen ganz normalen FTP-Zugangsdaten darauf verbinden (getestet mit Putty).
+Der Server zu dem ihr Euch verbinden wollt, muss Anfragen auf den Port 22 erlauben, sonst läuft da gar nichts. Bei jWeiland (meinem Provider) ist Port 22 geöffnet und ich kann mich über Port 22 und meinen ganz normalen FTP-Zugangsdaten darauf verbinden (getestet mit Putty).
 
 Bei meinem Hosteurope-Account sah das schon etwas anders aus. Dort kann ich mich zwar mit meinem normalen SSH-Account an Port 22 anmelden, nicht aber mit meinen FTP-Zugangsdaten. Es ist also wichtig, dass der Server so eingerichtet ist, dass der FTP-User nach Anmeldung eine Shell wie /bin/bash erhält. Auf unserem Hosteuropeserver gab es im Plesk sogar die besser Option `/bin/bash (chrooted)` auszuwählen. Damit zwinge ich den FTP-User in seinem Homeverzeichnis zu bleiben. Er kann also nicht mal eben die `/etc/passwd` auslesen.
 
@@ -32,7 +32,7 @@ Kurz: Auf dem Server muss der FTP-User so eingerichtet sein, dass er nach Anmeld
 
 ## Sonderfall Hosteurope
 
-Ich habe mich bereits mit Hosteurope über dieses Thema unterhalten und auch hier funktioniert die sichere FTP-Verbindung. Allerdings muss hier nicht SFTP sondern FTPES ausgewählt werden. Auch hier erhaltet Ihr ein Zertifikat, das Ihr bestätigen müsst.
+Ich habe mich bereits mit Hosteurope über dieses Thema unterhalten und auch hier funktioniert die sichere FTP-Verbindung. Allerdings muss hier nicht SFTP sondern FTPES ausgewählt werden. Auch hier erhaltet ihr ein Zertifikat, das ihr bestätigen müsst.
 
 ## Unbekannter Server-Schlüssel
 

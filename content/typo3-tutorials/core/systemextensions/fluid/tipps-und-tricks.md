@@ -44,7 +44,7 @@ Das liegt daran, dass Fluid nur Arrays und Objekte miteinander vergleichen kann.
 
 ## Rendern von Contentelementen
 
-Es gibt ja diese Contentelemente Text, Text mit Bild, Tabelle, Liste und so weiter. Wenn Ihr mithilfe von Extbase mal auf die Inhaltselemente zugreifen müsst, dann holt ihr euch den Inhalt üblicherweise über das Feld bodytext.
+Es gibt ja diese Contentelemente Text, Text mit Bild, Tabelle, Liste und so weiter. Wenn ihr mithilfe von Extbase mal auf die Inhaltselemente zugreifen müsst, dann holt ihr euch den Inhalt üblicherweise über das Feld bodytext.
 
 Wenn ihr wie ich auch den RTE verwendet, könnt ihr nun mithilfe von Fluid, den Text aus der Datenbank wieder in HTML-Quelltext konvertieren:
 
@@ -52,10 +52,10 @@ Wenn ihr wie ich auch den RTE verwendet, könnt ihr nun mithilfe von Fluid, den 
 <f:format.html>{content.bodytext}</f:format.html>
 ```
 
-Bis hierhin ist die Welt noch in Ordnung, aber spätestens, wenn Ihr den bodytext einer Tabelle ausgebt, steht ihr vor einem Problem und `f:format.html` wandelt euch das bestimmt nicht in eine Tabelle um. Folgende Lösungen stehen euch zur Verfügung, wobei die letzte Lösung die Beste ist:
+Bis hierhin ist die Welt noch in Ordnung, aber spätestens, wenn ihr den bodytext einer Tabelle ausgebt, steht ihr vor einem Problem und `f:format.html` wandelt euch das bestimmt nicht in eine Tabelle um. Folgende Lösungen stehen euch zur Verfügung, wobei die letzte Lösung die Beste ist:
 
-1. Schon bei der Datenbankabfrage im Repository könnt Ihr mithilfe einer Switch-Case-Anweisung herausfinden, welchen CType Ihr aktuell habt und die dafür entsprechenden css_styled_content-Funktionen ausführen. Ich gehe da jetzt nicht weiter drauf ein, weil das bestimmt nicht der way-of-fluid ist.
-2. Innerhalb des Controllers holt Ihr Euch ein Objekt von tslib_cObj und ladet Euch die Contentinhalte mit Hilfe des Contentobjects CONTENT.
+1. Schon bei der Datenbankabfrage im Repository könnt ihr mithilfe einer Switch-Case-Anweisung herausfinden, welchen CType ihr aktuell habt und die dafür entsprechenden css_styled_content-Funktionen ausführen. Ich gehe da jetzt nicht weiter drauf ein, weil das bestimmt nicht der way-of-fluid ist.
+2. Innerhalb des Controllers holt ihr Euch ein Objekt von tslib_cObj und ladet Euch die Contentinhalte mit Hilfe des Contentobjects CONTENT.
 3. Die geilste und vor allem die kürzeste Variante ist aber:
 
 ```html

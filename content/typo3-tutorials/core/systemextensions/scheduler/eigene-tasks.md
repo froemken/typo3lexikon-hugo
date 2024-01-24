@@ -46,7 +46,7 @@ return array(
 );
 ```
 
-Nun könnt Ihr einen Task anlegen und werden nur dann informiert, wenn der Port 80 Eures Servers nicht erreichbar ist. Wenn ihr keine Mail bekommt, ist alles in Ordnung. Tragt mal statt Serverport 80 den Port 123 ein und versucht es nochmal den Task zu starten. Ich hab meine Mail mit den Fehlermeldungen bekommen.
+Nun könnt ihr einen Task anlegen und werden nur dann informiert, wenn der Port 80 Eures Servers nicht erreichbar ist. Wenn ihr keine Mail bekommt, ist alles in Ordnung. Tragt mal statt Serverport 80 den Port 123 ein und versucht es nochmal den Task zu starten. Ich hab meine Mail mit den Fehlermeldungen bekommen.
 
 ## Dynamische IP-Adresse und Port
 
@@ -64,7 +64,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_sfpinger_pin
 );
 ```
 
-Wie Ihr ahnen könnt werden weitere Felder auch wieder über eine Klasse definiert. Also ab in den tasks-Ordner und dort die Datei `tx_sfpinger_pinger_addFields` anlegen mit folgendem Inhalt:
+Wie ihr ahnen könnt werden weitere Felder auch wieder über eine Klasse definiert. Also ab in den tasks-Ordner und dort die Datei `tx_sfpinger_pinger_addFields` anlegen mit folgendem Inhalt:
 
 ```php
 <?php
@@ -124,7 +124,7 @@ class tx_sfpinger_pinger_addFields implements tx_scheduler_AdditionalFieldProvid
 
 ### getAdditionalFields
 
-Die beiden ersten empty-ifs sollen auf jeden Fall drin bleiben. Wenn Ihr sie weglasst, werden Eure Daten, die Ihr in die Felder eintragen wollt, nicht gespeichert und/oder beim Bearbeiten nicht erneut angezeigt. Die beiden mittleren Abschnitte erstellen die neuen Felder. Hier ist wichtig, dass Ihr tx_scheduler als Namen angebt und nicht den Namen Eurer eigenen Extension. Das additionalFields-Array kann neben code und label auch noch Informationen für die csh-Hilfe enthalten. Schaut Euch dazu die Beispiele in der scheduler-Extension an.
+Die beiden ersten empty-ifs sollen auf jeden Fall drin bleiben. Wenn ihr sie weglasst, werden Eure Daten, die ihr in die Felder eintragen wollt, nicht gespeichert und/oder beim Bearbeiten nicht erneut angezeigt. Die beiden mittleren Abschnitte erstellen die neuen Felder. Hier ist wichtig, dass ihr tx_scheduler als Namen angebt und nicht den Namen Eurer eigenen Extension. Das additionalFields-Array kann neben code und label auch noch Informationen für die csh-Hilfe enthalten. Schaut Euch dazu die Beispiele in der scheduler-Extension an.
 
 ### validateAdditionalFields
 
@@ -153,7 +153,7 @@ class tx_sfpinger_pinger extends tx_scheduler_Task {
 }
 ```
 
-Hier seht Ihr nun, dass ich den Fehlerbericht, der per Mail versendet werden soll noch um den Server und Port ausgeweitet habe. Außerdem besitzt unsere Klasse nun noch die Methode `getAdditionalInformations()`. Diese Methode hat allerdings nix mit "hat geklappt" und "hat nicht geklappt" zu tun, sondern eher damit, dass Ihr gleiche Tasks besser unterscheiden könnt. Legt mal mehrere unserer Tasks an und Ihr werdet feststellen, dass sie alle gleich aussehen. Erst Dank dieser Funktion erscheinen zusätzliche Informationen in der Liste, die Euch helfen die Tasks zu unterscheiden. In meinem Fall habe ich mich für den Servernamen und den Port entschieden.
+Hier seht ihr nun, dass ich den Fehlerbericht, der per Mail versendet werden soll noch um den Server und Port ausgeweitet habe. Außerdem besitzt unsere Klasse nun noch die Methode `getAdditionalInformations()`. Diese Methode hat allerdings nix mit "hat geklappt" und "hat nicht geklappt" zu tun, sondern eher damit, dass ihr gleiche Tasks besser unterscheiden könnt. Legt mal mehrere unserer Tasks an und ihr werdet feststellen, dass sie alle gleich aussehen. Erst Dank dieser Funktion erscheinen zusätzliche Informationen in der Liste, die Euch helfen die Tasks zu unterscheiden. In meinem Fall habe ich mich für den Servernamen und den Port entschieden.
 
 Damit unsere Klasse wieder gefunden wird, müssen wir diese auch noch mit in die ext_autoload.php einbinden:
 
@@ -167,4 +167,4 @@ return [
 
 ## Parallel, oder nicht?
 
-Bei jedem Task habt Ihr die Möglichkeit zwischen parallel oder nicht zu wählen. Soll heißen: Darf der aktuelle Task parallel zu anderen gleichen Tasks laufen oder nicht. Wenn Ihr in unserem Beispiel nur 3-5 Tasks angelegt habt, dann könnt Ihr bedenkenlos "parallel" wählen. Es werden dann dementsprechend bis zu 5 gleichzeitig laufende Dienste auf dem Server gestartet. Bei mehreren Hundert dieser Tasks würde ich von parallel allerdings abraten. 100 neue Tasks auf dem Server kann je nach Task den Server echt in die Knie zwingen. Hier wählt als bitte nicht parallel. Die Tasks werden dann hintereinander abgearbeitet
+Bei jedem Task habt ihr die Möglichkeit zwischen parallel oder nicht zu wählen. Soll heißen: Darf der aktuelle Task parallel zu anderen gleichen Tasks laufen oder nicht. Wenn ihr in unserem Beispiel nur 3-5 Tasks angelegt habt, dann könnt ihr bedenkenlos "parallel" wählen. Es werden dann dementsprechend bis zu 5 gleichzeitig laufende Dienste auf dem Server gestartet. Bei mehreren Hundert dieser Tasks würde ich von parallel allerdings abraten. 100 neue Tasks auf dem Server kann je nach Task den Server echt in die Knie zwingen. Hier wählt als bitte nicht parallel. Die Tasks werden dann hintereinander abgearbeitet

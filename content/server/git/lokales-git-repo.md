@@ -23,7 +23,7 @@ Aktiviert nun für dieses Verzeichnis die Git-Versionsverwaltung:
 git init
 ```
 
-Wenn Ihr Git richtig installiert habt, dann solltet ihr nun eine Meldung dieser Art erhalten:
+Wenn ihr Git richtig installiert habt, dann solltet ihr nun eine Meldung dieser Art erhalten:
 
 ```shell
 Initialized empty Git repository in /Pfad/zum/Verzeichnis/Klausur/.git/
@@ -68,7 +68,7 @@ Bei `Untracked files` handelt es sich um Dateien, die sich zwar im Verzeichnis b
 git add hallo.txt
 ```
 
-Dieser Befehl liefert kein Ergebnis zurück. Er wird einfach nur ausgeführt und Ende. Ihr könnt ihn auch mehrfach ausführen, aber auch das wird nichts daran ändern. Nur wenn Ihr Dateien angebt, die nicht im Verzeichnis enthalten sind, meckert er:
+Dieser Befehl liefert kein Ergebnis zurück. Er wird einfach nur ausgeführt und Ende. Ihr könnt ihn auch mehrfach ausführen, aber auch das wird nichts daran ändern. Nur wenn ihr Dateien angebt, die nicht im Verzeichnis enthalten sind, meckert er:
 
 ```shell
 fatal: pathspec 'bla' did not match any files
@@ -99,15 +99,15 @@ liefert nun:
 #	myDocument.txt
 ```
 
-Wie Ihr seht, wurde die Datei `hallo.txt` bei Git angemeldet und steht für die Übergabe (`commit`) an die Git-Versionsverwaltun bereit.
+Wie ihr seht, wurde die Datei `hallo.txt` bei Git angemeldet und steht für die Übergabe (`commit`) an die Git-Versionsverwaltun bereit.
 
 ```shell
 git commit
 ```
 
-Nicht erschrecken. Je nach Betriebssystem und Einstellungen öffnet sich nun ein Editor, in dem ihr eine kurze Übergabenachricht angebt. Hier könnt Ihr angeben, was sich zum Beispiel zu vorherigen Versionen geändert hat. In unserem Fall gibt es noch keine vorherigen Versionen. Also tragt einfach so was wie `Erster Commit` ein.
+Nicht erschrecken. Je nach Betriebssystem und Einstellungen öffnet sich nun ein Editor, in dem ihr eine kurze Übergabenachricht angebt. Hier könnt ihr angeben, was sich zum Beispiel zu vorherigen Versionen geändert hat. In unserem Fall gibt es noch keine vorherigen Versionen. Also tragt einfach so was wie `Erster Commit` ein.
 
-Über den Editor habt Ihr die Möglichkeit mehrzeilige Nachrichten anzugeben. Bei so Einzeilern, wie wir sie gerade hatten, könnt ihr die Nachricht auch direkt im Git-Befehl mit angeben:
+Über den Editor habt ihr die Möglichkeit mehrzeilige Nachrichten anzugeben. Bei so Einzeilern, wie wir sie gerade hatten, könnt ihr die Nachricht auch direkt im Git-Befehl mit angeben:
 
 ```shell
 git commit -m "Erster Commit"
@@ -143,7 +143,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 Anders als bei SVN (Subversion) muss bei Git jede zu übertragende Datei vorher mit `git add <PfadZurDatei>` für die Übertragung in die Git-Versionsverwaltung angemeldet werden. Ihr könnt gerne probieren `git commit` ohne vorherigem `git add hallo.txt` auszuführen. Als Ergebnis erhaltet ihr die gleiche Ausgabe, wie gerade von `git status`. Im Prinzip ist also nichts passiert.
 
-Der Statusmeldung könnt Ihr entnehmen, dass Git bemerkt hat, dass es sich bei der Datei `hallo.txt` nicht mehr um eine neue, sondern um eine veränderte Datei (modified) handelt. Git empfiehlt uns diese Datei für die Übertragung in die Versionierung anzumelden:
+Der Statusmeldung könnt ihr entnehmen, dass Git bemerkt hat, dass es sich bei der Datei `hallo.txt` nicht mehr um eine neue, sondern um eine veränderte Datei (modified) handelt. Git empfiehlt uns diese Datei für die Übertragung in die Versionierung anzumelden:
 
 ```shell
 git add hallo.txt

@@ -12,7 +12,7 @@ Warum nicht ein LAMP-Server, wenn dieser produktiv eingesetzt werden soll? In me
 
 Warum diese Dokumentation? Weil ich ein Glückspilz bin, der ein Anziehungspunkt für Fehlermeldungen ist. Es gibt keine Dokumentation, die so detailliert auf evtl. auftretende Fehlermeldungen eingeht, wie diese hier. Hinzu kommt, dass diese Doku alle empfohlenen Features/Bedingungen enthält, die in der INSTALL.txt des TYPO3-Paketes enthalten sind.
 
-Ich habe die Doku so aufgebaut, dass der Server nach jedem Kapitel immer noch lauffähig sein sollte. Wenn Ihr also alle Schritte durchgeht, kann es durchaus sein, dass Ihr ein und dieselbe Datei bis zu 4mal editieren müsst.
+Ich habe die Doku so aufgebaut, dass der Server nach jedem Kapitel immer noch lauffähig sein sollte. Wenn ihr also alle Schritte durchgeht, kann es durchaus sein, dass ihr ein und dieselbe Datei bis zu 4mal editieren müsst.
 
 ## Apache
 
@@ -21,7 +21,7 @@ Für den [Apache](https://httpd.apache.org/download.cgi) gibt es drei Downloadm�
 - Win32 Binary without crypto (Webserver OHNE https-Unterstützung.)
 - Win32 Binary including OpenSSL (Meine Empfehlung: Für alle, die neben der einfachen Installation auch noch mit dem https-Protokoll arbeiten wollen. phpMyAdmin meckert zum Beispiel, wenn https nicht vorhanden ist.)
 
-Während der Installation werdet Ihr nach der Domäne, dem Server und der Admin-Mail gefragt. Für eine lokale Testumgebung tragt Ihr bei "Domäne" und "Server": `localhost` ein. Bei der E-Mail-Adresse würde ich dann aber schon eine öffentliche E-Mail-Adresse angeben. Weiter geht's mit der typical-Installation.
+Während der Installation werdet ihr nach der Domäne, dem Server und der Admin-Mail gefragt. Für eine lokale Testumgebung tragt ihr bei "Domäne" und "Server": `localhost` ein. Bei der E-Mail-Adresse würde ich dann aber schon eine öffentliche E-Mail-Adresse angeben. Weiter geht's mit der typical-Installation.
 
 Nach dem Start des Apache erhalte ich eine Fehlermeldung in der `logs/error.log`:
 
@@ -35,7 +35,7 @@ Da wir `localhost` in die Setuproutine eingetragen haben, wird die Zeile
 #ServerName localhost:80
 ```
 
-in der `conf/httpd.conf` nicht automatisch auskommentiert. Das müsst Ihr bitte händisch nachholen:
+in der `conf/httpd.conf` nicht automatisch auskommentiert. Das müsst ihr bitte händisch nachholen:
 
 ```ini
 ServerName localhost:80
@@ -48,7 +48,7 @@ LoadModule expires_module modules/mod_expires.so
 LoadModule rewrite_module modules/mod_rewrite.so
 ```
 
-Damit `mod_rewrite` funktionieren kann, muss der Apache die Möglichkeit haben, auf die jeweiligen `.htaccess` Dateien eines jeden Verzeichnisses zugreifen zu können. Aus Performancegründen (Ja, das Auslesen und Suchen von `.htaccess` Dateien in jedem Verzeichnis dauert länger, als wenn Ihr die Settings direkt in der `httpd.conf` hinterlegen würdet.) wurde per Default das Auslesen der `.htaccess` Dateien erstmal deaktiviert. Wir suchen nun in unserer `httpd.conf` nach dem Block, der mit dieser Zeile anfängt:
+Damit `mod_rewrite` funktionieren kann, muss der Apache die Möglichkeit haben, auf die jeweiligen `.htaccess` Dateien eines jeden Verzeichnisses zugreifen zu können. Aus Performancegründen (Ja, das Auslesen und Suchen von `.htaccess` Dateien in jedem Verzeichnis dauert länger, als wenn ihr die Settings direkt in der `httpd.conf` hinterlegen würdet.) wurde per Default das Auslesen der `.htaccess` Dateien erstmal deaktiviert. Wir suchen nun in unserer `httpd.conf` nach dem Block, der mit dieser Zeile anfängt:
 
 ```ini
 <Directory "C:/Programme/Apache Software Foundation/Apache2.2/htdocs">
@@ -76,12 +76,12 @@ Auch wenn in der PHP Dokumentation steht:
 
 Es hat bei mir einfach nicht geklappt. Der Installer hat PHP nicht in die bestehende Apache-Konfiguration eingebunden. Weiterhin hat mir die jeweils mitgelieferte `php5.dll` nach der manuellen Einbindung nur Fehler im Error-Log des Apache rein geschreiben. Der Apache ließ sich danach nicht mehr starten und damit habe ich für mich entschlossen, die Installation manuell mithilfe der ZIP-Datei zu realisieren.
 
-Nur im Bereich der manuellen Installation (und im Downloadbereich selbst) erfahrt Ihr welche PHP-Installationsdatei Ihr für welchen Server herunterladen müsst:
+Nur im Bereich der manuellen Installation (und im Downloadbereich selbst) erfahrt ihr welche PHP-Installationsdatei ihr für welchen Server herunterladen müsst:
 
 - VC6 -> Apache
 - VC9 -> IIS
 
-- Jetzt bleibt aber immer noch die Frage offen, ob nun `Thread safe` oder `non thread safe`. Ich hab beide Versionen ausprobiert und erhalte bei der `Non thread safe` Version auch wieder nur Fehlermeldung im Error-Log des Apache. Außerdem beinhaltet diese Version nicht diese `php5apache2.dll`, wie sie in all den anderen Onlinedokumentationen erwähnt wird. Die gesuchte DLL-Datei findet Ihr nur in diesem Paket:
+- Jetzt bleibt aber immer noch die Frage offen, ob nun `Thread safe` oder `non thread safe`. Ich hab beide Versionen ausprobiert und erhalte bei der `Non thread safe` Version auch wieder nur Fehlermeldung im Error-Log des Apache. Außerdem beinhaltet diese Version nicht diese `php5apache2.dll`, wie sie in all den anderen Onlinedokumentationen erwähnt wird. Die gesuchte DLL-Datei findet ihr nur in diesem Paket:
 
 > VC6 x86 Thread Safe (ZIP)
 
@@ -95,7 +95,7 @@ AddHandler application/x-httpd-php .php
 PHPIniDir "C:/Programme/php"
 ```
 
-PHP ist nun zwar grundsätzlich aktiviert, aber wenn Ihr ein Verzeichnis aufruft in der sich eine `index.php` befindet, wird diese nicht direkt ausgeführt wie vielleicht erwartet. Dazu müsst Ihr in der `httpd.conf` folgende Zeilen ausfindig machen:
+PHP ist nun zwar grundsätzlich aktiviert, aber wenn ihr ein Verzeichnis aufruft in der sich eine `index.php` befindet, wird diese nicht direkt ausgeführt wie vielleicht erwartet. Dazu müsst ihr in der `httpd.conf` folgende Zeilen ausfindig machen:
 
 ```ini
 <IfModule dir_module>
@@ -118,7 +118,7 @@ Standardmäßig gibt es im PHP-Verzeichnis keine `php.ini`. Dafür aber 2 `php.i
 - php.ini-development
 - php.ini-production
 
-Entscheidet also selbst, ob Ihr ein Testsystem oder eine Produktivumgebung aufbauen wollt und benennt die entsprechende Datei in `php.ini` um. Bei der Produktivumgebung ist aber zu bedenken, dass die Option `display_errors` ausgeschaltet ist. Bei Fehlern erhaltet Ihr so nur noch eine weiße Seite.
+Entscheidet also selbst, ob ihr ein Testsystem oder eine Produktivumgebung aufbauen wollt und benennt die entsprechende Datei in `php.ini` um. Bei der Produktivumgebung ist aber zu bedenken, dass die Option `display_errors` ausgeschaltet ist. Bei Fehlern erhaltet ihr so nur noch eine weiße Seite.
 
 Auf meiner Testumgebung konnte das Introductionpackage von TYPO3 nicht installiert werden, da die `max_execution_time` von 30 nicht ausgereicht hat und das, obwohl ich hier mit einem 3GHz DualCore arbeite und 4 GB RAM. Ändert den Wert in der `php.ini` also auf 60:
 
@@ -169,7 +169,7 @@ Euch werden nun ein paar Fragen gestellt:
 - **Locality Name**: Tragt hier den Namen Eurer Stadt ein
 - **Organisation Name**: Tragt hier Euren Firmennamen ein oder lasst es leer
 - **Organizational Unit Name**: In welchem Bereich ist die Firma tätig. Ansonsten leer lassen
-- **Common Name**: Es wird hier vorgeschlagen den eigenen Namen anzugeben. ABER: Ihr werden dann einen Hinweis in der error.log erhalten, dass der common name nicht mit dem Namen des Servers übereinstimmt. Tragt hier bitte den Servernamen ein, wie Ihr ihn in der httpd.conf angegeben habt OHNE den Doppelpunkt und dem Port.
+- **Common Name**: Es wird hier vorgeschlagen den eigenen Namen anzugeben. ABER: Ihr werden dann einen Hinweis in der error.log erhalten, dass der common name nicht mit dem Namen des Servers übereinstimmt. Tragt hier bitte den Servernamen ein, wie ihr ihn in der httpd.conf angegeben habt OHNE den Doppelpunkt und dem Port.
 - **E-Mail address**: Sollte klar sein
 - **A challenge password**: Würde ich leer lassen. Haben oben doch schon eins eingetragen
 - **An optional company name**: Würde ich auch leer lassen.
@@ -182,7 +182,7 @@ Im nächsten Schritt entfernen wir die Pass-Phrase:
 openssl rsa -in privkey.pem -out wampserver.key
 ```
 
-Gebt hier das Passwort, dass Ihr oben unter "PEM pass phrase" angegeben habt ein. Nun ist eine `wampserver.key` im bin-Verzeichnis hinzugekommen.
+Gebt hier das Passwort, dass ihr oben unter "PEM pass phrase" angegeben habt ein. Nun ist eine `wampserver.key` im bin-Verzeichnis hinzugekommen.
 
 Der letzte Befehl lautet:
 

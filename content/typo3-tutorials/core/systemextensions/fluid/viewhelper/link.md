@@ -64,7 +64,7 @@ Nutzt diesen ViewHelper, um auf externe Seiten zu verweisen. Wenn ihr bei `uri` 
 
 ## f:link.page
 
-Mit diesem ViewHelper erstellt Ihr einen Link, der auf eine andere Seite verweist.
+Mit diesem ViewHelper erstellt ihr einen Link, der auf eine andere Seite verweist.
 
 | Parameter | Erklärung |
 |-----------|-----------|

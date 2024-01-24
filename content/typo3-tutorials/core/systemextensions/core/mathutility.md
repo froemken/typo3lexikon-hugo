@@ -12,8 +12,8 @@ Prüft, ob ein gegebener Zahlenwert sich in einem Bereich von bis befindet. Fall
 Parameter
 : **theInt**: Die Zahl, die geprüft werden soll
 : **min**: Wie klein darf theInt sein? Wenn die Zahl kleiner ist als min, dann wird theInt auf den Wert von min gesetzt und als Ergebnis zurückgeliefert.
-: **max**: Wie groß darf theInt sein? TYPO3 gibt hier einen Defaultwert von 2000000000 an. Diesen solltet Ihr nach Möglichkeit nicht übersteigen. Auf 32bit-Systemen können Int-Werte bis zu 4294967296 Zahlen darstellen, jedoch vergessen viele das Vorzeichen-Bit, weshalb die größtmögliche Zahl 2147483648 ist. Die 2000000000 steht dort also nur zur besseren Lesbarkeit. Wenn eine Zahl größer als max ist, wird theInt auf den Wert von max gesetzt und zurückgeliefert.
-: **defaultValue**: Falls die Konvertierung von theInt fehlschlägt, könnt Ihr mit defaultValue einen Wert angeben, der an theInt weitergegeben und zurückgeliefert wird.
+: **max**: Wie groß darf theInt sein? TYPO3 gibt hier einen Defaultwert von 2000000000 an. Diesen solltet ihr nach Möglichkeit nicht übersteigen. Auf 32bit-Systemen können Int-Werte bis zu 4294967296 Zahlen darstellen, jedoch vergessen viele das Vorzeichen-Bit, weshalb die größtmögliche Zahl 2147483648 ist. Die 2000000000 steht dort also nur zur besseren Lesbarkeit. Wenn eine Zahl größer als max ist, wird theInt auf den Wert von max gesetzt und zurückgeliefert.
+: **defaultValue**: Falls die Konvertierung von theInt fehlschlägt, könnt ihr mit defaultValue einen Wert angeben, der an theInt weitergegeben und zurückgeliefert wird.
 
 ## convertToPositiveInteger
 

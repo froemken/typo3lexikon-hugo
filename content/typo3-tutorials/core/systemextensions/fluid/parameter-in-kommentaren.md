@@ -22,7 +22,7 @@ wenn bestimmte Eigenschaften nicht sauber mit Parametern im Kommentar deklariert
 
 ### @entity
 
-Definiert, dass diese Klasse eine Einheit nach dem Prinzip des DDD ist und dass sie dauerhaft bestehen kann. Solche Einheiten bringen Ihren eigenen Identifier mit und können so auch bei gleichem Inhalt differenziert werden.
+Definiert, dass diese Klasse eine Einheit nach dem Prinzip des DDD ist und dass sie dauerhaft bestehen kann. Solche Einheiten bringen ihren eigenen Identifier mit und können so auch bei gleichem Inhalt differenziert werden.
 
 ### @copyright und @license
 
