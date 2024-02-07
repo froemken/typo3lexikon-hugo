@@ -1,7 +1,7 @@
 +++
 title = "TemplaVoila 1.4.1"
 date = 2024-01-09T20:53:23+01:00
-aliases = ["templvoila-141.html"]
+aliases = ["templavoila-141.html"]
 +++
 
 Ich war schlicht weg begeistert als ich heute die neue Version von TemplaVoila installiert habe. Hier also ein paar Bilder, wie das neue TemplaVoila ausschaut.
