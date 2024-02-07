@@ -1,6 +1,7 @@
 +++
 title = "formhandler"
 date = 2024-01-09T20:51:29+01:00
+alwaysopen = false
 aliases = ["formhandler.html"]
 +++
 

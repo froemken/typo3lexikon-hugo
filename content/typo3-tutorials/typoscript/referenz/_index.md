@@ -2,6 +2,7 @@
 title = "TypoScript Referenz"
 linkTitle = "Referenz"
 date = 2024-01-09T20:56:25+01:00
+alwaysopen = false
 aliases = ["referenz.html"]
 +++
 
