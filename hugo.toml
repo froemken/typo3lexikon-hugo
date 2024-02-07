@@ -1,6 +1,6 @@
 baseURL = "https://www.typo3lexikon.de/"
-canonifyURLs = true
-relativeURLs = true
+# canonifyURLs = true
+relativeURLs = false
 
 title = "Stefans TYPO3 Seite"
 languageCode = "de-DE"
