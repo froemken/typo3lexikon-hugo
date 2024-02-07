@@ -17,6 +17,7 @@ themeVariant = [
 	{ identifier = "zen-dark"       },
 	{ identifier = "neon"           }
 ]
+enableRobotsTXT = true
 disableBreadcrumb = false
 disableExplicitIndexURLs = true
 disableNextPrev = false
