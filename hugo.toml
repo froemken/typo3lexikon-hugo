@@ -1,4 +1,7 @@
-baseURL = "http://hugo.typo3lexikon.de/"
+baseURL = "https://www.typo3lexikon.de/"
+canonifyURLs = true
+relativeURLs = true
+
 title = "Stefans TYPO3 Seite"
 languageCode = "de-DE"
 theme = "hugo-theme-relearn"
