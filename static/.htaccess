@@ -11,4 +11,21 @@
   RewriteRule ^(.*)$ https://www.typo3lexikon.de/$1 [R=301,L]
   RewriteCond %{HTTP_HOST} ^typo3lexikon\.de$ [NC]
   RewriteRule ^(.*)$ https://www.typo3lexikon.de/$1 [R=301,L]
+
+  # Do not try to access fileadmin anymore
+  RewriteRule ^fileadmin/ - [L,R=410]
+
+  # Do not try to open files with showpic eID
+  RewriteCond %{QUERY_STRING} tx_cms_showpic
+  RewriteRule .* - [G,NC]
+
+  # Site is gone forever 410
+  RewriteRule ^kontakt/kontakt-empfangsbestaetigung.html - [G]
+  RewriteRule ^typo3-tutorials/extensions/fluid/fluid-performance.html - [G]
+  RewriteRule ^typo3-tutorials/extensions/sr-freecap.html - [G]
+  RewriteRule ^typo3-tutorials/rte/rte-konfigurieren.html - [G]
+  RewriteRule ^typo3-tutorials/t3lib.html - [G]
+  RewriteRule ^typo3-tutorials/tipps-und-tricks/schriftart-konvertieren.html - [G]
+  RewriteRule ^typo3-tutorials/tipps-und-tricks/cursor.html - [G]
+  RewriteRule ^typo3-tutorials/typo3-einrichten/phoenix.html - [G]
 </IfModule>
