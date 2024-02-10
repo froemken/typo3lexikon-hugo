@@ -15,8 +15,11 @@
   # Do not try to access fileadmin anymore
   RewriteRule ^fileadmin/ - [L,R=410]
 
-# Redirect requests from index.php?whatever to start page. QSD: Query String Discard
+  # Redirect requests from index.php?whatever to start page. QSD: Query String Discard
   RewriteRule ^index.php / [L,QSD,R=301]
+
+  # Rewrite old fluid-documentation (ViewHelper) to new path and remove Query Strings
+  RewriteRule ^typo3-tutorials/extensions/fluid/fluid-dokumentation/(.*).html$ /typo3-tutorials/core/systemextensions/fluid/viewhelper/$1 [L,QSD,R=301]
 
   # Do not try to open files with showpic eID
   RewriteCond %{QUERY_STRING} tx_cms_showpic
