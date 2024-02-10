@@ -37,7 +37,7 @@ class Tx_Sffluid_Controller_BlablaController extends Tx_Extbase_MVC_Controller_A
 
 Ihr seht: Der erste Parameter der inject-Methode heißt $customerRepository und ist vom Typ Tx_Sffluid_Domain_Repository_CustomerRepository. Wieso habe ich mich für dieses Namen entschieden?
 
-## Der extbase_kickstarter bezeichnet die Dateien auch so :-)
+## Der `extension_builder` bezeichnet die Dateien auch so :-)
 
 Laut DDD wollen wir eine strikte Trennung zwischen Model, Repository, TS und vielen Anderen erreichen. Die Verzeichnisstruktur gibt vor, dass die Repositories hier zu liegen haben. Wir könnten die Klasse auch Tx_Sffluid_customerRepository bezeichnen, aber dann muss auch diese Datei entsprechend umbenannt werden und in das Rootverzeichnis von Sffluid verschoben werden, da der Objektmanager die Datei nicht finden und kein Objekt von der Klasse erzeugen kann. Dadurch würden wir aus dem Prinzip von DDD ausbrechen und eine unsaubere Extension programmieren.
 Der Objektmanager erstellt nun aus diesem Typ/Klassennamen ein Objekt und übergibt es an $customerRepository. Dieses wiederum stellen wir mithilfe von $this allen Methoden innerhalb unseres Controllerobjekts zur Verfügung.
