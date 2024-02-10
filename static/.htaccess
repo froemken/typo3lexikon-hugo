@@ -18,8 +18,25 @@
   # Redirect requests from index.php?whatever to start page. QSD: Query String Discard
   RewriteRule ^index.php / [L,QSD,R=301]
 
-  # Rewrite old fluid-documentation (ViewHelper) to new path and remove Query Strings
-  RewriteRule ^typo3-tutorials/extensions/fluid/fluid-dokumentation/(.*).html$ /typo3-tutorials/core/systemextensions/fluid/viewhelper/$1 [L,QSD,R=301]
+  # Rewrite sysext from ter-extensions to systemextensions
+  RewriteRule ^typo3-tutorials/extensions/css-styled-content/(.*)(/|.html)$ /typo3-tutorials/core/systemextensions/css-styled-content/$1/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/extbase/(.*).html$ /typo3-tutorials/core/systemextensions/extbase/$1/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/fluid/validators.html$ /typo3-tutorials/core/systemextensions/extbase/validator/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/fluid/fluid-dokumentation/(.*)(/|.html)$ /typo3-tutorials/core/systemextensions/fluid/viewhelper/$1/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/fluid/(.*).html$ /typo3-tutorials/core/systemextensions/fluid/$1/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/sys-action(/|.html)$ /typo3-tutorials/core/systemextensions/sys-action/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/indexed-search(/|.html)$ /typo3-tutorials/core/systemextensions/indexed-search/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/indexed-search/(.*)(/|.html)$ /typo3-tutorials/core/systemextensions/indexed-search/$1/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/scheduler(/|.html)$ /typo3-tutorials/core/systemextensions/scheduler/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/extensions/scheduler/(.*)(/|.html)$ /typo3-tutorials/core/systemextensions/scheduler/$1/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/core/systemextensions/fluid/fluid-dokumentation/$ /typo3-tutorials/core/systemextensions/fluid/ [L,QSD,R=301]
+  RewriteRule ^typo3-tutorials/core/systemextensions/fluid/fluid-dokumentation/(.*)(/|.html)$ /typo3-tutorials/core/systemextensions/fluid/viewhelper/$1/ [L,QSD,R=301]
+
+  # Rewrite old extension dir to ter-extensions
+  RewriteRule ^typo3-tutorials/extensions/(.*).html$ /typo3-tutorials/ter-extensions/$1/ [L,QSD,R=301]
+
+  # Rewrite old rte docu to sysext dir
+  RewriteRule ^typo3-tutorials/rte(.*).html$ /typo3-tutorials/core/systemextensions/rtehtmlarea$1/ [L,QSD,R=301]
 
   # Do not try to open files with showpic eID
   RewriteCond %{QUERY_STRING} tx_cms_showpic

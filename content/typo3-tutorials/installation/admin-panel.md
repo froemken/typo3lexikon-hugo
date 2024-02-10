@@ -1,7 +1,7 @@
 +++
 title = "AdminPanel"
 date = 2024-01-09T20:47:30+01:00
-aliases = ["adminpanel.html", "adminpanel-admpanel.html"]
+aliases = ["adminpanel.html", "/typo3-tutorials/typo3-einrichten/admpanel.html"]
 +++
 
 Mit dem admPanel habt Ihr die Möglichkeit die Inhalte Eurer Webseite direkt im Frontend zu bearbeiten.

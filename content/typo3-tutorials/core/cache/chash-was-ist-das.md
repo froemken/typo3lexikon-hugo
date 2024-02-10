@@ -3,7 +3,7 @@ title = "Was ist der cHash?"
 linkTitle = "cHash? Was ist das?"
 date = 2024-01-06T22:32:48+01:00
 slug = "chash-was-ist-das"
-aliases = ["chash-was-ist-das.html"]
+aliases = ["chash-was-ist-das.html", "/typo3-tutorials/tipps-und-tricks/chash-was-ist-das.html"]
 +++
 
 Mit jedem Aufruf einer Seite im Frontend muss TYPO3 eine ganze Reihe von Informationen aufbereiten. Das Aufwändigste hier dürfte wohl das Abarbeiten von TypoScript sein. Allein die Extension css_styled_content kommt schon mit über 1000 Zeilen TypoScript daher. Auch das Templating kostet Zeit. Suchen und Ersetzen der Platzhalter in Fluid oder in früheren Installationen die Marker und Subparts. All das kostet Zeit und die Idee eines Seitencaches war gebohren. Ein Cache, in dem das TypoScript schon fertig abgearbeitet wurde und die Seiteninhalte bereits in die Platzhalter der Templates eingebunden wurde. All diese Daten liegen nun in der Datenbanktabelle cf_cache_pages.

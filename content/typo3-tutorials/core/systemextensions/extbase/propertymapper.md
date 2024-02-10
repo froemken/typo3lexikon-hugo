@@ -1,7 +1,7 @@
 +++
 title = "PropertyMapper"
 date = 2024-01-09T20:22:21+01:00
-aliases = ["propertymapper.html", "property-mapper.html"]
+aliases = ["propertymapper.html", "property-mapper.html", "property-mapper"]
 +++
 
 ## Was ist die Aufgabe eines Property Mappers?

@@ -1,7 +1,7 @@
 +++
 title = "Security"
 date = 2024-01-09T20:28:26+01:00
-aliases = ["security.html", "/typo3-tutorials/extensions/fluid/fluid-dokumentation/be/security.html"]
+aliases = ["security.html"]
 +++
 
 ## f:be.security.ifAuthenticated

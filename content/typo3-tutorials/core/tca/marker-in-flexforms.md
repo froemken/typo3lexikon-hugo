@@ -1,7 +1,7 @@
 +++
 title = "Marker in Flexforms"
 date = 2024-01-09T20:42:59+01:00
-aliases = ["marker-in-flexforms.html"]
+aliases = ["marker-in-flexforms.html", "/typo3-tutorials/tipps-und-tricks/marker-in-flexforms.html"]
 +++
 
 ## Marker in foreign_table_where

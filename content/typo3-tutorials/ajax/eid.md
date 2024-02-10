@@ -3,7 +3,7 @@ title = "AJAX-Request mittels eID"
 linkTitle = "eID"
 date = 2024-01-06T19:45:25+01:00
 slug = "eid"
-aliases = ["eid.html"]
+aliases = ["eid.html", "/typo3-tutorials/eid-und-ajax/eid-beispiele.html"]
 +++
 
 Ajax-Requests auf Basis von `eID` werden vorzugsweise für das TYPO3 Frontend verwendet und werden innerhalb von TYPO3 sehr früh geladen. An dieser frühen Position hat noch keine Autorisierung stattgefunden, die Sprachen bzw. das Übersetzungssystem ist noch nicht gestartet, der TypoScriptFrontendController alias `TSFE` ist noch nicht geladen und selbst der Site- als auch der PageResolver wurden noch nicht ausgeführt. Somit stehen Euch im Rahmen von `eID` Requests nur ein paar wenige TYPO3 APIs und die Datenbank zur Verfügung.

@@ -1,7 +1,7 @@
 +++
 title = "Enable-Word-Clean"
 date = 2024-01-09T20:32:02+01:00
-aliases = ["enablewordclean.html"]
+aliases = ["enablewordclean", "enablewordclean.html"]
 +++
 
 Beim Kopieren von externen Texten wie z.B. aus Word oder auch von anderen Webseiten in den RTE werden alle HTML-Tags übernommen. Im RTE erscheinen die riesigen bunten Überschriften, die Bilder sind sichtbar, Floatings werden übernommen. Naja..eigentlich kann man sagen, dass wir mit Copy&Paste ein fremdes Design in unseren RTE implementieren.

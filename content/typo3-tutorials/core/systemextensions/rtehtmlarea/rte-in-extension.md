@@ -1,7 +1,7 @@
 +++
 title = "RTE in Extension"
 date = 2024-01-09T20:31:52+01:00
-aliases = ["rte-in-extension.html"]
+aliases = ["rte-in-einer-extension", "rte-in-einer-extension.html"]
 +++
 
 Dieser Bericht ist noch nicht fertig, aber grundsätzlich wird der RTE in der localconf.php konfiguriert. Hier eine Konfiguration, wie ich sie für ein kleineres Projekt eingesetzt habe:
