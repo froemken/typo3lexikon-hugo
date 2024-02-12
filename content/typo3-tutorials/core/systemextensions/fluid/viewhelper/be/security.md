@@ -37,6 +37,8 @@ Dieser ViewHelper wird überwiegend aus dem Frontend heraus benötigt. So könnt
 
 Dieser ViewHelper prüft, ob ein im Backend angemeldeter User der im Parameter role angegebenen Benutzergruppe angehört. Wie schon bei dem f:if-ViewHelper wird bei Gültigkeit der Inhalt zwischen den Tags oder, wenn vorhanden, der Inhalt aus dem f:then-ViewHelper angezeigt. Falls gewünscht, kann auch der f:else-ViewHelper angegeben werden, der immer dann angezeigt werden soll, falls der User nicht der angegebenen Benutzergruppe angehört.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | role | Entweder der Gruppenname (Groß- und Kleinschreibung beachten) oder die Gruppen-UID |

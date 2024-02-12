@@ -6,6 +6,8 @@ aliases = ["format.html"]
 
 ## f:format.crop
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | maxCharacters | Anzahl Zeichen nach denen abgeschnitten werden soll. |
@@ -61,6 +63,8 @@ Mit diesem ViewHelper könnt ihr Zahlen als Währung darstellen lassen. Doch zwe
 Ihr dürft diesem ViewHelper keine Zahlen mit einem Komma als Dezimaltrenner mitgeben. Schaut euch dazu die Beispiele unten an.
 {{% /notice %}}
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | currencySign | Das Währungskennzeichen wie `$` oder `€`. Dieses Zeichen wird immer hinter der Währung angezeigt. |
@@ -95,6 +99,8 @@ Zitat: return new DateTime(date('c', $timestamp));
 
 Warum das in den ViewHelper noch nicht eingeflossen ist, kann ich mir nicht erklären.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | date | Entweder ein Objekt vom Typ `\DateTime` oder ein Text, der in ein `\DateTime` Objekt konvertiert werden kann. Z.B. `17.01.1979` geht. `17.01.79` geht nicht. |
@@ -118,6 +124,8 @@ Wie schon gesagt: Je nach Land/Kontinent bitte mit Vorsicht zu behandeln.
 
 Wenn ihr ein Modell für die Tabelle `tt_content` erstellt habt, dann erhaltet ihr im Frontend die nackten Daten, wie sie aus der Datenbank kommen. Damit die Daten wieder so aussehen, wie wenn ihr sie mit `styles.content.get` ausgebt, hilft euch dieser ViewHelper. Dieser schnappt sich die Rohdaten und schleift diese einmal komplett durch den hinterlegten TypoScript-Objektpfad.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | parseFuncTSPath | Formatiere einen Text anhand der TypoScript-Konfiguration, die sich standardmäßig in `lib.parseFunc_RTE` befindet. Diesen Pfad könnt ihr hier ändern. |
@@ -135,6 +143,8 @@ Wenn ihr ein Modell für die Tabelle `tt_content` erstellt habt, dann erhaltet i
 ```
 
 ## f:format.htmlentitiesDecode
+
+### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
@@ -154,6 +164,8 @@ Im Quelltext sieht man wieder ein richtig sauberes: `Müller & Breuer`.
 
 Mit diesem ViewHelper wandelt ihr Sonderzeichen oder auch die deutschen Umlaute in web-sichere HTML-Codes um. Ein `ü` wird dann zu `&uuml;`. Damit kann gewährleistet werden, dass jeder Browser dieses Zeichen richtig anzeigt, und zwar egal wo auf der Welt. Seit der Standardzeichensatz von TYPO3 auf UTF-8 gesetzt ist, sollte diese Sache hier so nach und nach der Vergangenheit angehören.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | value | Der Text der kodiert werden soll |
@@ -171,6 +183,8 @@ Mit diesem ViewHelper wandelt ihr Sonderzeichen oder auch die deutschen Umlaute 
 ## f:format.htmlspecialchars
 
 Wenn ihr mit Userdaten (Formulardaten) arbeitet, dann sollte dieser Inhalt zuallererst durch diesen ViewHelper. Denn dieser wandelt alle spitzen Klammern von HTML-Tags in ein nicht mehr interpretierbares Format um. Die HTML-Tags können also keinen Schaden mehr verursachen und werden im Frontend angezeigt statt verarbeitet.
+
+### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
@@ -203,6 +217,8 @@ ergibt: `Text<br>mit<br>Zeilenumbrüchen`
 
 Mit diesem ViewHelper könnt ihr Zahlen formatieren. Er arbeitet ähnlich dem `f:format.currency` ViewHelper.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | decimals | Wie viele Nachkommastellen dürfen angezeigt werden. |
@@ -220,6 +236,8 @@ ergibt: `1,122,334,455.668`.
 Wie ihr seht, wird sogar automatisch aufgerundet.
 
 ## f:format.padding
+
+### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
@@ -251,6 +269,8 @@ Hier nahezu das gleiche Beispiel wie oben. Allerdings fangen die letzten beiden 
 
 Mit diesem ViewHelper können Platzhalter in einem Text mit den Werten aus dem Array ersetzt werden.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | arguments | Gebt hier Werte in Arraynotation ein, die die Platzhalter in dem Text, der sich zwischen den Tags befindet, ersetzt. |
@@ -269,6 +289,8 @@ Wenn dieser ViewHelper überhaupt nicht angezeigt wird, dann habt ihr entweder e
 
 Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchars()` schicken. Dies zu verhindern stellt auf jeden Fall ein Sicherheitsrisiko dar, kann aber mit diesem ViewHelper erreicht werden. Ich denke gerade im Bereich von Formulardaten, kann dieser ViewHelper evtl. Verwendung finden.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | value | Der Text, der unangetastet/unverändert ausgegeben werden soll |
@@ -283,6 +305,8 @@ Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchar
 
 Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | value | Der Text aus dem die HTML-Tags entfernt werden sollen |
@@ -296,6 +320,8 @@ Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 ## f:format.urlencode
 
 In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%` vor. Diese Zeichen sind nicht URL-sicher und sollten vor der Übermittlung durch diesen ViewHelper verarbeitet werden.
+
+### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|

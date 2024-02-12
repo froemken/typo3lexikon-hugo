@@ -6,13 +6,15 @@ aliases = ["widget.html"]
 
 ## f:be.widget.paginate
 
+### Parameter
+
 | Parameter | Erklärung |
 |-----------|-----------|
 | objects | Die Objekte, für die die Seitennavigation erzeugt werden soll. |
 | as | Ein Variablenname, der die reduzierte Anzahl an Objekten pro Seite zur Verfügung stellt. |
 | configuration | Siehe nachfolgende Tabelle |
 
-### configuration
+#### configuration
 
 | Parameter | Erklärung |
 |-----------|-----------|

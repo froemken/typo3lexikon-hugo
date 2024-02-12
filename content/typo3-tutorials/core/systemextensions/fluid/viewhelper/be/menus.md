@@ -6,7 +6,9 @@ aliases = ["menus.html"]
 
 ## f:be.menus.actionMenuItem
 
-Mit diesem ViewHelper könnt ihr einen Menüeintrag für Euer BE-Modul erstellen. Damit das funktioniert müssen sich diese ViewHelper innerhalb des f:be.menus.actionMenu-ViewHelper befinden.
+Mit diesem ViewHelper könnt ihr einen Menüeintrag für Euer BE-Modul erstellen. Damit das funktioniert müssen sich diese ViewHelper innerhalb des `f:be.menus.actionMenu` ViewHelper befinden.
+
+### Parameter
 
 | Parameter | Erklärung | Pflichtfeld |
 |-----------|-----------|-------------|
@@ -28,7 +30,9 @@ Dieses Menü beinhaltet eine Selectbox mit 2 Menüeinträgen, die nach Auswahl d
 
 ## f:be.menus.actionMenu
 
-Dieser ViewHelper erstellt eine Selectbox. Mit Hilfe der actionMenuItem-ViewHelper könnt ihr diese Selectbox mit Optionen auffüllen, die dann nach Auswahl auf die gewünschte Action zugreifen.
+Dieser ViewHelper erstellt eine Selectbox. Mithilfe der actionMenuItem-ViewHelper könnt ihr diese Selectbox mit Optionen auffüllen, die dann nach Auswahl auf die gewünschte Action zugreifen.
+
+### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
