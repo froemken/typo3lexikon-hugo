@@ -6,7 +6,7 @@ alwaysopen = false
 aliases = ["viewhelper.html"]
 +++
 
-Mit reinem HTML wird wiederkehrender Quellcode sehr schnell sehr groß und unübersichtlich. Im Hinblick auf TYPO3, wo Seiten verschoben und umbenannt werden können, müssten Links und URLs im HTML Quelltext immer wieder erneut angepasst werden. Abhilfe schaffen hier besondere HTML-Tags, die von Fluid, dem Core und anderen Extensions mitgeliefert werden. Mit diesen sogenannten ViewHelpern können direkt im HTML Quelltext Schleifen, Verlinkungen zu TYPO3 Seiten, Abfragen und das Ausliefern von per TypoScript generiertem Inhalt realisiert werden. Dank Layouts, Partials und Templates können die HTML-Templates sehr dynamisch und wiederverwendbar strukturiert werden.
+Mit reinem HTML wird wiederkehrender Quellcode sehr schnell sehr groß und unübersichtlich. Im Hinblick auf TYPO3, wo Seiten verschoben und umbenannt werden können, müssten Links und URLs im HTML Quelltext immer wieder erneut angepasst werden. Abhilfe schaffen hier besondere HTML-Tags, die von Fluid, dem Core und anderen Extensions mitgeliefert werden. Mit diesen sogenannten ViewHelper können direkt im HTML Quelltext Schleifen, Verlinkungen zu TYPO3 Seiten, Abfragen und das Ausliefern von per TypoScript generiertem Inhalt realisiert werden. Dank Layouts, Partials und Templates können die HTML-Templates sehr dynamisch und wiederverwendbar strukturiert werden.
 
 Im Folgenden eine Auflistung der zur Verfügung stehenden ViewHelper.
 
@@ -16,13 +16,17 @@ Im Folgenden eine Auflistung der zur Verfügung stehenden ViewHelper.
 
 Mit diesem ViewHelper könnt ihr eigene Variablen innerhalb des öffnenden und schließenden Tags zur Verfügung stellen. Das ist sinnvoll, wenn ihr einen bestimmten Wert z.B. aus Objekten oder eine etwas längere ViewHelper Aneinanderreihung in eurem Template mehrfach wieder verwenden wollt.
 
+{{% notice style="info" title="Persönliche Anmerkung" icon="exclamation" %}}
+Durch den eingeschränkten Gültigkeitsbereich und die Bereitstellung von mehreren Variablen als Array-Struktur mit teilweise weiter verschachtelten Fluid ViewHelper wird das Nachvollziehen der Programmierung erheblich erschwert. Ich rate dringen auf [f:variable](#fvariable) umzusteigen.
+{{% /notice %}}
+
 ### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
-| map       | Die Eingabe erfolgt in Arraynotation. Der Key gibt den Namen der neuen Variable wieder, während der Wert den Inhalt wieder spiegelt. |
+| map | Die Eingabe erfolgt in Array-Notation. Der Key gibt den Namen der neuen Variable wieder, während der Wert den Inhalt wieder spiegelt. |
 
-### Beispiel für einfache Texte
+### Beispiel: Einfacher Text
 
 ```html
 <f:alias map="{vorname: 'Stefan', nachname: 'Froemken'}">
@@ -30,7 +34,7 @@ Mit diesem ViewHelper könnt ihr eigene Variablen innerhalb des öffnenden und s
 </f:alias>
 ```
 
-### Beispiel für selbst erstellte Arrays
+### Beispiel: Verschachtelte Arrays
 
 Dieses Beispiel ist vielleicht wenig sinnvoll, aber es zeigt sehr gut, wie man innerhalb von Fluid mehrdimensionale Arrays erstellen kann.
 
@@ -45,7 +49,7 @@ Dieses Beispiel ist vielleicht wenig sinnvoll, aber es zeigt sehr gut, wie man i
 </f:alias>
 ```
 
-### Beispiel für Werte aus Objekten
+### Beispiel: Nutzung von Objekteigenschaften
 
 Dieses Beispiel funktioniert nur, wenn ihr das `feUser` Objekt in eurer Extension per `$this->view->assign()` verfügbar gemacht habt.
 
@@ -58,8 +62,10 @@ Dieses Beispiel funktioniert nur, wenn ihr das `feUser` Objekt in eurer Extensio
 ## f:base
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="orange" icon="angle-double-up" %}}TYPO3 11.3{{% /badge %}}
+{{% badge style="red" icon="skull-crossbones" %}}TYPO3 12.0{{% /badge %}}
 
-Erstellt einen `<base>` Tag. Mit diesem Tag wird ein Pfad angegeben, der die Grundlage aller anderen Pfade wie Links und Bilder vorgibt. Diesen Basispfad holt sich der ViewHelper vorzugweise aus der Site-Konfiguration. In älteren TYPO3 Versionen wurden die TypoScript Eigenschaften `config.baseURL` und `config.absRefPrefix` dafür ausgelesen.
+Erstellt den [base](https://wiki.selfhtml.org/wiki/HTML/Elemente/base) Tag. Mit diesem HTML Tag wird ein Pfad angegeben, der die Grundlage aller anderen Pfade wie Links und Bilder vorgibt. Diesen Basispfad holt sich der ViewHelper vorzugweise aus der Site-Konfiguration. In älteren TYPO3 Versionen wurden die TypoScript Eigenschaften `config.baseURL` und `config.absRefPrefix` dafür ausgelesen.
 
 {{% notice style="info" title="Information" icon="exclamation" %}}
 Da der `<base>` Tag in den `<head>` Bereich einer Webseite gehört, macht die Verwendung diesen ViewHelpers nur dann Sinn, wenn ihr eure komplette Webseite mithilfe von Fluid aufbaut. Definiert ihr die Angaben für den `<head>` Bereich über TypoScript und dem Site-Modul, würde diese ViewHelper evtl. im `<body>` Tag landen, wo er nicht hingehört.
@@ -86,7 +92,7 @@ Die Ausgabe im Quelltext:
 | value | Der Inhalt des f:case ViewHelpers wird nur dann angezeigt, wenn der Wert von value dem expression-Argument aus dem f:switch ViewHelper übereinstimmt |
 | default | Ein f:case ViewHelper, bei dem default aktiviert wurde, wird immer dann angezeigt, wenn kein anderer f:case ViewHelper zu der expression des f:switch ViewHelpers passt. |
 
-Ein Beispiel findet ihr beim f:switch ViewHelper
+Ein Beispiel findet ihr beim [f:switch](#fswitch) ViewHelper
 
 ## f:cObject
 
@@ -274,7 +280,7 @@ Dieser ViewHelper macht nur im Bereich selbstprogrammierter Extensions Sinn. Den
 
 | Parameter | Erklärung |
 |-----------|-----------|
-| renderMode | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.4{{% /badge %}} {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}}Sollen die Fehlermeldungen als Liste ul oder als Container div gerendert werden. |
+| renderMode | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.4{{% /badge %}} {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Sollen die Fehlermeldungen als Liste ul oder als Container div gerendert werden. |
 | as | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} Die Angabe aus `as` wird zum Erstellen einer Variable für das Fluid-Template genutzt, die alle Benachrichtigungen beinhaltet. Um das Rendering dieser Nachrichten muss sich selbst gekümmert werden. |
 | queueIdentifier | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Alle Benachrichtigungen einer Extension landen normalerweise in einer Warteschlange mit dem Namen `extbase.flashmessages.[extension]_[plugin]`. Da ihr aber auch eigene Namen vergeben könnt, war es bisher nicht möglich diese im Frontend rendern zu lassen. Dieser Parameter schafft Abhilfe. |
 
@@ -774,64 +780,108 @@ Da dieser ViewHelper nur innerhalb des `f:if` ViewHelpers verwendet werden kann,
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
-Mit dem `f:translate` ViewHelper greift ihr auf eine beliebige Sprachdatei (standardmäßig `locallang.xlf`) zu und holt euch die entsprechende Übersetzung mithilfe der Angabe im Parameter `key`.
-
-Innerhalb von Extensions wird immer auf die `locallang.xlf` im Verzeichnis `Resources/Private/Language/` zugegriffen. Im Bereich FLUIDTEMPLATE müsste ihr hier die Pfadsyntax verwenden:
-
-`LLL:fileadmin/templates/locallang.xml:domain_model_irgendwas.titel`
-
-bzw:
-
-`LLL:EXT:meineExtension/Resources/Private/Language/locallang.xml:domain_model_irgendwas.titel`
-
-Der `LLL:` Prefix muss dem Pfad immer vorangestellt sein! Etwas einfacher machen es sich die FLUIDTEMPLATE-User, wenn sie im TypoScript zuvor angeben auf welche `locallang.xlf` welcher Extension sie zugreifen wollen:
-
-```typo3_typoscript
-extbase.pluginName = Pi1
-extbase.controllerExtensionName = MeineExtension
-```
-
-Dann reicht es auch wieder nur den `key` anzugeben ohne den ganzen Pfad.
+Der `f:translate` ViewHelper stellt Übersetzungen im Fluid-Template zur Verfügung. Ohne Angabe eines Pfades werden Übersetzungen aus der `locallang.xlf` der aktuellen Extension bezogen.
 
 ### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
-| key | Der key, mit dem man die Übersetzung aus dem Sprachdateien auslesen kann |
-| default | Wenn der Key in der Sprachdatei nicht gefunden werden kann, dann verwende diesen Text. Wenn default nicht gesetzt ist, wird der Inhalt zwischen den Tags verwendet. |
-| htmlEscape | Alle Übersetzungen aus den Sprachdateien werden durch htmlspecialchars geschleust, was es unmöglich macht, HTML-Tags in den Übersetzungen anzeigen zu lassen. Setzt diesen Wert auf FALSE, um dieses Vorgehen zu unterbinden. |
-| arguments | In den Übersetzungen können Platzhalter definiert werden, die dann mit den Inhalten diesen Arrays gefüllt werden. |
+| key | In den Sprachdateien (`*.locallang.xlf`) wird jeder Eintrag eindeutig über die `index` Angabe identifiziert. Gebt für `key` diesen Index an, um den gewünschten Eintrag in der vorgegebenen Übersetzung auszulesen. Wünscht ihr Zugriff auf die Sprachdateien anderer Extensions, dann verwendet zusätzlich die Option `extensionName`. Sollten die Sprachdateien anders heißen, dann muss der vollständige Pfad zu der Sprachdatei in Standardsprache (die Dateien ohne `de.` vorne dran) mit vorangestelltem `LLL:EXT:` und der `key` mittels `:` vom Pfad getrennt angegeben werden |
+| id | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Das gleiche wie `key`. Wurde damals zwecks besserer Kompatibilität zu TYPO3 Flow hinzugefügt und danach aus Kompatibilitätsgründen zu früheren TYPO3 Versionen nie wieder entfernt. |
+| default | Wenn der `key` in der Sprachdatei nicht gefunden werden kann, dann wird der Text aus `default` für die Ausgabe verwendet. Wenn `default` nicht verwendet wird, versucht dieser ViewHelper den Default aus dem Text zwischen öffnendem und schließendem Tag zu verwenden. |
+| htmlEscape | Alle Übersetzungen aus den Sprachdateien werden zunächst durch `PHP:htmlspecialchars()` verarbeitet. Falls Übersetzungen HTML Tags beinhalten, dann setzt `htmlEscape` auf `false`, um die Verarbeitung durch `htmlspecialchars` zu unterbinden.`htmlEscape` wirkt sich nicht auf den Text aus `default` aus. |
+| arguments | In den Übersetzungen können Platzhalter definiert werden, die dann mit den Inhalten diesen Arrays befüllt werden. |
+| extensionName | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Wenn angegeben, dann wird die `locallang.xlf` aus `Resources/Private/Language` verwendet, um eine Übersetzung für `key` zu finden. Ohne Angabe wird der aktuelle Kontext, in dem sich das Fluid-Template befindet, ausgelesen und von dort der aktuelle Extension-Name extrahiert. Bitte verwendet UpperCamelCase: `BlogExample` statt `blog_example` |
 
-### Beispiel
-
-```html
-<f:translate key="domain_model.title" htmlEscape="false" />
-```
-
-### Beispiel mit Pfad
+### Beispiel: Simpel
 
 ```html
-<f:translate key="LLL:fileadmin/lang/locallang.xml:domain_model.title" />
+<f:translate key="domain_model.title"/>
 ```
 
-### Beispiel mit Platzhaltern
+### Beispiel: Vollständiger Pfad
 
-In unserem Template:
+```html
+<f:translate key="LLL:EXT:events2/Resources/Private/Language/ExtConf.xlf:domain_model.title" />
+```
 
+### Beispiel: Platzhalter
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
 <f:translate key="LLL:fileadmin/lang/locallang.xml:domain_model.title" arguments="{0: 'Herr der Ringe'}" />
 ```
-
-In der `locallang.xlf`:
-
+{{% /tab %}}
+{{% tab title="locallang.xlf" %}}
 ```xml
 <label index="domain_model.title">Title of: %s</label>
 ```
+{{% /tab %}}
+{{% /tabs %}}
 
-Mit %s wird auf den ersten Wert des übergebenen Arrays zugegriffen. Kommt %s nochmals vor, dann wird auf den zweiten Arrayeintrag zugegriffen. Um das unabhängig von der Reihenfolge zu machen, empfehle ich noch folgende Notation:
+Mit `%s` wird auf den ersten Wert des übergebenen Arrays zugegriffen. Kommt %s nochmals vor, dann wird auf den zweiten Array-Eintrag zugegriffen. Um das unabhängig von der Reihenfolge zu machen, empfehle ich noch folgende Notation:
 
 ```xml
 <label index="domain_model.title">Titel von: %1$s</label>
 ```
 
-Mit %1 greift ihr auf den ersten Eintrag zu und sagt diesem, dass er als String/Text interpretiert werden soll ($s). Auf php.net findet Ihr heraus wofür diese ganzen Kürzel stehen.
+Mit `%1` greift ihr auf den ersten Eintrag zu und sagt diesem, dass er als String `$s` interpretiert werden soll. Weitere Informationen zu dieser Syntax findet ihr in der Dokumentation der zugrundeliegenden PHP Funktion [vsprintf](https://www.php.net/manual/de/function.vsprintf.php).
+
+## f:variable
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 8.4{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.2.0{{% /badge %}}
+
+Erstellt im Template eine Variable, die ab Verwendung bis Dateiende Gültigkeit hat. Sehr sinnvoll, um das Ergebnis eines ViewHelpers noch vor einer Schleife in eine Variable zu überführen, anstatt den ViewHelper innerhalb der Schleife 30 Mal aufrufen zu lassen.
+
+### Parameter
+
+| Parameter | Erklärung |
+|-----------|-----------|
+| name | Der Variablenname. Beispiel: `frucht`. Mit dem hier angegebenen Namen kann im Template nach Nutzung dieses ViewHelpers mittels `{frucht}` auf den enthaltenen Wert zugegriffen werden. |
+| value | Der Wert, der dem Variablennamen zuzuweisen ist. |
+
+### Beispiel: Einfache Wertzuweisung
+
+Wenn der Parameter `value` nicht angegeben wird, wird automatisch der Inhalt zwischen öffnendem und schließenden Tag als `value` verwendet.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:variable name="fullName">{person.firstName} {person.lastName}</f:variable>
+<p>Ich heiße {fullName}</p>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+<p>Stefan Froemken</p>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Beispiel: Performance
+
+Hier ein Beispiel, wie man mit `f:variable` das immer wiederkehrende Aufrufen von ViewHelper in einer Schleife unterbinden kann. Je nach ViewHelper lässt sich so richtig Zeit während dem ersten Parsen der Templates einsparen. 
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:variable name="productLabel" value="{f:translate(key: 'product')}"/>
+<ul>
+    <f:for each="{products}" as="product">
+        <li>{productLabel}: {product.title}</li>
+    </f:for>
+</ul>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+<ul>
+    <li>Produktbezeichnung: TYP-03</li>
+    <li>Produktbezeichnung: LI-E-BE</li>
+    <li>Produktbezeichnung: Passierschein A38</li>
+</ul>
+```
+{{% /tab %}}
+{{< /tabs >}}
