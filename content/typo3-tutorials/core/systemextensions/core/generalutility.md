@@ -48,7 +48,7 @@ class TestGeneralUtility
 
 **Ausgabe**: `XXL`
 
-{{% notice style="info" title="Hinweis" icon="skull-crossbones" %}}
+{{% notice style="info" title="Hinweis" icon="info" %}}
 Wenn ihr schon wisst in welchem Array sich Eure Variable befindet, dann verwendet bitte bevorzugt direkt die Methoden `_GET()` oder `_POST()` aus `GeneralUtility`.
 {{% /notice %}}
 

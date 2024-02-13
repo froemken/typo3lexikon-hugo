@@ -6,13 +6,19 @@ alwaysopen = false
 aliases = ["viewhelper.html"]
 +++
 
-Mit reinem HTML wird wiederkehrender Quellcode sehr schnell sehr groß und unübersichtlich. Im Hinblick auf TYPO3, wo Seiten verschoben und umbenannt werden können, müssten Links und URLs im HTML Quelltext immer wieder erneut angepasst werden. Abhilfe schaffen hier besondere HTML-Tags, die von Fluid, dem Core und anderen Extensions mitgeliefert werden. Mit diesen sogenannten ViewHelper können direkt im HTML Quelltext Schleifen, Verlinkungen zu TYPO3 Seiten, Abfragen und das Ausliefern von per TypoScript generiertem Inhalt realisiert werden. Dank Layouts, Partials und Templates können die HTML-Templates sehr dynamisch und wiederverwendbar strukturiert werden.
+Mit reinem HTML wird wiederkehrender Quellcode sehr schnell sehr unübersichtlich. Im Hinblick auf TYPO3, wo Seiten verschoben und umbenannt werden können, müssten Links und URLs im HTML Quelltext immer wieder erneut angepasst werden. Abhilfe schaffen hier besondere HTML-Tags, die von Fluid, dem Core und anderen Extensions mitgeliefert werden. Mit diesen sogenannten "ViewHelper" können direkt im HTML Quelltext Schleifen, Verlinkungen zu TYPO3 Seiten, Abfragen und das Ausliefern von per TypoScript generiertem Inhalt realisiert werden. Dank "Layouts", "Partials" und "Templates" können die Fluid-Templates sehr gut strukturiert werden.
+
+{{% notice style="info" title="Hinweis" icon="info" %}}
+Ab {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0.0{{% /badge %}} werden Fluid ViewHelper, die keine TYPO3 Abhängigkeiten wie TypoScript benötigen, aus dem Composer-Paket `typo3fluid/fluid` bereitgestellt. Mit dieser Version findet ihr [f:for](#ffor), [f:alias](#falias), [f:cycle](#fcycle) und viele mehr in diesem neuen Composer Paket.
+{{% /notice %}}
 
 Im Folgenden eine Auflistung der zur Verfügung stehenden ViewHelper.
 
 ## f:alias
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
+
 
 Mit diesem ViewHelper könnt ihr eigene Variablen innerhalb des öffnenden und schließenden Tags zur Verfügung stellen. Das ist sinnvoll, wenn ihr einen bestimmten Wert z.B. aus Objekten oder eine etwas längere ViewHelper Aneinanderreihung in eurem Template mehrfach wieder verwenden wollt.
 
@@ -84,13 +90,14 @@ Die Ausgabe im Quelltext:
 ## f:case
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 ### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
-| value | Der Inhalt des f:case ViewHelpers wird nur dann angezeigt, wenn der Wert von value dem expression-Argument aus dem f:switch ViewHelper übereinstimmt |
-| default | Ein f:case ViewHelper, bei dem default aktiviert wurde, wird immer dann angezeigt, wenn kein anderer f:case ViewHelper zu der expression des f:switch ViewHelpers passt. |
+| value | Der Inhalt des ViewHelpers wird nur dann angezeigt, wenn der Wert von `value` dem `expression` Parameter aus dem [f:switch](#fswitch) ViewHelper übereinstimmt |
+| default | {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0.0{{% /badge %}} Veraltet, bitte verwendet [f:defaultCase](#fdefaultcase) |
 
 Ein Beispiel findet ihr beim [f:switch](#fswitch) ViewHelper
 
@@ -133,6 +140,7 @@ Stefan heisst Euch willkommen
 ## f:comment
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Während HTML Kommentare auch im Quellcode ausgegeben werden, können mit `f:comment` ganze Bereiche vom Quellcode ausgeschlossen werden. Diese kommen somit im HTML Quellcode nicht mehr vor und die enthaltenen ViewHelper werden auch nicht ausgeführt. Sehr nützlich im Rahmen von Debugging.
 
@@ -151,6 +159,7 @@ ViewHelper wird nicht verarbeitet: <f:alias map="{}"></f:alias>
 ## f:count
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Dieser ViewHelper zählt die Elemente im übergebenen Array oder die enthaltenen Objekte eines zählbaren Objektes wie `\SplObjectStorage` oder dem Extbase `ObjectStorage`.
 
@@ -195,6 +204,7 @@ Dieser ViewHelper zählt die Elemente im übergebenen Array oder die enthaltenen
 ## f:cycle
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 `f:cycle` wird im Rahmen von Schleifen wie `f:for` verwendet, um für jedes xte Element in der Schleife eine Sonderbehandlung durchführen zu können. Gerade `odd` und `even` Operationen, um abwechselnde Hintergrundfarben in Tabellen zu erzeugen sinnvoll.
 
@@ -227,6 +237,7 @@ Dieser ViewHelper zählt die Elemente im übergebenen Array oder die enthaltenen
 ## f:debug
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Zeigt den Inhalt einer Variable oben am Rand des Browsers an. Verschachtelte Elemente können mittels dem `+` Icon weiter aufgeklappt werden.
 
@@ -250,9 +261,19 @@ Zeigt den Inhalt einer Variable oben am Rand des Browsers an. Verschachtelte Ele
 </f:alias>
 ```
 
+## f:defaultCase
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0.0{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
+
+Der Inhalt dieses ViewHelpers wird angezeigt, wenn kein `value` anderer [f:case](#fcase) ViewHelper mit dem `expression` Parameter des [f:switch](#fswitch) ViewHelpers übereinstimmt.
+
+Beispiele zu diesem ViewHelper findet ihr unter [f:switch](#fswitch).
+
 ## f:else
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Diesen ViewHelper erkläre ich im ViewHelper `f:if`, da er nur dort verwendet werden kann.
 
@@ -268,7 +289,9 @@ Diesen ViewHelper erkläre ich im ViewHelper `f:if`, da er nur dort verwendet we
 {{% badge style="orange" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 {{% badge style="red" icon="skull-crossbones" %}}TYPO3 6.0{{% /badge %}}
 
-Diesen ViewHelper gibt es nicht mehr. Bitte verwendet einen der `f:format.*` ViewHelper.
+Dieser ViewHelper konnte Werte je nach Typ (`html`, `entities` oder `url`) escapen. Zur besseren Wartbarkeit wurde seine Funktionsweise in individuelle ViewHelper, zu finden im Unterordner `format`, aufgeteilt.
+
+Diesen ViewHelper gibt es nicht mehr. Bitte verwendet einen der [f:format.*](format.md) ViewHelper.
 
 ## f:flashMessages
 
@@ -310,6 +333,7 @@ Hier spring der `FlashMessageRenderResolver` ein und rendert im Frontend Kontext
 ## f:for
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Erzeugt eine Schleife. Jedes Element des übergebenen Arrays oder ObjectStorages wird durchlaufen und kann als Datenbasis des zugrunde liegenden Templates verwendet werden.
 
@@ -466,6 +490,7 @@ Ich habe in meinem Beispiel noch einen Objektnamen angegeben `newFeUser`. Wie ih
 ## f:groupedFor
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Ein sehr mächtiger ViewHelper im Bereich der Listengenerierung. Übergebt dem ViewHelper ein Array und ein Gruppierungskriterium und ihr erhaltet mit jedem Durchlauf bzw. mit jeder gefundenen Gruppe ein Array mit den dazugehörigen Arrayelementen zurück. Zu kompliziert? Na dann schaut mal in die Beispiele.
 
@@ -505,6 +530,7 @@ Ich hab hier wieder das Beispiel mit den 6 Mitarbeitern ausgepackt. Wie Ihr sehe
 ## f:if
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Ermöglicht Wenn-Dann-Sonst-Abfragen.
 
@@ -615,6 +641,7 @@ Die kürzere Seite wird auf 100 Pixel gesetzt und bei der längeren Seite wird n
 ## f:layout
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Doku kommt noch
 
@@ -631,9 +658,17 @@ Doku kommt noch
 | width | Breite des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen geschnitten wird. Z.B. 200c |
 | height | Höhe des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen geschnitten wird. Z.B. 100c |
 
+## f:or
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0.0{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
+
+Doku kommt noch
+
 ## f:render
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Die Partials sind in Fluid wie die FCEs in TemplaVoila. Kurz: Wiederverwendbare Templates. Eine geniale Sache, solange ihr diese ViewHelper in Maßen einsetzt, denn das Laden eines Partials dauert ca. 5 Millisekunden. Wenn ihr also irgendwann mal auf die Idee kommen solltet, jede Zelle einer Tabelle mit Partials generieren zu wollen, dann kann das Laden der Webseite bei 700 Tabellenzeilen und 15 Spalten schonmal etwas dauern: 700 Zeilen * 15 Spalten * 5 Millisekunden = 52500 Millisekunden. Plus die Zeit, die TYPO3 selbst noch braucht sind wir bei knapp einer Minute.
 
@@ -698,6 +733,7 @@ Veraltet. Bitte verwendet nun `f:flashMessages`.
 ## f:section
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Sections arbeiten ähnlich wie Partials. Während Partials in eine eigene Datei ausgelagert werden und somit innerhalb der Extension von überall aufgerufen werden können, befinden sich Sections innerhalb der Templatedateien und können auch nur von dort und Layouts aufgerufen werden. Mit Hilfe von Sections lassen sich gerade große Templates hervorragend strukturieren.
 
@@ -724,9 +760,10 @@ Sections arbeiten ähnlich wie Partials. Während Partials in eine eigene Datei 
 
 ## f:spaceless
 
-{{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}}
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6.0{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
-Jedes Enter, jede Einrückung und jedes Leerzeichen in Euren Fluidtemplates werden 1zu1 im Seiten Quelltext Eurer Webseite ausgegeben. Zwar reduziert der Browser überflüssigen Leerraum bei der Ausgabe auf ein Leerzeichen zusammen, aber trotzdem muss jedes Leerzeichen zum Browser übertragen werden und kostet somit zusätzlichen Traffic. Mit diesem ViewHelper können die überflüssigen Leerräume schon vor der Ausgabe entfernt werden.
+Jedes Enter, jede Einrückung und jedes Leerzeichen in euren Fluid-Templates werden 1 zu 1 im Seiten-Quelltext eurer Webseite ausgegeben. Zwar reduziert der Browser überflüssigen Leerraum bei der Ausgabe auf ein Leerzeichen zusammen, aber trotzdem muss jedes Leerzeichen zum Browser übertragen werden und kostet somit zusätzlichen Traffic. Mit diesem ViewHelper können die überflüssigen Leerräume schon vor der Ausgabe entfernt werden.
 
 Im folgenden Beispiel würde der HTML-Quelltext als eine lange Zeile zum Browser übertragen werden.
 
@@ -749,6 +786,7 @@ Es wird nur Leerraum zwischen den HTML-Tags entfernt. Nicht jedoch der Leerraum 
 ## f:switch
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Mit dem f:switch ViewHelper könnt Ihr gleich mehrere Varianten eines Wertes überprüfen. Auf die Frage "Was bist Du?" könnte die Antwort Vater, Mutter, Tochter oder Sohn erfolgen. Diese 4 Antwortmöglichkeiten mittels dem `f:if` ViewHelper zu realisieren wäre schon sehr komplex und schwer zu warten. Mit jeder weiteren Variante würde der Quelltext ein bisschen weiter nach rechts rutschen. Nach ein paar Monaten weiß kein Mensch mehr, was da eigentlich gerade passiert.
 
@@ -766,13 +804,14 @@ Mit dem f:switch ViewHelper könnt Ihr gleich mehrere Varianten eines Wertes üb
     <f:case value="Mutter">Wann gibt's Mittach?</f:case>
     <f:case value="Tochter">Wo ist mein Lippenstift?</f:case>
     <f:case value="Sohn">Ich geh scaten</f:case>
-    <f:case default="1">Stell Dich vor</f:case>
+    <f:defaultCase>Stell Dich vor</f:defaultCase>
 </f:switch>
 ```
 
 ## f:then
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
 Da dieser ViewHelper nur innerhalb des `f:if` ViewHelpers verwendet werden kann, erkläre ich diesen dort.
 

@@ -4,7 +4,28 @@ date = 2024-01-09T20:27:32+01:00
 aliases = ["format.html"]
 +++
 
+## f:format.bytes
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}}
+
+Dokumentation folgt
+
+## f:format.case
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 7.2{{% /badge %}}
+
+Dokumentation folgt
+
+## f:format.cdata
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
+
+Dokumentation folgt
+
 ## f:format.crop
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
 ### Parameter
 
@@ -55,6 +76,8 @@ Wie oben schon erwähnt, liegt das daran, dass nun auch alle Buchstaben der HTML
 
 ## f:format.currency
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+
 Mit diesem ViewHelper könnt ihr Zahlen als Währung darstellen lassen. Doch zwei wichtige Informationen:
 
 Übergebt ihr an diesen ViewHelper einen leeren Text, dann benötigt die in diesem ViewHelper befindliche Methode `PHP:number_format()` knapp 23 Millisekunden. Liefert ihr dieser Methode stattdessen direkt ein `0.00` ist die Methode in 1-2 Millisekunden durch. Das kann gerade bei größeren Listen Performance-Problemen entgegenwirken.
@@ -89,6 +112,8 @@ ergibt: `1,122,334,455.00 $`
 
 ## f:format.date
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+
 So schön wie das mit den ganzen `\DateTime` Objekten ist, so prüft die Werte bitte ganz genau. Besucht Online-Timestamp-Konverter oder gleicht die Werte mit denen in eurer Datenbank ab. So steht in der Doku z.B. Wenn ihr einen Timestamp in ein `\DateTime` Objekt konvertieren wollt, dann fügt einfach ein `@`-Zeichen vorne an. Ich hoffe, ich erzähle jetzt nichts Falsches, aber dieser Timestamp wird nach dem RFC2822 konvertiert und das ist Zeitzone 0. In Deutschland würden wir dem resultierenden `\DateTime` Objekt also immer hinterherhinken. Die `\DateTime` Objekt sollten besser nach ISO8601 konvertiert werden. Dann klappt's auch mit der richtigen Zeitzone. Ich für meinen Teil hab mir einen eigenen ViewHelper geschrieben, der sich daran hält und auch Extbase arbeitet intern mit diesem ISO-Format. Siehe dazu auch die Methode in Extbase:
 
 ```html
@@ -122,6 +147,8 @@ Wie schon gesagt: Je nach Land/Kontinent bitte mit Vorsicht zu behandeln.
 
 ## f:format.html
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+
 Wenn ihr ein Modell für die Tabelle `tt_content` erstellt habt, dann erhaltet ihr im Frontend die nackten Daten, wie sie aus der Datenbank kommen. Damit die Daten wieder so aussehen, wie wenn ihr sie mit `styles.content.get` ausgebt, hilft euch dieser ViewHelper. Dieser schnappt sich die Rohdaten und schleift diese einmal komplett durch den hinterlegten TypoScript-Objektpfad.
 
 ### Parameter
@@ -144,6 +171,8 @@ Wenn ihr ein Modell für die Tabelle `tt_content` erstellt habt, dann erhaltet i
 
 ## f:format.htmlentitiesDecode
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
+
 ### Parameter
 
 | Parameter | Erklärung |
@@ -161,6 +190,8 @@ Wenn ihr ein Modell für die Tabelle `tt_content` erstellt habt, dann erhaltet i
 Im Quelltext sieht man wieder ein richtig sauberes: `Müller & Breuer`.
 
 ## f:format.htmlentities
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 
 Mit diesem ViewHelper wandelt ihr Sonderzeichen oder auch die deutschen Umlaute in web-sichere HTML-Codes um. Ein `ü` wird dann zu `&uuml;`. Damit kann gewährleistet werden, dass jeder Browser dieses Zeichen richtig anzeigt, und zwar egal wo auf der Welt. Seit der Standardzeichensatz von TYPO3 auf UTF-8 gesetzt ist, sollte diese Sache hier so nach und nach der Vergangenheit angehören.
 
@@ -182,6 +213,9 @@ Mit diesem ViewHelper wandelt ihr Sonderzeichen oder auch die deutschen Umlaute 
 
 ## f:format.htmlspecialchars
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
+
 Wenn ihr mit Userdaten (Formulardaten) arbeitet, dann sollte dieser Inhalt zuallererst durch diesen ViewHelper. Denn dieser wandelt alle spitzen Klammern von HTML-Tags in ein nicht mehr interpretierbares Format um. Die HTML-Tags können also keinen Schaden mehr verursachen und werden im Frontend angezeigt statt verarbeitet.
 
 ### Parameter
@@ -199,7 +233,15 @@ Wenn ihr mit Userdaten (Formulardaten) arbeitet, dann sollte dieser Inhalt zuall
 <f:format.htmlspecialchars><p><strong>fetter</strong> Text</p></f:format.htmlspecialchars>
 ```
 
+## f:format.json
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 8.6{{% /badge %}}
+
+Dokumentation folgt
+
 ## f:format.nl2br
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
 Dieser ViewHelper besitzt keine Parameter. Den umzuwandelnden Inhalt bezieht er sich aus dem Text zwischen den Tags. Sinnvoll wird dieser ViewHelper beim Anzeigen von Inhalten aus `textarea` Tags. Denn hier wurden die Zeilenumbrüche mit ENTER (CHR(10)) realisiert. Im HTML sind diese Umbrüche aber völlig egal und würde den Text einfach hintereinander weg anzeigen. Um das zu verhindern, könnt ihr diesen ViewHelper verwender. Er konvertiert alle CHR(10)-Zeilenumbrüche in `<br>` Tags und so werden Zeilenumbrüche auch im Browser wieder richtig dargestellt.
 
@@ -214,6 +256,8 @@ Zeilenumbrüchen</f:format.nl2br>
 ergibt: `Text<br>mit<br>Zeilenumbrüchen`
 
 ## f:format.number
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
 Mit diesem ViewHelper könnt ihr Zahlen formatieren. Er arbeitet ähnlich dem `f:format.currency` ViewHelper.
 
@@ -236,6 +280,8 @@ ergibt: `1,122,334,455.668`.
 Wie ihr seht, wird sogar automatisch aufgerundet.
 
 ## f:format.padding
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
 ### Parameter
 
@@ -267,6 +313,9 @@ Hier nahezu das gleiche Beispiel wie oben. Allerdings fangen die letzten beiden 
 
 ## f:format.printf
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
+
 Mit diesem ViewHelper können Platzhalter in einem Text mit den Werten aus dem Array ersetzt werden.
 
 ### Parameter
@@ -287,6 +336,9 @@ Wenn dieser ViewHelper überhaupt nicht angezeigt wird, dann habt ihr entweder e
 
 ## f:format.raw
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0.0{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
+
 Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchars()` schicken. Dies zu verhindern stellt auf jeden Fall ein Sicherheitsrisiko dar, kann aber mit diesem ViewHelper erreicht werden. Ich denke gerade im Bereich von Formulardaten, kann dieser ViewHelper evtl. Verwendung finden.
 
 ### Parameter
@@ -303,6 +355,8 @@ Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchar
 
 ## f:format.stripTags
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
+
 Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 
 ### Parameter
@@ -317,7 +371,15 @@ Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 <f:format.stripTags>Ein <strong>fetter</strong> Text mit einigen <span style="color: blue;">bunten</span> HTML-Tags.</f:format.stripTags>
 ```
 
+## f:format.trim
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 12.4{{% /badge %}}
+
+Dokumentation folgt
+
 ## f:format.urlencode
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 
 In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%` vor. Diese Zeichen sind nicht URL-sicher und sollten vor der Übermittlung durch diesen ViewHelper verarbeitet werden.
 
