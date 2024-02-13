@@ -28,7 +28,11 @@ Standard Pfad für Dateien, die über den RTE eingebunden wurden. Ausgangspunkt 
 
 ## lockRootPath
 
-Normalerweise sind absolute Pfade nur innerhalb des Web Root Verzeichnisses aus PATH_site gültig. Falls Eure Dateien mal außerhalb diesen Verzeichnisses liegen, könnt Ihr mit dieser Einstellung einen (und nicht mehr) weiteren Pfad angeben, der als erlaubter Pfad gilt.
+Wenn `[BE][lockRootPath]` nicht gesetzt, leer oder ein leeres Array ist, dann kann TYPO3 aus Sicherheitsgründen nur auf Dateien innerhalb des Projektverzeichnisses (wo `vendor` und `config` liegt) und auf Dateien innerhalb vom Webroot (wo `fileadmin`, `index.php` und `_assets` liegen) zugreifen. Da `[BE][lockRootPath]` standardmäßig nicht gesetzt ist, müsst ihr bei Verwendung zusätzlicher Verzeichnisse außerhalb vom Projektverzeichnis und Webroot hier den absoluten Pfad zu diesem zusätzlich erlaubten Pfad angeben. Das kommt schonmal vor, wenn ihr 2 TYPO3 Installationen habt und ein Bilderordner ist 2 Ebenen oberhalb eurer TYPO3 Instanzen. Dann setzt den absoluten Pfad zu diesem Ordner hier und ihr könnt mittels eines Dateispeichers (Tabelle: `sys_file_storage`) darauf zugreifen.
+
+{{% notice style="info" title="Hinweis" icon="exclamation" %}}
+Angaben ausgehend vom Home-Verzeichnis `~/httpdocs/typo3/12.4/` und auch relative Angaben wie `../../` sind nicht erlaubt. Der absolute Pfad muss mit einem Slash `/` enden.
+{{% /notice %}}
 
 ## userHomePath
 
