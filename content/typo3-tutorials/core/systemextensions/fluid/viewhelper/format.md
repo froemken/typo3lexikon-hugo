@@ -1,6 +1,9 @@
 +++
-title = "Format"
-date = 2024-01-09T20:27:32+01:00
+title = "f:format.*"
+linkTitle = "Format"
+description = "Mit den TYPO3 Fluid ViewHelpern aus dem Bereich f:format.* können Texte nach Belieben bereinigt werden."
+keywords = "typo3 stefan frömken lindlar oberberg oberbergischer kreis tutorial fluid viewhelper format"
+date = 2024-02-17T19:37:32+01:00
 aliases = ["format.html"]
 +++
 
