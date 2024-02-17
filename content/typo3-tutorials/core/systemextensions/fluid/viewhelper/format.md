@@ -8,71 +8,244 @@ aliases = ["format.html"]
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}}
 
-Dokumentation folgt
+Dieser ViewHelper teilt Bytes (Dateigröße) solange durch `1024`, bis das Resultat max. 3-stellig ist oder das Maximum an verfügbaren Einheiten erreicht ist.
+
+### Parameter
+
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Die Dateigröße in Bytes. Muss eine Ganzzahl sein.  ||
+| decimals | Angabe der Nachkommastellen | 0 |
+| decimalSeparator | Zeichen für die Trennung der Nachkommastellen | `.` |
+| thousandsSeparator | Zeichen, um die Tausenderstellen hervorzuheben | `,` |
+| units | Angabe der Einheiten aufsteigend. Teilung findet in 1024er Schritten statt. Der hier aufgeführte Standardwert kommt aus einer englischen Übersetzungsdatei und kann somit je nach Sprache differenzieren. | B,KB,MB,GB,TB,PB,EB,ZB,YB |
+
+### Beispiel: Nachkommastellen
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:format.bytes decimals="2">23748596</f:format.bytes>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+22.65 MB
+```
+{{% /tab %}}
+{{% /tabs %}}
+
+### Beispiel: Array Notation
+
+Hier seht ihr, dass der `thousandsSeparator` keine Auswirkung hat. Solange noch `units` zum Teilen verfügbar sind, findet der Parameter keine Anwendung.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:variable name="filesize">8374832920384</f:variable>
+{filesize -> f:format.bytes(decimals: 4, decimalSeparator: ',', thousandsSeparator: '.')}
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+7,6169 TB
+```
+{{% /tab %}}
+{{% /tabs %}}
+
+### Beispiel: Eigene Units
+
+Durch die Reduzierung auf 4 `units` kann die `value` Angabe nur 4-mal durch `1024` geteilt werden. Dadurch wirkt sich der `thousandsSeparator` erstmalig aus.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:format.bytes decimals="2" units="Bytes,KiloBytes,MegaBytes,GigaBytes">25987463422954872</f:format.bytes>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+24,202,711.34 GigaBytes
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.case
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.2{{% /badge %}}
 
-Dokumentation folgt
+Schreibt einen Text in Groß- oder Kleinschreibung, aber auch Wortanfänge können groß- oder kleingeschrieben werden.
+
+### Parameter
+
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Der Text oder die Wörter, die groß- oder kleinzuschreiben sind. ||
+| mode | Angabe eines Modus, wie der Text oder auch die Wörter zu schreiben sind. Siehe Tabelle `Modus` | upper |
+
+### Modus
+
+| Parameter | Erklärung |
+|-----------|-----------|
+| lower | Der komplette Text aus `value` wird kleingeschrieben. |
+| upper | Der komplette Text aus `value` wird großgeschrieben. |
+| capital | Der Text aus `value` wird nur am Anfang großgeschrieben.. |
+| uncapital | Der Text aus `value` wird nur am Anfang kleingeschrieben. |
+| capitalWords | {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} Alle Wörter im Text aus `value` werden am Anfang großgeschrieben. |
+
+### Beispiel
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:format.case mode="upper">ich werde mal ganz groß rauskommen</f:format.case><br>
+<f:format.case mode="lower">Ich fühle mich ERNIEDRIGT</f:format.case><br>
+<f:format.case mode="capital">ich werde am Anfang großgeschrieben</f:format.case><br>
+<f:format.case mode="uncapital">Nur am Anfang werd ich klein</f:format.case><br>
+<f:format.case mode="capitalWords">aller anfang ist groß</f:format.case><br>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+ICH WERDE MAL GANZ GROSS RAUSKOMMEN
+ich fühle mich erniedrigt
+Ich werde am Anfang großgeschrieben
+nur am Anfang werd ich klein
+Aller Anfang Ist Groß
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.cdata
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}}
 {{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
-Dokumentation folgt
+Bei [CDATA](https://de.wikipedia.org/wiki/CDATA) handelt es sich um einen Identifikator innerhalb vom XML, um dem XML-Parser mitzuteilen, dass der nachfolgende Text nicht als XML zu interpretieren ist. Die Sprachdateien in TYPO3 sind eine XML-Struktur. Wenn die Übersetzungen HTML, was auch eine XML-Struktur ist, enthalten, dann können diese HTML-Tags zu Fehlern führen.
 
-## f:format.crop
+Oder ein RSS-Feed. Dieser ist auch eine XML-Struktur. Wenn da Inhaltselemente ausgegeben werden, dann können diese auch HTML beinhalten und die XML-Ausgabe stören und Fehler provozieren.
 
-{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+Solltet ihr mit Fluid-Template solche XML-Strukturen bauen, dann verwendet bitte diesen ViewHelper. Es findet keine Konvertierung (escapen) des Inhaltes statt. Der Inhalt wird 1 zu 1 verwendet und nur in `<![CDATA[Euer Text mit <b>HTML</b>]]>` eingewickelt.
 
 ### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
-| maxCharacters | Anzahl Zeichen nach denen abgeschnitten werden soll. |
-| append | Welche Zeichenkette soll nach dem Abschneiden angefügt werden? Standard ist `...` |
-| respectWordBoundaries | Standardmäßig aktiv und führt dazu einen Schnitt innerhalb eines Wortes zu verhindern, indem der Schnitt vor dem Wort geschieht. Mit `0` zwingt man den ViewHelper dazu innerhalb von Wörtern zu schneiden. |
-| respectHtml | Standardmäßig aktiviert und führt dazu innerhalb von HTML-Tags an den korrekten Stellen zu schneiden. Mit `0` kann es passieren, dass auch ein HTML-Tag zerschnitten wird. |
+| value | Der Text mit möglicherweise enthaltenen HTML-Tags, der für eine XML-Ausgabe in CDATA-Tags eingewickelt werden soll. |
 
 ### Beispiel
 
-```html
-<f:format.crop maxCharacters="14">Diesen Text werden wir jetzt zerschnibbeln</f:format.crop>
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```xml
+<event>
+    <date>23.05.2024</date>
+    <title>TYPO3 Camp</title>
+    <bodytext><f:format.cdata>Ich freue mich <strong>riesig</strong> auf das TYPO3 Camp</f:format.cdata></bodytext>
+</event>
 ```
-
-Normalerweise würde dieser Befehl das Wort `werden` auftrennen. Aber dadurch, dass `respectWordBoundaries` standardmäßig gesetzt ist erhalten wir diese Ausgabe:
-
-```html
-Diesen Text...
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```xml
+<event>
+    <date>23.05.2024</date>
+    <title>TYPO3 Camp</title>
+    <bodytext><![CDATA[Ich freue mich <strong>riesig</strong> auf das TYPO3 Camp]]></bodytext>
+</event>
 ```
+{{% /tab %}}
+{{% /tabs %}}
 
-### Beispiel: Trennung im Wort
+## f:format.crop
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+
+Schneidet den Text zwischen öffnendem und schließendem Tag nach X Zeichen an geeigneter Stelle. Der abgeschnittene Text wird mit dem Wert aus `append` ersetzt. Dieser ViewHelper wird gerne verwendet, um lange Texte für Teaser anzupassen.
+
+### Parameter
+
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| maxCharacters | Maximale Anzahl Zeichen, nach denen der Text zwischen öffnendem und schließendem Tag abgeschnitten werden soll. ||
+| append | Zeichenkette, die dem Leser signalisiert, dass hier der Text abgeschnitten wurde. | `&hellip;` -> ... |
+| respectWordBoundaries | Wenn aktiv, dann wird verhindert, dass mitten in einem Wort ein Schnitt stattfindet. Der Schnitt findet dann bei der nächstmöglichen freien Stelle vor dem Wort statt. | `true` |
+| respectHtml | Wenn aktiv, dann wird verhindert, dass enthaltene HTML Tags im Text nicht beschnitten werden. Der Schnitt findet dann bei der nächstmöglichen Stelle vor dem HTML Tag statt. | `true` |
+
+### Beispiel: Wörter respektieren
+
+Da `respectWordBoundaries` standardmäßig aktiv ist, findet hier keine Trennung im Wort `werden` statt, sondern in dem Leerraum davor.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.crop maxCharacters="14" respectWordBoundaries="FALSE">Diesen Text werden wir jetzt zerschnibbeln</f:format.crop>
+<f:format.crop maxCharacters="14">Diesen Text werden wir jetzt kürzen</f:format.crop>
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+Diesen Text…
+```
+{{% /tab %}}
+{{% /tabs %}}
 
-ergibt
+### Beispiel: Im Wort trennen
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-Diesen Text we...
+<f:format.crop maxCharacters="14" respectWordBoundaries="false">Diesen Text werden wir jetzt kürzen</f:format.crop>
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+Diesen Text we…
+```
+{{% /tab %}}
+{{% /tabs %}}
 
-### Beispiel mit respectHtml = 0
+### Beispiel: Im HTML trennen
 
+Wenn `respectHtml` deaktiviert wird, dann wird der komplette Text als reiner Text interpretiert (Klasse: `\TYPO3\CMS\Core\Text\TextCropper`).
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.crop maxCharacters="25" respectHtml="0"><p>Diesen Text <strong>werden</strong> wir jetzt zerschnibbeln</p></f:format.crop>
+<f:format.crop maxCharacters="36" respectHtml="false" respectWordBoundaries="true"><p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"><p>Nicht wahr?</p></f:format.crop>
 ```
-
-ergibt
-
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
 ```html
-Diesen Text...
+<p>Ein schönes Bild</p><img src="#"&hellip;
 ```
+{{% /tab %}}
+{{% /tabs %}}
 
-Wie oben schon erwähnt, liegt das daran, dass nun auch alle Buchstaben der HTML-Tags mitgezählt werden.
+### Beispiel: Nicht im HTML trennen
+
+Wenn `respectHtml` aktiviert ist, dann bezieht sich `maxCharacters` nur auf den reinen Text. Jegliches HTML wird für die Zählung nicht berücksichtigt (Klasse: `\TYPO3\CMS\Core\Text\HtmlCropper`). Jeder einzelne HTML-Tag und jeder Text werden in einzelne Abschnitte aufgeteilt. `Ein schönes Bild` und `Nicht wahr?` sind also individuelle Abschnitte, die sich nicht kennen.
+
+Im ersten Crop befindet sich der 18te Buchstabe innerhalb des Wortes `Nicht`. Da `respectWordBoundaries` aktiv ist, wird die nächste freie Stelle vor dem Wort gesucht. Da es sich hier um das erste Wort in diesem Abschnitt handelt und der `HtmlCropper` nichts von dem anderen Abschnitt weiß, würde er keine Ausgabe generieren. Um das zu verhindern, schneidet er trotz aktivierten `respectWordBoundaries` innerhalb des Wortes.
+
+Im zweiten Crop befindet sich der 24te Buchstabe innerhalb des zweiten Wortes `wahr` des zweiten Abschnittes. Da `respectWordBoundaries` aktiv ist, wird die nächste freie Stelle vor dem Wort gesucht. Der `HtmlCropper` findet die freie Stelle und schneidet sauber zwischen den beiden Wörtern.
+
+Im dritten Crop befindet sich der 24te Buchstabe auch innerhalb des zweiten Wortes `wahr` des zweiten Abschnittes. Da `respectWordBoundaries` nicht aktiv ist, wird innerhalb des Wortes `wahr` getrennt.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:format.crop maxCharacters="18" respectHtml="true" respectWordBoundaries="true"><p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"><p>Nicht wahr?</p></f:format.crop>
+<f:format.crop maxCharacters="24" respectHtml="true" respectWordBoundaries="true"><p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"><p>Nicht wahr?</p></f:format.crop>
+<f:format.crop maxCharacters="24" respectHtml="true" respectWordBoundaries="false"><p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"><p>Nicht wahr?</p></f:format.crop>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+<p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"/><p>Ni&hellip;</p>
+<p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"/><p>Nicht&hellip;</p>
+<p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"/><p>Nicht wa&hellip;</p>
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.currency
 
@@ -88,62 +261,128 @@ Ihr dürft diesem ViewHelper keine Zahlen mit einem Komma als Dezimaltrenner mit
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| currencySign | Das Währungskennzeichen wie `$` oder `€`. Dieses Zeichen wird immer hinter der Währung angezeigt. |
-| decimalSeperator | Welches Zeichen soll für die Trennung von Euro und Cent verwendet werden. Standard: `,` |
-| thousandsSeperator | Welches Zeichen soll als Tausendertrennzeichen verwendet werden. Standard: `.` |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| currencySign | Das Währungskennzeichen wie `$` oder `€`. ||
+| decimalSeperator | Zeichen zum Einleiten der Nachkommastellen. | `,` |
+| thousandsSeperator | Zeichen zum Hervorheben der Tausenderstellen. Standard:  | `.` |
+| prependCurrency | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Wenn aktiviert, wird das Währungskennzeichen dem Betrag vorangestellt. Interessant für Währungen in Dollar. | `false` |
+| separateCurrency | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Wenn aktiv, wird zwischen Währungskennzeichen und Betrag ein Leerzeichen eingefügt. | `true` |
+| decimals | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.1{{% /badge %}} Anzahl der Nachkommastellen. | 2 |
+| useDash | {{% badge style="green" icon="angle-double-up" %}}TYPO3 9.4{{% /badge %}} Wenn aktiviert, dann werden bei vollen Beträgen bzw. wenn alle Nachkommastellen `0` sind, diese durch einen Bindestrich ersetzt. | `false` |
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.currency currencySign="$" decimalSeparator="." thousandsSeparator=",">1122334455.66</f:format.currency>
+<f:format.currency currencySign="$" prependCurrency="true" decimalSeparator="." thousandsSeparator=",">1122334455.66</f:format.currency>
 ```
-
-ergibt: `1,122,334,455.66 $`
-
-### Beispiel mit nicht float kompatiblen Zahlen
-
-```html
-<f:format.currency currencySign="$" decimalSeparator="." thousandsSeparator=",">1122334455,66</f:format.currency>
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
 ```
-
-ergibt: `1,122,334,455.00 $`
+$ 1,122,334,455.66
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.date
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
-So schön wie das mit den ganzen `\DateTime` Objekten ist, so prüft die Werte bitte ganz genau. Besucht Online-Timestamp-Konverter oder gleicht die Werte mit denen in eurer Datenbank ab. So steht in der Doku z.B. Wenn ihr einen Timestamp in ein `\DateTime` Objekt konvertieren wollt, dann fügt einfach ein `@`-Zeichen vorne an. Ich hoffe, ich erzähle jetzt nichts Falsches, aber dieser Timestamp wird nach dem RFC2822 konvertiert und das ist Zeitzone 0. In Deutschland würden wir dem resultierenden `\DateTime` Objekt also immer hinterherhinken. Die `\DateTime` Objekt sollten besser nach ISO8601 konvertiert werden. Dann klappt's auch mit der richtigen Zeitzone. Ich für meinen Teil hab mir einen eigenen ViewHelper geschrieben, der sich daran hält und auch Extbase arbeitet intern mit diesem ISO-Format. Siehe dazu auch die Methode in Extbase:
-
-```html
-DataMapper->mapDateTime()
-```
-
-Zitat: return new DateTime(date('c', $timestamp));
-
-Warum das in den ViewHelper noch nicht eingeflossen ist, kann ich mir nicht erklären.
+Modifiziert und gibt ein Datum in einem vorgegebenen Format aus.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| date | Entweder ein Objekt vom Typ `\DateTime` oder ein Text, der in ein `\DateTime` Objekt konvertiert werden kann. Z.B. `17.01.1979` geht. `17.01.79` geht nicht. |
-| format | In welchem Format soll das Datum ausgegeben werden? Standard: Standard: `Y-m-d` |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| date | Entweder ein Datum vom Typ `\DateTime` oder ein Wert, der in ein `\DateTime` Objekt konvertiert werden kann (z.B. `17.01.1979`). Es kann auch der Timestamp (Sekunden seit 01.01.1970) angegeben werden. Relative Angaben wie `+2 months` modifizieren das aktuelle Datum. Um relative Angaben auf ein anderes Datum anzuwenden, muss das Datum in `base` definiert werden. ||
+| format | Formatvorgaben für die Ausgabe des Datums. [DateTime Formatierungen](https://www.php.net/manual/en/datetime.format.php) werden intern mit `PHP:date()` formatiert, können jedoch nur englische Ausgaben (Sunday, ...).<br>{{% badge style="orange" icon="angle-double-up" %}}PHP 8.1{{% /badge %}} [strftime Formatierungen](https://www.php.net/manual/en/function.strftime) werden intern mit `PHP:strftime()` formatiert und können auch mehrsprachige Ausgabe erzeugen (Sonntag, ...). Die Unterstützung für `strftime` ist in TYPO3 13 noch gegeben, könnte jedoch mit TYPO3 14 entfernt werden. | `Y-m-d` |
+| pattern | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.3{{% /badge %}} Formatvorgaben für die Ausgabe des Datums. Da `PHP:date()` nur englische Ausgaben kann und `PHP:strftime()` veraltet ist, wird `PHP:IntlDateFormatter` diese ersetzen. Dieser Formatter benötigt die Formatvorgaben jedoch im [Unicode ICO Format](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax). Wenn angegeben, wird `format` nicht mehr berücksichtigt. ||
+| locale | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.3{{% /badge %}} Angabe der zu verwendenden Sprache in dem Format `de_AT`, `fr` oder `en_US.utf8`. Wird nur berücksichtigt, wenn auch `pattern` benutzt wird. ||
+| base | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.4{{% /badge %}} Um in `date` mit [relativen Formaten](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) arbeiten zu können, muss das zugrundeliegende Datum hier angegeben werden. Akzeptiert nur `\DaTime` Objekt oder Timestamp (Sekunden seit 01.01.1970) ||
 
-### Beispiel
+### Beispiel: date
 
+Wochentage und Monatsnamen werden in englischer Sprache ausgeben.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.date date="17.01.1979" format="d/m/y"/>
+<f:format.date date="17.01.1979" format="l \d\e\n d F y"/><br>
+<f:format.date date="285375600" format="l \d\e\n d F y"/><br>
+{person.birthday -> f:format.date(format: 'l \d\e\n d F y')}
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+Wednesday den 17 January 1979
+Wednesday den 17 January 1979
+Wednesday den 17 January 1979
+```
+{{% /tab %}}
+{{% /tabs %}}
 
-### Beispiel Timestamp
+### Beispiel: strftime
 
+Wochentage und Monatsnamen werden in der Sprache ausgegeben, wie mit `PHP:setlocale()` konfiguriert.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.date format="d.m.Y">@1334439765</f:format.date>
+<f:format.date date="17.01.1979" format="%A den %d %B %Y"/><br>
+<f:format.date date="285375600" format="%A den %d %B %Y"/><br>
+{person.birthday -> f:format.date(format: '%A den %d %B %Y')}
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+Mittwoch den 17 Januar 1979
+Mittwoch den 17 Januar 1979
+Mittwoch den 17 Januar 1979
+```
+{{% /tab %}}
+{{% /tabs %}}
 
-Wie schon gesagt: Je nach Land/Kontinent bitte mit Vorsicht zu behandeln.
+### Beispiel: Relative Formatierung
+
+Mit relativen Formatierungen kann ein Datum modifiziert und anschließend formatiert werden..
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<div>Aktuelles Datum + 2 Wochen</div>
+<f:format.date date="+2 weeks" format="%A den %d %B %Y"/><br>
+<div>Anderes Datum + 2 Wochen</div>
+<f:format.date date="+2 weeks" base="285375600" format="%A den %d %B %Y"/><br>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+<div>Aktuelles Datum + 2 Wochen</div>
+Saturday den 02 March 2024<br>
+<div>Anderes Datum + 2 Wochen</div>
+Tuesday den 30 January 1979<br>
+```
+{{% /tab %}}
+{{% /tabs %}}
+
+### Beispiel: Unicode ICU
+
+Mit PHP 8.1 ist `PHP:strftime` veraltet. Um weiterhin mit übersetzten Wochentagen und Monatsnamen arbeiten zu können, muss mit `pattern` und `locale` gearbeitet werden.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:format.date date="+2 weeks" pattern="EEEE 'den' dd LLLL yyyy"/><br>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+Samstag den 02 März 2024<br>
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.html
 
