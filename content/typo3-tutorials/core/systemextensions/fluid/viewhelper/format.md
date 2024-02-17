@@ -369,12 +369,12 @@ Tuesday den 30 January 1979<br>
 
 ### Beispiel: Unicode ICU
 
-Mit PHP 8.1 ist `PHP:strftime` veraltet. Um weiterhin mit übersetzten Wochentagen und Monatsnamen arbeiten zu können, muss mit `pattern` und `locale` gearbeitet werden.
+Mit PHP 8.1 ist `PHP:strftime` veraltet. Um weiterhin mit übersetzten Wochentagen und Monatsnamen arbeiten zu können, muss mit `pattern` und `locale` gearbeitet werden. Im Beispiel werden dem aktuellen Datum 2 Wochen hinzugefügt.
 
 {{< tabs >}}
 {{% tab title="Fluid Template" %}}
 ```html
-<f:format.date date="+2 weeks" pattern="EEEE 'den' dd LLLL yyyy"/><br>
+<f:format.date date="+2 weeks" pattern="EEEE 'den' dd LLLL yyyy" locale="de_DE"/><br>
 ```
 {{% /tab %}}
 {{% tab title="Ausgabe" %}}
