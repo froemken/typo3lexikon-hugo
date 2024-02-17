@@ -388,111 +388,240 @@ Samstag den 02 März 2024<br>
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
-Wenn ihr ein Modell für die Tabelle `tt_content` erstellt habt, dann erhaltet ihr im Frontend die nackten Daten, wie sie aus der Datenbank kommen. Damit die Daten wieder so aussehen, wie wenn ihr sie mit `styles.content.get` ausgebt, hilft euch dieser ViewHelper. Dieser schnappt sich die Rohdaten und schleift diese einmal komplett durch den hinterlegten TypoScript-Objektpfad.
+Schleust einen Text, der aus der Datenbank kommt, durch die angegebene TypoScript `parseFunc` Eigenschaft, um z.B. enthaltene Links wie `t3://page?uid=1` vor der Ausgabe im Frontend in `<a>` Tags umzuwandeln. Bitte verwendet diesen ViewHelper immer dann, wenn ihr es mit Inhalten zu tun habt, die redaktionell erstellt wurden. `parseFunc` ist maßgeblich dafür verantwortlich unerlaubte HTML-Tags (wie `<script>`) aus den Inhalten zu entfernen oder zumindest die spitzen Klammern `<>` in `&gt;&lt;` umzuwandeln, um Schaden abzuwenden. Bitte passt lieber die Eigenschaften in der zugrundeliegenden `parseFunc` Eigenschaft an, anstatt Inhalte ungeprüft mittels [f:format.raw](#fformatraw) ausgeben zu lassen.
+
+Diesen ViewHelper bitte nur für das Frontend verwenden.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| parseFuncTSPath | Formatiere einen Text anhand der TypoScript-Konfiguration, die sich standardmäßig in `lib.parseFunc_RTE` befindet. Diesen Pfad könnt ihr hier ändern. |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| parseFuncTSPath | Gebe hier den Pfad zur TypoScript `parseFunc` Eigenschaft an, die sich um das Aufbereiten des Texten kümmern soll. | `lib.parseFunc_RTE` |
+| data | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Falls gewünscht könnt ihr ein Array, einen Datensatz oder auch ein Domainmodel hier angeben, dessen Eigenschaften innerhalb der angegebenen `parseFunc` Eigenschaft mittels der TypoScript `field` Eigenschaft wieder abgefragt werden können. ||
+| current | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Befüllt die `current` Eigenschaft in Eurem TypoScript mit dem hier angegebenen Wert. Im TypoScript erhaltet ihr mit `current = 1` Zugriff auf den Wert. Wenn gesetzt, ist `currentValueKey` ohne Funktion. ||
+| currentValueKey | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Gebt einen Array-Key oder die Domainmodel-Eigenschaft von der `data` Eigenschaft an, um den enthaltenen Wert in `current` zu überführen. Im TypoScript erhaltet ihr mit `current = 1` Zugriff auf den Wert. ||
+| table | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Falls es sich bei `data` um einen Datensatz handelt, dann hier bitte den entsprechenden Tabellennamen mit angeben. Ist keine Pflichtangabe, aber hilft den zugrundeliegende ContentObjectRenderer vollständig auf die bevorstehende Aufgabe [vorzubereiten](https://github.com/TYPO3/typo3/commit/ad0aa9a55ca0d1e2718d9b1ec7819e5f58ac0e28) | Empty String |
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.html>{content.bodytext}</f:format.html>
+<f:format.html>Ein <a href="t3://page?uid=11">Link</a></f:format.html>
+<f:format.html>Böses Script: <script>alert("har har har");</script></f:format.html>
 ```
-
-### Beispiel/Trick mit abgeschalteten htmlspecialchars
-
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
 ```html
-<f:format.html parseFuncTSPath="lib.parseFunc">{variable}</f:format.html>
+<p>Ein <a href="/extensions/events2">Link</a></p>
+<p>Böses Script: &lt;script&gt;alert("har har har");&lt;/script&gt;</p>
 ```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.htmlentitiesDecode
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 
+Im Text befindliche Zeichen wie: `&amp;`, `&quot;`, `&#039;`, `&lt;`, `&gt;` werden mittels `PHP:html_entity_decode()` wieder in ihre vorherige, HTML interpretierbare Form, zurückkonvertiert: `&`, `"`, `'`, `<`, `>`.
+
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Text der dekodiert werden soll |
-| keepQuotes | Sollen einfache und doppelte Anführungsstriche auch dekodiert werden? Standard: deaktiviert |
-| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Standard: Wie im INSTALL_TOOL definiert. Normalerweise: UTF-8 |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Der Text in dem sich die maskierten Zeichen befinden, die zurückkonvertiert werden sollen. ||
+| keepQuotes | Einfache und doppelte Anführungsstriche werden standardmäßig nicht mit zurückkonvertiert. | `false` |
+| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8` |
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<p><f:format.htmlentitiesDecode>M&uuml;ller &amp; Breuer</f:format.htmlentitiesDecode>
+<p>
+    <f:format.htmlentitiesDecode keepQuotes="false">Ich arbeite bei &quot;M&uuml;ller &amp; Breuer&quot;</f:format.htmlentitiesDecode>
+</p>
+<p>
+    <f:format.htmlentitiesDecode keepQuotes="true">Ich arbeite bei &quot;M&uuml;ller &amp; Breuer&quot;</f:format.htmlentitiesDecode>
+</p>
 ```
-
-Im Quelltext sieht man wieder ein richtig sauberes: `Müller & Breuer`.
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+<p>
+    Ich arbeite bei "Müller & Breuer"
+</p>
+<p>
+    Ich arbeite bei &quot;Müller & Breuer&quot;
+</p>
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.htmlentities
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 
-Mit diesem ViewHelper wandelt ihr Sonderzeichen oder auch die deutschen Umlaute in web-sichere HTML-Codes um. Ein `ü` wird dann zu `&uuml;`. Damit kann gewährleistet werden, dass jeder Browser dieses Zeichen richtig anzeigt, und zwar egal wo auf der Welt. Seit der Standardzeichensatz von TYPO3 auf UTF-8 gesetzt ist, sollte diese Sache hier so nach und nach der Vergangenheit angehören.
+Im Text befindliche Sonderzeichen wie: `&`, `"`, `'`, `<`, `>` und auch Umlaute wie `ä`, `ö`, `ü` werden mittels `PHP:htmlentities()` in ein HTML sicheres Format konvertiert: `&amp;`, `&quot;`, `&#039;`, `&lt;`, `&gt;` und `&auml;`, `&ouml;`, `&uuml;`. Gerade diese spitzen Klammern `<>` könnten vom HTML Parser als Tags interpretiert werden oder das `&` als Trenner für einen URI-Parameter.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Text der kodiert werden soll |
-| keepQuotes | Sollen einfache und doppelte Anführungsstriche auch dekodiert werden? Standard: deaktiviert |
-| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Standard: Wie im INSTALL_TOOL definiert. Normalerweise: UTF-8 |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Der Text mit den Zeichen, die in ein HTML sicheres Format zu konvertieren sind. ||
+| keepQuotes | Einfache und doppelte Anführungsstriche werden standardmäßig nicht umgewandelt. | `false` |
+| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8` |
+| doubleEncode | Falls der Text bereits HTML sicherere Zeichen beinhaltet, werden diese erneut konvertiert. Dies führt zu `&amp;amp;amp;`. Um erneutes Umwandeln zu verhindern, diese Option auf `false` setzen. | `true` |
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:alias map="{name: 'Müller & Breuer'}">
-    <p><f:format.htmlentities>{name}</f:format.htmlentities></p>
-</f:alias>
+<p>
+    <f:format.htmlentities keepQuotes="false">Ich arbeite bei "Müller &amp; Breuer"</f:format.htmlentities>
+</p>
+<p>
+    <f:format.htmlentities keepQuotes="true">Ich arbeite bei "Müller &amp; Breuer"</f:format.htmlentities>
+</p>
+<p>
+    <f:format.htmlentities keepQuotes="false" doubleEncode="false">Ich arbeite bei "Müller &amp; Breuer"</f:format.htmlentities>
+</p>
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+<p>
+    Ich arbeite bei &quot;M&uuml;ller &amp;amp; Breuer&quot;
+</p>
+<p>
+    Ich arbeite bei "M&uuml;ller &amp;amp; Breuer"
+</p>
+<p>
+    Ich arbeite bei &quot;M&uuml;ller &amp; Breuer&quot;
+</p>
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.htmlspecialchars
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 {{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
-Wenn ihr mit Userdaten (Formulardaten) arbeitet, dann sollte dieser Inhalt zuallererst durch diesen ViewHelper. Denn dieser wandelt alle spitzen Klammern von HTML-Tags in ein nicht mehr interpretierbares Format um. Die HTML-Tags können also keinen Schaden mehr verursachen und werden im Frontend angezeigt statt verarbeitet.
+Im Text befindliche Sonderzeichen wie: `&`, `"`, `'`, `<`, `>` werden mittels `PHP:htmlspecialchars()` in ein HTML sicheres Format konvertiert: `&amp;`, `&quot;`, `&#039;`, `&lt;`, `&gt;`. Gerade diese spitzen Klammern `<>` könnten vom HTML Parser als Tags interpretiert werden oder das `&` als Trenner für einen URI-Parameter.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Text der formatiert werden soll |
-| keepQuotes | Sollen einfache und doppelte Anführungszeichen auch formatiert werden. Standard: deaktiviert |
-| encoding ||
-| doubleEncode | Mit jedem Aufruf diesen ViewHelpers wird ein Text, der bereits `PHP:htmlspecialchars()` durchlaufen hat, erneut durch `PHP:htmlspecialchars()` geschickt. Somit wird aus `&` erst `&amp;`, dann `&amp;amp;` und dann `&amp;amp;amp;`. Um das zu verhindert, kann dieser Parameter auf `0` gesetzt werden. |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Der Text mit den Zeichen, die in ein HTML sicheres Format zu konvertieren sind. ||
+| keepQuotes | Einfache und doppelte Anführungsstriche werden standardmäßig nicht umgewandelt. | `false` |
+| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8` |
+| doubleEncode | Falls der Text bereits HTML sicherere Zeichen beinhaltet, werden diese erneut konvertiert. Dies führt zu `&amp;amp;amp;`. Um erneutes Umwandeln zu verhindern, diese Option auf `false` setzen. | `true` |
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.htmlspecialchars><p><strong>fetter</strong> Text</p></f:format.htmlspecialchars>
+<p>
+    <f:format.htmlspecialchars keepQuotes="false">Ich arbeite bei "Müller &amp; Breuer"</f:format.htmlspecialchars>
+</p>
+<p>
+    <f:format.htmlspecialchars keepQuotes="true">Ich arbeite bei "Müller &amp; Breuer"</f:format.htmlspecialchars>
+</p>
+<p>
+    <f:format.htmlspecialchars keepQuotes="false" doubleEncode="false">Ich arbeite bei "Müller &amp; Breuer"</f:format.htmlspecialchars>
+</p>
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+<p>
+    Ich arbeite bei &quot;Müller &amp;amp; Breuer&quot;
+</p>
+<p>
+    Ich arbeite bei "Müller &amp;amp; Breuer"
+</p>
+<p>
+    Ich arbeite bei &quot;Müller &amp; Breuer&quot;
+</p>
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.json
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.6{{% /badge %}}
 
-Dokumentation folgt
+Nimmt jedweden Wert entgegen und gibt in als JSON zurück.
+
+### Parameter
+
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Der Text, die Zahl, das Objekt, was auch immer in JSON umgewandelt werden soll. ||
+| forceObject | Üblicherweise wird zunächst versucht den Wert aus `value` als Array im JSON zu repräsentieren `[]`. Wenn aktiviert, werden Arrays im JSON als Objekte ausgegeben `{}`. | `false` |
+
+### Beispiel
+
+Standardmäßig werden alle Anführungszeichen maskiert in `&quot;`. Das ist hervorragend, um dieses JSON in HTML Attributen direkt weiterzuverwenden. Für die Weiterverarbeitung als RestAPI oder `PHP:json_decode()` kann dieses JSON nicht verwendet werden und muss mittels [f:format.raw](#fformatraw) weiter aufbereitet werden.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:format.json forceObject="false">{personen}</f:format.json>
+{personen -> f:format.json(forceObject: "false") -> f:format.raw()}
+
+<f:format.json forceObject="true">{personen}</f:format.json>
+{personen -> f:format.json(forceObject: "true") -> f:format.raw()}
+```
+{{% /tab %}}
+{{% tab title="Controller" %}}
+```php
+$this->view->assign(
+    'personen',
+    [
+        0 => ['name' => 'Stefan'],
+        1 => ['name' => 'Petra'],
+    ]
+);
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+[{&quot;name&quot;:&quot;Stefan&quot;},{&quot;name&quot;:&quot;Petra&quot;}]
+[{"name":"Stefan"},{"name":"Petra"}]
+
+{&quot;0&quot;:{&quot;name&quot;:&quot;Stefan&quot;},&quot;1&quot;:{&quot;name&quot;:&quot;Petra&quot;}}
+{"0":{"name":"Stefan"},"1":{"name":"Petra"}}
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.nl2br
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
-Dieser ViewHelper besitzt keine Parameter. Den umzuwandelnden Inhalt bezieht er sich aus dem Text zwischen den Tags. Sinnvoll wird dieser ViewHelper beim Anzeigen von Inhalten aus `textarea` Tags. Denn hier wurden die Zeilenumbrüche mit ENTER (CHR(10)) realisiert. Im HTML sind diese Umbrüche aber völlig egal und würde den Text einfach hintereinander weg anzeigen. Um das zu verhindern, könnt ihr diesen ViewHelper verwender. Er konvertiert alle CHR(10)-Zeilenumbrüche in `<br>` Tags und so werden Zeilenumbrüche auch im Browser wieder richtig dargestellt.
+Dieser ViewHelper besitzt keine Parameter. Den umzuwandelnden Inhalt bezieht er sich aus dem Text zwischen den Tags. Sinnvoll wird dieser ViewHelper beim Anzeigen von Inhalten aus `<textarea>` Tags. Denn hier wurden die Zeilenumbrüche mit ENTER (CHR(10)) realisiert. Im HTML sind diese Umbrüche aber völlig egal und würde den Text einfach hintereinander weg anzeigen. Um das zu verhindern, könnt ihr diesen ViewHelper verwender. Er konvertiert alle CHR(10)-Zeilenumbrüche in `<br>` Tags und so werden Zeilenumbrüche auch im Browser wieder richtig dargestellt.
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
 <f:format.nl2br>Text
 mit
 Zeilenumbrüchen</f:format.nl2br>
 ```
-
-ergibt: `Text<br>mit<br>Zeilenumbrüchen`
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```html
+Text<br>mit<br>Zeilenumbrüchen
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.number
 
@@ -502,95 +631,121 @@ Mit diesem ViewHelper könnt ihr Zahlen formatieren. Er arbeitet ähnlich dem `f
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| decimals | Wie viele Nachkommastellen dürfen angezeigt werden. |
-| decimalSeperator | Welches Zeichen soll für den Trenner zwischen Zahl und Nachkommastellen verwendet werden? Standard: `.` |
-| thousandsSeperator | Welches Zeichen soll als Tausendertrennzeichen verwendet werden. Standard: `,` |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| decimals | Anzahl der Nachkommastellen. | 2 |
+| decimalSeperator | Zeichen zum Einleiten der Nachkommastellen. | `,` |
+| thousandsSeperator | Zeichen zum Hervorheben der Tausenderstellen. Standard:  | `.` |
 
 ### Beispiel
 
+Wie ihr seht, wird sogar automatisch aufgerundet.
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
 <f:format.number decimals="3" decimalSeparator="." thousandsSeparator=",">1122334455.667788</f:format.number>
 ```
-
-ergibt: `1,122,334,455.668`.
-
-Wie ihr seht, wird sogar automatisch aufgerundet.
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+1,122,334,455.668
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.padding
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 
+Der angegebene Text wird so lange mit dem Abstandszeichen aufgefüllt, bis dass die gewünschte Länge aus `padLength` erreicht ist. Das ist gerade bei tabellarischen Konsolenausgaben interessant, damit Werte aus einer Spalte immer exakt untereinander stehen.
+
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| padLength | Wie viel Zeichen lang darf der Text inkl. der hinzugefügten Abstandszeichen maximal werden? |
-| padString | Welches Zeichen soll als Abstand dienen? Standard: Leerzeichen |
-| padType | Wo sollen die Abstandszeichen eingefügt werden? Zur Auswahl steht `right`, `left` und `both`. Standard: `right` |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.1{{% /badge %}} Das Wort oder der Text, dem Abstandszeichen hinzugefügt werden sollen ||
+| padLength | Wenn der text aus `value` kleiner ist als die hier angegebene Anzahl Zeichen, dann wird der Text solange mit Abstandszeichen aus `padString` aufgefüllt, bis die gewünschte Anzahl Zeichen erreicht ist. ||
+| padString | Angabe des Abstandszeichen mit dem aufgefüllt werden soll. | Leerzeichen |
+| padType | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Die Abstandszeichen können rechts `right`, links `left` oder von beiden Seiten aus `both` angefügt werden. | right |
 
-### Beispiel zur Funktionsweise
+### Beispiel
 
-In diesem Beispiel wird das angegebene Zeichen so lange wiederholt, bis das Maximum an Zeichen erfüllt ist. Je nach Zeichensatz macht diese Darstellung wenig Sinn. Denn wie ihr seht beginnen die letzten beiden Wörter je Zeile immer an einer unterschiedlichen Stelle.
-
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
 <p><f:format.padding padLength="10" padString="-=">TYPO3</f:format.padding>ist cool</p>
 <p><f:format.padding padLength="10" padString="#">Stefan</f:format.padding>ist cool</p>
 <p><f:format.padding padLength="10" padString=" ">Ich</f:format.padding>bin cool</p>
 ```
-
-### Beispiel mit sinnvoller Einrückung
-
-Hier nahezu das gleiche Beispiel wie oben. Allerdings fangen die letzten beiden Wörter je Zeile nun immer an der gleichen Position an. Mit Hilfe diesen ViewHelpers könnte man also so eine Art Tabulator erstellen.
-
-```html
-<pre><f:format.padding padLength="10" padString=" ">TYPO3</f:format.padding>ist cool<br />
-<f:format.padding padLength="10" padString=" ">Stefan</f:format.padding>ist cool<br />
-<f:format.padding padLength="10" padString=" ">Ich</f:format.padding>bin cool</pre>
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
 ```
+<p>TYPO3-=-=-ist cool</p>
+<p>Stefan####ist cool</p>
+<p>Ich       bin cool</p>
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.printf
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 {{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
-Mit diesem ViewHelper können Platzhalter in einem Text mit den Werten aus dem Array ersetzt werden.
+Mit diesem ViewHelper können Platzhalter in einem Text mit den Werten aus dem Array ersetzt werden. In diesem Rahmen ist es auch möglich einen Text in eine Zahl umzuwandeln, oder Fließkommazahlen mit führenden Nullen aufzufüllen.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| arguments | Gebt hier Werte in Arraynotation ein, die die Platzhalter in dem Text, der sich zwischen den Tags befindet, ersetzt. |
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Der Text mit den Formatierungszeichen, die mit den Werten aus `arguments` ersetzt werden sollen. | `null` |
+| arguments | Ein Array mit Werten, die in die Formatierungszeichen aus `value` überführt werden sollen. | Leeres Array |
 
 ### Beispiel
 
 Mit %1, %2 und %3 wird der jeweilige Wert aus dem Array geholt. Da es unterschiedliche Datentypen gibt, müssen wir jedem Wert noch mitteilen, um was für einen Datentyp es sich handelt. Dabei steht `$s` für `string` also Text. `$d` für einen Zahlenwert, der auch ein Vorzeichen enthalten darf und wie ihr evtl. schon gesehen habt, habe ich die Zahl `4` als Text deklariert, gebe sie aber als Typ Integer an den Text weiter.
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
 <f:format.printf arguments="{0: 'Stefan', 1: 2, 2: '4'}">%1$s hat eine %3$d-seitige Dokumentation geschrieben und %2$d Tage dafür gebraucht.</f:format.printf>
 ```
-
-Wenn dieser ViewHelper überhaupt nicht angezeigt wird, dann habt ihr entweder einen Fehler in eurem Array oder ihr habe die Typdefinition der Variablen wie `$s` oder `$d` vergessen mit anzugeben.
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+Stefan hat eine 4-seitige Dokumentation geschrieben und 2 Tage dafür gebraucht.
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.raw
 
-{{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0.0{{% /badge %}}
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 {{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
-Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchars()` schicken. Dies zu verhindern stellt auf jeden Fall ein Sicherheitsrisiko dar, kann aber mit diesem ViewHelper erreicht werden. Ich denke gerade im Bereich von Formulardaten, kann dieser ViewHelper evtl. Verwendung finden.
+Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchars()` schicken, um das Interpretieren diverser HTML Zeichen zu unterbinden. Aus Sicherheitsgründen macht das Sinn und verhindert unliebsames Ausführen von `<script>` Tags. In einigen Fällen kann die Verwendung von `f:format.raw` trotz dem Sinn machen. Im Falle von [f:format.json](#fformatjson) kann das Resultat nur innerhalb von HTML Attributen weiterverwendet werden. Für eine Ausgabe auf der Webseite oder direkte Weiterverwendung durch `PHP:json_decode()` muss das Ergebnis zusätzlich durch `f:format.raw()` geführt werden. Siehe Beispiel beim json ViewHelper.
 
 ### Parameter
 
 | Parameter | Erklärung |
 |-----------|-----------|
-| value | Der Text, der unangetastet/unverändert ausgegeben werden soll |
+| value | Der Text, der unverändert ausgegeben werden soll |
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.raw value="{formData.nachricht}"/>
+<f:format.raw value="Böser <script> Tag"/>
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+Böser <script> Tag
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.stripTags
 
@@ -603,24 +758,61 @@ Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 | Parameter | Erklärung |
 |-----------|-----------|
 | value | Der Text aus dem die HTML-Tags entfernt werden sollen |
+| allowedTags | {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0{{% /badge %}} Standardmäßig werden gradenlos alle HTML Tags entfernt. Mit dieser Option könnt ihr eine Auswahl an Tags als Ausnahme deklarieren. |
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.stripTags>Ein <strong>fetter</strong> Text mit einigen <span style="color: blue;">bunten</span> HTML-Tags.</f:format.stripTags>
+<f:format.stripTags allowedTags="<b>,<i>">Ein <b>fetter</b> und <i>kursiver</i> Text mit einigen <span style="color: blue;">bunten</span> HTML-Tags.</f:format.stripTags>
 ```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+Ein <b>fetter</b> und <i>kursiver</i> Text mit einigen bunten HTML-Tags.
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.trim
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.4{{% /badge %}}
 
-Dokumentation folgt
+Entfernt von außen jegliche Tabs, Leer- und Enter-Zeichen von einem Text. Alternativ können eigene Zeichen angegeben werden, die von einem Text äußerlich entfernt werden sollen.
+
+### Parameter
+
+| Parameter | Erklärung | Standard |
+|-----------|-----------|----------|
+| value | Der Text von dem rechts und/oder links die Zeichen aus `characters` entfernt werden sollen. ||
+| characters | Komma separierte Liste von Zeichen, die vom `value` links und/oder rechts entfernt werden sollen. Der Standard `false` setzt `characters` intern auf folgende Werte: ` \t\n\r\0\x0B` | `false` |
+| side | Entfernt Zeichen von der linken Seite (`left`, `start`), von der rechten Seite (`right`, `end`) oder von beiden Seiten `both` | `both` |
+
+### Beispiel
+
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
+```html
+<f:format.trim characters="#">###MARKER###</f:format.trim>
+<f:format.trim side="left">   
+    
+    ###MARKER###</f:format.trim>
+```
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
+```
+MARKER
+###MARKER###
+```
+{{% /tab %}}
+{{% /tabs %}}
 
 ## f:format.urlencode
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
 
-In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%` vor. Diese Zeichen sind nicht URL-sicher und sollten vor der Übermittlung durch diesen ViewHelper verarbeitet werden.
+In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%` vor. Diese Zeichen sind nicht URL-sicher und müssen vor Verwendung in URIs durch diesen ViewHelper verarbeitet werden.
 
 ### Parameter
 
@@ -630,12 +822,15 @@ In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%
 
 ### Beispiel
 
+{{< tabs >}}
+{{% tab title="Fluid Template" %}}
 ```html
-<f:format.urlencode>Text mit ein npaar Sonderzeichen, die für die URL entsprechend maskiert werden müssen: @+%/</f:format.urlencode>
+<f:format.urlencode>Text mit ein paar Sonderzeichen, die für die URL entsprechend maskiert werden müssen: @+%/</f:format.urlencode>
 ```
-
-Ergebnis:
-
+{{% /tab %}}
+{{% tab title="Ausgabe" %}}
 ```
-Text%20mit%20ein%20npaar%20Sonderzeichen%2C%20die%20f%C3%BCr%20die%20URL%20entsprechend%20maskiert%20werden%20m%C3%BCssen%3A%20%40%2B%25%2F 
+Text%20mit%20ein%20paar%20Sonderzeichen%2C%20die%20f%C3%BCr%20die%20URL%20entsprechend%20maskiert%20werden%20m%C3%BCssen%3A%20%40%2B%25%2F 
 ```
+{{% /tab %}}
+{{% /tabs %}}
