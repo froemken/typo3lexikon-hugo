@@ -3,7 +3,7 @@ title = "ViewHelper"
 date = 2024-01-09T20:27:06+01:00
 ordersectionsby = "linktitle"
 alwaysopen = false
-aliases = ["viewhelper.html"]
+aliases = ["viewhelper.html", "fluid-viewhelper.html"]
 +++
 
 Mit reinem HTML wird wiederkehrender Quellcode sehr schnell sehr unübersichtlich. Im Hinblick auf TYPO3, wo Seiten verschoben und umbenannt werden können, müssten Links und URLs im HTML Quelltext immer wieder erneut angepasst werden. Abhilfe schaffen hier besondere HTML-Tags, die von Fluid, dem Core und anderen Extensions mitgeliefert werden. Mit diesen sogenannten "ViewHelper" können direkt im HTML Quelltext Schleifen, Verlinkungen zu TYPO3 Seiten, Abfragen und das Ausliefern von per TypoScript generiertem Inhalt realisiert werden. Dank "Layouts", "Partials" und "Templates" können die Fluid-Templates sehr gut strukturiert werden.
