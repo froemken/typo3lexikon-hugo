@@ -1,31 +1,45 @@
 +++
 title = "Datenschutz"
-date = 2024-01-06T19:04:28+01:00
+date = 2024-03-05T00:03:28+01:00
 slug = "datenschutz"
 weight = 5
 aliases = ["datenschutz.html"]
 +++
 
-Diese Webseite ist eine rein private Webseite und verfolgt keine Gewinnbringung. Ich tracke Euch auch nicht.
+## Erträge
+
+Diese Webseite ist eine rein private Webseite und verfolgt keine Gewinnbringung. Auf meiner Webseite findet ihr keine (bezahlte) Werbung.
 
 ## Cookies
 
 Die Webseite verwendet keine Cookies und auch keine Trackingcookies.
 
-Es gibt eine Ausnahme: Der Login, der nur für mich ist. Dieser setzt nach erfolgreichem Login ein Cookie.
-
 ## Kontakt
 
-Das Kontaktformular speichert keine Daten auf meiner Webseite. Alle eingetragenen Daten werden direkt an meine E-Mail-Adresse weitergeleitet. Diese liegt bei Google. Wenn ihr nicht wollt, dass Euer Anliegen auf Googleservern als Mail gespeichert wird, dann kontaktiert mich bitte nicht. Wenn Euer Anliegen geklärt ist, dann lösche ich die Mail. Im Papierkorb wird sie binnen 30 Tagen automatisch gelöscht. Inwieweit Google die Mail tatsächlich vollständig von seinen Servern gelöscht hat? Keine Ahnung. Wenn Du mich öfters kontaktierst oder wenn wir uns kennen oder über die verschiedenen TYPO3Camps kennengelernt haben, dann kann es passieren, dass ich Eure Kontaktdaten in meinem Google-Adressbuch hinterlege.
+Meine Webseite basiert auf rein statischen HTML Inhalten (Hugo IO). Damit ist die Realisierung eines Kontaktformulars nicht möglich. Auf der Kontakt-Seite findet ihr einen Link zu einem Google-Formular. Einen entsprechenden Hinweis, dass ihr nach Klick auf den Link auf einem anderen Service landet, habe ich hinterlegt.
 
-Nochmal: Dies ist eine private Seite. Wenn ich Eure Daten speichere, dann sind wir Freunde.
+Wie lange ich eure Mail aufbewahre, kann ich euch nicht sagen. Die Mail landet in meinem privaten Postfach (Google Server) und dort gehe ich grob jedes Jahr einmal durch und lösche Mails nach eigenem Ermessen.
+
+Ihr wollt nichts mit Google zu tun haben? Dann kontaktiert mich bitte über [Slack TYPO3](https://typo3.slack.com/). Die Slack-Einrichtung findet ihr in der [TYPO3 Dokumentation](https://typo3.org/community/meet/chat-slack).
 
 ## Hosting
 
-Meine Webseite wird derzeit bei infrastructure.punkt.de gehostet. Serverstandort: Karlsruhe
+Meine Webseite wird derzeit von [jweiland.net](https://jweiland.net) gehostet. Serverstandort: `Köln`. Die Matomo-Integration liegt ebenfalls bei [jweiland.net](https://jweiland.net), hier jedoch im Cloud Hosting Tarif mit Serverstandort: `Frankfurt`.
 
-## Logging
+Warum? Das Wildcard-Zertifikat kostet ca. 160 EUR/Jahr. Alternativ würde die spezifische Absicherung der Matomo-Subdomain nochmals 36 EUR/Jahr kosten. Für ein reines Freizeit-Projekt ist mir das zu viel.
 
-Das verwendete CMS System loggt im Normalfall nichts. Wenn sich jedoch jemand versucht am Backend anzumelden (zu dem nur ich den Zugang habe), dann wird die IP-Adresse diesen Versuch protokolliert. Ein nächtlicher Cronjob löscht derartige Versuche nach 90 Tagen und die IP-Adresse wird anschließend automatisch anonymisiert.
+## Protokoll
 
-Im Kundenmenü des Hosters habe ich das Logging abgeschaltet. Da ich jedoch Zugriff, auf den vom Hoster zur Verfügung gestellten WebAlizer habe, muss ich davon ausgehen, dass zumindest der Hoster irgendwelche Daten speichert, um eine Analyse der Webseitenbesuche über die letzten 12 Monate zu erstellen.
+Ich verwende [Matomo](https://matomo.org/), um herauszufinden, woher die Aufrufe kommen. Sind es mehr Aufrufe von Suchergebnissen, sozialen Medien oder direkte Aufrufe?
+
+Tracking:
+: Es interessiert mich nicht, wie ihr euch über meine Webseite bewegt. Ich freue mich einfach nur, dass ihr da seid. Darum habe ich das Tracking mittels Cookie in Matomo vollständig deaktiviert.
+
+IP-Adresse:
+: Die IP-Adresse hilft, um herauszufinden, aus welchem Land ihr kommt. Aber dafür brauche ich nicht die vollständige IP-Adresse. Ich habe Matomo so konfiguriert, dass nur die ersten beiden Oktetten (die ersten 2 Bytes) protokolliert werden.
+
+Anonymisierte Verweise:
+: Mittels HTTP Referrer kann analysiert werden von welcher Seite ihr kommt. Da mich nur die Seite interessiert und nicht was ihr dort gemacht oder eingestellt habt, habe ich Matomo so konfiguriert, dass jegliche Query-Parameter (In einer URL alles hinter dem Pfad beginnend mit `?`) entfernt wird.
+
+Webserver Logs:
+: Der Hoster bietet das Protokollieren der Webseitenzugriffe für einen Zeitraum von 1 Woche an. Da in diesem Protokoll vollständige IP-Adressen enthalten sind, und sich diese Daten auch nicht anonymisieren lassen, habe ich die Hoster eigene Protokollierung vollständig abgeschaltet.
