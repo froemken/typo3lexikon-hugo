@@ -19,7 +19,6 @@ Im Folgenden eine Auflistung der zur Verfügung stehenden ViewHelper.
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
 {{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 1.0.6{{% /badge %}}
 
-
 Mit diesem ViewHelper könnt ihr eigene Variablen innerhalb des öffnenden und schließenden Tags zur Verfügung stellen. Das ist sinnvoll, wenn ihr einen bestimmten Wert z.B. aus Objekten oder eine etwas längere ViewHelper Aneinanderreihung in eurem Template mehrfach wieder verwenden wollt.
 
 {{% notice style="info" title="Persönliche Anmerkung" icon="exclamation" %}}
@@ -857,7 +856,7 @@ Der `f:translate` ViewHelper stellt Übersetzungen im Fluid-Template zur Verfüg
 <label index="domain_model.title">Title of: %s</label>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 Mit `%s` wird auf den ersten Wert des übergebenen Arrays zugegriffen. Kommt %s nochmals vor, dann wird auf den zweiten Array-Eintrag zugegriffen. Um das unabhängig von der Reihenfolge zu machen, empfehle ich noch folgende Notation:
 

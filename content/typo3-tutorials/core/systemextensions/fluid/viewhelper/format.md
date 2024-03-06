@@ -36,7 +36,7 @@ Dieser ViewHelper teilt Bytes (Dateigröße) solange durch `1024`, bis das Resul
 22.65 MB
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: Array Notation
 
@@ -54,7 +54,7 @@ Hier seht ihr, dass der `thousandsSeparator` keine Auswirkung hat. Solange noch 
 7,6169 TB
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: Eigene Units
 
@@ -71,7 +71,7 @@ Durch die Reduzierung auf 4 `units` kann die `value` Angabe nur 4-mal durch `102
 24,202,711.34 GigaBytes
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.case
 
@@ -117,7 +117,7 @@ nur am Anfang werd ich klein
 Aller Anfang Ist Groß
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.cdata
 
@@ -157,7 +157,7 @@ Solltet ihr mit Fluid-Template solche XML-Strukturen bauen, dann verwendet bitte
 </event>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.crop
 
@@ -189,7 +189,7 @@ Da `respectWordBoundaries` standardmäßig aktiv ist, findet hier keine Trennung
 Diesen Text…
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: Im Wort trennen
 
@@ -204,7 +204,7 @@ Diesen Text…
 Diesen Text we…
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: Im HTML trennen
 
@@ -221,7 +221,7 @@ Wenn `respectHtml` deaktiviert wird, dann wird der komplette Text als reiner Tex
 <p>Ein schönes Bild</p><img src="#"&hellip;
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: Nicht im HTML trennen
 
@@ -248,7 +248,7 @@ Im dritten Crop befindet sich der 24te Buchstabe auch innerhalb des zweiten Wort
 <p>Ein schönes Bild</p><img src="#" width="128" height="128" title="nice" alt="sonne"/><p>Nicht wa&hellip;</p>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.currency
 
@@ -287,7 +287,7 @@ Ihr dürft diesem ViewHelper keine Zahlen mit einem Komma als Dezimaltrenner mit
 $ 1,122,334,455.66
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.date
 
@@ -324,7 +324,7 @@ Wednesday den 17 January 1979
 Wednesday den 17 January 1979
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: strftime
 
@@ -345,7 +345,7 @@ Mittwoch den 17 Januar 1979
 Mittwoch den 17 Januar 1979
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: Relative Formatierung
 
@@ -368,7 +368,7 @@ Saturday den 02 March 2024<br>
 Tuesday den 30 January 1979<br>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ### Beispiel: Unicode ICU
 
@@ -385,7 +385,7 @@ Mit PHP 8.1 ist `PHP:strftime` veraltet. Um weiterhin mit übersetzten Wochentag
 Samstag den 02 März 2024<br>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.html
 
@@ -420,7 +420,7 @@ Diesen ViewHelper bitte nur für das Frontend verwenden.
 <p>Böses Script: &lt;script&gt;alert("har har har");&lt;/script&gt;</p>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.htmlentitiesDecode
 
@@ -459,7 +459,7 @@ Im Text befindliche Zeichen wie: `&amp;`, `&quot;`, `&#039;`, `&lt;`, `&gt;` wer
 </p>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.htmlentities
 
@@ -505,7 +505,7 @@ Im Text befindliche Sonderzeichen wie: `&`, `"`, `'`, `<`, `>` und auch Umlaute 
 </p>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.htmlspecialchars
 
@@ -552,7 +552,7 @@ Im Text befindliche Sonderzeichen wie: `&`, `"`, `'`, `<`, `>` werden mittels `P
 </p>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.json
 
@@ -601,7 +601,7 @@ $this->view->assign(
 {"0":{"name":"Stefan"},"1":{"name":"Petra"}}
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.nl2br
 
@@ -624,7 +624,7 @@ Zeilenumbrüchen</f:format.nl2br>
 Text<br>mit<br>Zeilenumbrüchen
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.number
 
@@ -655,7 +655,7 @@ Wie ihr seht, wird sogar automatisch aufgerundet.
 1,122,334,455.668
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.padding
 
@@ -689,7 +689,7 @@ Der angegebene Text wird so lange mit dem Abstandszeichen aufgefüllt, bis dass 
 <p>Ich       bin cool</p>
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.printf
 
@@ -720,7 +720,7 @@ Mit %1, %2 und %3 wird der jeweilige Wert aus dem Array geholt. Da es unterschie
 Stefan hat eine 4-seitige Dokumentation geschrieben und 2 Tage dafür gebraucht.
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.raw
 
@@ -748,7 +748,7 @@ Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchar
 Böser <script> Tag
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.stripTags
 
@@ -776,7 +776,7 @@ Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 Ein <b>fetter</b> und <i>kursiver</i> Text mit einigen bunten HTML-Tags.
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.trim
 
@@ -809,7 +809,7 @@ MARKER
 ###MARKER###
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## f:format.urlencode
 
@@ -836,4 +836,4 @@ In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%
 Text%20mit%20ein%20paar%20Sonderzeichen%2C%20die%20f%C3%BCr%20die%20URL%20entsprechend%20maskiert%20werden%20m%C3%BCssen%3A%20%40%2B%25%2F 
 ```
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
