@@ -1,32 +1,76 @@
 +++
-title = "Oops an error occurred"
-date = 2024-01-09T20:45:24+01:00
+title = "Oops, an error occurred"
+date = 2024-03-06T19:54:18+01:00
 aliases = ["oops-an-error-occurred.html"]
 +++
 
-Seit TYPO3 6.0 gibt es in TYPO3 den ApplicationContext, mit dem Ihr TYPO3 in folgenden Modi laufen lassen könnt: Productive, Development oder Testing. Diese Modi lassen sich nicht wie vielleicht vermutet im Installtool umschalten, sondern müssen mit Umgebungsvariablen gesetzt werden. Ja, es ist ein Irrglaube zu denken, dass die "Debug"-Einstellung unter "Configuration Presets" im Installtool diese Modi setzen kann.
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}}
 
-Bei jedem TYPO3-Aufruf wird die Umgebungsvariable TYPO3_CONTEXT abgefragt. Falls diese nicht gesetzt ist, wird die Umgebungsvariable REDIRECT_TYPO3_CONTEXT abgefragt. Falls beide Variablen nicht gesetzt sind, schaltet TYPO3 als Fallback in den Productive-Modus.
+Mit Einführung von [ApplicationContext](/typo3-tutorials/core/systemextensions/core/application-context) wird TYPO3 von Haus aus in dem sogenannten `Production`-ApplicationContext ausgeführt. Eben dieser verhindert die Ausgabe von Fehlermeldungen und verhindert somit auch die Veröffentlichung von möglicherweise sicherheitsrelevanten Daten.
 
-Je nach Konfiguration des Webservers lassen sich solche Umgebungsvariablen auch in der .htaccess setzen:
+Die Meldung `Oops, an error occurred! Code: {code}` bezieht sich nur auf Fehler, die bei der Verarbeitung von Inhaltselementen entstehen. Das kann beispielsweise "Text", "Text mit Medien", "Tabellen", "Formulare", oder aber auch "Plugin" sein. Ich lehne mich mal weit aus dem Fenster und behaupte, dass dieser Fehler zu etwa 90 % bei der Verarbeitung von Plugins auftritt.
+
+{{% notice style="info" title="Für Entwickler" icon="exclamation" %}}
+Das Rendering der Inhaltselemente findet in der `render` Methode der TYPO3 Klasse `ContentObjectRenderer` statt. Um die `render` Methode eines jeden einzelnen Inhaltselementes herum ist ein `try-catch` Block gewickelt, der auftretende Fehler abfängt und je nach Konfiguration an den jeweiligen ExceptionHandler weiterreicht.
+{{% /notice %}}
+
+## Analyse des Codes
+
+Fehlermeldung: `Oops, an error occurred! Code: 202304241947330576a7e3`
+
+Der Code kann in Datum (Jahr, Monat, Tag), Uhrzeit (Stunden, Minuten, Sekunden) und einem eindeutigen 8-stelligen Request-Hash aufgeteilt werden:
+
+Datum: 20230424: 24.04.2023
+Uhrzeit: 194733: 19:47:33
+Request-Hash: 0576a7e3
+
+### Fehler finden
+
+TYPO3 protokolliert diese Art Fehlermeldungen in seinem Log-Verzeichnis:
+
+- neuer oder entspricht TYPO3 9 (Standalone): `typo3temp/var/log/typo3_[10-stelliger Hash-Wert].log`
+- neuer oder entspricht TYPO3 9 (Composer): `var/log/typo3_[10-stelliger Hash-Wert].log`
+- TYPO3 8 (Standalone): `typo3temp/var/logs/typo3_[10-stelliger Hash-Wert].log`
+- In früheren TYPO3 Versionen gibt es zwar schon die Logging-API, aber TYPO3 selbst nutzt diese erst mit Version 8.
+
+Diese Log-Dateien können über die Zeit sehr groß werden. Das Öffnen dieser Dateien mit einem Editor kann sehr lange dauern, aber auch den Editor zum Absturz bringen. Ich empfehle solch große Dateien mittels `less` zu öffnen:
 
 ```shell
-SetEnv TYPO3_CONTEXT Development
+less typo3_bd3c26ba0b.log
 ```
 
-Ich weiß, dass aufgrund von Sicherheitsbestimmungen, diese Art der Konfiguration nicht bei Domainfactory und jweiland.net funktioniert. Hier habe ich 3 Alternativen für Euch:
+Drückt nun die Slash-Taste `/`. Damit versetzt ihr `less` in den Such-Modus. Kopiert und fügt den 8-stelligen Request-Hash aus dem Code von oben rein und drückt Enter. Es kann eine Weile dauern bis `less` euch zur gewünschten Stelle bringt. Hier ein Beispiel-Suchergebnis:
 
-Die index.php von TYPO3 modifizieren und dadurch die Updatefähigkeit beeinflussen. Da sich auch mit PHP Umgebungsvariablen setzen lassen, tragt Ihr in diese Datei folgende Zeile ein: `putenv('TYPO3_CONTEXT=Development');`
+```shell
+Sat, 17 Feb 2024 16:48:18 +0000 [ALERT] request="19e3c9e03b5cd" component="TYPO3.CMS.Frontend.ContentObject.Exception.ProductionExceptionHandler": Oops, an error occurred! Code: 2024021716481867fcf23b- Exception: Undeclared arguments passed to ViewHelper TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlentitiesViewHelper: doubleQuote. Valid arguments are: value, keepQuotes, encoding, doubleEncode, in file /var/www/html/vendor/typo3fluid/fluid/src/Core/ViewHelper/AbstractViewHelper.php:461
+```
 
-Legt eine eigene `index.php` an. Fügt dort die putenv-Zeile von oben ein und ladet die Original TYPO3 index.php mit require_once('typo3_src/index.php'). Vorteil: Ihr seid updatefähig.
+## Fehler ausgeben lassen
 
-Bei den beiden genannten Hostern oben könnt Ihr im Konfigurationsmenü die php.ini editieren. Fügt hier eine `auto_prepend_file` Zeile ein, die auf eine PHP-Datei verweist, die wie im vorherigen Beispiel eine Umgebungsvariable mit putenv() registriert. Diese Datei wird nun vor jedem TYPO3-Aufruf geladen. Vorteil: Ihr seid updatefähig.
+Um den tatsächlichen Fehler im Frontend ausgeben zu lassen, müsst ihr in den Debug-Modus wechseln. Dazu habt ihr folgende Möglichkeiten. Bevorzugt von oben nach unten.
 
-## ExceptionHandler für Inhaltselemente
+### ApplicationContext
 
-Wie Ihr oben gelesen habt, läuft TYPO3 ohne gesetzte Umgebungsvariablen im Productive-Modus. In diesem Modus dürfen keine Exceptions an den Webseitenbesucher ausgegeben werden, denn in diesen sogenannten Backtraces können Hacker Informationen über das System ausspähen. Um diese informativen Ausgaben zu unterbinden ist der ContentObjectEceptionHandler integriert worden. Wird während der Verarbeitung von Inhaltselementen, und hierzu zählen auch sämtliche Frontendextensions/Plugins, eine Exception geworfen, fängt dieser ExceptionHandler diese ab und meldet sich nur noch mit den Worten: Oops, an error occurred!
+[Setz den ApplicationContext](/typo3-tutorials/core/systemextensions/core/application-context#applicationcontext-setzen) auf `Development`.
 
-Der ContentObjectExceptionHandler lässt sich mithilfe von TypoScript sehr individuell konfigurieren. Für die Zeit der Entwicklung kann der ExceptionHandler auch im Productive-Modus komplett abgeschaltet werden. Habt Ihr ZUSÄTZLICH im Installtool das "Configuration Preset" auf "Debug" eingestellt, dann erscheinen auch die wohl bekannten Backtraces wieder im Frontend:
+### additional.php
+
+```php
+<?php
+$GLOBALS['TYPO3_CONF_VARS']['FE']['debug'] = true;
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask'] = '[DEINE IP-ADRESSE]';
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['displayErrors'] = 1;
+```
+
+### Preset
+
+Im Installtool oder auch als System-Maintainer im TYPO3 Backend könnt ihr im Menü "Settings" unter "Presets" auf das "Debug"-Preset umstellen. Beachtet bitte, dass in diesem Fall jeder, der auf die fehlerhafte Seite kommt, den Fehler sieht.
+
+### Backtrace
+
+Zusätzlich zu dem Fehler im Frontend lässt sich dort auch ein vollständiger Backtrace, also ein Hergangs-Protokoll über alle aufgerufenen PHP Klassen und Methoden darstellen, die schlussendlich zu diesem Fehler geführt haben. Wir Entwickler lieben solche Ausgaben. Bitte macht von sowas einen Screenshot und schickt es eurer umsetzenden Agentur. Danach seid ihr deren Liebling. Wirklich!
+
+Wenn ihr auf den `Development`-ApplicationContext gewechselt habt, dann seht ihr den Backtrace schon. Alle anderen unter euch müssen im TypoScript noch eine Einstellung hinzufügen:
 
 ```typo3_typoscript
 config.contentObjectExceptionHandler = 0
