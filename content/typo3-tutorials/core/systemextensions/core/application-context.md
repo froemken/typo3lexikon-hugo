@@ -255,6 +255,8 @@ page.10.wrap = <div style="border: 3px red solid;">|</div>
 
 ## Presets
 
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}}
+
 Wie anfangs erwähnt, wirkt sich der ApplicationContext auf bestimmte TYPO3 Einstellungen aus. Schauen wir uns dazu die Presets aus der EXT:install `Classes/Configuration/Context/*` etwas genauer an:
 
 - `LivePreset` mit Priorität 50
