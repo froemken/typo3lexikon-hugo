@@ -1,6 +1,6 @@
 +++
 title = "ApplicationContext"
-date = 2024-03-06T21:10:34+01:00
+date = 2024-03-08T00:08:34+01:00
 slug = "ApplicationContext"
 +++
 
@@ -66,7 +66,25 @@ Bei einigen Hostern kann es sein, dass das Setzen von Umgebungsvariablen mittels
 fastcgi_param TYPO3_CONTEXT Development;
 ```
 
-### Composer
+### .env (nur Composer)
+
+Es gibt die Möglichkeit `.env` Dateien im Root-Verzeichnis eures Projektes einlesen zu lassen. Alle enthaltenen Werte werden dann als Umgebungsvariable zur Verfügung gestellt. Die Basis dafür bildet der [Symfony .env loader](https://packagist.org/packages/symfony/dotenv). Jedoch benötigt dieses Paket ein paar Methodenaufrufe, für die Initialisierung. Entweder ihr baut das selbst oder aber ihr verwendet den [HelHum .env connector](https://github.com/helhum/dotenv-connector). Dieser übernimmt für euch die Initialisierung des Symfony Packages.
+
+#### Installation
+
+```shell
+composer req helhum/dotenv-connector
+```
+
+#### .env
+
+Bitte achtet darauf keine Leerzeichen vor und nach dem `=` einzufügen
+
+```shell
+TYPO3_CONTEXT=Development/Dev1
+```
+
+### AutoLoader (nur Composer)
 
 Falls euer TYPO3 mittels Composer aufgesetzt wurde, könnt ihr die [Composer files](https://getcomposer.org/doc/04-schema.md#files) Eigenschaft dazu missbrauchen, um mit jedem Request eine bestimmte Datei vor allen anderen Dateien zu laden.
 
@@ -115,10 +133,10 @@ require_once('typo3_src/index.php')
 
 ## Sub ApplicationContext
 
-Der ApplicationContext kann mittels `/` nochmals unterteilt werden. Hier ein paar Beispiele:
+Der ApplicationContext kann mittels `/` weitere Male unterteilt werden. Hier ein paar Beispiele:
 
 - Development/Dev1
-- Development/DDEV
+- Development/Local/Ddev
 - Testing/UnitTest
 - Production/1und1
 
@@ -129,6 +147,111 @@ Ich nutze diese Unterteilung gerne, um für Kunden unterschiedliche Abnahme-Doma
 - Development/Dev3 -> dev3.example.com
 - Development/Dev4 -> dev4.example.com
 - Development/Dev5 -> dev5.example.com
+
+### Root ApplicationContext
+
+Völlig egal, ob ihr mit nur einem ApplicationContext arbeitet oder mit einem per Slash mehrfach unterteiltem ApplicationContext: Der erste Teil ist immer der Root ApplicationContext und muss immer entweder `Production`, `Development` oder `Testing` sein, ansonsten funktionieren die Methoden `isProduction`, `isDevelopment` und `isTesting` nicht.
+
+### Parent ApplicationContext
+
+Dieser Abschnitt trifft nur zu, wenn ihr den ApplicationContext mittels Slashes in mehrere Abschnitte unterteilt habt. Der komplette restliche Wert hinter dem ersten Slash wird verwendet, um einen neuen ApplicationContext zu instanziieren. Den sogenannten Parent ApplicationContext. Hier seht ihr, wie sich der Context verschachtelt:
+
+- ApplicationContext: `Development/Local/Ddev/Dev2`
+  - Root ApplicationContext: `Development`
+  - Parent ApplicationContext: `Local/Ddev/Dev2`
+    - Root ApplicationContext: `Local`
+    - Parent ApplicationContext: `Ddev/Dev2`
+      - Root ApplicationContext: `Ddev`
+      - Parent ApplicationContext: `Dev2`
+
+Ich habe oben geschrieben, dass der Root ApplicationContext immer einer der 3 Werte sein muss: `Production`, `Development` oder `Testing`. Spätestens mit der 2ten Verschachtelung ist der Root ApplicationContext hier nun `Local` und mit der 3ten Verschachtelung `Ddev`. Es gibt in der PHP Klasse `ApplicationContext` keine Möglichkeit diesen Root ApplicationContext abzufragen! Ihr habt nur die Möglichkeit mittels `getParent()` auf den nächsten Parent ApplicationContext zuzugreifen und mittels `(string)getParent()` den bis dahin vollständigen ApplicationContext als String wiederzugeben. Also auf Ebene 2 kommt dann `Local/Ddev/Dev2` und auf Ebene 3 `Ddev/Dev2` zurück.
+
+## ApplicationContext auslesen
+
+TYPO3 selbst fragt den ApplicationContext bereits an den unterschiedlichsten Stellen ab, aber auch ihr könnt an diversen Stellen auf den ApplicationContext reagieren.
+
+### PHP
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}}
+{{% badge style="orange" icon="angle-double-up" %}}TYPO3 10.2{{% /badge %}}
+{{% badge style="red" icon="skull-crossbones" %}}TYPO3 11.0{{% /badge %}}
+
+Früher holte man sich den ApplicationContext mit `GeneralUtility::getApplicationContext()`. Diese Methode wurde mittlerweile entfernt. Bitte verwendet die `Environment` Klasse. 
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 9.2{{% /badge %}}
+
+Hier ein paar Beispiele, wie ihr mit der `Environment` Klasse auf den ApplicationContext zugreift:
+
+{{< tabs >}}
+{{% tab title="Root abfragen" %}}
+```php
+<?php
+
+use TYPO3\CMS\Core\Core\Environment;
+
+class SunnyProducts
+{
+    public function getDiscount(): int
+    {
+        if (Environment::getContext()->isDevelopment()) {
+            return 20;
+        }
+        
+        return 4;
+    }
+}
+```
+{{% /tab %}}
+{{% tab title="Parent abfragen" %}}
+```php
+<?php
+
+use TYPO3\CMS\Core\Core\Environment;
+
+class SunnyProducts
+{
+    public function getDiscount(): int
+    {
+        if ((string)(Environment::getContext()->getParent() ?? '') === 'Local/Ddev') {
+            return 20;
+        }
+        
+        return 4;
+    }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Site Config
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 9.2{{% /badge %}}
+
+```yaml
+baseVariants:
+-
+  base: 'https://dev-1.typo3lexikon.de/'
+  condition: 'applicationContext == "Development/Dev1"'
+```
+
+### TypoScript
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 13.0{{% /badge %}}
+
+```typo3_typoscript
+if {
+   value.data = applicationcontext
+   equals = Development/Dev1
+}
+```
+
+{{% badge style="green" icon="angle-double-up" %}}TYPO3 9.4{{% /badge %}}
+
+```typo3_typoscript
+[applicationContext == "Development/Dev1"]
+page.10.wrap = <div style="border: 3px red solid;">|</div>
+[END]
+```
 
 ## Presets
 
