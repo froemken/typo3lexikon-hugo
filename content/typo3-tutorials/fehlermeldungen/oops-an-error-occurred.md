@@ -20,8 +20,8 @@ Fehlermeldung: `Oops, an error occurred! Code: 202304241947330576a7e3`
 
 Der Code kann in Datum (Jahr, Monat, Tag), Uhrzeit (Stunden, Minuten, Sekunden) und einem eindeutigen 8-stelligen Request-Hash aufgeteilt werden:
 
-Datum: 20230424: 24.04.2023
-Uhrzeit: 194733: 19:47:33
+Datum: 20230424: 24.04.2023<br>
+Uhrzeit: 194733: 19:47:33<br>
 Request-Hash: 0576a7e3
 
 ### Fehler finden
