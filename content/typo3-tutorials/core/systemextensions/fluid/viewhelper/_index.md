@@ -290,7 +290,7 @@ Diesen ViewHelper erkläre ich im ViewHelper `f:if`, da er nur dort verwendet we
 
 Dieser ViewHelper konnte Werte je nach Typ (`html`, `entities` oder `url`) escapen. Zur besseren Wartbarkeit wurde seine Funktionsweise in individuelle ViewHelper, zu finden im Unterordner `format`, aufgeteilt.
 
-Diesen ViewHelper gibt es nicht mehr. Bitte verwendet einen der [f:format.*](format.md) ViewHelper.
+Diesen ViewHelper gibt es nicht mehr. Bitte verwendet einen der [f:format.*](./format) ViewHelper.
 
 ## f:flashMessages
 
