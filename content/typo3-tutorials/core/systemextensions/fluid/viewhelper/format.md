@@ -76,6 +76,7 @@ Durch die Reduzierung auf 4 `units` kann die `value` Angabe nur 4-mal durch `102
 ## f:format.case
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.2{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.10.0{{% /badge %}}
 
 Schreibt einen Text in Groß- oder Kleinschreibung, aber auch Wortanfänge können groß- oder kleingeschrieben werden.
 
@@ -557,6 +558,7 @@ Im Text befindliche Sonderzeichen wie: `&`, `"`, `'`, `<`, `>` werden mittels `P
 ## f:format.json
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.6{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.10.0{{% /badge %}}
 
 Nimmt jedweden Wert entgegen und gibt in als JSON zurück.
 
@@ -606,6 +608,7 @@ $this->view->assign(
 ## f:format.nl2br
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.10.0{{% /badge %}}
 
 Dieser ViewHelper besitzt keine Parameter. Den umzuwandelnden Inhalt bezieht er sich aus dem Text zwischen den Tags. Sinnvoll wird dieser ViewHelper beim Anzeigen von Inhalten aus `<textarea>` Tags. Denn hier wurden die Zeilenumbrüche mit ENTER (CHR(10)) realisiert. Im HTML sind diese Umbrüche aber völlig egal und würde den Text einfach hintereinander weg anzeigen. Um das zu verhindern, könnt ihr diesen ViewHelper verwender. Er konvertiert alle CHR(10)-Zeilenumbrüche in `<br>` Tags und so werden Zeilenumbrüche auch im Browser wieder richtig dargestellt.
 
@@ -629,6 +632,7 @@ Text<br>mit<br>Zeilenumbrüchen
 ## f:format.number
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.10.0{{% /badge %}}
 
 Mit diesem ViewHelper könnt ihr Zahlen formatieren. Er arbeitet ähnlich dem `f:format.currency` ViewHelper.
 
@@ -753,6 +757,7 @@ Böser <script> Tag
 ## f:format.stripTags
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.10.0{{% /badge %}}
 
 Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 
@@ -781,6 +786,7 @@ Ein <b>fetter</b> und <i>kursiver</i> Text mit einigen bunten HTML-Tags.
 ## f:format.trim
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.4{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.10.0{{% /badge %}}
 
 Entfernt von außen jegliche Tabs, Leer- und Enter-Zeichen von einem Text. Alternativ können eigene Zeichen angegeben werden, die von einem Text äußerlich entfernt werden sollen.
 
@@ -814,6 +820,7 @@ MARKER
 ## f:format.urlencode
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}}
+{{% badge style="blue" icon="angle-double-up" %}}typo3fluid/fluid 2.10.0{{% /badge %}}
 
 In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%` vor. Diese Zeichen sind nicht URL-sicher und müssen vor Verwendung in URIs durch diesen ViewHelper verarbeitet werden.
 
