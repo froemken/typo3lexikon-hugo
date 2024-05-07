@@ -9,7 +9,7 @@ aliases = ["be.html"]
 ## f:be.container
 
 {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.3{{% /badge %}}
-{{% badge style="orange" icon="angle-double-up" %}}PHP 11.3{{% /badge %}}
+{{% badge style="orange" icon="angle-double-up" %}}TYPO3 11.3{{% /badge %}}
 {{% badge style="red" icon="skull-crossbones" %}}TYPO3 12.0{{% /badge %}}
 
 Wurde damals verwendet, um ein Layout für Backend Module zu schaffen, das dem der TYPO3 eigenen Backend Module entspricht. Durch zusätzliche Parameter konnten RequireJS Module, CSS- und JS Dateien angegeben werden. Da die meisten Parameter eh alle an die TYPO3 Klasse `PageRenderer` übergeben wurden, entstand der `f:be.pageRenderer` ViewHelper als Ablösung.
