@@ -34,7 +34,7 @@ are allowed to copy, modify, store and translate the complete content with all e
 
 ```shell
 hugo server
-hugo --cleanDestinationDir --minify
+hugo --gc --cleanDestinationDir --minify
 git add .
 git commit
 git push origin main
