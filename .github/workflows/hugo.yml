@@ -56,3 +56,4 @@ jobs:
           remote_host: jweiland65.net
           remote_user: ssh-564464
           remote_key: ${{ secrets.DEPLOY_KEY }}
+          remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
