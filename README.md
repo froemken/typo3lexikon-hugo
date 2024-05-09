@@ -38,5 +38,5 @@ hugo --cleanDestinationDir --minify
 git add .
 git commit
 git push origin main
-rsync -avz --delete public jweiland65.net:~/typo3cms/hugo
+rsync -avz --delete public [server]:~/typo3cms/[path]
 ```
