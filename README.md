@@ -18,7 +18,7 @@ This is the base repository of my website [TYPO3 Lexikon](https://www.typo3lexik
 
 You can copy a few lines of my documentation and paste them as a quote with backlink to [TYPO3 Lexikon](https://www.typo3lexikon.de).
 
-Copying content of one site or all sites is not allowed.
+Copying full content of one site or all sites is not allowed.
 
 ### TYPO3 CMS related
 
