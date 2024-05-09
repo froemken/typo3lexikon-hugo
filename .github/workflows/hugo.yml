@@ -60,7 +60,7 @@ jobs:
         with:
           switches: -avz --delete
           path: public/
-          remote_path: ~/typo3cms/deploy/
+          remote_path: ~/typo3cms/hugo/public/
           remote_host: jweiland65.net
           remote_user: ssh-564464
           remote_key: ${{ secrets.DEPLOY_KEY }}
