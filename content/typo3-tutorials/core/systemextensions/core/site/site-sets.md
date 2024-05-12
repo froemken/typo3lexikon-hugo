@@ -176,7 +176,7 @@ Falls zu diesem Setting eine Settings-Definition existiert, wurde der zurückgel
 
 Die `SetRegistry` ruft die gefundenen Site-Sets in geordneter Reihenfolge ab, so wie durch `dependencies` in `config.yaml` definiert. Bitte verwendet bevorzugt das `Site` Objekt, um an die benötigten Daten dranzukommen. Wenn ihr jedoch eine oder mehrere Site-Set-Definitionen in geordneter Reihenfolge, wie durch `dependencies` definiert abfragen müsst, dann ist `SetRegistry` die richtige Anlaufstelle. Um alle Site-Set-Definitionen auszulesen, verwendet bitte `SetCollector`.
 
-### getSets
+#### getSets
 
 Liest eine oder mehrere Site-Set-Definitionen inkl. deren Abhängigkeiten aus.
 
@@ -184,7 +184,7 @@ Liest eine oder mehrere Site-Set-Definitionen inkl. deren Abhängigkeiten aus.
 $sets = $setRegistry->getSets('stefanfroemken/bootstrap', 'in2code/powermail');
 ```
 
-### getSet
+#### hasSet
 
 Prüft, ob eine Site-Set-Definition verfügbar ist.
 
@@ -192,7 +192,7 @@ Prüft, ob eine Site-Set-Definition verfügbar ist.
 $hasSet = $setRegistry->hasSet('stefanfroemken/bootstrap');
 ```
 
-### getSet
+#### getSet
 
 Liest eine Site-Set-Definition OHNE Abhängigkeiten aus.
 
