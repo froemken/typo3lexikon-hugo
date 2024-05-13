@@ -135,7 +135,7 @@ page.10.split {
 }
 ```
 
-Ich will das Thema optionSplit hier nicht allzu deutlich erklären, deshalb nur kurz: Mit |*| splitte ich die Werte auf in Anfang |*| Mitte |*| und Ende. Da wir wieder einmal mehr Werte haben als in optionSplit angegeben, werden die Werte in der Mitte mehfach hintereinander abgearbeitet. Soll heißen: Sie wechseln sich ab. Mehr zu optionSlip findet Ihr hier:
+Ich will das Thema optionSplit hier nicht allzu deutlich erklären, deshalb nur kurz: Mit |*| splitte ich die Werte auf in Anfang |*| Mitte |*| und Ende. Da wir wieder einmal mehr Werte haben als in optionSplit angegeben, werden die Werte in der Mitte mehrfach hintereinander abgearbeitet. Soll heißen: Sie wechseln sich ab. Mehr zu optionSlip findet Ihr hier:
 
 http://typo3.org/documentation/document-library/core-documentation/doc_core_tsref/4.2.0/view/1/3/#id4139108
 
