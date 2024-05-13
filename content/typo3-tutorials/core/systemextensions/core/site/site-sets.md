@@ -138,7 +138,7 @@ In dem Verzeichnis für die Site-Set-Definition, parallel zur `config.yaml`, kö
 
 Großer Vorteil hier ist, dass diese TypoScript Dateien, wie durch die Abhängigkeiten (`dependencies`) definiert, entsprechend in die TypoScript Ladereihenfolge einordnen.
 
-Innerhalb dieser beiden Seiten könnt iihr auch weiterhin mittels `@include` auf andere TypoScript Dateien verweisen:
+Innerhalb dieser beiden Seiten könnt ihr auch weiterhin mittels `@include` auf andere TypoScript Dateien verweisen:
 
 `EXT:my_ext/Configuration/Sets/Typo3LexikonBootstrap/setup.typoscript`
 
