@@ -11,10 +11,10 @@ Tabelle: office
 | raumnr | raumname |
 |--------|----------|
 | 101 | Empfang |
-| 102	EDV
-| 103	Vertrieb
-| 104	Technik
-| 405	Flur
+| 102 | EDV |
+| 103 | Vertrieb |
+| 104 | Technik |
+| 405 | Flur |
 
 Tabelle: computer
 
