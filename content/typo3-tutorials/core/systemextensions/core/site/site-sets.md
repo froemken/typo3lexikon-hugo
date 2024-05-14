@@ -157,7 +157,7 @@ Großer Vorteil hier ist, dass dieses PageTSConfig, wie durch die Abhängigkeite
 Die zur Verfügung stehenden Site-Set-Definitionen können über einen Shell Befehl ausgelesen werden: 
 
 ```shell
-bin/typo3 site:sets:list:
+bin/typo3 site:sets:list
 ```
 
 ## Weitere Informationen
@@ -167,7 +167,28 @@ bin/typo3 site:sets:list:
 Die Site Settings können über das Site-Objekt ausgelesen werden:
 
 ```php
-$color = $site->getSettings()->get('website.background.color');
+<?php
+
+namespace StefanFroemken\SfCars\Service
+
+use TYPO3\CMS\Core\Site\SiteFinder;
+
+class WebsiteService
+{
+    public function __construct(
+        protected readonly SiteFinder $siteFinder
+    ) {}
+
+    public function getBackgroundColor(): string
+    {
+        return $site->getSettings()->get('website.background.color');
+    }
+    
+    protected function getSite(): Site
+    {
+        return $this->siteFinder->getSiteByPageId(123);
+    }
+}
 ```
 
 Falls zu diesem Setting eine Settings-Definition existiert, wurde der zurückgelieferte Wert bereits validiert, konvertiert und, falls nicht gesetzt, der Standardwert verwendet.
@@ -181,7 +202,30 @@ Die `SetRegistry` ruft die gefundenen Site-Sets in geordneter Reihenfolge ab, so
 Liest eine oder mehrere Site-Set-Definitionen inkl. deren Abhängigkeiten aus.
 
 ```php
-$sets = $setRegistry->getSets('stefanfroemken/bootstrap', 'in2code/powermail');
+<?php
+
+namespace StefanFroemken\SfCars\Service
+
+use TYPO3\CMS\Core\Site\Set\SetDefinition;
+use TYPO3\CMS\Core\Site\Set\SetRegistry;
+
+class WebsiteService
+{
+    public function __construct(
+        protected readonly SetRegistry $setRegistry
+    ) {}
+
+    /**
+     * @return list<SetDefinition>
+     */
+    public function getMyNeededSets(): array
+    {
+        return $this->setRegistry->getSets(
+            'stefanfroemken/bootstrap', 
+            'in2code/powermail'
+        );
+    }
+}
 ```
 
 #### hasSet
@@ -189,7 +233,23 @@ $sets = $setRegistry->getSets('stefanfroemken/bootstrap', 'in2code/powermail');
 Prüft, ob eine Site-Set-Definition verfügbar ist.
 
 ```php
-$hasSet = $setRegistry->hasSet('stefanfroemken/bootstrap');
+<?php
+
+namespace StefanFroemken\SfCars\Service
+
+use TYPO3\CMS\Core\Site\Set\SetRegistry;
+
+class WebsiteService
+{
+    public function __construct(
+        protected readonly SetRegistry $setRegistry
+    ) {}
+
+    public function hasBootstrapSet(): bool
+    {
+        return $this->setRegistry->hasSet('stefanfroemken/bootstrap');
+    }
+}
 ```
 
 #### getSet
@@ -197,7 +257,24 @@ $hasSet = $setRegistry->hasSet('stefanfroemken/bootstrap');
 Liest eine Site-Set-Definition OHNE Abhängigkeiten aus.
 
 ```php
-$set = $setRegistry->getSet('stefanfroemken/bootstrap');
+<?php
+
+namespace StefanFroemken\SfCars\Service
+
+use TYPO3\CMS\Core\Site\Set\SetDefinition;
+use TYPO3\CMS\Core\Site\Set\SetRegistry;
+
+class WebsiteService
+{
+    public function __construct(
+        protected readonly SetRegistry $setRegistry
+    ) {}
+
+    public function getJustBootstrapSet(): SetDefinition
+    {
+        return $this->setRegistry->getSet('stefanfroemken/bootstrap');
+    }
+}
 ```
 
 ### SetCollector
@@ -205,10 +282,27 @@ $set = $setRegistry->getSet('stefanfroemken/bootstrap');
 TYPO3 kommt mit einem neuen `ServiceProvider`, der mit dem ersten Instanziieren des `SetCollector` alle Extensions durchgeht und alle gefundenen Site-Set-Definitionen ausliest.
 
 ```php
-public function __construct(
-    #[Autowire(lazy: true)]
-    protected SetCollector $setCollector,
-) {}
+<?php
+
+namespace StefanFroemken\SfCars\Service
+
+use TYPO3\CMS\Core\Site\Set\SetDefinition;
+use TYPO3\CMS\Core\Site\Set\SetCollector;
+
+class WebsiteService
+{
+    public function __construct(
+        protected readonly SetCollector $setCollector
+    ) {}
+
+    /**
+     * @return array<string, SetDefinition>
+     */
+    public function getEverythingYouHave(): array
+    {
+        return $this->setCollector->getSetDefinitions();
+    }
+}
 ```
 
 Das ist jedoch nicht der offizielle Weg, um an die Site-Set-Definitionen und deren Abhängigkeiten dranzukommen. Bitte greift über das `Site` Objekt auf die Konfiguration zu. Alternativ könnt ihr auch die `SetRegistry` verwenden, da nur diese die Site-Sets in der Reihenfolge verwaltet, wie durch die `dependency` Angabe deklariert.
