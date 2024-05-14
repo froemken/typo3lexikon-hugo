@@ -10,12 +10,12 @@ Mit diesem ViewHelper könnt ihr einen Menüeintrag für Euer BE-Modul erstellen
 
 ### Parameter
 
-| Parameter | Erklärung | Pflichtfeld |
-|-----------|-----------|-------------|
-| label | Der anzuzeigende Name des Menüeintrages | ja |
-| controller | In welchem Controller liegt die aufzurufende Action | ja |
-| action | Welche Action soll nach Auswahl aufgerufen werden | ja |
-| arguments | Welche Parameter sollen an die aufzurufende Action übergeben werden (Arraynotation) | nein |
+| Parameter  | Erklärung                                                                           | Pflichtfeld |
+|------------|-------------------------------------------------------------------------------------|-------------|
+| label      | Der anzuzeigende Name des Menüeintrages                                             | ja          |
+| controller | In welchem Controller liegt die aufzurufende Action                                 | ja          |
+| action     | Welche Action soll nach Auswahl aufgerufen werden                                   | ja          |
+| arguments  | Welche Parameter sollen an die aufzurufende Action übergeben werden (Arraynotation) | nein        |
 
 ### Beispiel
 
@@ -34,8 +34,8 @@ Dieser ViewHelper erstellt eine Selectbox. Mithilfe der actionMenuItem-ViewHelpe
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
+| Parameter         | Erklärung                                                                                                                                                                                                                                                                                                                                                                                                     |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | defaultController | Gebt hier den Controllernamen ein auf den zurückgegriffen werden soll, falls im ActionMenuItem-ViewHelper kein Controller angegeben worden ist. Wenn ich mir den ViewHelper im Quellcode anschaue, würde ich diesen Parameter besser nicht verwenden. Erstens: Weil er im Quelltext überhaupt nicht weiter verwendet wird und Zweitens: Weil der Controller in den ActionMenuItems eh eine Pflichtangabe ist. |
 
 Beispiele findet ihr bei den `f:be.menues.actionMenuItem` ViewHelpern.

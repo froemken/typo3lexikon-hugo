@@ -35,9 +35,9 @@ Dieser ViewHelper prüft, ob ein im Frontend angemeldeter User, der im Parameter
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| role | Entweder der Gruppenname (Groß- und Kleinschreibung beachten) oder die Gruppen-UID |
+| Parameter | Erklärung                                                                          |
+|-----------|------------------------------------------------------------------------------------|
+| role      | Entweder der Gruppenname (Groß- und Kleinschreibung beachten) oder die Gruppen-UID |
 
 ### Beispiel WENN->DANN->SONST
 

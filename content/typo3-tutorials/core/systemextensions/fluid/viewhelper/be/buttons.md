@@ -20,12 +20,12 @@ Die CSH Implementation im TYPO3 Core klappte nur für direkte TCA Felder. Für F
 
 ### Parameter
 
-| Parameter | Erklärung | Standardwert |
-|-----------|-----------|--------------|
-| table | Der Tabellenname ||
-| field | Der Key aus der Sprachdatei ||
-| iconOnly | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Es wird nur das Bildchen dargestellt, nicht aber der Hilfetext | deaktiviert |
-| styleAttributes | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Zusätzliches `style` Attribut, das in die umschließende Tabelle eingebunden wird ||
+| Parameter       | Erklärung                                                                                                                                                                                                                            | Standardwert |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| table           | Der Tabellenname                                                                                                                                                                                                                     |              |
+| field           | Der Key aus der Sprachdatei                                                                                                                                                                                                          |              |
+| iconOnly        | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Es wird nur das Bildchen dargestellt, nicht aber der Hilfetext                   | deaktiviert  |
+| styleAttributes | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Zusätzliches `style` Attribut, das in die umschließende Tabelle eingebunden wird |              |
 
 ## f:be.buttons.icon
 
@@ -43,11 +43,11 @@ Liste erlaubter Icons:
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| uri | Bei Angabe einer URI wird das Icon verlinkt. Kann auch mit einem der `f:uri.*` ViewHelper kombiniert werden |
-| icon | Der Name des Icons, dass verwendet werden soll |
-| title | Der hier eingegebene Wert wird als `title` Attribut für den Link verwendet |
+| Parameter | Erklärung                                                                                                   |
+|-----------|-------------------------------------------------------------------------------------------------------------|
+| uri       | Bei Angabe einer URI wird das Icon verlinkt. Kann auch mit einem der `f:uri.*` ViewHelper kombiniert werden |
+| icon      | Der Name des Icons, dass verwendet werden soll                                                              |
+| title     | Der hier eingegebene Wert wird als `title` Attribut für den Link verwendet                                  |
 
 ## f:be.buttons.shortcut
 
@@ -64,10 +64,10 @@ Ich vermute, durch die `ButtonBar` wurde dieser ViewHelper obsolet.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| getVars | Wenn nichts angegeben wird, dann werden Seiten-UID, Modul und Modulargumente mit dem Favoriten zusammen abgespeichert. |
-| setVars | Hier wird auf template::makeShortcutIcon() verwiesen. Wird aber für Extbase-Module normalerweise nicht benötigt. |
+| Parameter | Erklärung                                                                                                              |
+|-----------|------------------------------------------------------------------------------------------------------------------------|
+| getVars   | Wenn nichts angegeben wird, dann werden Seiten-UID, Modul und Modulargumente mit dem Favoriten zusammen abgespeichert. |
+| setVars   | Hier wird auf template::makeShortcutIcon() verwiesen. Wird aber für Extbase-Module normalerweise nicht benötigt.       |
 
 ### Beispiel
 

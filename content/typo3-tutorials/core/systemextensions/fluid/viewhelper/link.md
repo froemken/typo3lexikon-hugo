@@ -10,24 +10,24 @@ Dieser ViewHelper wird überwiegend innerhalb von Extension-Templates verwendet,
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| action | Auf welche Actionmethode soll der Link zeigen |
-| arguments | Welche Argumente/Parameter sollen dem Link angehängt werden |
-| controller | Auf welchen Controller soll der Link zeigen |
-| extensionName | Auf welchen Controller und/oder Action welcher Extension soll der Link zeigen |
-| pluginName | Auf welchen Controller und/oder Action welchen Plugins soll der Link zeigen |
-| pageUid | Auf welche Seiten-UID soll verlinkt werden |
-| pageType | Auf welche Seitentyp ID soll verlinkt werden. |
-| noCache | Verhindert das Caching der aufzurufenden Seite |
-| noCacheHash | Verhindert, dass der cHash-Parameter nicht mit an die URL angehangen wird. |
-| section | Auf welchen Anker soll die Zielseite springen (#anker) |
-| format | Gibt an um welches Format es sich bei der Zielseite handelt. Standard: `html` |
-| linkAccessRestrictedPages | Normalerweise werden Links auf geschützte Seiten nicht erzeugt. Hier mit kann man die Link-Generation erzwingen. Standard: deaktiviert |
-| additionalParams | Fügt weitere Parameter der Zielseite an. Im Gegensatz zu `arguments`, können hiermit Variablen hinzugefügt werden, die nicht mit dem Extensionnamen vorangestellt werden. |
-| absolute | Nach Aktivierung wird der Zielseite noch der Domainname und Pfad vorangestellt. Standard: deaktiviert |
-| addQueryString | Falls der aktuellen Seite bereits Parameter über die URL mitgegeben wurden, könnt ihr hier nun entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. |
-| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein. |
+| Parameter                            | Erklärung                                                                                                                                                                   |
+|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| action                               | Auf welche Actionmethode soll der Link zeigen                                                                                                                               |
+| arguments                            | Welche Argumente/Parameter sollen dem Link angehängt werden                                                                                                                 |
+| controller                           | Auf welchen Controller soll der Link zeigen                                                                                                                                 |
+| extensionName                        | Auf welchen Controller und/oder Action welcher Extension soll der Link zeigen                                                                                               |
+| pluginName                           | Auf welchen Controller und/oder Action welchen Plugins soll der Link zeigen                                                                                                 |
+| pageUid                              | Auf welche Seiten-UID soll verlinkt werden                                                                                                                                  |
+| pageType                             | Auf welche Seitentyp ID soll verlinkt werden.                                                                                                                               |
+| noCache                              | Verhindert das Caching der aufzurufenden Seite                                                                                                                              |
+| noCacheHash                          | Verhindert, dass der cHash-Parameter nicht mit an die URL angehangen wird.                                                                                                  |
+| section                              | Auf welchen Anker soll die Zielseite springen (#anker)                                                                                                                      |
+| format                               | Gibt an um welches Format es sich bei der Zielseite handelt. Standard: `html`                                                                                               |
+| linkAccessRestrictedPages            | Normalerweise werden Links auf geschützte Seiten nicht erzeugt. Hier mit kann man die Link-Generation erzwingen. Standard: deaktiviert                                      |
+| additionalParams                     | Fügt weitere Parameter der Zielseite an. Im Gegensatz zu `arguments`, können hiermit Variablen hinzugefügt werden, die nicht mit dem Extensionnamen vorangestellt werden.   |
+| absolute                             | Nach Aktivierung wird der Zielseite noch der Domainname und Pfad vorangestellt. Standard: deaktiviert                                                                       |
+| addQueryString                       | Falls der aktuellen Seite bereits Parameter über die URL mitgegeben wurden, könnt ihr hier nun entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. |
+| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein.                        |
 
 ### Beispiel
 
@@ -41,9 +41,9 @@ Ein ViewHelper um eine E-Mail-Adresse zu verlinken
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| email | Die zu verlinkende E-Mail-Adresse |
+| Parameter | Erklärung                         |
+|-----------|-----------------------------------|
+| email     | Die zu verlinkende E-Mail-Adresse |
 
 ### Beispiel
 
@@ -57,9 +57,9 @@ Nutzt diesen ViewHelper, um auf externe Seiten zu verweisen. Wenn ihr bei `uri` 
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| uri | Die URL zu der externen Zielseite |
+| Parameter     | Erklärung                                                                                       |
+|---------------|-------------------------------------------------------------------------------------------------|
+| uri           | Die URL zu der externen Zielseite                                                               |
 | defaultScheme | Hier sind alle gültigen Schemas für Links erlaubt wie z.B. `ftp` oder `https`. Standard: `http` |
 
 ### Beispiel
@@ -74,18 +74,18 @@ Mit diesem ViewHelper erstellt ihr einen Link, der auf eine andere Seite verweis
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| pageUid | Auf welche Seiten-UID soll verlinkt werden |
-| additionalParams | Fügt weitere Parameter der Zielseite an. Im Gegensatz zu arguments, können hiermit Variablen hinzugefügt werden, die nicht mit dem Extensionnamen vorangestellt werden. |
-| pageType | Auf welche Seitentyp ID soll verlinkt werden. |
-| noCache | Verhindert das Caching der aufzurufenden Seite |
-| noCacheHash | Verhindert, dass der cHash-Parameter nicht mit an die URL angehangen wird. |
-| section | Auf welchen Anker soll die Zielseite springen (#anker) |
-| linkAccessRestrictedPages | Normalerweise werden Links auf geschützte Seiten nicht erzeugt. Hier mit kann man die Link-Generation erzwingen. Standard: deaktiviert |
-| absolute | Nach Aktivierung wird der Zielseite noch der Domainname und Pfad vorangestellt. Standard: deaktiviert |
-| addQueryString | Falls der aktuellen Seite bereits Parameter über die URL mitgegeben wurden, könnt ihr hier nun entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. |
-| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein. |
+| Parameter                            | Erklärung                                                                                                                                                                   |
+|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageUid                              | Auf welche Seiten-UID soll verlinkt werden                                                                                                                                  |
+| additionalParams                     | Fügt weitere Parameter der Zielseite an. Im Gegensatz zu arguments, können hiermit Variablen hinzugefügt werden, die nicht mit dem Extensionnamen vorangestellt werden.     |
+| pageType                             | Auf welche Seitentyp ID soll verlinkt werden.                                                                                                                               |
+| noCache                              | Verhindert das Caching der aufzurufenden Seite                                                                                                                              |
+| noCacheHash                          | Verhindert, dass der cHash-Parameter nicht mit an die URL angehangen wird.                                                                                                  |
+| section                              | Auf welchen Anker soll die Zielseite springen (#anker)                                                                                                                      |
+| linkAccessRestrictedPages            | Normalerweise werden Links auf geschützte Seiten nicht erzeugt. Hier mit kann man die Link-Generation erzwingen. Standard: deaktiviert                                      |
+| absolute                             | Nach Aktivierung wird der Zielseite noch der Domainname und Pfad vorangestellt. Standard: deaktiviert                                                                       |
+| addQueryString                       | Falls der aktuellen Seite bereits Parameter über die URL mitgegeben wurden, könnt ihr hier nun entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. |
+| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein.                        |
 
 ### Beispiel
 

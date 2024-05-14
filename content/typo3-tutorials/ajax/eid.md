@@ -125,10 +125,10 @@ class Request
 ```html
 <html>
 <head>
-	<title>Ajax-Requests returns variable text</title>
+    <title>Ajax-Requests returns variable text</title>
 </head>
 <body>
-<div id="ajax">Klick mich</div>
+    <div id="ajax">Klick mich</div>
 </body>
 </html>
 ```

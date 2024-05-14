@@ -26,13 +26,13 @@ Warum ein neuer ViewHelper und warum wird nicht auch hier `f:flashMessages` verw
 
 ### Parameter
 
-| Parameter | Erklärung | Standardwert |
-|-----------|-----------|--------------|
-| title | Überschrift für die InfoBox. Enthaltenes HTML wird escaped. ||
-| message | Die Nachricht, die die InfoBox ausgeben soll. Angegeben als Attribut wird HTML escaped. Als Inhalt zwischen den HTML-Tags ist HTML jedoch erlaubt. ||
-| state | Status der InfoBox. Je nach Status wird die InfoBox in anderen Signalfarben ausgegeben:<br>-2: Hinweis<br>-1: Information<br>0: Alles OK<br>1: Warnung<br>2: Fehler | -2: Hinweis |
-| iconName | Der CSS Klassenname aus dem kostenlosen Font-Awesome Paket ohne das führende `fa-`. Ab {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} wurde auf die IconFactory umgestellt, wodurch ihr von nun an Zugriff auf alle in TYPO3 registrierten Icons habt. | Es wird ein entsprechendes Icon je nach `state` gerendert |
-| disableIcon | Wenn aktiviert, dann wird das Icon nicht angezeigt | 0 |
+| Parameter   | Erklärung                                                                                                                                                                                                                                                                          | Standardwert                                              |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| title       | Überschrift für die InfoBox. Enthaltenes HTML wird escaped.                                                                                                                                                                                                                        |                                                           |
+| message     | Die Nachricht, die die InfoBox ausgeben soll. Angegeben als Attribut wird HTML escaped. Als Inhalt zwischen den HTML-Tags ist HTML jedoch erlaubt.                                                                                                                                 |                                                           |
+| state       | Status der InfoBox. Je nach Status wird die InfoBox in anderen Signalfarben ausgegeben:<br>-2: Hinweis<br>-1: Information<br>0: Alles OK<br>1: Warnung<br>2: Fehler                                                                                                                | -2: Hinweis                                               |
+| iconName    | Der CSS Klassenname aus dem kostenlosen Font-Awesome Paket ohne das führende `fa-`. Ab {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} wurde auf die IconFactory umgestellt, wodurch ihr von nun an Zugriff auf alle in TYPO3 registrierten Icons habt. | Es wird ein entsprechendes Icon je nach `state` gerendert |
+| disableIcon | Wenn aktiviert, dann wird das Icon nicht angezeigt                                                                                                                                                                                                                                 | 0                                                         |
 
 ### Beispiel: ohne HTML
 
@@ -58,11 +58,11 @@ Das Backend Routing wurde zwar mit TYPO3 7.5 eingeführt, dennoch wurde bei viel
 
 ### Parameter
 
-| Parameter | Erklärung | Standardwert |
-|-----------|-----------|--------------|
-| route | Name der Route. Im Backend gibt es links den Menüpunkt "Konfiguration". Wählt dort "Backendroutes" aus der Selektbox aus, um alle verfügbaren Routen anzeigen zulassen. ||
-| parameters | Gebt der aufzurufenden Route oder auch Backend Modul ein paar zusätzliche URI Parameter mit an. || 
-| referenceType | Angabe des Link-Typs.<br>url: Absolute URI<br>absolute: Absoluter Pfad<br>share: Absolute URI zum Teilen mit anderen | absolute |
+| Parameter     | Erklärung                                                                                                                                                               | Standardwert |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| route         | Name der Route. Im Backend gibt es links den Menüpunkt "Konfiguration". Wählt dort "Backendroutes" aus der Selektbox aus, um alle verfügbaren Routen anzeigen zulassen. |              |
+| parameters    | Gebt der aufzurufenden Route oder auch Backend Modul ein paar zusätzliche URI Parameter mit an.                                                                         |              | 
+| referenceType | Angabe des Link-Typs.<br>url: Absolute URI<br>absolute: Absoluter Pfad<br>share: Absolute URI zum Teilen mit anderen                                                    | absolute     |
 
 ### Beispiel
 
@@ -110,20 +110,20 @@ Mit diesem ViewHelper wird in einigen Backend Modulen oben rechts der derzeitige
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| pageTitle | Der Seitentitel der rendernden Ansicht |
-| loadExtJs | {{% badge style="orange" icon="angle-double-up" %}} TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Soll die ExtJS Library geladen werden? |
-| loadExtJsTheme | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Welcher Stil soll für die ExtJS Komponenten verwendet werden? |
-| enableExtJsDebug | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Aktivieren der Debug-Ausgabe für ExtJS |
-| loadJQuery | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Einbindung von jQuery aktivieren |
-| jQueryNamespace | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Um Side-Effects mit anderen JavaScript Bibliotheken zu verhindern, kann hier ein eigener Namespace für jQuery angegeben werden. |
-| includeCssFiles | Angabe von einer oder mehreren CSS Dateien. Angabe von `EXT:` ist erlaubt. |
-| includeJsFiles | Angabe von einer oder mehreren JavaScript Dateien. Angabe von `EXT:` ist erlaubt. |
-| addJsInlineLabels | Angabe von Übersetzungen, auf die mittels `TYPO3.lang.*` innerhalb von JavaScript-Dateien wieder zugegriffen werden kann. |
-| includeRequireJsModules | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 13.0{{% /badge %}} TYPO3 bringt von Haus aus schon eine Menge JavaScript Module wie Drag&Drop, Events, Notifications und Vielem mehr bereits mit. Ladet hier die Module, die ihr braucht. |
-| includeJavaScriptModules | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} TYPO3 bringt von Haus aus schon eine Menge JavaScript Module wie Drag&Drop, Events, Notifications und Vielem mehr bereits mit. Ladet hier die Module, die ihr braucht. |
-| addInlineSettings | Angabe von beliebigen Einstellungen ähnlich der `settings`, die ihr aus Extbase und Fluid kennt. Alle Einstellungen sind innerhalb von JavaScript mittels `TYPO3.settings.*` verfügbar. |
+| Parameter                | Erklärung                                                                                                                                                                                                                                                                                                                    |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageTitle                | Der Seitentitel der rendernden Ansicht                                                                                                                                                                                                                                                                                       |
+| loadExtJs                | {{% badge style="orange" icon="angle-double-up" %}} TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Soll die ExtJS Library geladen werden?                                                                                                                                  |
+| loadExtJsTheme           | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Welcher Stil soll für die ExtJS Komponenten verwendet werden?                                                                                                            |
+| enableExtJsDebug         | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Aktivieren der Debug-Ausgabe für ExtJS                                                                                                                                   |
+| loadJQuery               | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Einbindung von jQuery aktivieren                                                                                                                                         |
+| jQueryNamespace          | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 9.0{{% /badge %}} Um Side-Effects mit anderen JavaScript Bibliotheken zu verhindern, kann hier ein eigener Namespace für jQuery angegeben werden.                                          |
+| includeCssFiles          | Angabe von einer oder mehreren CSS Dateien. Angabe von `EXT:` ist erlaubt.                                                                                                                                                                                                                                                   |
+| includeJsFiles           | Angabe von einer oder mehreren JavaScript Dateien. Angabe von `EXT:` ist erlaubt.                                                                                                                                                                                                                                            |
+| addJsInlineLabels        | Angabe von Übersetzungen, auf die mittels `TYPO3.lang.*` innerhalb von JavaScript-Dateien wieder zugegriffen werden kann.                                                                                                                                                                                                    |
+| includeRequireJsModules  | {{% badge style="orange" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 13.0{{% /badge %}} TYPO3 bringt von Haus aus schon eine Menge JavaScript Module wie Drag&Drop, Events, Notifications und Vielem mehr bereits mit. Ladet hier die Module, die ihr braucht. |
+| includeJavaScriptModules | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} TYPO3 bringt von Haus aus schon eine Menge JavaScript Module wie Drag&Drop, Events, Notifications und Vielem mehr bereits mit. Ladet hier die Module, die ihr braucht.                                                                            |
+| addInlineSettings        | Angabe von beliebigen Einstellungen ähnlich der `settings`, die ihr aus Extbase und Fluid kennt. Alle Einstellungen sind innerhalb von JavaScript mittels `TYPO3.settings.*` verfügbar.                                                                                                                                      |
 
 ### Beispiel
 
@@ -145,21 +145,21 @@ Erstellt eine Listenansicht, wie ihr sie aus dem List-Modul kennt. Anzahl Datens
 
 ### Parameter
 
-| Parameter | Erklärung | Standardwert |
-|-----------|-----------|--------------|
-| tableName | Der Name der Tabelle ||
-| fieldList | Welche Spalten der Tabelle sollen angezeigt werden (Arraynotation) ||
-| storagePid | Die Daten welcher Seite sollen angezeigt werden? Wenn nichts anderen angegeben wurde, werden die Datensätze der Seite angezeigt, die über persistence.storagePid angegeben wurde. ||
-| levels | Falls die Seite aus storagePid noch Unterordner enthält, könnt ihr hier angeben wie viele Ebenen tiefer nach weiteren Datensätzen gesucht werden soll. | 1 |
-| filter | Gebt hier ein Suchwort ein, nach dem Eure Datensätze gefiltert werden sollen. ||
-| recordsPerPage | Wie viele Datensätze dürfen maximal auf einer Seite angezeigt werden. | Angabe aus TCA, sonst 100 |
-| sortField | Nach welchem Feld sollen die gefundenen Datensätze sortiert werden |
-| sortDescending | Wenn aktiviert, dann werden die Datensätze rückwärts sortiert. | deaktiviert |
-| readOnly | Wenn aktiviert, dann werden die Bearbeitungssymbole nicht mehr angezeigt. | deaktiviert |
-| enableClickMenu | Wenn aktiviert, dann kann das Contextmenü verwendet werden | aktiviert |
-| clickTitleMode | Auswahl von `edit`, `info` und `show`. Falls ihr `show` auswählt, dann klappt das nur bei der Tabelle `pages` und `tt_content`. Normalerweise müsst ihr immer erst über das Kontextmenü oder über ein anderes Modul in diesen Bereich klicken. Nun reicht ein Klick auf den Titel des Datensatzes. ||
-| enableControlPanels | {{% badge style="green" icon="angle-double-up" %}}TYPO3 10.4.6{{% /badge %}} Aktivierung der Control Buttons, wie löschen, History, sort up, sort down | deaktiviert |
-| alternateBackgroundColors | {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Wenn aktiviert, wechseln sich die Hintergrundfarben je Datenzeile ab. | deaktiviert |
+| Parameter                 | Erklärung                                                                                                                                                                                                                                                                                          | Standardwert              |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| tableName                 | Der Name der Tabelle                                                                                                                                                                                                                                                                               |                           |
+| fieldList                 | Welche Spalten der Tabelle sollen angezeigt werden (Arraynotation)                                                                                                                                                                                                                                 |                           |
+| storagePid                | Die Daten welcher Seite sollen angezeigt werden? Wenn nichts anderen angegeben wurde, werden die Datensätze der Seite angezeigt, die über persistence.storagePid angegeben wurde.                                                                                                                  |                           |
+| levels                    | Falls die Seite aus storagePid noch Unterordner enthält, könnt ihr hier angeben wie viele Ebenen tiefer nach weiteren Datensätzen gesucht werden soll.                                                                                                                                             | 1                         |
+| filter                    | Gebt hier ein Suchwort ein, nach dem Eure Datensätze gefiltert werden sollen.                                                                                                                                                                                                                      |                           |
+| recordsPerPage            | Wie viele Datensätze dürfen maximal auf einer Seite angezeigt werden.                                                                                                                                                                                                                              | Angabe aus TCA, sonst 100 |
+| sortField                 | Nach welchem Feld sollen die gefundenen Datensätze sortiert werden                                                                                                                                                                                                                                 |
+| sortDescending            | Wenn aktiviert, dann werden die Datensätze rückwärts sortiert.                                                                                                                                                                                                                                     | deaktiviert               |
+| readOnly                  | Wenn aktiviert, dann werden die Bearbeitungssymbole nicht mehr angezeigt.                                                                                                                                                                                                                          | deaktiviert               |
+| enableClickMenu           | Wenn aktiviert, dann kann das Contextmenü verwendet werden                                                                                                                                                                                                                                         | aktiviert                 |
+| clickTitleMode            | Auswahl von `edit`, `info` und `show`. Falls ihr `show` auswählt, dann klappt das nur bei der Tabelle `pages` und `tt_content`. Normalerweise müsst ihr immer erst über das Kontextmenü oder über ein anderes Modul in diesen Bereich klicken. Nun reicht ein Klick auf den Titel des Datensatzes. |                           |
+| enableControlPanels       | {{% badge style="green" icon="angle-double-up" %}}TYPO3 10.4.6{{% /badge %}} Aktivierung der Control Buttons, wie löschen, History, sort up, sort down                                                                                                                                             | deaktiviert               |
+| alternateBackgroundColors | {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Wenn aktiviert, wechseln sich die Hintergrundfarben je Datenzeile ab.                                                                                                                                                     | deaktiviert               |
 
 ### Minimalistisches Beispiel
 
@@ -197,11 +197,11 @@ Das Backend Routing wurde zwar mit TYPO3 7.5 eingeführt, dennoch wurde bei viel
 
 ### Parameter
 
-| Parameter | Erklärung | Standardwert |
-|-----------|-----------|--------------|
-| route | Name der Route. Im Backend gibt es links den Menüpunkt "Konfiguration". Wählt dort "Backendroutes" aus der Selektbox aus, um alle verfügbaren Routen anzeigen zulassen. ||
-| parameters | Gebt der aufzurufenden Route oder auch Backend Modul ein paar zusätzliche URI Parameter mit an. || 
-| referenceType | Angabe des Link-Typs.<br>url: Absolute URI<br>absolute: Absoluter Pfad<br>share: Absolute URI zum Teilen mit anderen | absolute |
+| Parameter     | Erklärung                                                                                                                                                               | Standardwert |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| route         | Name der Route. Im Backend gibt es links den Menüpunkt "Konfiguration". Wählt dort "Backendroutes" aus der Selektbox aus, um alle verfügbaren Routen anzeigen zulassen. |              |
+| parameters    | Gebt der aufzurufenden Route oder auch Backend Modul ein paar zusätzliche URI Parameter mit an.                                                                         |              | 
+| referenceType | Angabe des Link-Typs.<br>url: Absolute URI<br>absolute: Absoluter Pfad<br>share: Absolute URI zum Teilen mit anderen                                                    | absolute     |
 
 ### Beispiel
 

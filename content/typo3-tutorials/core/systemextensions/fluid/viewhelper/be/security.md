@@ -39,9 +39,9 @@ Dieser ViewHelper prüft, ob ein im Backend angemeldeter User der im Parameter r
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| role | Entweder der Gruppenname (Groß- und Kleinschreibung beachten) oder die Gruppen-UID |
+| Parameter | Erklärung                                                                          |
+|-----------|------------------------------------------------------------------------------------|
+| role      | Entweder der Gruppenname (Groß- und Kleinschreibung beachten) oder die Gruppen-UID |
 
 ## Beispiel WENN->DANN->SONST
 

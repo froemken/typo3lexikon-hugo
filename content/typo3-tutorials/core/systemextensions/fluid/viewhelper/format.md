@@ -15,13 +15,13 @@ Dieser ViewHelper teilt Bytes (Dateigröße) solange durch `1024`, bis das Resul
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Die Dateigröße in Bytes. Muss eine Ganzzahl sein.  ||
-| decimals | Angabe der Nachkommastellen | 0 |
-| decimalSeparator | Zeichen für die Trennung der Nachkommastellen | `.` |
-| thousandsSeparator | Zeichen, um die Tausenderstellen hervorzuheben | `,` |
-| units | Angabe der Einheiten aufsteigend. Teilung findet in 1024er Schritten statt. Der hier aufgeführte Standardwert kommt aus einer englischen Übersetzungsdatei und kann somit je nach Sprache differenzieren. | B,KB,MB,GB,TB,PB,EB,ZB,YB |
+| Parameter          | Erklärung                                                                                                                                                                                                 | Standard                  |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| value              | Die Dateigröße in Bytes. Muss eine Ganzzahl sein.                                                                                                                                                         |                           |
+| decimals           | Angabe der Nachkommastellen                                                                                                                                                                               | 0                         |
+| decimalSeparator   | Zeichen für die Trennung der Nachkommastellen                                                                                                                                                             | `.`                       |
+| thousandsSeparator | Zeichen, um die Tausenderstellen hervorzuheben                                                                                                                                                            | `,`                       |
+| units              | Angabe der Einheiten aufsteigend. Teilung findet in 1024er Schritten statt. Der hier aufgeführte Standardwert kommt aus einer englischen Übersetzungsdatei und kann somit je nach Sprache differenzieren. | B,KB,MB,GB,TB,PB,EB,ZB,YB |
 
 ### Beispiel: Nachkommastellen
 
@@ -82,19 +82,19 @@ Schreibt einen Text in Groß- oder Kleinschreibung, aber auch Wortanfänge könn
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Der Text oder die Wörter, die groß- oder kleinzuschreiben sind. ||
-| mode | Angabe eines Modus, wie der Text oder auch die Wörter zu schreiben sind. Siehe Tabelle `Modus` | upper |
+| Parameter | Erklärung                                                                                      | Standard |
+|-----------|------------------------------------------------------------------------------------------------|----------|
+| value     | Der Text oder die Wörter, die groß- oder kleinzuschreiben sind.                                |          |
+| mode      | Angabe eines Modus, wie der Text oder auch die Wörter zu schreiben sind. Siehe Tabelle `Modus` | upper    |
 
 ### Modus
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| lower | Der komplette Text aus `value` wird kleingeschrieben. |
-| upper | Der komplette Text aus `value` wird großgeschrieben. |
-| capital | Der Text aus `value` wird nur am Anfang großgeschrieben.. |
-| uncapital | Der Text aus `value` wird nur am Anfang kleingeschrieben. |
+| Parameter    | Erklärung                                                                                                                                   |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| lower        | Der komplette Text aus `value` wird kleingeschrieben.                                                                                       |
+| upper        | Der komplette Text aus `value` wird großgeschrieben.                                                                                        |
+| capital      | Der Text aus `value` wird nur am Anfang großgeschrieben..                                                                                   |
+| uncapital    | Der Text aus `value` wird nur am Anfang kleingeschrieben.                                                                                   |
 | capitalWords | {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.7{{% /badge %}} Alle Wörter im Text aus `value` werden am Anfang großgeschrieben. |
 
 ### Beispiel
@@ -133,9 +133,9 @@ Solltet ihr mit Fluid-Template solche XML-Strukturen bauen, dann verwendet bitte
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Text mit möglicherweise enthaltenen HTML-Tags, der für eine XML-Ausgabe in CDATA-Tags eingewickelt werden soll. |
+| Parameter | Erklärung                                                                                                           |
+|-----------|---------------------------------------------------------------------------------------------------------------------|
+| value     | Der Text mit möglicherweise enthaltenen HTML-Tags, der für eine XML-Ausgabe in CDATA-Tags eingewickelt werden soll. |
 
 ### Beispiel
 
@@ -168,12 +168,12 @@ Schneidet den Text zwischen öffnendem und schließendem Tag nach X Zeichen an g
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| maxCharacters | Maximale Anzahl Zeichen, nach denen der Text zwischen öffnendem und schließendem Tag abgeschnitten werden soll. ||
-| append | Zeichenkette, die dem Leser signalisiert, dass hier der Text abgeschnitten wurde. | `&hellip;` -> ... |
-| respectWordBoundaries | Wenn aktiv, dann wird verhindert, dass mitten in einem Wort ein Schnitt stattfindet. Der Schnitt findet dann bei der nächstmöglichen freien Stelle vor dem Wort statt. | `true` |
-| respectHtml | Wenn aktiv, dann wird verhindert, dass enthaltene HTML Tags im Text nicht beschnitten werden. Der Schnitt findet dann bei der nächstmöglichen Stelle vor dem HTML Tag statt. | `true` |
+| Parameter             | Erklärung                                                                                                                                                                    | Standard          |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| maxCharacters         | Maximale Anzahl Zeichen, nach denen der Text zwischen öffnendem und schließendem Tag abgeschnitten werden soll.                                                              |                   |
+| append                | Zeichenkette, die dem Leser signalisiert, dass hier der Text abgeschnitten wurde.                                                                                            | `&hellip;` -> ... |
+| respectWordBoundaries | Wenn aktiv, dann wird verhindert, dass mitten in einem Wort ein Schnitt stattfindet. Der Schnitt findet dann bei der nächstmöglichen freien Stelle vor dem Wort statt.       | `true`            |
+| respectHtml           | Wenn aktiv, dann wird verhindert, dass enthaltene HTML Tags im Text nicht beschnitten werden. Der Schnitt findet dann bei der nächstmöglichen Stelle vor dem HTML Tag statt. | `true`            |
 
 ### Beispiel: Wörter respektieren
 
@@ -265,15 +265,15 @@ Ihr dürft diesem ViewHelper keine Zahlen mit einem Komma als Dezimaltrenner mit
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| currencySign | Das Währungskennzeichen wie `$` oder `€`. ||
-| decimalSeperator | Zeichen zum Einleiten der Nachkommastellen. | `,` |
-| thousandsSeperator | Zeichen zum Hervorheben der Tausenderstellen. Standard:  | `.` |
-| prependCurrency | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Wenn aktiviert, wird das Währungskennzeichen dem Betrag vorangestellt. Interessant für Währungen in Dollar. | `false` |
-| separateCurrency | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Wenn aktiv, wird zwischen Währungskennzeichen und Betrag ein Leerzeichen eingefügt. | `true` |
-| decimals | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.1{{% /badge %}} Anzahl der Nachkommastellen. | 2 |
-| useDash | {{% badge style="green" icon="angle-double-up" %}}TYPO3 9.4{{% /badge %}} Wenn aktiviert, dann werden bei vollen Beträgen bzw. wenn alle Nachkommastellen `0` sind, diese durch einen Bindestrich ersetzt. | `false` |
+| Parameter          | Erklärung                                                                                                                                                                                                  | Standard |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| currencySign       | Das Währungskennzeichen wie `$` oder `€`.                                                                                                                                                                  |          |
+| decimalSeperator   | Zeichen zum Einleiten der Nachkommastellen.                                                                                                                                                                | `,`      |
+| thousandsSeperator | Zeichen zum Hervorheben der Tausenderstellen. Standard:                                                                                                                                                    | `.`      |
+| prependCurrency    | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Wenn aktiviert, wird das Währungskennzeichen dem Betrag vorangestellt. Interessant für Währungen in Dollar.                      | `false`  |
+| separateCurrency   | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Wenn aktiv, wird zwischen Währungskennzeichen und Betrag ein Leerzeichen eingefügt.                                              | `true`   |
+| decimals           | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.1{{% /badge %}} Anzahl der Nachkommastellen.                                                                                                     | 2        |
+| useDash            | {{% badge style="green" icon="angle-double-up" %}}TYPO3 9.4{{% /badge %}} Wenn aktiviert, dann werden bei vollen Beträgen bzw. wenn alle Nachkommastellen `0` sind, diese durch einen Bindestrich ersetzt. | `false`  |
 
 ### Beispiel
 
@@ -298,13 +298,13 @@ Modifiziert und gibt ein Datum in einem vorgegebenen Format aus.
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| date | Entweder ein Datum vom Typ `\DateTime` oder ein Wert, der in ein `\DateTime` Objekt konvertiert werden kann (z.B. `17.01.1979`). Es kann auch der Timestamp (Sekunden seit 01.01.1970) angegeben werden. Relative Angaben wie `+2 months` modifizieren das aktuelle Datum. Um relative Angaben auf ein anderes Datum anzuwenden, muss das Datum in `base` definiert werden. ||
-| format | Formatvorgaben für die Ausgabe des Datums. [DateTime Formatierungen](https://www.php.net/manual/en/datetime.format.php) werden intern mit `PHP:date()` formatiert, können jedoch nur englische Ausgaben (Sunday, ...).<br>{{% badge style="orange" icon="angle-double-up" %}}PHP 8.1{{% /badge %}} [strftime Formatierungen](https://www.php.net/manual/en/function.strftime) werden intern mit `PHP:strftime()` formatiert und können auch mehrsprachige Ausgabe erzeugen (Sonntag, ...). Die Unterstützung für `strftime` ist in TYPO3 13 noch gegeben, könnte jedoch mit TYPO3 14 entfernt werden. | `Y-m-d` |
-| pattern | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.3{{% /badge %}} Formatvorgaben für die Ausgabe des Datums. Da `PHP:date()` nur englische Ausgaben kann und `PHP:strftime()` veraltet ist, wird `PHP:IntlDateFormatter` diese ersetzen. Dieser Formatter benötigt die Formatvorgaben jedoch im [Unicode ICO Format](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax). Wenn angegeben, wird `format` nicht mehr berücksichtigt. ||
-| locale | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.3{{% /badge %}} Angabe der zu verwendenden Sprache in dem Format `de_AT`, `fr` oder `en_US.utf8`. Wird nur berücksichtigt, wenn auch `pattern` benutzt wird. ||
-| base | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.4{{% /badge %}} Um in `date` mit [relativen Formaten](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) arbeiten zu können, muss das zugrundeliegende Datum hier angegeben werden. Akzeptiert nur `\DaTime` Objekt oder Timestamp (Sekunden seit 01.01.1970) ||
+| Parameter | Erklärung                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Standard |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| date      | Entweder ein Datum vom Typ `\DateTime` oder ein Wert, der in ein `\DateTime` Objekt konvertiert werden kann (z.B. `17.01.1979`). Es kann auch der Timestamp (Sekunden seit 01.01.1970) angegeben werden. Relative Angaben wie `+2 months` modifizieren das aktuelle Datum. Um relative Angaben auf ein anderes Datum anzuwenden, muss das Datum in `base` definiert werden.                                                                                                                                                                                                                           |          |
+| format    | Formatvorgaben für die Ausgabe des Datums. [DateTime Formatierungen](https://www.php.net/manual/en/datetime.format.php) werden intern mit `PHP:date()` formatiert, können jedoch nur englische Ausgaben (Sunday, ...).<br>{{% badge style="orange" icon="angle-double-up" %}}PHP 8.1{{% /badge %}} [strftime Formatierungen](https://www.php.net/manual/en/function.strftime) werden intern mit `PHP:strftime()` formatiert und können auch mehrsprachige Ausgabe erzeugen (Sonntag, ...). Die Unterstützung für `strftime` ist in TYPO3 13 noch gegeben, könnte jedoch mit TYPO3 14 entfernt werden. | `Y-m-d`  |
+| pattern   | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.3{{% /badge %}} Formatvorgaben für die Ausgabe des Datums. Da `PHP:date()` nur englische Ausgaben kann und `PHP:strftime()` veraltet ist, wird `PHP:IntlDateFormatter` diese ersetzen. Dieser Formatter benötigt die Formatvorgaben jedoch im [Unicode ICO Format](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax). Wenn angegeben, wird `format` nicht mehr berücksichtigt.                                                                                                                    |          |
+| locale    | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.3{{% /badge %}} Angabe der zu verwendenden Sprache in dem Format `de_AT`, `fr` oder `en_US.utf8`. Wird nur berücksichtigt, wenn auch `pattern` benutzt wird.                                                                                                                                                                                                                                                                                                                                                                               |          |
+| base      | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.4{{% /badge %}} Um in `date` mit [relativen Formaten](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) arbeiten zu können, muss das zugrundeliegende Datum hier angegeben werden. Akzeptiert nur `\DaTime` Objekt oder Timestamp (Sekunden seit 01.01.1970)                                                                                                                                                                                                                                                    |          |
 
 ### Beispiel: date
 
@@ -398,13 +398,13 @@ Diesen ViewHelper bitte nur für das Frontend verwenden.
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| parseFuncTSPath | Gebe hier den Pfad zur TypoScript `parseFunc` Eigenschaft an, die sich um das Aufbereiten des Texten kümmern soll. | `lib.parseFunc_RTE` |
-| data | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Falls gewünscht könnt ihr ein Array, einen Datensatz oder auch ein Domainmodel hier angeben, dessen Eigenschaften innerhalb der angegebenen `parseFunc` Eigenschaft mittels der TypoScript `field` Eigenschaft wieder abgefragt werden können. ||
-| current | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Befüllt die `current` Eigenschaft in Eurem TypoScript mit dem hier angegebenen Wert. Im TypoScript erhaltet ihr mit `current = 1` Zugriff auf den Wert. Wenn gesetzt, ist `currentValueKey` ohne Funktion. ||
-| currentValueKey | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Gebt einen Array-Key oder die Domainmodel-Eigenschaft von der `data` Eigenschaft an, um den enthaltenen Wert in `current` zu überführen. Im TypoScript erhaltet ihr mit `current = 1` Zugriff auf den Wert. ||
-| table | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Falls es sich bei `data` um einen Datensatz handelt, dann hier bitte den entsprechenden Tabellennamen mit angeben. Ist keine Pflichtangabe, aber hilft den zugrundeliegende ContentObjectRenderer vollständig auf die bevorstehende Aufgabe [vorzubereiten](https://github.com/TYPO3/typo3/commit/ad0aa9a55ca0d1e2718d9b1ec7819e5f58ac0e28) | Empty String |
+| Parameter       | Erklärung                                                                                                                                                                                                                                                                                                                                                                                                              | Standard            |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| parseFuncTSPath | Gebe hier den Pfad zur TypoScript `parseFunc` Eigenschaft an, die sich um das Aufbereiten des Texten kümmern soll.                                                                                                                                                                                                                                                                                                     | `lib.parseFunc_RTE` |
+| data            | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Falls gewünscht könnt ihr ein Array, einen Datensatz oder auch ein Domainmodel hier angeben, dessen Eigenschaften innerhalb der angegebenen `parseFunc` Eigenschaft mittels der TypoScript `field` Eigenschaft wieder abgefragt werden können.                                                                                              |                     |
+| current         | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Befüllt die `current` Eigenschaft in Eurem TypoScript mit dem hier angegebenen Wert. Im TypoScript erhaltet ihr mit `current = 1` Zugriff auf den Wert. Wenn gesetzt, ist `currentValueKey` ohne Funktion.                                                                                                                                  |                     |
+| currentValueKey | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Gebt einen Array-Key oder die Domainmodel-Eigenschaft von der `data` Eigenschaft an, um den enthaltenen Wert in `current` zu überführen. Im TypoScript erhaltet ihr mit `current = 1` Zugriff auf den Wert.                                                                                                                                 |                     |
+| table           | {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.0{{% /badge %}} Falls es sich bei `data` um einen Datensatz handelt, dann hier bitte den entsprechenden Tabellennamen mit angeben. Ist keine Pflichtangabe, aber hilft den zugrundeliegende ContentObjectRenderer vollständig auf die bevorstehende Aufgabe [vorzubereiten](https://github.com/TYPO3/typo3/commit/ad0aa9a55ca0d1e2718d9b1ec7819e5f58ac0e28) | Empty String        |
 
 ### Beispiel
 
@@ -431,11 +431,11 @@ Im Text befindliche Zeichen wie: `&amp;`, `&quot;`, `&#039;`, `&lt;`, `&gt;` wer
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Der Text in dem sich die maskierten Zeichen befinden, die zurückkonvertiert werden sollen. ||
-| keepQuotes | Einfache und doppelte Anführungsstriche werden standardmäßig nicht mit zurückkonvertiert. | `false` |
-| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8` |
+| Parameter  | Erklärung                                                                                                                                                                                                                                           | Standard |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| value      | Der Text in dem sich die maskierten Zeichen befinden, die zurückkonvertiert werden sollen.                                                                                                                                                          |          |
+| keepQuotes | Einfache und doppelte Anführungsstriche werden standardmäßig nicht mit zurückkonvertiert.                                                                                                                                                           | `false`  |
+| encoding   | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8`  |
 
 ### Beispiel
 
@@ -470,12 +470,12 @@ Im Text befindliche Sonderzeichen wie: `&`, `"`, `'`, `<`, `>` und auch Umlaute 
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Der Text mit den Zeichen, die in ein HTML sicheres Format zu konvertieren sind. ||
-| keepQuotes | Einfache und doppelte Anführungsstriche werden standardmäßig nicht umgewandelt. | `false` |
-| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8` |
-| doubleEncode | Falls der Text bereits HTML sicherere Zeichen beinhaltet, werden diese erneut konvertiert. Dies führt zu `&amp;amp;amp;`. Um erneutes Umwandeln zu verhindern, diese Option auf `false` setzen. | `true` |
+| Parameter    | Erklärung                                                                                                                                                                                                                                           | Standard |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| value        | Der Text mit den Zeichen, die in ein HTML sicheres Format zu konvertieren sind.                                                                                                                                                                     |          |
+| keepQuotes   | Einfache und doppelte Anführungsstriche werden standardmäßig nicht umgewandelt.                                                                                                                                                                     | `false`  |
+| encoding     | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8`  |
+| doubleEncode | Falls der Text bereits HTML sicherere Zeichen beinhaltet, werden diese erneut konvertiert. Dies führt zu `&amp;amp;amp;`. Um erneutes Umwandeln zu verhindern, diese Option auf `false` setzen.                                                     | `true`   |
 
 ### Beispiel
 
@@ -517,12 +517,12 @@ Im Text befindliche Sonderzeichen wie: `&`, `"`, `'`, `<`, `>` werden mittels `P
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Der Text mit den Zeichen, die in ein HTML sicheres Format zu konvertieren sind. ||
-| keepQuotes | Einfache und doppelte Anführungsstriche werden standardmäßig nicht umgewandelt. | `false` |
-| encoding | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8` |
-| doubleEncode | Falls der Text bereits HTML sicherere Zeichen beinhaltet, werden diese erneut konvertiert. Dies führt zu `&amp;amp;amp;`. Um erneutes Umwandeln zu verhindern, diese Option auf `false` setzen. | `true` |
+| Parameter    | Erklärung                                                                                                                                                                                                                                           | Standard |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| value        | Der Text mit den Zeichen, die in ein HTML sicheres Format zu konvertieren sind.                                                                                                                                                                     |          |
+| keepQuotes   | Einfache und doppelte Anführungsstriche werden standardmäßig nicht umgewandelt.                                                                                                                                                                     | `false`  |
+| encoding     | Wir sind hier im Bereich TYPO3 und da sollte der Zeichensatz auf UTF-8 und nix anderes stehen. Sollte wieder erwartend ein anderer Zeichensatz gewünscht sein, kann dieser hier angegeben werden. Der Standardwert wird vom Installtool ausgelesen. | `UTF-8`  |
+| doubleEncode | Falls der Text bereits HTML sicherere Zeichen beinhaltet, werden diese erneut konvertiert. Dies führt zu `&amp;amp;amp;`. Um erneutes Umwandeln zu verhindern, diese Option auf `false` setzen.                                                     | `true`   |
 
 ### Beispiel
 
@@ -564,10 +564,10 @@ Nimmt jedweden Wert entgegen und gibt in als JSON zurück.
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Der Text, die Zahl, das Objekt, was auch immer in JSON umgewandelt werden soll. ||
-| forceObject | Üblicherweise wird zunächst versucht den Wert aus `value` als Array im JSON zu repräsentieren `[]`. Wenn aktiviert, werden Arrays im JSON als Objekte ausgegeben `{}`. | `false` |
+| Parameter   | Erklärung                                                                                                                                                              | Standard |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| value       | Der Text, die Zahl, das Objekt, was auch immer in JSON umgewandelt werden soll.                                                                                        |          |
+| forceObject | Üblicherweise wird zunächst versucht den Wert aus `value` als Array im JSON zu repräsentieren `[]`. Wenn aktiviert, werden Arrays im JSON als Objekte ausgegeben `{}`. | `false`  |
 
 ### Beispiel
 
@@ -638,11 +638,11 @@ Mit diesem ViewHelper könnt ihr Zahlen formatieren. Er arbeitet ähnlich dem `f
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| decimals | Anzahl der Nachkommastellen. | 2 |
-| decimalSeperator | Zeichen zum Einleiten der Nachkommastellen. | `,` |
-| thousandsSeperator | Zeichen zum Hervorheben der Tausenderstellen. Standard:  | `.` |
+| Parameter          | Erklärung                                               | Standard |
+|--------------------|---------------------------------------------------------|----------|
+| decimals           | Anzahl der Nachkommastellen.                            | 2        |
+| decimalSeperator   | Zeichen zum Einleiten der Nachkommastellen.             | `,`      |
+| thousandsSeperator | Zeichen zum Hervorheben der Tausenderstellen. Standard: | `.`      |
 
 ### Beispiel
 
@@ -669,12 +669,12 @@ Der angegebene Text wird so lange mit dem Abstandszeichen aufgefüllt, bis dass 
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.1{{% /badge %}} Das Wort oder der Text, dem Abstandszeichen hinzugefügt werden sollen ||
-| padLength | Wenn der text aus `value` kleiner ist als die hier angegebene Anzahl Zeichen, dann wird der Text solange mit Abstandszeichen aus `padString` aufgefüllt, bis die gewünschte Anzahl Zeichen erreicht ist. ||
-| padString | Angabe des Abstandszeichen mit dem aufgefüllt werden soll. | Leerzeichen |
-| padType | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Die Abstandszeichen können rechts `right`, links `left` oder von beiden Seiten aus `both` angefügt werden. | right |
+| Parameter | Erklärung                                                                                                                                                                                                | Standard    |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| value     | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.1{{% /badge %}} Das Wort oder der Text, dem Abstandszeichen hinzugefügt werden sollen                                                          |             |
+| padLength | Wenn der text aus `value` kleiner ist als die hier angegebene Anzahl Zeichen, dann wird der Text solange mit Abstandszeichen aus `padString` aufgefüllt, bis die gewünschte Anzahl Zeichen erreicht ist. |             |
+| padString | Angabe des Abstandszeichen mit dem aufgefüllt werden soll.                                                                                                                                               | Leerzeichen |
+| padType   | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.6{{% /badge %}} Die Abstandszeichen können rechts `right`, links `left` oder von beiden Seiten aus `both` angefügt werden.                     | right       |
 
 ### Beispiel
 
@@ -704,10 +704,10 @@ Mit diesem ViewHelper können Platzhalter in einem Text mit den Werten aus dem A
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Der Text mit den Formatierungszeichen, die mit den Werten aus `arguments` ersetzt werden sollen. | `null` |
-| arguments | Ein Array mit Werten, die in die Formatierungszeichen aus `value` überführt werden sollen. | Leeres Array |
+| Parameter | Erklärung                                                                                        | Standard     |
+|-----------|--------------------------------------------------------------------------------------------------|--------------|
+| value     | Der Text mit den Formatierungszeichen, die mit den Werten aus `arguments` ersetzt werden sollen. | `null`       |
+| arguments | Ein Array mit Werten, die in die Formatierungszeichen aus `value` überführt werden sollen.       | Leeres Array |
 
 ### Beispiel
 
@@ -735,9 +735,9 @@ Es gibt viele ViewHelper, die Inhalte vor der Ausgabe durch `PHP:htmlspecialchar
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Text, der unverändert ausgegeben werden soll |
+| Parameter | Erklärung                                        |
+|-----------|--------------------------------------------------|
+| value     | Der Text, der unverändert ausgegeben werden soll |
 
 ### Beispiel
 
@@ -763,9 +763,9 @@ Dieser ViewHelper entfernt sämtliche HTML-Tags aus einem Text.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Text aus dem die HTML-Tags entfernt werden sollen |
+| Parameter   | Erklärung                                                                                                                                                                                                    |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| value       | Der Text aus dem die HTML-Tags entfernt werden sollen                                                                                                                                                        |
 | allowedTags | {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0{{% /badge %}} Standardmäßig werden gradenlos alle HTML Tags entfernt. Mit dieser Option könnt ihr eine Auswahl an Tags als Ausnahme deklarieren. |
 
 ### Beispiel
@@ -792,11 +792,11 @@ Entfernt von außen jegliche Tabs, Leer- und Enter-Zeichen von einem Text. Alter
 
 ### Parameter
 
-| Parameter | Erklärung | Standard |
-|-----------|-----------|----------|
-| value | Der Text von dem rechts und/oder links die Zeichen aus `characters` entfernt werden sollen. ||
-| characters | Komma separierte Liste von Zeichen, die vom `value` links und/oder rechts entfernt werden sollen. Der Standard `false` setzt `characters` intern auf folgende Werte: ` \t\n\r\0\x0B` | `false` |
-| side | Entfernt Zeichen von der linken Seite (`left`, `start`), von der rechten Seite (`right`, `end`) oder von beiden Seiten `both` | `both` |
+| Parameter  | Erklärung                                                                                                                                                                            | Standard |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| value      | Der Text von dem rechts und/oder links die Zeichen aus `characters` entfernt werden sollen.                                                                                          |          |
+| characters | Komma separierte Liste von Zeichen, die vom `value` links und/oder rechts entfernt werden sollen. Der Standard `false` setzt `characters` intern auf folgende Werte: ` \t\n\r\0\x0B` | `false`  |
+| side       | Entfernt Zeichen von der linken Seite (`left`, `start`), von der rechten Seite (`right`, `end`) oder von beiden Seiten `both`                                                        | `both`   |
 
 ### Beispiel
 
@@ -826,9 +826,9 @@ In Texten und Firmennamen kommen immer wieder Sonderzeichen wie `@`, `&` oder `%
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Text, der für die Übergabe per Link vorbereitet werden soll |
+| Parameter | Erklärung                                                       |
+|-----------|-----------------------------------------------------------------|
+| value     | Der Text, der für die Übergabe per Link vorbereitet werden soll |
 
 ### Beispiel
 

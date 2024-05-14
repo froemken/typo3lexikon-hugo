@@ -27,9 +27,9 @@ Durch den eingeschränkten Gültigkeitsbereich und die Bereitstellung von mehrer
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| map | Die Eingabe erfolgt in Array-Notation. Der Key gibt den Namen der neuen Variable wieder, während der Wert den Inhalt wieder spiegelt. |
+| Parameter | Erklärung                                                                                                                             |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------|
+| map       | Die Eingabe erfolgt in Array-Notation. Der Key gibt den Namen der neuen Variable wieder, während der Wert den Inhalt wieder spiegelt. |
 
 ### Beispiel: Einfacher Text
 
@@ -93,10 +93,10 @@ Die Ausgabe im Quelltext:
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| value | Der Inhalt des ViewHelpers wird nur dann angezeigt, wenn der Wert von `value` dem `expression` Parameter aus dem [f:switch](#fswitch) ViewHelper übereinstimmt |
-| default | {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0.0{{% /badge %}} Veraltet, bitte verwendet [f:defaultCase](#fdefaultcase) |
+| Parameter | Erklärung                                                                                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| value     | Der Inhalt des ViewHelpers wird nur dann angezeigt, wenn der Wert von `value` dem `expression` Parameter aus dem [f:switch](#fswitch) ViewHelper übereinstimmt |
+| default   | {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0.0{{% /badge %}} Veraltet, bitte verwendet [f:defaultCase](#fdefaultcase)                            |
 
 Ein Beispiel findet ihr beim [f:switch](#fswitch) ViewHelper
 
@@ -108,11 +108,11 @@ Dieser ViewHelper nutzt den angegeben `typoscriptObjectPath`, um das dahinterlie
 
 ### Parameter
 
-| Parameter            | Erklärung | Pflichtfeld |
-|----------------------|-----------|-------------|
-| typoscriptObjectPath | Gebt hier den TypoScript Objektpfad an wie z.B. `lib.beispieldaten.10` | Ja |
-| data | Übergebt dem TypoScript Daten in Form eines Arrays, Objektes oder auch einen Text, auf dessen Basis das TypoScript Rendering vonstatten gehen soll. Im Falle von Array oder Objekt könnt ihr mit der TypoScript Eigenschaft `field` auf individuelle Daten zugreifen. Im Falle von Text verwendet bitte `current`. |
-| currentValueKey | Angabe eines Array Keys oder Objekt Eigenschaft, die innerhalb von TypoScript über `current` zur Verfügung gestellt werden soll. |
+| Parameter            | Erklärung                                                                                                                                                                                                                                                                                                          | Pflichtfeld |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| typoscriptObjectPath | Gebt hier den TypoScript Objektpfad an wie z.B. `lib.beispieldaten.10`                                                                                                                                                                                                                                             | Ja          |
+| data                 | Übergebt dem TypoScript Daten in Form eines Arrays, Objektes oder auch einen Text, auf dessen Basis das TypoScript Rendering vonstatten gehen soll. Im Falle von Array oder Objekt könnt ihr mit der TypoScript Eigenschaft `field` auf individuelle Daten zugreifen. Im Falle von Text verwendet bitte `current`. |
+| currentValueKey      | Angabe eines Array Keys oder Objekt Eigenschaft, die innerhalb von TypoScript über `current` zur Verfügung gestellt werden soll.                                                                                                                                                                                   |
 
 ### Beispiel mit Array
 
@@ -164,9 +164,9 @@ Dieser ViewHelper zählt die Elemente im übergebenen Array oder die enthaltenen
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| subject | Gebt hier das Array oder das Objekt an, dessen Elemente gezählt werden sollen. Wenn dieser Wert leer gelassen wird, versucht `f:count` das Array oder Objekt zwischen dem öffnenden und schließendem Tag zu zählen |
+| Parameter | Erklärung                                                                                                                                                                                                          |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| subject   | Gebt hier das Array oder das Objekt an, dessen Elemente gezählt werden sollen. Wenn dieser Wert leer gelassen wird, versucht `f:count` das Array oder Objekt zwischen dem öffnenden und schließendem Tag zu zählen |
 
 ### Beispiel mit subject
 
@@ -209,10 +209,10 @@ Dieser ViewHelper zählt die Elemente im übergebenen Array oder die enthaltenen
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| values | Ein Array mit Werten für jeden xten Durchlauf. |
-| as | Variablenname, mit der Wert aus `values`, der nur zwischen öffnendem und schließendem `f:cycle` Tag Gültigkeit hat. |
+| Parameter | Erklärung                                                                                                           |
+|-----------|---------------------------------------------------------------------------------------------------------------------|
+| values    | Ein Array mit Werten für jeden xten Durchlauf.                                                                      |
+| as        | Variablenname, mit der Wert aus `values`, der nur zwischen öffnendem und schließendem `f:cycle` Tag Gültigkeit hat. |
 
 ### Beispiel
 
@@ -242,15 +242,15 @@ Zeigt den Inhalt einer Variable oben am Rand des Browsers an. Verschachtelte Ele
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| title | Gibt der Debug-Ausgabe einen Titel. Bei mehreren Debug-Ausgaben können so die jeweiligen Ausgaben besser differenziert werden. |
-| maxDepth | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Durch die teilweise sehr tiefe Verschachtelung von Objekten kann die Debug-Ausgabe sehr groß werden. Mit `maxDepth` kann die Ausgabe nach Erreichen der angegebenen Tiefe unterbunden werden. |
-| plainText | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Anstatt einer HTML/JavaScript Ausgabe könnt ihr die Ausgabe auch komplett als reinen Text ausgeben lassen. |
-| ansiColors | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Wenn `plainText` aktiv ist, könnt ihr mit `ansiColors` die Textausgabe mit etwas Farbe aufhübschen |
-| inline | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Üblicherweise wird die Debug-Ausgabe oben am Rand des Browsers ausgegeben. Durch Aktivierung von `inline` wird die Ausgabe dort platziert, wo sich der `f:debug` ViewHelper im HTML befindet. |
-| blacklistedClassNames | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Einige Klassen werden bei der Debug-Ausgabe sehr groß. So z.B. der `ObjectManager`. Gebt deren Klassennamen als Array an, um deren Ausgabe zu verhindern |
-| blacklistedPropertyNames | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Ähnlich wie `blacklistedClassNames`, nur mit dem Unterschied, dass hiermit bestimmte Eigenschaften von der Debug-Ausgabe ausgeschlossen werden. |
+| Parameter                | Erklärung                                                                                                                                                                                                                                                               |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title                    | Gibt der Debug-Ausgabe einen Titel. Bei mehreren Debug-Ausgaben können so die jeweiligen Ausgaben besser differenziert werden.                                                                                                                                          |
+| maxDepth                 | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Durch die teilweise sehr tiefe Verschachtelung von Objekten kann die Debug-Ausgabe sehr groß werden. Mit `maxDepth` kann die Ausgabe nach Erreichen der angegebenen Tiefe unterbunden werden. |
+| plainText                | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Anstatt einer HTML/JavaScript Ausgabe könnt ihr die Ausgabe auch komplett als reinen Text ausgeben lassen.                                                                                    |
+| ansiColors               | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Wenn `plainText` aktiv ist, könnt ihr mit `ansiColors` die Textausgabe mit etwas Farbe aufhübschen                                                                                            |
+| inline                   | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Üblicherweise wird die Debug-Ausgabe oben am Rand des Browsers ausgegeben. Durch Aktivierung von `inline` wird die Ausgabe dort platziert, wo sich der `f:debug` ViewHelper im HTML befindet. |
+| blacklistedClassNames    | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Einige Klassen werden bei der Debug-Ausgabe sehr groß. So z.B. der `ObjectManager`. Gebt deren Klassennamen als Array an, um deren Ausgabe zu verhindern                                      |
+| blacklistedPropertyNames | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Ähnlich wie `blacklistedClassNames`, nur mit dem Unterschied, dass hiermit bestimmte Eigenschaften von der Debug-Ausgabe ausgeschlossen werden.                                               |
 
 ### Beispiel
 
@@ -278,9 +278,9 @@ Diesen ViewHelper erkläre ich im ViewHelper `f:if`, da er nur dort verwendet we
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| if | {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0{{% /badge %}} Durch das neue `if` Attribut können nun mehrfache else-if Abfragen realisiert werden |
+| Parameter | Erklärung                                                                                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| if        | {{% badge style="green" icon="angle-double-up" %}}TYPO3 8.0{{% /badge %}} Durch das neue `if` Attribut können nun mehrfache else-if Abfragen realisiert werden |
 
 ## f:escape
 
@@ -300,10 +300,10 @@ Dieser ViewHelper macht nur im Bereich selbstprogrammierter Extensions Sinn. Den
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| renderMode | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.4{{% /badge %}} {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Sollen die Fehlermeldungen als Liste ul oder als Container div gerendert werden. |
-| as | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} Die Angabe aus `as` wird zum Erstellen einer Variable für das Fluid-Template genutzt, die alle Benachrichtigungen beinhaltet. Um das Rendering dieser Nachrichten muss sich selbst gekümmert werden. |
+| Parameter       | Erklärung                                                                                                                                                                                                                                                                                                                                                                  |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| renderMode      | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.4{{% /badge %}} {{% badge style="orange" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} {{% badge style="red" icon="skull-crossbones" %}}TYPO3 8.0{{% /badge %}} Sollen die Fehlermeldungen als Liste ul oder als Container div gerendert werden.                                                             |
+| as              | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} Die Angabe aus `as` wird zum Erstellen einer Variable für das Fluid-Template genutzt, die alle Benachrichtigungen beinhaltet. Um das Rendering dieser Nachrichten muss sich selbst gekümmert werden.                                                                                             |
 | queueIdentifier | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Alle Benachrichtigungen einer Extension landen normalerweise in einer Warteschlange mit dem Namen `extbase.flashmessages.[extension]_[plugin]`. Da ihr aber auch eigene Namen vergeben könnt, war es bisher nicht möglich diese im Frontend rendern zu lassen. Dieser Parameter schafft Abhilfe. |
 
 {{% notice style="info" title="Information" icon="exclamation" %}}
@@ -338,12 +338,12 @@ Erzeugt eine Schleife. Jedes Element des übergebenen Arrays oder ObjectStorages
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| each | Array oder Objekt, das durchlaufen werden soll |
-| as | Ein Variablenname, der Daten des aktuellen Durchlaufs enthält |
-| key | Falls ihr den Key/Schlüssel des aktuellen Durchlaufes benötigt, könnt ihr hiermit den Namen einer weiteren Variable definieren |
-| reverse | Der Durchlauf des Arrays oder Objektes geschieht rückwärts |
+| Parameter | Erklärung                                                                                                                                                                         |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| each      | Array oder Objekt, das durchlaufen werden soll                                                                                                                                    |
+| as        | Ein Variablenname, der Daten des aktuellen Durchlaufs enthält                                                                                                                     |
+| key       | Falls ihr den Key/Schlüssel des aktuellen Durchlaufes benötigt, könnt ihr hiermit den Namen einer weiteren Variable definieren                                                    |
+| reverse   | Der Durchlauf des Arrays oder Objektes geschieht rückwärts                                                                                                                        |
 | iteration | Eine Arrayvariable, die Informationen darüber beinhaltet, ob man sich im ersten oder letzten Durchlauf befindet. Außerdem enthalten: `index`, `cycle`, `total`, `isEven`, `isOdd` |
 
 ### Beispiel
@@ -435,29 +435,29 @@ Dieser ViewHelper ist für die Erstellung von HTML Formularen zuständig und bil
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| action | Welche Actionmethode soll aufgerufen werden, wenn das Formular abgesendet wird |
-| arguments | Welche zusätzlichen Variablen sollen beim Absenden mit übergeben werden |
-| controller | Falls sich die gewünschte Actionmethode nicht im gleichen Controller befindet, muss hier dieser entsprechende Controller angegeben werden |
-| extensionName | Falls das Formular von einer anderen Extension abgearbeitet werden soll, dann muss hier der Extensionname ohne tx_ und ohne Unterstriche angegeben werden |
-| pluginName | Falls das Formular von einem anderen Plugin abgearbeitet werden soll, dann muss hier der Pluginname angegeben werden |
-| pageUid | Seiten-UID eintragen, wenn das Formular von einer anderen Seite aus abgearbeitet werden soll |
-| object | Übergebt hier ein Objekt mit Eigenschaften, die die Eingabefelder im Formular wiederspiegeln. |
-| pageType | Gebt hier eine Seitentyp ID an, die das Formular abarbeiten soll. Könnte für AJAX interessant sein. |
-| noCache | Kann aktiviert werden, um das Caching für die Zielseite zu deaktivieren. |
-| noCacheHash | Nach Aktivierung wird dem generierten Link zur Zielseite kein cHash-Parameter angehangen |
-| section | Definition eines Ankers zu dem auf der Zielseite gesprungen werden soll. Interessant wir Seiten auf denen viele Inhalte sind. |
-| format | Gibt an um welches Format es sich bei der Zielseite handelt. Alternativ ginge auch `xml`, obwohl das bei einer Formularzielseite wenig Sinn machen würde. Klappt nur wenn `actionUri` nicht gesetzt ist. |
-| additionalParams | Fügt weitere Variablen der Zielseite an. Im Gegensatz zu `arguments`, können hiermit Variablen hinzugefügt werden die nicht mit dem Extensionnamen geprefixed werden. Klappt nur, wenn `actionUri` nicht gesetzt ist. |
-| absolute | Nach Aktivierung wird der Zeilseite noch der Domainname und Pfad vorangestellt. Klappt nur, wenn `actionUri` nicht gesetzt ist. |
-| addQueryString | Falls dem Formular bereits Parameter über die URL mitgegeben wurden, könnt ihr hier entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. Klappt nur, wenn actionUri nicht gesetzt ist. |
-| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein. Klappt nur, wenn `actionUri` nicht gesetzt ist. |
-| addQueryStringMethod | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Normalerweise werden nur die GET Parameter bei Verwendung von `addQueryString` an die Zielseite angehangen. Dieser Parameter erlaubt 4 Werte. `GET`: Standard. Die GET-Parameter werden übergeben. `POST`: Die POST Parameter werden mit übergeben. `GET,POST`: GET-Parameter sind die Basis und werden mit POST Parametern überschrieben, sofern beide Methoden gleichnamige Parameter beinhalten. `POST,GET`: POST-Parameter werden mit GET-Parametern überschrieben. |
-| fieldNamePrefix | Falls ein anderer Prefix gewünscht ist. Macht eigentlich nur Sinn, wenn die Formulardaten von einer anderen Extension abgearbeitet werden müssen. |
-| actionUri | Gebt hier Eure ganz eigene individuelle Zielseiten-URL ein. Viele der oberen Parameter haben aber dann keine Wirkung mehr. |
-| objectName | Hier kommt ein Objekt- bzw. Modelname rein, in das die nach Absenden gesammelten Formulardaten gespeichert werden sollen. Hat den Vorteil, dass Ihr nicht in jeder Action die Formulardaten überprüfen, sondern die Überprüfung nur einmalig im Model vornehmen müsst. |
-| hiddenFieldClassName | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Der `f:form` ViewHelper rendert ein paar hidden Felder, um z.B. eine Liste über die erlaubten Formularfelder zu generieren oder auch die Action zu kennen, die dieses Formular rendern lässt. Mit diesem Parameter könnt Ihr dem div-Tag, der diese hidden Felder enthält explizit setzen. |
+| Parameter                            | Erklärung                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| action                               | Welche Actionmethode soll aufgerufen werden, wenn das Formular abgesendet wird                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| arguments                            | Welche zusätzlichen Variablen sollen beim Absenden mit übergeben werden                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| controller                           | Falls sich die gewünschte Actionmethode nicht im gleichen Controller befindet, muss hier dieser entsprechende Controller angegeben werden                                                                                                                                                                                                                                                                                                                                                                                                         |
+| extensionName                        | Falls das Formular von einer anderen Extension abgearbeitet werden soll, dann muss hier der Extensionname ohne tx_ und ohne Unterstriche angegeben werden                                                                                                                                                                                                                                                                                                                                                                                         |
+| pluginName                           | Falls das Formular von einem anderen Plugin abgearbeitet werden soll, dann muss hier der Pluginname angegeben werden                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| pageUid                              | Seiten-UID eintragen, wenn das Formular von einer anderen Seite aus abgearbeitet werden soll                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| object                               | Übergebt hier ein Objekt mit Eigenschaften, die die Eingabefelder im Formular wiederspiegeln.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| pageType                             | Gebt hier eine Seitentyp ID an, die das Formular abarbeiten soll. Könnte für AJAX interessant sein.                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| noCache                              | Kann aktiviert werden, um das Caching für die Zielseite zu deaktivieren.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| noCacheHash                          | Nach Aktivierung wird dem generierten Link zur Zielseite kein cHash-Parameter angehangen                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| section                              | Definition eines Ankers zu dem auf der Zielseite gesprungen werden soll. Interessant wir Seiten auf denen viele Inhalte sind.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| format                               | Gibt an um welches Format es sich bei der Zielseite handelt. Alternativ ginge auch `xml`, obwohl das bei einer Formularzielseite wenig Sinn machen würde. Klappt nur wenn `actionUri` nicht gesetzt ist.                                                                                                                                                                                                                                                                                                                                          |
+| additionalParams                     | Fügt weitere Variablen der Zielseite an. Im Gegensatz zu `arguments`, können hiermit Variablen hinzugefügt werden die nicht mit dem Extensionnamen geprefixed werden. Klappt nur, wenn `actionUri` nicht gesetzt ist.                                                                                                                                                                                                                                                                                                                             |
+| absolute                             | Nach Aktivierung wird der Zeilseite noch der Domainname und Pfad vorangestellt. Klappt nur, wenn `actionUri` nicht gesetzt ist.                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| addQueryString                       | Falls dem Formular bereits Parameter über die URL mitgegeben wurden, könnt ihr hier entscheiden, ob diese Parameter auch mit auf die Zielseite übergeben werden. Klappt nur, wenn actionUri nicht gesetzt ist.                                                                                                                                                                                                                                                                                                                                    |
+| argumentsToBeExcludedFromQueryString | Falls ihr `addQueryString` aktiviert habt, aber einen oder zwei bestimmte Parameter wieder entfernen wollt, dann tragt ihr hier diese Parameter ein. Klappt nur, wenn `actionUri` nicht gesetzt ist.                                                                                                                                                                                                                                                                                                                                              |
+| addQueryStringMethod                 | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Normalerweise werden nur die GET Parameter bei Verwendung von `addQueryString` an die Zielseite angehangen. Dieser Parameter erlaubt 4 Werte. `GET`: Standard. Die GET-Parameter werden übergeben. `POST`: Die POST Parameter werden mit übergeben. `GET,POST`: GET-Parameter sind die Basis und werden mit POST Parametern überschrieben, sofern beide Methoden gleichnamige Parameter beinhalten. `POST,GET`: POST-Parameter werden mit GET-Parametern überschrieben. |
+| fieldNamePrefix                      | Falls ein anderer Prefix gewünscht ist. Macht eigentlich nur Sinn, wenn die Formulardaten von einer anderen Extension abgearbeitet werden müssen.                                                                                                                                                                                                                                                                                                                                                                                                 |
+| actionUri                            | Gebt hier Eure ganz eigene individuelle Zielseiten-URL ein. Viele der oberen Parameter haben aber dann keine Wirkung mehr.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| objectName                           | Hier kommt ein Objekt- bzw. Modelname rein, in das die nach Absenden gesammelten Formulardaten gespeichert werden sollen. Hat den Vorteil, dass Ihr nicht in jeder Action die Formulardaten überprüfen, sondern die Überprüfung nur einmalig im Model vornehmen müsst.                                                                                                                                                                                                                                                                            |
+| hiddenFieldClassName                 | {{% badge style="green" icon="angle-double-up" %}}TYPO3 4.7{{% /badge %}} Der `f:form` ViewHelper rendert ein paar hidden Felder, um z.B. eine Liste über die erlaubten Formularfelder zu generieren oder auch die Action zu kennen, die dieses Formular rendern lässt. Mit diesem Parameter könnt Ihr dem div-Tag, der diese hidden Felder enthält explizit setzen.                                                                                                                                                                              |
 
 ### Beispiel
 
@@ -495,12 +495,12 @@ Ein sehr mächtiger ViewHelper im Bereich der Listengenerierung. Übergebt dem V
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| each | Array oder Objekt, das durchlaufen werden soll |
-| as | Ein Variablenname, der die gruppierten Datensätze enthält |
-| groupBy | anhand welcher Eigenschaft soll das Array gruppiert werden |
-| groupKey | Innerhalb der `f:groupedBy` Tags kann mit dieser Variable auf den gruppierten Wert zugegriffen werden. |
+| Parameter | Erklärung                                                                                              |
+|-----------|--------------------------------------------------------------------------------------------------------|
+| each      | Array oder Objekt, das durchlaufen werden soll                                                         |
+| as        | Ein Variablenname, der die gruppierten Datensätze enthält                                              |
+| groupBy   | anhand welcher Eigenschaft soll das Array gruppiert werden                                             |
+| groupKey  | Innerhalb der `f:groupedBy` Tags kann mit dieser Variable auf den gruppierten Wert zugegriffen werden. |
 
 ### Beispiel
 
@@ -535,8 +535,8 @@ Ermöglicht Wenn-Dann-Sonst-Abfragen.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
+| Parameter | Erklärung                                               |
+|-----------|---------------------------------------------------------|
 | condition | Hier kommt die Vergleichsabfrage rein (Siehe Beispiele) |
 
 Folgende Vergleiche sind erlaubt: `==`, `!=`, `<`, `<=`, `>`, `>=` und `%`.
@@ -602,20 +602,20 @@ Ich war total begeistert, als ich von diesem ViewHelper das erstmal gelesen habe
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| src | - Pfad zu der Datei. Prefix `EXT:` möglich.<br>- Kombinierter Identifier wie `2:uploads/tx_news/hund.png`. Wobei die Zahl die UID des Storages angibt.<br>- UID aus der Tabelle sys_file<br>- Wenn `treatIdAsReference` aktiviert wurde, dann gilt nicht mehr die UID aus der Tabelle `sys_file`, sondern die UID aus der Tabelle `sys_file_reference`. |
-| alt | Alternativtext für das Bild, falls es nicht angezeigt wird |
-| width | Breite des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen, abgeschnitten wird. Z.B. 200c |
-| height | Höhe des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen, abgeschnitten wird. Z.B. 100c |
-| minWidth | Auch wenn die Bilder im Original evtl. kleiner sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Breite gezoomt. |
-| minHeight | Auch wenn die Bilder im Original evtl. kleiner sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Höhe gezoomt. |
-| maxWidth | Auch wenn die Bilder im Original evtl. größer sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Breite verkleinert. |
-| maxHeight | Auch wenn die Bilder im Original evtl. größer sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Höhe verkleinert. |
-| treatIdAsReference | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Verwende die UID beim `src` Parameter für die Tabelle `sys_file_reference` und nicht mehr für Tabelle `sys_file`. |
-| image | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}} Anstatt dem `src` Parameter könnt ihr hier das komplette Bildobjekt von FAL übergeben (FileInterface/AbstractFileFolder). `src` und `image` sind eine entweder-oder-Sache. Ihr könnt nicht beide gleichzeitig verwenden. |
-| crop | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} Hiermit könnt Ihr das in sys_file_reference hinterlegte Cropping überschreiben. Erwartet wird ein Text wie: X,Y,WIDTH,HEIGHT. X = Horizontale Anzahl Pixel von der oberen linken Ecke. Y = Vertikale Anzahl von Pixel der oberen linken Ecke. WIDTH/HEIGHT: Breite und Höhe des Ausschnitts in Pixel. Wenn 0, dann wird das in `sys_file_reference` hinterlegte Cropping komplett deaktiviert. |
-| absolute | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Wenn 1, dann wird das Bild mit einem absoluten Pfad gerendert. |
+| Parameter          | Erklärung                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| src                | - Pfad zu der Datei. Prefix `EXT:` möglich.<br>- Kombinierter Identifier wie `2:uploads/tx_news/hund.png`. Wobei die Zahl die UID des Storages angibt.<br>- UID aus der Tabelle sys_file<br>- Wenn `treatIdAsReference` aktiviert wurde, dann gilt nicht mehr die UID aus der Tabelle `sys_file`, sondern die UID aus der Tabelle `sys_file_reference`.                                                                                                                  |
+| alt                | Alternativtext für das Bild, falls es nicht angezeigt wird                                                                                                                                                                                                                                                                                                                                                                                                               |
+| width              | Breite des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen, abgeschnitten wird. Z.B. 200c                                                                                                                                                                                                                                                                                                       |
+| height             | Höhe des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen, abgeschnitten wird. Z.B. 100c                                                                                                                                                                                                                                                                                                         |
+| minWidth           | Auch wenn die Bilder im Original evtl. kleiner sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Breite gezoomt.                                                                                                                                                                                                                                                                                                                                 |
+| minHeight          | Auch wenn die Bilder im Original evtl. kleiner sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Höhe gezoomt.                                                                                                                                                                                                                                                                                                                                   |
+| maxWidth           | Auch wenn die Bilder im Original evtl. größer sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Breite verkleinert.                                                                                                                                                                                                                                                                                                                              |
+| maxHeight          | Auch wenn die Bilder im Original evtl. größer sind wie dieser Wert hier, so werden diese Bilder auf die hier angegebene Höhe verkleinert.                                                                                                                                                                                                                                                                                                                                |
+| treatIdAsReference | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Verwende die UID beim `src` Parameter für die Tabelle `sys_file_reference` und nicht mehr für Tabelle `sys_file`.                                                                                                                                                                                                                                                                              |
+| image              | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.2{{% /badge %}} Anstatt dem `src` Parameter könnt ihr hier das komplette Bildobjekt von FAL übergeben (FileInterface/AbstractFileFolder). `src` und `image` sind eine entweder-oder-Sache. Ihr könnt nicht beide gleichzeitig verwenden.                                                                                                                                                                       |
+| crop               | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.3{{% /badge %}} Hiermit könnt Ihr das in sys_file_reference hinterlegte Cropping überschreiben. Erwartet wird ein Text wie: X,Y,WIDTH,HEIGHT. X = Horizontale Anzahl Pixel von der oberen linken Ecke. Y = Vertikale Anzahl von Pixel der oberen linken Ecke. WIDTH/HEIGHT: Breite und Höhe des Ausschnitts in Pixel. Wenn 0, dann wird das in `sys_file_reference` hinterlegte Cropping komplett deaktiviert. |
+| absolute           | {{% badge style="green" icon="angle-double-up" %}}TYPO3 7.6{{% /badge %}} Wenn 1, dann wird das Bild mit einem absoluten Pfad gerendert.                                                                                                                                                                                                                                                                                                                                 |
 
 ### Beispiel in Originalgröße
 
@@ -650,12 +650,12 @@ Doku kommt noch
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| file | Hier geht es nicht um eine UID, Dateinamen oder Referenz. Diese Eigenschaft erwartet das komplette Bildobjekt vom Typ FileInterface oder AbstractFileFolder |
-| additionalConfig | Eine zusätzliche Konfiguration, die an den Bildrenderer Prozess übergeben wird |
-| width | Breite des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen geschnitten wird. Z.B. 200c |
-| height | Höhe des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen geschnitten wird. Z.B. 100c |
+| Parameter        | Erklärung                                                                                                                                                       |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| file             | Hier geht es nicht um eine UID, Dateinamen oder Referenz. Diese Eigenschaft erwartet das komplette Bildobjekt vom Typ FileInterface oder AbstractFileFolder     |
+| additionalConfig | Eine zusätzliche Konfiguration, die an den Bildrenderer Prozess übergeben wird                                                                                  |
+| width            | Breite des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen geschnitten wird. Z.B. 200c |
+| height           | Höhe des Bildes. Hier kann z.B. mit einem angehängtem `c` gesagt werden, dass das Bild, falls die Proportionen nicht genau passen geschnitten wird. Z.B. 100c   |
 
 ## f:or
 
@@ -677,12 +677,12 @@ Sections haben kein eigenes Verzeichnis, da diese immer innerhalb der aktuellen 
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| section | Der Name einer Section, die gerendert werden soll. |
-| partial | Pfad + Dateiname ohne .html-Endung ab dem Verzeichnis, das für Partials definiert wurde. |
-| arguments | Welche Variablen sollen in den Partial/das Layout übernommen werden. |
-| optional | Normalerweise hagelt es Fehlermeldungen, wenn Sections nicht auffindbar sind. Setzt man diesen Parameter aber auf TRUE, dann wird eben nichts ausgegeben. |
+| Parameter | Erklärung                                                                                                                                                 |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| section   | Der Name einer Section, die gerendert werden soll.                                                                                                        |
+| partial   | Pfad + Dateiname ohne .html-Endung ab dem Verzeichnis, das für Partials definiert wurde.                                                                  |
+| arguments | Welche Variablen sollen in den Partial/das Layout übernommen werden.                                                                                      |
+| optional  | Normalerweise hagelt es Fehlermeldungen, wenn Sections nicht auffindbar sind. Setzt man diesen Parameter aber auf TRUE, dann wird eben nichts ausgegeben. |
 
 ### Beispiel für Partial
 
@@ -717,8 +717,8 @@ Dieser ViewHelper findet nur innerhalb der Templates von Fluid Widgets Gebrauch.
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
+| Parameter | Erklärung                                                                     |
+|-----------|-------------------------------------------------------------------------------|
 | arguments | Variablen in ArrayNotation, die an das Unter-Template übergeben werden sollen |
 
 ## f:renderFlashMessages
@@ -738,9 +738,9 @@ Sections arbeiten ähnlich wie Partials. Während Partials in eine eigene Datei 
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| name | Ein Name unter dem man den Inhalt zwischen den Tags wieder auffinden kann |
+| Parameter | Erklärung                                                                 |
+|-----------|---------------------------------------------------------------------------|
+| name      | Ein Name unter dem man den Inhalt zwischen den Tags wieder auffinden kann |
 
 ### Beispiel
 
@@ -791,8 +791,8 @@ Mit dem f:switch ViewHelper könnt Ihr gleich mehrere Varianten eines Wertes üb
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
+| Parameter  | Erklärung                                                                             |
+|------------|---------------------------------------------------------------------------------------|
 | expression | Ein string/int/bool Wert, auf den die enthaltenen f:case ViewHelper reagieren sollen. |
 
 ### Beispiel
@@ -822,14 +822,14 @@ Der `f:translate` ViewHelper stellt Übersetzungen im Fluid-Template zur Verfüg
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| key | In den Sprachdateien (`*.locallang.xlf`) wird jeder Eintrag eindeutig über die `index` Angabe identifiziert. Gebt für `key` diesen Index an, um den gewünschten Eintrag in der vorgegebenen Übersetzung auszulesen. Wünscht ihr Zugriff auf die Sprachdateien anderer Extensions, dann verwendet zusätzlich die Option `extensionName`. Sollten die Sprachdateien anders heißen, dann muss der vollständige Pfad zu der Sprachdatei in Standardsprache (die Dateien ohne `de.` vorne dran) mit vorangestelltem `LLL:EXT:` und der `key` mittels `:` vom Pfad getrennt angegeben werden |
-| id | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Das gleiche wie `key`. Wurde damals zwecks besserer Kompatibilität zu TYPO3 Flow hinzugefügt und danach aus Kompatibilitätsgründen zu früheren TYPO3 Versionen nie wieder entfernt. |
-| default | Wenn der `key` in der Sprachdatei nicht gefunden werden kann, dann wird der Text aus `default` für die Ausgabe verwendet. Wenn `default` nicht verwendet wird, versucht dieser ViewHelper den Default aus dem Text zwischen öffnendem und schließendem Tag zu verwenden. |
-| htmlEscape | Alle Übersetzungen aus den Sprachdateien werden zunächst durch `PHP:htmlspecialchars()` verarbeitet. Falls Übersetzungen HTML Tags beinhalten, dann setzt `htmlEscape` auf `false`, um die Verarbeitung durch `htmlspecialchars` zu unterbinden.`htmlEscape` wirkt sich nicht auf den Text aus `default` aus. |
-| arguments | In den Übersetzungen können Platzhalter definiert werden, die dann mit den Inhalten diesen Arrays befüllt werden. |
-| extensionName | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Wenn angegeben, dann wird die `locallang.xlf` aus `Resources/Private/Language` verwendet, um eine Übersetzung für `key` zu finden. Ohne Angabe wird der aktuelle Kontext, in dem sich das Fluid-Template befindet, ausgelesen und von dort der aktuelle Extension-Name extrahiert. Bitte verwendet UpperCamelCase: `BlogExample` statt `blog_example` |
+| Parameter     | Erklärung                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| key           | In den Sprachdateien (`*.locallang.xlf`) wird jeder Eintrag eindeutig über die `index` Angabe identifiziert. Gebt für `key` diesen Index an, um den gewünschten Eintrag in der vorgegebenen Übersetzung auszulesen. Wünscht ihr Zugriff auf die Sprachdateien anderer Extensions, dann verwendet zusätzlich die Option `extensionName`. Sollten die Sprachdateien anders heißen, dann muss der vollständige Pfad zu der Sprachdatei in Standardsprache (die Dateien ohne `de.` vorne dran) mit vorangestelltem `LLL:EXT:` und der `key` mittels `:` vom Pfad getrennt angegeben werden |
+| id            | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Das gleiche wie `key`. Wurde damals zwecks besserer Kompatibilität zu TYPO3 Flow hinzugefügt und danach aus Kompatibilitätsgründen zu früheren TYPO3 Versionen nie wieder entfernt.                                                                                                                                                                                                                                                                                                                          |
+| default       | Wenn der `key` in der Sprachdatei nicht gefunden werden kann, dann wird der Text aus `default` für die Ausgabe verwendet. Wenn `default` nicht verwendet wird, versucht dieser ViewHelper den Default aus dem Text zwischen öffnendem und schließendem Tag zu verwenden.                                                                                                                                                                                                                                                                                                               |
+| htmlEscape    | Alle Übersetzungen aus den Sprachdateien werden zunächst durch `PHP:htmlspecialchars()` verarbeitet. Falls Übersetzungen HTML Tags beinhalten, dann setzt `htmlEscape` auf `false`, um die Verarbeitung durch `htmlspecialchars` zu unterbinden.`htmlEscape` wirkt sich nicht auf den Text aus `default` aus.                                                                                                                                                                                                                                                                          |
+| arguments     | In den Übersetzungen können Platzhalter definiert werden, die dann mit den Inhalten diesen Arrays befüllt werden.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| extensionName | {{% badge style="green" icon="angle-double-up" %}}TYPO3 6.0{{% /badge %}} Wenn angegeben, dann wird die `locallang.xlf` aus `Resources/Private/Language` verwendet, um eine Übersetzung für `key` zu finden. Ohne Angabe wird der aktuelle Kontext, in dem sich das Fluid-Template befindet, ausgelesen und von dort der aktuelle Extension-Name extrahiert. Bitte verwendet UpperCamelCase: `BlogExample` statt `blog_example`                                                                                                                                                        |
 
 ### Beispiel: Simpel
 
@@ -875,10 +875,10 @@ Erstellt im Template eine Variable, die ab Verwendung bis Dateiende Gültigkeit 
 
 ### Parameter
 
-| Parameter | Erklärung |
-|-----------|-----------|
-| name | Der Variablenname. Beispiel: `frucht`. Mit dem hier angegebenen Namen kann im Template nach Nutzung dieses ViewHelpers mittels `{frucht}` auf den enthaltenen Wert zugegriffen werden. |
-| value | Der Wert, der dem Variablennamen zuzuweisen ist. |
+| Parameter | Erklärung                                                                                                                                                                              |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name      | Der Variablenname. Beispiel: `frucht`. Mit dem hier angegebenen Namen kann im Template nach Nutzung dieses ViewHelpers mittels `{frucht}` auf den enthaltenen Wert zugegriffen werden. |
+| value     | Der Wert, der dem Variablennamen zuzuweisen ist.                                                                                                                                       |
 
 ### Beispiel: Einfache Wertzuweisung
 

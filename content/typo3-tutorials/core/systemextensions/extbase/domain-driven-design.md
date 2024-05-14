@@ -38,13 +38,13 @@ Mit diesen Verknüpfungen sowie Gettern und Settern könnt ihr eure Modelle imme
 
 Splittet eure Programmierung in kleinere Teilbereiche und schaut, wie ihr diese in die Techniken von Domain Driven Design überführen könnt:
 
-| Technik | Erklärung |
-|---------|-----------|
-| Factories | Wenn es mal nicht reicht Daten aus der DB einfach 1 zu 1 in die Modelle zu überführen, dann nutzt Factory Klassen. Um ein Flugzeug zu starten braucht es eben nicht nur ein Flugzeug. Es gibt Ablaufpläne wie das Flugzeug vorzubereiten ist. |
-| Entities | Modelle, die über eine ID eindeutig zu identifizieren sind: Fahrgestellnummer, Artikelnummer, IBAN, ISBN |
-| Value Objects | Modelle, die über all ihre Eigenschaften eindeutig sind. Farbe, Adresse (Straße, Hausnummer, PLZ, Ort) |
-| Repository | Stellt euch eine Bibliothek vor, um an Daten dranzukommen. Dabei kann es euch völlig egal sein, woher diese Daten kommen: RestAPI, Datenbank, CSV, XML, JSON |
-| Aggregate | Der Einstiegspunkt einer Struktur, um an beliebige Daten innerhalb der Struktur dranzukommen. |
-| Services | Denkt an Mailversand, Prozesse protokollieren, ZIP Datei erstellen, Download vorbereiten |
+| Technik       | Erklärung                                                                                                                                                                                                                                     |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Factories     | Wenn es mal nicht reicht Daten aus der DB einfach 1 zu 1 in die Modelle zu überführen, dann nutzt Factory Klassen. Um ein Flugzeug zu starten braucht es eben nicht nur ein Flugzeug. Es gibt Ablaufpläne wie das Flugzeug vorzubereiten ist. |
+| Entities      | Modelle, die über eine ID eindeutig zu identifizieren sind: Fahrgestellnummer, Artikelnummer, IBAN, ISBN                                                                                                                                      |
+| Value Objects | Modelle, die über all ihre Eigenschaften eindeutig sind. Farbe, Adresse (Straße, Hausnummer, PLZ, Ort)                                                                                                                                        |
+| Repository    | Stellt euch eine Bibliothek vor, um an Daten dranzukommen. Dabei kann es euch völlig egal sein, woher diese Daten kommen: RestAPI, Datenbank, CSV, XML, JSON                                                                                  |
+| Aggregate     | Der Einstiegspunkt einer Struktur, um an beliebige Daten innerhalb der Struktur dranzukommen.                                                                                                                                                 |
+| Services      | Denkt an Mailversand, Prozesse protokollieren, ZIP Datei erstellen, Download vorbereiten                                                                                                                                                      |
 
 Und das sind nur die Techniken, die mir durch meine Arbeit mit Extbase bekannt sind. Auf [Wikipedia](https://de.wikipedia.org/wiki/Domain-driven_Design) habe ich noch eine ganze Menge weiterer Techniken gefunden, in die ihr eure Programmierung und Klassen einkategorisieren könnt. Aber rechnet nicht damit, dass alle diese Techniken in Extbase adaptiert wurden.
