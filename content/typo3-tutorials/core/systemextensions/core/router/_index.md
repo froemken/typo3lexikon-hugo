@@ -250,8 +250,11 @@ var_dump($siteHelper->buildUrl(
 
 ## Routen für Extensions
 
+Wie vorhin erklärt, bildet nur der vordere Teil des URL-Pfades den Slug für TYPO3 Seiten ab. Der hintere Teil der URL, sofern vorhanden und konfiguriert, bildet Pfade für Extensions ab. Die Konfiguration dazu befindet sich in der `config.yaml` im `sites/[site-identifier]/` Ordner auf dem Webserver und kann aktuell noch nicht über das Sites-Modul im TYPO3 Backend konfiguriert werden. Diese Datei muss manuell bearbeitet werden. Die Routen für Extensions werden in der `config.yaml` im Abschnitt `routeEnhancers` konfiguriert. Siehe dazu die folgenden Abschnitte `Route Enhancer` und `Aspect`.
+
 ### Route Enhancer
-Mit einem [Route Enhancer](/typo3-tutorials/core/systemextensions/core/router/enhancer/) wird eine Route (oder auch mehrere) definiert, wo auf welcher Seite diese Gültigkeit haben und welche Bedingungen ein URL-Parameter zu erfüllen hat.
+
+Mit einem [Route Enhancer](/typo3-tutorials/core/systemextensions/core/router/enhancer/) wird eine Route (oder auch mehrere) definiert, wo auf welcher Seite diese Gültigkeit und welche Bedingungen ein URL-Parameter zu erfüllen hat.
 
 ### Aspect
 
