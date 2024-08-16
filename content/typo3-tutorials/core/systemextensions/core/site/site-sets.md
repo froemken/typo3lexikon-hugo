@@ -124,10 +124,9 @@ Anstatt Site Settings für Site-Set-Definitionen direkt in der `config.yaml` zu 
 `[MyExt]/Configuration/Sets/Typo3LexikonBootstrap/settings.yaml`
 
 ```yaml
-settings:
-  website:
-    background:
-      color: '#386492'
+website:
+  background:
+    color: '#386492'
 ```
 
 Bitte setzt hier keine Standardwerte. Dafür sind die Settings Definitionen da.
