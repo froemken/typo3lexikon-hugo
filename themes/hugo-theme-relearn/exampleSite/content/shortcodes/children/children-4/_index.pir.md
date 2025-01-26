@@ -1,8 +1,8 @@
 +++
 alwaysopen = false
-descrption = "This be a hidden demo child plank"
+description = "This be a hidden demo child plank"
 hidden = true
-tags = ["children", "it's hidden"]
+tags = ["children", "the hidden"]
 title = "plank 4 (hidden)"
 weight = 40
 +++

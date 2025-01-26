@@ -40,13 +40,16 @@ other = "Menj a kezdőlapra"
 [Edit-this-page]
 other = "Szerkesztés"
 
+[Show-Markdown]
+other = "Markdown megjelenítése"
+
 [Print-this-chapter]
 other = "Teljes fejezet nyomtatása"
 
 [More-action]
 other = "Egyebek"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Egyebek"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "KB"
 [Megabyte-symbol]
 other = "MB"
 
-[note]
-other = "Jegyzet"
+[caution]
+other = "Vigyázat"
+
+[important]
+other = "Fontos"
 
 [info]
 other = "Infó"
+
+[note]
+other = "Jegyzet"
 
 [tip]
 other = "Tipp"
@@ -117,3 +126,6 @@ other = "Kategóriák"
 
 [category]
 other = "Kategória"
+
+[Details]
+other = "Részletek"

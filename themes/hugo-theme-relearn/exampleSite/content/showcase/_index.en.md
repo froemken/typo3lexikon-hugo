@@ -1,4 +1,5 @@
 +++
+menuPre = "<i class='fa-fw fas fa-camera'></i> "
 title = "Showcase"
 [_build]
   render = "always"
@@ -10,7 +11,7 @@ title = "Showcase"
 
 A collection of poems with requirements for improved taxonomy support, adjusted menu width and additional JavaScript dependencies.
 
-[![Poésieland image](poesieland.png?width=60pc&lightbox=false)](http://poesieland.free.fr/)
+[![Poésieland image](poesieland.png?width=60pc&lightbox=false)](https://poesieland.github.io/)
 
 ## GoboLinux Wiki by NEONsys.org
 

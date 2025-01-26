@@ -40,13 +40,16 @@ other = "Vers la page d'accueil"
 [Edit-this-page]
 other = "Éditer"
 
+[Show-Markdown]
+other = "Afficher Markdown"
+
 [Print-this-chapter]
 other = "Imprimer le chapitre entier"
 
 [More-action]
 other = "Aller plus loin"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Aller plus loin"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "ko"
 [Megabyte-symbol]
 other = "Mo"
 
-[note]
-other = "Remarque"
+[caution]
+other = "Attention"
+
+[important]
+other = "Important"
 
 [info]
 other = "Information"
+
+[note]
+other = "Remarque"
 
 [tip]
 other = "Astuce"
@@ -117,3 +126,6 @@ other = "Catégories"
 
 [category]
 other = "Catégorie"
+
+[Details]
+other = "Détails"

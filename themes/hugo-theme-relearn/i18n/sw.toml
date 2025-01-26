@@ -40,13 +40,16 @@ other = "Nenda kwenye ukurasa wa kwanza"
 [Edit-this-page]
 other = "Hariri"
 
+[Show-Markdown]
+other = "Onyesha Alama"
+
 [Print-this-chapter]
 other = "Chapisha sura nzima"
 
 [More-action]
 other = "Zaidi"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Zaidi"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "KB"
 [Megabyte-symbol]
 other = "MB"
 
-[note]
-other = "Kumbuka"
+[caution]
+other = "Tahadhari"
+
+[important]
+other = "Muhimu"
 
 [info]
 other = "Habari"
+
+[note]
+other = "Kumbuka"
 
 [tip]
 other = "Kidokezo"
@@ -117,3 +126,6 @@ other = "Kategoria"
 
 [category]
 other = "Kategoria"
+
+[Details]
+other = "Maelezo"

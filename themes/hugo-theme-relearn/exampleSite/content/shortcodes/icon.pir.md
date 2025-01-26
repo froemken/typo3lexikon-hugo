@@ -1,6 +1,6 @@
 +++
-aliases = "/pir/cont/icons"
-descrption = "Nice ay'cons fer yer plank"
+categories = ["howto", "reference"]
+description = "Nice ay'cons fer yer plank"
 title = "Icon"
 +++
 {{< piratify >}}

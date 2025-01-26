@@ -40,13 +40,16 @@ other = "Перейти на главную"
 [Edit-this-page]
 other = "редактировать"
 
+[Show-Markdown]
+other = "Показать Markdown"
+
 [Print-this-chapter]
 other = "Печать всей главы"
 
 [More-action]
 other = "Еще"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Еще"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "КБ"
 [Megabyte-symbol]
 other = "МБ"
 
-[note]
-other = "Заметка"
+[caution]
+other = "Внимание"
+
+[important]
+other = "Важно"
 
 [info]
 other = "Информация"
+
+[note]
+other = "Заметка"
 
 [tip]
 other = "Совет"
@@ -117,3 +126,6 @@ other = "Категории"
 
 [category]
 other = "Категория"
+
+[Details]
+other = "Подробности"

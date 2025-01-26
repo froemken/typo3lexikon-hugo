@@ -40,13 +40,16 @@ other = "Đi đến trang chủ"
 [Edit-this-page]
 other = "Biên tập"
 
+[Show-Markdown]
+other = "Hiển thị Markdown"
+
 [Print-this-chapter]
 other = "In toàn bộ chương"
 
 [More-action]
 other = "Nội dung khác"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Nội dung khác"
 
 [Expand-title]
@@ -70,11 +73,17 @@ other = "KB"
 [Megabyte-symbol]
 other = "MB"
 
-[note]
-other = "Ghi chú"
+[caution]
+other = "Thận trọng"
+
+[important]
+other = "Quan trọng"
 
 [info]
 other = "Thông tin"
+
+[note]
+other = "Ghi chú"
 
 [tip]
 other = "Mẹo vặt"
@@ -120,3 +129,6 @@ other = "Thể loại"
 
 [category]
 other = "Loại"
+
+[Details]
+other = "Chi tiết"

@@ -40,13 +40,16 @@ other = "Naar startpagina"
 [Edit-this-page]
 other = "Bewerken"
 
+[Show-Markdown]
+other = "Afprijzing weergeven"
+
 [Print-this-chapter]
 other = "Het hele hoofdstuk afdrukken"
 
 [More-action]
 other = "Snelkoppelingen"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Snelkoppelingen"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "KB"
 [Megabyte-symbol]
 other = "MB"
 
-[note]
-other = "Notitie"
+[caution]
+other = "Let op"
+
+[important]
+other = "Belangrijk"
 
 [info]
 other = "Info"
+
+[note]
+other = "Notitie"
 
 [tip]
 other = "Fooi"
@@ -117,3 +126,6 @@ other = "Categorieën"
 
 [category]
 other = "Categorie"
+
+[Details]
+other = "Details"

@@ -1,7 +1,9 @@
 +++
-archetype = "chapter"
-title = "Shorrrtcodes"
+categories = ["reference"]
+menuPre = "<i class='fa-fw fas fa-shapes'></i> "
 ordersectionsby = "title"
-weight = 3
+title = "Shorrrtcodes"
+type = "chapter"
+weight = 4
 +++
 {{< piratify >}}

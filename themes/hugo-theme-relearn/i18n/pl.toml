@@ -40,13 +40,16 @@ other = "Idź do strony paczątkowej"
 [Edit-this-page]
 other = "Edycja"
 
+[Show-Markdown]
+other = "Pokaż język Markdown"
+
 [Print-this-chapter]
 other = "Drukowanie całego rozdziału"
 
 [More-action]
 other = "Więcej"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Więcej"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "KB"
 [Megabyte-symbol]
 other = "MB"
 
-[note]
-other = "Uwaga"
+[caution]
+other = "Ostrożność"
+
+[important]
+other = "Ważne"
 
 [info]
 other = "Info"
+
+[note]
+other = "Uwaga"
 
 [tip]
 other = "Porada"
@@ -117,3 +126,6 @@ other = "Kategorie"
 
 [category]
 other = "Kategoria"
+
+[Details]
+other = "Szczegóły"

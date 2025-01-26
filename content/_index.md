@@ -4,6 +4,7 @@ title = "Stefans TYPO3 Seite"
 linkTitle = "Startseite"
 alwaysopen = true
 ordersectionsby = "weight"
+description = "Stefan Frömken stellt auf seiner TYPO3-Seite Tutorials zu verschiedenen Themen von TYPO3 vor. Einfache Texte und Themen bezogene Bilder runden seine Tipps und Tricks ab"
 +++
 
 ## Tutorials, Tipps und Tricks von Stefan Frömken

@@ -9,7 +9,6 @@ theme = "hugo-theme-relearn"
 [params]
 author.name = "Stefan Froemken"
 author.email = "froemken@gmail.com"
-description = "Stefan Frömken stellt auf seiner TYPO3-Seite Tutorials zu verschiedenen Themen von TYPO3 vor. Einfache Texte und Themen bezogene Bilder runden seine Tipps und Tricks ab"
 social.twitter = "StefanFroemken"
 themeVariant = [
 	{ identifier = "zen-auto",      name = "Zen Light/Dark", auto = [ "zen-light", "zen-dark" ] },
@@ -36,7 +35,7 @@ disableHoverBlockCopyToClipBoard = false
 externalLinkTarget = "_blank"
 
 [outputs]
-  home = ["html", "rss", "search"]
+  home = ["html", "rss"]
 #  page = ["html"]
 #  rss = ["rss"]
 #  section = ["html", "rss"]

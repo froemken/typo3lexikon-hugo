@@ -1,5 +1,7 @@
 +++
+categories = ["howto", "reference"]
 description = "Disclaimers to help you structure your page"
+options = ["boxStyle"]
 title = "Notice"
 +++
 
@@ -11,9 +13,15 @@ It is all about the boxes.
 
 ## Usage
 
-While the examples are using shortcodes with named parameter you are free to use positional as well or also call this shortcode from your own partials.
-
 {{< tabs groupid="shortcode-parameter">}}
+{{% tab title="callout" %}}
+
+````md
+> [!primary] There may be pirates
+> It is all about the boxes.
+````
+
+{{% /tab %}}
 {{% tab title="shortcode" %}}
 
 ````go
@@ -47,126 +55,96 @@ It is all about the boxes.
 {{% /tab %}}
 {{< /tabs >}}
 
+Callout syntax has limited features as it does not provide all of the below parameter. Nevertheless, it is widely available in other Markdown parsers like [GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) or [Obsidian](https://help.obsidian.md/Editing+and+formatting/Callouts#Change+the+title) and therefore is the recommend syntax for generating portable Markdown.
+
+If you want to display a transparent expandable box without any border, you can also use the [`expand` shortcode](/shortcodes/expand).
+
 ### Parameter
 
-| Name      | Position | Default   | Notes       |
-|-----------|----------|-----------|-------------|
-| **style** | 1        | `default` | The style scheme used for the box.<br><br>- by severity: `info`, `note`, `tip`, `warning`<br>- by brand color: `primary`, `secondary`, `accent`<br>- by color: `blue`, `green`, `grey`, `orange`, `red`<br>- by special color: `default`, `transparent`, `code` |
-| **color** |          | see notes | The [CSS color value](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) to be used. If not set, the chosen color depends on the **style**. Any given value will overwrite the default.<br><br>- for severity styles: a nice matching color for the severity<br>- for all other styles: the corresponding color |
-| **title** | 2        | see notes | Arbitrary text for the box title. Depending on the **style** there may be a default title. Any given value will overwrite the default.<br><br>- for severity styles: the matching title for the severity<br>- for all other styles: _&lt;empty&gt;_<br><br>If you want no title for a severity style, you have to set this parameter to `" "` (a non empty string filled with spaces) |
-| **icon**  | 3        | see notes | [Font Awesome icon name](shortcodes/icon#finding-an-icon) set to the left of the title. Depending on the **style** there may be a default icon. Any given value will overwrite the default.<br><br>- for severity styles: a nice matching icon for the severity<br>- for all other styles: _&lt;empty&gt;_<br><br>If you want no icon for a severity style, you have to set this parameter to `" "` (a non empty string filled with spaces) |
+| Name                  | Position | Default         | Notes       |
+|-----------------------|----------|-----------------|-------------|
+| **groupid**           |          | _&lt;empty&gt;_ | Arbitrary name of the group the box belongs to.<br><br>Expandable boxes with the same **groupid** sychronize their open state. |
+| **style**             | 1        | `default`       | The style scheme used for the box.<br><br>- by severity: `caution`, `important`, `info`, `note`, `tip`, `warning`<br>- by brand color: `primary`, `secondary`, `accent`<br>- by color: `blue`, `cyan`, `green`, `grey`, `magenta`, `orange`, `red`<br>- by special color: `default`, `transparent`, `code`<br><br>You can also [define your own styles](#defining-own-styles). |
+| **color**             |          | see notes       | The [CSS color value](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) to be used. If not set, the chosen color depends on the **style**. Any given value will overwrite the default.<br><br>- for severity styles: a nice matching color for the severity<br>- for all other styles: the corresponding color<br><br>This is not available using callout syntax. |
+| **title**             | 2        | see notes       | Arbitrary text for the box title. Depending on the **style** there may be a default title. Any given value will overwrite the default.<br><br>- for severity styles: the matching title for the severity<br>- for all other styles: _&lt;empty&gt;_<br><br>If you want no title for a severity style, you have to set this parameter to `" "` (a non empty string filled with spaces) |
+| **icon**              | 3        | see notes       | [Font Awesome icon name](shortcodes/icon#finding-an-icon) set to the left of the title. Depending on the **style** there may be a default icon. Any given value will overwrite the default.<br><br>- for severity styles: a nice matching icon for the severity<br>- for all other styles: _&lt;empty&gt;_<br><br>If you want no icon for a severity style, you have to set this parameter to `" "` (a non empty string filled with spaces)<br><br>This is not available using callout syntax. |
+| **expanded**          |          | _&lt;empty&gt;_ | Whether to draw an expander and how the content is displayed.<br><br>- _&lt;empty&gt;_: no expander is drawn and the content is permanently shown<br>- `true`: the expander is drawn and the content is initially shown<br>- `false`: the expander is drawn and the content is initially hidden |
 | _**&lt;content&gt;**_ |          | _&lt;empty&gt;_ | Arbitrary text to be displayed in box. |
+
+## Settings
+
+### Defining own Styles
+
+{{% badge style="cyan" icon="gears" title=" " %}}Option{{% /badge %}} Besides the predefined `style` values [from above](#parameter), you are able to define your own.
+
+{{< multiconfig file=hugo >}}
+[params]
+boxStyle = [
+	{ identifier = 'magic', i18n = '', title = 'Magic', icon = 'rainbow', color = 'gold' }
+]
+{{< /multiconfig >}}
+
+The `style` parameter used in a shortcode must match the `identifier` in the configuration. The title for the style will be determined from the configured `title`. If no `title` but a `i18n` is set, the title will be taken from the translation files by that key. The `title` may be empty in which case, the box does not contain a default title. `icon` and `color` are working similar.
+
+You can also redefine the predefined styles if you're not satisfied with the default values.
+
+Below is a [usage example](#user-defined-style).
 
 ## Examples
 
-### By Severity
+### By Severity Using Callout Syntax
 
-#### Info with markup
+````md
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
 
-````go
-{{%/* notice style="info" */%}}
-An **information** disclaimer
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
 
-You can add standard markdown syntax:
+> [!INFO]
+> Information that users <ins>_might_</ins> find interesting.
 
-- multiple paragraphs
-- bullet point lists
-- _emphasized_, **bold** and even ***bold emphasized*** text
-- [links](https://example.com)
-- etc.
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
 
-```plaintext
-...and even source code
-```
+> [!TIP]
+> Helpful advice for doing things better or more easily.
 
-> the possibilities are endless (almost - including other shortcodes may or may not work)
-{{%/* /notice */%}}
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
 ````
 
-{{% notice style="info" %}}
-An **information** disclaimer
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
 
-You can add standard markdown syntax:
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
 
-- multiple paragraphs
-- bullet point lists
-- _emphasized_, **bold** and even **_bold emphasized_** text
-- [links](https://example.com)
-- etc.
+> [!INFO]
+> Information that users <ins>_might_</ins> find interesting.
 
-```plaintext
-...and even source code
-```
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
 
-> the possibilities are endless (almost - including other shortcodes may or may not work)
-{{% /notice %}}
+> [!TIP]
+> Helpful advice for doing things better or more easily.
 
-#### Note
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
 
-````go
-{{%/* notice style="note" */%}}
-A **notice** disclaimer
-{{%/* /notice */%}}
-````
-
-{{% notice style="note" %}}
-A **notice** disclaimer
-{{% /notice %}}
-
-#### Tip
-
-````go
-{{%/* notice style="tip" */%}}
-A **tip** disclaimer
-````
-
-{{% notice style="tip" %}}
-A **tip** disclaimer
-{{% /notice %}}
-
-#### Warning
-
-````go
-{{%/* notice style="warning" */%}}
-A **warning** disclaimer
-{{%/* /notice */%}}
-````
-
-{{% notice style="warning" %}}
-A **warning** disclaimer
-{{% /notice %}}
-
-#### Warning with Non-Default Title and Icon
-
-````go
-{{%/* notice style="warning" title="Here are dragons" icon="dragon" */%}}
-A **warning** disclaimer
-{{%/* /notice */%}}
-````
-
-{{% notice style="warning" title="Here are dragons" icon="dragon" %}}
-A **warning** disclaimer
-{{% /notice %}}
-
-#### Warning without a Title and Icon
-
-````go
-{{%/* notice style="warning" title=" " icon=" " */%}}
-A **warning** disclaimer
-{{%/* /notice */%}}
-````
-
-{{% notice style="warning" title=" " icon=" " %}}
-A **warning** disclaimer
-{{% /notice %}}
-
-### By Brand Colors
-
-#### Primary with Title only
+### By Brand Colors with Title and Icon Variantion
 
 ````go
 {{%/* notice style="primary" title="Primary" */%}}
 A **primary** disclaimer
+{{%/* /notice */%}}
+
+{{%/* notice style="secondary" title="Secondary" */%}}
+A **secondary** disclaimer
+{{%/* /notice */%}}
+
+{{%/* notice style="accent" icon="stopwatch" */%}}
+An **accent** disclaimer
 {{%/* /notice */%}}
 ````
 
@@ -174,126 +152,228 @@ A **primary** disclaimer
 A **primary** disclaimer
 {{% /notice %}}
 
-#### Secondary with Icon only
-
-````go
-{{%/* notice style="secondary" icon="stopwatch" */%}}
-A **secondary** disclaimer
-{{%/* /notice */%}}
-````
-
-{{% notice style="secondary" icon="stopwatch" %}}
+{{% notice style="secondary" title="Secondary" %}}
 A **secondary** disclaimer
 {{% /notice %}}
 
-#### Accent
-
-````go
-{{%/* notice style="accent" */%}}
-An **accent** disclaimer
-{{%/* /notice */%}}
-````
-
-{{% notice style="accent" %}}
+{{% notice style="accent" icon="stopwatch" %}}
 An **accent** disclaimer
 {{% /notice %}}
 
 ### By Color
 
-#### Blue without a Title and Icon
-
 ````go
-{{%/* notice style="blue" */%}}
+{{%/* notice style="blue" title="Blue"*/%}}
 A **blue** disclaimer
 {{%/* /notice */%}}
-````
 
-{{% notice style="blue" %}}
-A **blue** disclaimer
-{{% /notice %}}
+{{%/* notice style="cyan" title="Cyan" */%}}
+A **cyan** disclaimer
+{{%/* /notice */%}}
 
-#### Green with Title only
-
-````go
 {{%/* notice style="green" title="Green" */%}}
 A **green** disclaimer
 {{%/* /notice */%}}
+
+{{%/* notice style="grey" icon="bug" */%}}
+A **grey** disclaimer
+{{%/* /notice */%}}
+
+{{%/* notice style="magenta" title="Magenta" */%}}
+A **magenta** disclaimer
+{{%/* /notice */%}}
+
+{{%/* notice style="orange" title="Orange" icon="bug" */%}}
+A **orange** disclaimer
+{{%/* /notice */%}}
+
+{{%/* notice style="red" title="Red" */%}}
+A **red** disclaimer
+{{%/* /notice */%}}
 ````
+
+{{% notice style="blue" title="Blue" %}}
+A **blue** disclaimer
+{{% /notice %}}
+
+{{% notice style="cyan" title="Cyan" %}}
+A **cyan** disclaimer
+{{% /notice %}}
 
 {{% notice style="green" title="Green" %}}
 A **green** disclaimer
 {{% /notice %}}
 
-#### Grey with Icon only
-
-````go
-{{%/* notice style="grey" icon="bug" */%}}
-A **grey** disclaimer
-{{%/* /notice */%}}
-````
-
 {{% notice style="grey" icon="bug" %}}
 A **grey** disclaimer
 {{% /notice %}}
 
-#### Orange with Title and Icon
-
-````go
-{{%/* notice style="orange" title="Orange" icon="bug" */%}}
-A **orange** disclaimer
-{{%/* /notice */%}}
-````
+{{% notice style="magenta" title="Magenta" %}}
+A **magenta** disclaimer
+{{% /notice %}}
 
 {{% notice style="orange" title="Orange" icon="bug" %}}
 A **orange** disclaimer
 {{% /notice %}}
 
-#### Red without a Title and Icon
-
-````go
-{{%/* notice style="red" */%}}
-A **red** disclaimer
-{{%/* /notice */%}}
-````
-
-{{% notice style="red" %}}
+{{% notice style="red" title="Red" %}}
 A **red** disclaimer
 {{% /notice %}}
 
 ### By Special Color
 
-#### Default with Positional Parameter
-
 ````go
-{{%/* notice default "Pay Attention to this Note!" "skull-crossbones" */%}}
-Some serious information.
+{{%/* notice style="default" title="Default" icon="skull-crossbones" */%}}
+Just some grey default color.
+{{%/* /notice */%}}
+
+{{%/* notice style="code" title="Code" icon="skull-crossbones" */%}}
+Colored like a code fence.
+{{%/* /notice */%}}
+
+{{%/* notice style="transparent" title="Transparent" icon="skull-crossbones" */%}}
+No visible borders.
 {{%/* /notice */%}}
 ````
 
-{{% notice default "Pay Attention to this Note!" "skull-crossbones" %}}
-Some serious information.
+{{% notice style="default" title="Default" icon="skull-crossbones" %}}
+Just some grey default color.
 {{% /notice %}}
 
-#### Transparent with Title and Icon
+{{% notice style="code" title="Code" icon="skull-crossbones" %}}
+Colored like a code fence.
+{{% /notice %}}
+
+{{% notice style="transparent" title="Transparent" icon="skull-crossbones" %}}
+No visible borders.
+{{% /notice %}}
+
+### Various Features
+
+#### With User-Defined Color, Font Awesome Brand Icon and Markdown in Title and Content
 
 ````go
-{{%/* notice style="transparent" title="Pay Attention to this Note!" icon="skull-crossbones" */%}}
-Some serious information.
+{{%/* notice color="fuchsia" title="**Hugo** is _awesome_" icon="fa-fw fab fa-hackerrank" */%}}
+{{% include "shortcodes/include/INCLUDE_ME.md" %}}
 {{%/* /notice */%}}
 ````
 
-{{% notice style="transparent" title="Pay Attention to this Note!" icon="skull-crossbones" %}}
-Some serious information.
+{{% notice color="fuchsia" title="**Hugo** is _awesome_" icon="fa-fw fab fa-hackerrank" %}}
+{{% include "shortcodes/include/INCLUDE_ME.md" %}}
 {{% /notice %}}
 
-### With User-Defined Color, Font Awesome Brand Icon and Markdown Title
+#### Expandable Content Area with `groupid`
+
+If you give multiple expandable boxes the same `groupid`, at most one will be open at any given time. If you open one of the boxes, all other boxes of the same group will close.
 
 ````go
-{{%/* notice color="fuchsia" title="**Hugo**" icon="fab fa-hackerrank" */%}}
-Victor? Is it you?
+{{%/* notice style="green" title="Expand me..." groupid="notice-toggle" expanded="true" */%}}
+No need to press you!
+{{%/* /notice */%}}
+
+{{%/* notice style="red" title="Expand me..." groupid="notice-toggle" expanded="false" */%}}
+Thank you!
 {{%/* /notice */%}}
 ````
 
-{{% notice color="fuchsia" title="**Hugo**" icon="fab fa-hackerrank" %}}
-Victor? Is it you?
+{{% notice style="green" title="Expand me..." groupid="notice-toggle" expanded="true" %}}
+No need to press you!
 {{% /notice %}}
+
+{{% notice style="red" title="Expand me..." groupid="notice-toggle" expanded="false" %}}
+Thank you!
+{{% /notice %}}
+
+#### No Content or No Title
+
+````go
+{{%/* notice style="accent" title="Just a bar" */%}}
+{{%/* /notice */%}}
+
+{{%/* notice style="accent" */%}}
+Just a box
+{{%/* /notice */%}}
+````
+
+{{% notice style="accent" title="Just a bar" %}}
+{{% /notice %}}
+
+{{% notice style="accent" %}}
+Just a box
+{{% /notice %}}
+
+#### Various Callouts
+
+````go
+> [!caution] Callouts can have custom titles
+> Like this one.
+
+> [!caution] Title-only callout
+
+> [!note]- Are callouts foldable?
+> Yes! In a foldable callout, the contents are hidden when the callout is collapsed
+
+> [!note]+ Are callouts foldable?
+> Yes! In a foldable callout, the contents are hidden when the callout is collapsed
+
+> [!info] Can callouts be nested?
+> > [!important] Yes!, they can.
+> > > [!tip]  You can even use multiple layers of nesting.
+````
+
+> [!caution] Callouts can have custom titles
+> Like this one.
+
+> [!caution] Title-only callout
+
+> [!note]- Are callouts foldable?
+> Yes! In a foldable callout, the contents are hidden when the callout is collapsed
+
+> [!note]+ Are callouts foldable?
+> Yes! In a foldable callout, the contents are hidden when the callout is collapsed
+
+> [!info] Can callouts be nested?
+> > [!important] Yes!, they can.
+> > > [!tip]  You can even use multiple layers of nesting.
+
+#### Code with Collapsed Colored Borders
+
+````
+> [!secondary]
+> ```c
+> // With colored border in Markdown syntax
+> printf("Hello World!");
+> ```
+
+{{%/* notice style="red" */%}}
+```c
+// With colored border in Shortcode syntax
+printf("Hello World!");
+```
+{{%/* /notice */%}}
+````
+
+> [!secondary]
+> ```c
+> // With colored border in Markdown syntax
+> printf("Hello World!");
+> ```
+
+{{% notice style="red" %}}
+```c
+// With colored border in Shortcode syntax
+printf("Hello World!");
+```
+{{% /notice %}}
+
+#### User-defined Style
+
+Self-defined styles can be [configured](#defining-own-styles) in your `hugo.toml` and used for every shortcode, that accepts a `style` parameter.
+
+````
+> [!magic]
+> Maaagic!
+````
+
+> [!magic]
+> Maaagic!

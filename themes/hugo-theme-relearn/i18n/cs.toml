@@ -40,13 +40,16 @@ other = "Přejít na domovskou stránku"
 [Edit-this-page]
 other = "Upravit"
 
+[Show-Markdown]
+other = "Zobrazit Markdown"
+
 [Print-this-chapter]
 other = "Vytisknout kapitolu"
 
 [More-action]
 other = "Více"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Více"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "KB"
 [Megabyte-symbol]
 other = "MB"
 
-[note]
-other = "Poznámka"
+[caution]
+other = "Upozornění"
+
+[important]
+other = "Důležité"
 
 [info]
 other = "Info"
+
+[note]
+other = "Poznámka"
 
 [tip]
 other = "Tip"
@@ -117,3 +126,6 @@ other = "Kategorie"
 
 [category]
 other = "Kategorie"
+
+[Details]
+other = "Podrobnosti"

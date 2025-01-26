@@ -1,13 +1,10 @@
 +++
+categories = ["howto", "reference"]
 description = "Show content in tabbed views"
 title = "Tabs"
 +++
 
 The `tabs` shortcode displays arbitrary content in an unlimited number of tabs.
-
-This comes in handy eg. for providing code snippets for multiple languages.
-
-If you just want a single tab you can instead call the [`tab` shortcode](shortcodes/tab) standalone.
 
 {{< tabs title="hello." >}}
 {{% tab title="py" %}}
@@ -34,10 +31,6 @@ printf("Hello World!");
 {{< /tabs >}}
 
 ## Usage
-
-While the examples are using shortcodes with named parameter you are free to also call this shortcode from your own partials.
-
-See the [`tab` shortcode](shortcodes/tab) for a description of the parameter for nested tabs.
 
 {{< tabs groupid="shortcode-parameter">}}
 {{% tab title="shortcode" %}}
@@ -88,6 +81,10 @@ printf"Hello World!");
 
 {{% /tab %}}
 {{< /tabs >}}
+
+If you just want a single tab you can instead call the [`tab` shortcode](shortcodes/tab) standalone.
+
+Also follow the above link to see the parameter for a nested tab.
 
 ### Parameter
 

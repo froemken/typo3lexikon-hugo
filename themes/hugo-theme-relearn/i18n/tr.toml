@@ -40,13 +40,16 @@ other = "Anasayfaya dön"
 [Edit-this-page]
 other = "Düzenlemek"
 
+[Show-Markdown]
+other = "Markdown'ı Göster"
+
 [Print-this-chapter]
 other = "Bölümün tamamını yazdır"
 
 [More-action]
 other = "Dahası Var"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Dahası Var"
 
 [Expand-title]
@@ -67,11 +70,17 @@ other = "KB"
 [Megabyte-symbol]
 other = "MB"
 
-[note]
-other = "Not"
+[caution]
+other = "Dikkat"
+
+[important]
+other = "Önemli"
 
 [info]
 other = "Bilgi"
+
+[note]
+other = "Not"
 
 [tip]
 other = "Bahşiş"
@@ -117,3 +126,6 @@ other = "Kategoriler"
 
 [category]
 other = "Kategori"
+
+[Details]
+other = "Şey"

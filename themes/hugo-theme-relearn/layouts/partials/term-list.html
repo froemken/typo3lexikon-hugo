@@ -12,33 +12,20 @@
   {{- $icon = printf "fa-fw fas fa-%s" $icon }}
 {{- end }}
 {{- $taxonomy_page := $page.Site.GetPage $taxonomy }}
-{{- $terms := slice | append (index $page.Params $taxonomy) }}
 {{- $term_pages := slice }}
-{{- range $terms }}
-  {{- $term := trim . " " }}
-  {{- if not $term }}
-    {{- continue }}
-  {{- end }}
-  {{- $term_key := ($term | plainify | anchorize) }}
-  {{- with $page.Site.GetPage (printf "%s/%s" $taxonomy $term_key) }}
-    {{- $term_pages = $term_pages | append (dict "Title" (default (humanize .Data.Term | strings.Title) .Title) "Term" . )}}
-  {{- else }}
-    {{- $term_key = ($term | urlize) }}
-    {{- with $page.Site.GetPage (printf "%s/%s" $taxonomy $term_key) }}
-      {{- $term_pages = $term_pages | append (dict "Title" (default (humanize .Data.Term | strings.Title) .Title) "Term" . )}}
-    {{- end }}
-  {{- end }}
+{{- range $page.GetTerms $taxonomy }}
+  {{- $term_pages = $term_pages | append (dict "Title" (partial "title.gotmpl" (dict "page" . "linkTitle" true)) "Term" . )}}
 {{- end }}
-{{- $taxonomy_title := default (default $taxonomy_page.Data.Plural (i18n $taxonomy_page.Data.Plural)) $taxonomy_page.Title }}
+{{- $taxonomy_title := partial "title.gotmpl" (dict "page" $taxonomy_page) }}
 {{- with $term_pages }}
-<div class=" taxonomy-{{ $taxonomy }} term-list cstyle {{ $style }} {{ $class }}" title="{{ $taxonomy_title }}"{{ if $color }}{{ printf " style=\"--VARIABLE-TAGS-BG-color: %s;\"" $color | safeHTMLAttr }}{{ end }}>
+<div class="R-taxonomy taxonomy-{{ $taxonomy }} cstyle{{ with $style }} {{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}" title="{{ $taxonomy_title }}"{{ if $color }}{{ printf " style=\"--VARIABLE-TAGS-BG-color: %s;\"" $color | safeHTMLAttr }}{{ end }}>
   {{- if $icon }}
   <i class="{{ $icon }}"></i>
   {{- end }}
   <ul>
   {{- range sort . ".Title" }}
     {{- $to := .Term }}
-    <li><a class="term-link" href="{{ partial "relLangPrettyUglyURL.hugo" (dict "to" $to) }}">{{ .Title }}</a></li>
+    <li><a class="term-link" href="{{ partial "permalink.gotmpl" (dict "to" $to) }}">{{ .Title }}</a></li>
   {{- end }}
   </ul>
 </div>

@@ -1,4 +1,5 @@
 +++
+categories = ["howto", "reference"]
 description = "Expandable/collapsible sections of text"
 title = "Expand"
 +++
@@ -19,15 +20,17 @@ That's some more text with a footnote.[^someid]
     Blue light glows blue.
 {{% /expand %}}
 
-{{% notice note %}}
-This only works in modern browsers flawlessly. While Internet Explorer 11 has issues in displaying it, the functionality still works.
-{{% /notice %}}
-
 ## Usage
 
-While the examples are using shortcodes with named parameter you are free to use positional as well or also call this shortcode from your own partials.
-
 {{< tabs groupid="shortcode-parameter">}}
+{{% tab title="callout" %}}
+
+````md
+> [!transparent]- Expand me...
+> Thank you!
+````
+
+{{% /tab %}}
 {{% tab title="shortcode" %}}
 
 ````go
@@ -55,12 +58,18 @@ While the examples are using shortcodes with named parameter you are free to use
 {{% /tab %}}
 {{< /tabs >}}
 
+[Extended callout syntax](https://gohugo.io/render-hooks/blockquotes/#extended-syntax) is available in other Markdown parsers like Obsidian and therefore is the recommend syntax for generating portable Markdown.
+
+The [`notice` shortcode](shortcodes/notice) is also capable of displaying expandable/collapsible sections of text but with additional parameter for color and additional icons.
+
+The theme supports Hugo’s built-in [`details` shortcode](https://gohugo.io/content-management/shortcodes/#details) by mapping the parameter to the theme's `expand` shortcode.
+
 ### Parameter
 
 | Name                  | Position | Default          | Notes       |
 |-----------------------|----------|------------------|-------------|
 | **title**             | 1        | `"Expand me..."` | Arbitrary text to appear next to the expand/collapse icon. |
-| **open**              | 2        | `false`          | When `true` the content text will be initially shown as expanded. |
+| **expanded**          | 2        | `false`          | How the content is displayed.<br><br>- `true`: the content is initially shown<br>- `false`: the content is initially hidden |
 | _**&lt;content&gt;**_ |          | _&lt;empty&gt;_  | Arbitrary text to be displayed on expand. |
 
 ## Examples
@@ -76,10 +85,10 @@ While the examples are using shortcodes with named parameter you are free to use
 ### Initially Expanded
 
 ````go
-{{%/* expand title="Expand me..." open="true" */%}}No need to press you!{{%/* /expand */%}}
+{{%/* expand title="Expand me..." expanded="true" */%}}No need to press you!{{%/* /expand */%}}
 ````
 
-{{% expand title="Expand me..." open="true" %}}No need to press you!{{% /expand %}}
+{{% expand title="Expand me..." expanded="true" %}}No need to press you!{{% /expand %}}
 
 ### Arbitrary Text
 
