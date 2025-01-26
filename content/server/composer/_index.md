@@ -6,7 +6,7 @@ alwaysopen = false
 aliases = ["composer.html"]
 +++
 
-[Composer](https://getcomposer.org/) ist ein CLI Command basierend auf der Programmiersprache PHP zum Installieren und Verwalten von PHP Bibliotheken. Im Englischen wird von `packages` gesprochen, warum Composer auch als `packagemanager` bezeichnet wird.
+[Composer](https://getcomposer.org/) ist ein auf der Programmiersprache PHP basierendes Kommandozeilenprogramm zur Installation und Verwaltung von PHP-Bibliotheken. Im Englischen spricht man von `packages`, daher wird Composer auch als `packagemanager` bezeichnet.
 
 ## Warum Composer?
 
