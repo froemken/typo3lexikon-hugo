@@ -37,7 +37,7 @@ processing:
   exitHTMLparser_db:
     allowTags: "p, h2, h3, h4, strong, em"
     stripEmptyTags:
-    keepTags: "em"
+      keepTags: "em"
 ```
 
 Wenn ihr nur bestimmte Tags entfernen wollt, dann gebt die Tag-Liste Komma separiert an. Diese Option kann nicht gleichzeitig mit keepTags verwendet werden:
@@ -48,7 +48,7 @@ processing:
   exitHTMLparser_db:
     allowTags: "p, h2, h3, h4, strong, em"
     stripEmptyTags:
-    tags: "strong, em"
+      tags: "strong, em"
 ```
 
 Mit der zusätzlichen Angabe von treatNonBreakingSpaceAsEmpty werden sogar solche Tags entfernt, die als Inhalt nur das &nbsp; enthalten:
@@ -59,6 +59,6 @@ processing:
   exitHTMLparser_db:
     allowTags: "p, h2, h3, h4, strong, em"
     stripEmptyTags:
-    tags: "strong, em"
-    treatNonBreakingSpaceAsEmpty: 1
+      tags: "strong, em"
+      treatNonBreakingSpaceAsEmpty: 1
 ```
