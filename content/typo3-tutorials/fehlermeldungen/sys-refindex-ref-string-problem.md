@@ -31,7 +31,11 @@ UTF8filesystem = true (Haken rein)
 forceCharset = utf-8 (Der Wert muss kleingeschrieben werden)
 ```
 
-So, diese Daten übernehmen wir erstmal und klicken dann auf Database Analyzer und drücken dort auf COMPARE. Normalerweise sollte hier einiges zu tun sein.
+So, diese Daten übernehmen wir erstmal und klicken dann auf Database Analyzer und drücken dort auf COMPARE. Normalerweise sollte hier Einiges zu tun sein.
+
+{{% notice style="info" title="Hinweis" icon="info" %}}
+Es kann sinnvoll sein, alle Indexe der Tabelle `sys_ref_index` zunächst zu entfernen z.B. mit PhpMyAdmin und erst danach die Indexe über das Installtool wieder anlegen lassen.
+{{% /notice %}}
 
 Nachdem wir hier jetzt erstmal die gesunde Basis für TYPO3 geschaffen haben, könnte es dennoch sein, dass der Fehler auftritt. Dazu habe ich folgenden Hinweis gefunden:
 
