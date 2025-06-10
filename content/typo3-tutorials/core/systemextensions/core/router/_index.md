@@ -213,38 +213,32 @@ declare(strict_types=1);
 
 namespace StefanFroemken\SitePackage\Helper;
 
-use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class SiteHelper
 {
-    public function buildUrl(int $targetPageUid, array $arguments = []): string
-    {
-        // Early return, if no TYPO3 request is available.
-        if (($request = $this->getTypo3Request()) === null) {
-            return '';
-        }
+    public function __construct(protected readonly SiteFinder $siteFinder)
+    {}
 
-        return (string)$this->getRouter()
+    public function buildUrl(Site $site, int $targetPageUid, array $arguments = []): string
+    {
+        return (string)$site
+            ->getRouter()
             ->generateUri($targetPageUid, $arguments);
     }
 
-    public function getRouter(ServerRequestInterface $request): PageArguments
+    public function getSiteByPageUid(int $pageUid): Site
     {
-        return $request->getAttribute('routing');
-    }
-
-    public function getTypo3Request(): ?ServerRequestInterface
-    {
-        return $GLOBALS['TYPO3_REQUEST'] ?? null;
+        return $this->siteFinder->getSiteByPageId($pageUid);
     }
 }
 
 $siteHelper = GeneralUtility::makeInstance(SiteHelper::class);
+$site = $siteHelper->getSiteByPageUid(123);
 var_dump($siteHelper->buildUrl(
+    $site,
     43782,
     [
         'tx_news_pi1' => [
