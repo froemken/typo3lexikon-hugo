@@ -78,7 +78,7 @@ Dazu das Fluid-Template:
 Das zu ladende Module-Layout steht automatisch zur Verfügung und kann in der `backend` Extension gefunden werden: `vendor/typo3/cms-backend/Resources/Private/Layouts/Module.html`. Achtet darauf, dass die `<f:section>` "Content" mit einem großen `C` lautet. Falsch geschrieben, wird euer Modul-Inhalt nicht ausgegeben.
 
 {{% notice style="info" title="Wichtig" icon="exclamation" %}}
-Im TYPO3 Backend Kontext funktioniert zwar auch die Verwendung von `$this->view->render()`, jedoch ist davon abzuraten, da dieser Aufruf in vielerlei Hinsicht nur für das Frontend gedacht ist und der DocHeader mit den Buttons damit nicht gerendert werden kann. NBitte verwendet die `ModuleTemplateFactory` wie oben beschrieben.
+Im TYPO3 Backend Kontext funktioniert zwar auch die Verwendung von `$this->view->render()`, jedoch ist davon abzuraten, da dieser Aufruf in vielerlei Hinsicht nur für das Frontend gedacht ist und der DocHeader mit den Buttons damit nicht gerendert werden kann. Bitte verwendet die `ModuleTemplateFactory` wie oben beschrieben.
 {{% /notice %}}
 
 ### Module Templates überschreiben
