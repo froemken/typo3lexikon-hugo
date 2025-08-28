@@ -197,7 +197,7 @@ Wie `render`. Hier wird der resultierende HTML-Code für euch bereits automatisc
 
 ### setBodyText
 
-Wer eine zusätzliche CSS-Klasse im <body>-Tag wünscht, kann dies mit `setBodyText()` erreichen. Achtung: Die Angabe einer CSS-Klasse wirkt sich auch auf den DocHeader-Bereich mit den Buttons aus. Fluid ViewHelper können hier nicht verwendet werden.
+Wer eine zusätzliche CSS-Klasse im `<body>`-Tag wünscht, kann dies mit `setBodyText()` erreichen. Achtung: Die Angabe einer CSS-Klasse wirkt sich auch auf den DocHeader-Bereich mit den Buttons aus. Fluid ViewHelper kann hier nicht verwendet werden.
 
 ```php
     public function listAction(): ResponseInterface
@@ -232,7 +232,7 @@ Hiermit erhaltet ihr Zugriff auf alle benötigten API Aufrufe, um den DocHeader 
 
 ### setForm
 
-Setzt und aktiviert einen eigenen <form>-Tag. Um einen schließenden </form>-Tag, müsst ihr euch nicht kümmern. Im DocHeader könnt ihr später Buttons vom Typ InputButton hinzufügen. Diese enthalten ein `name`, `value` und auch ein `form` Attribut. Bei Klick wird automatisch das Formular abgeschickt, dessen id-Attribut mit dem form-Attribut übereinstimmt.
+Setzt und aktiviert einen eigenen `<form>`-Tag. Um einen schließenden `</form>`-Tag, müsst ihr euch nicht kümmern. Im DocHeader könnt ihr später Buttons vom Typ InputButton hinzufügen. Diese enthalten ein `name`, `value` und auch ein `form` Attribut. Bei Klick wird automatisch das Formular abgeschickt, dessen id-Attribut mit dem form-Attribut übereinstimmt.
 
 {{% notice style="info" title="Wichtig" icon="exclamation" %}}
 In TYPO3 12 gab es noch eine action-save-buttons.js, die sich unter anderem um die InputButtons gekümmert hat. Diese ist in TYPO3 13 zwar noch da, aber als deprecated markiert und wird vonseiten TYPO3 selbst nicht mehr verwendet. Die neue Lösung scheint jedoch [noch nicht die InputButtons zu unterstützen](https://forge.typo3.org/issues/107336). Einzig innerhalb Formulare mit form-engine Unterstützung (TYPO3 List-View-Module) könnten die Buttons wohl überhaupt noch funktionieren.
