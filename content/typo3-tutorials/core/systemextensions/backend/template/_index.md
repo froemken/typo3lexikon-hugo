@@ -314,7 +314,7 @@ Fügt der FlashMessage Queue von TYPO3 eine neue FlashMessage hinzu, mit der man
 
 ### setFlashMessageQueue
 
-Standardmäßig wird das `ModulTemplate` mit der TYPO3 Core eigenen FlashMessage Queue initialisiert: `core.template.flashMessages`. Wenn ihr jedoch eure Backendmodule mittels einem Extbase Controller erstellt, lautet der FlashMessage Identifier jedoch: `extbase.flashmessages.[PLUGIN_NAMESPACE]`. FlashMessage, die mit `$this->addFlashMessage()` erstellt werden, werden somit NICHT im Template angezeigt. Darum müsst ihr die Extbase FlashMessage Queue in dem ModuleTemplate zunächst bekannt machen:
+Standardmäßig wird das `ModulTemplate` mit der TYPO3 Core eigenen FlashMessage Queue initialisiert: `core.template.flashMessages`. Wenn ihr jedoch eure Backendmodule mittels einem Extbase Controller erstellt, lautet der FlashMessage Identifier jedoch: `extbase.flashmessages.[PLUGIN_NAMESPACE]`. FlashMessages, die mit `$this->addFlashMessage()` erstellt werden, werden somit NICHT im Template angezeigt. Darum müsst ihr die Extbase FlashMessage Queue in dem ModuleTemplate zunächst bekannt machen:
 
 ```php
     public function listAction(): ResponseInterface
