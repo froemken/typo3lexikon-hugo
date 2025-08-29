@@ -36,14 +36,14 @@ Dadurch wird die Gestaltung von Backend-Modulen nicht nur konsistenter, sondern 
 Mit TYPO3 12.0 wurde an der `ModuleTemplate` Klasse ordentlich herumgeschraubt. Diese sollte nicht nur HTML Code erzeugen, sondern ist mit Einführung selbst zur Fluid-Template-View geworden. Bahnbrechend. Kein Hantieren mehr mit der veralteten StandaloneView:
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
-        
-        $moduleTemplate->assign('cars', $this->carRepository->findAll());
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
+    
+    $moduleTemplate->assign('cars', $this->carRepository->findAll());
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 Dazu das Fluid-Template:
@@ -138,14 +138,14 @@ Mit diesem Patch wurde `ModuleTemplate` drastisch aufgeräumt. Sämtliche Altlas
 Da das `ModuleTemplate` nun selbst eine View ist, könnt ihr hier, wie von Fluid bekannt, eigene Variablen dem Template hinzufügen.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->assign('cars', $this->carRepository->findAll());
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->assign('cars', $this->carRepository->findAll());
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### assignMultiple
@@ -153,17 +153,17 @@ Da das `ModuleTemplate` nun selbst eine View ist, könnt ihr hier, wie von Fluid
 Da das `ModuleTemplate` nun selbst eine View ist, könnt ihr hier, wie von Fluid bekannt auch mehrere Variablen in einem Rutsch dem Template zuweisen.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->assignMultiple([
-            'cars' => $this->carRepository->findAll(),
-            'contentObject' => $this->request->getAttribute('currentContentObject'),
-        ];
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->assignMultiple([
+        'cars' => $this->carRepository->findAll(),
+        'contentObject' => $this->request->getAttribute('currentContentObject'),
+    ];
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### render
@@ -171,15 +171,15 @@ Da das `ModuleTemplate` nun selbst eine View ist, könnt ihr hier, wie von Fluid
 Mit `render` könnt ihr das Fluid-basierte Template verarbeiten und erhaltet den fertigen HTML-Code zurück. Diesen könnt ihr dann entweder weiter verarbeiten, ergänzen, in ein JsonResponse oder HtmlResponse Objekt verpacken.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        return new JsonResponse([
-            'content' => $moduleTemplate->render('Cars/List'),
-            'status' => 'OK',
-        ];
-    }
+    return new JsonResponse([
+        'content' => $moduleTemplate->render('Cars/List'),
+        'status' => 'OK',
+    ];
+}
 ```
 
 ### renderResponse
@@ -187,12 +187,12 @@ Mit `render` könnt ihr das Fluid-basierte Template verarbeiten und erhaltet den
 Wie `render`. Hier wird der resultierende HTML-Code für euch bereits automatisch in ein HtmlResponse Objekt verpackt, welches direkt als Rückgabewert für eure Controller-Action verwendet werden kann.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### setBodyText
@@ -200,14 +200,14 @@ Wie `render`. Hier wird der resultierende HTML-Code für euch bereits automatisc
 Wer eine zusätzliche CSS-Klasse im `<body>`-Tag wünscht, kann dies mit `setBodyText()` erreichen. Achtung: Die Angabe einer CSS-Klasse wirkt sich auch auf den DocHeader-Bereich mit den Buttons aus. Fluid ViewHelper kann hier nicht verwendet werden.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->setBodyText('<body class="container">');
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->setBodyText('<body class="container">');
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### setTitle
@@ -215,15 +215,15 @@ Wer eine zusätzliche CSS-Klasse im `<body>`-Tag wünscht, kann dies mit `setBod
 Setzen des Seitentitels. Zu sehen im aktuellen Browser-Tab.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        // Second argument is a "context" and can be empty. If context is set, title will result in: "[TITLE] · [CONTEXT]"
-        $moduleTemplate->setTitle('My funny cars', 'Look here');
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    // Second argument is a "context" and can be empty. If context is set, title will result in: "[TITLE] · [CONTEXT]"
+    $moduleTemplate->setTitle('My funny cars', 'Look here');
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### getDocHeaderComponent
@@ -239,17 +239,17 @@ In TYPO3 12 gab es noch eine action-save-buttons.js, die sich unter anderem um d
 {{% /notice %}}
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->setForm(sprintf(
-            '<form method="post" action="%s" name="car" id="saveCar">',
-            $this->uriBuilder->uriFor('update', null, 'Management'),
-        ));
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->setForm(sprintf(
+        '<form method="post" action="%s" name="car" id="saveCar">',
+        $this->uriBuilder->uriFor('update', null, 'Management'),
+    ));
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### setModuleId
@@ -257,14 +257,14 @@ In TYPO3 12 gab es noch eine action-save-buttons.js, die sich unter anderem um d
 Fügt dem ersten `<div>` im Modul ein id-Attribut hinzu. Gerade in Bezug auf JavaScript kann das sinnvoll sein.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->setModuleId('my-special-module-for-cars');
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->setModuleId('my-special-module-for-cars');
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### setModuleName
@@ -272,14 +272,14 @@ Fügt dem ersten `<div>` im Modul ein id-Attribut hinzu. Gerade in Bezug auf Jav
 Fügt dem ersten `<div>` im Modul ein name-Attribut hinzu. Gerade in Bezug auf JavaScript kann das sinnvoll sein.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->setModuleName('wonderfulCarsModule');
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->setModuleName('wonderfulCarsModule');
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### setModuleClass
@@ -287,14 +287,14 @@ Fügt dem ersten `<div>` im Modul ein name-Attribut hinzu. Gerade in Bezug auf J
 Fügt dem ersten `<div>` im Modul ein class-Attribut hinzu. Gerade in Bezug auf CSS kann das sinnvoll sein.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->setModuleClass('styleMyModule');
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->setModuleClass('styleMyModule');
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### addFlashMessage
@@ -302,14 +302,14 @@ Fügt dem ersten `<div>` im Modul ein class-Attribut hinzu. Gerade in Bezug auf 
 Fügt der FlashMessage Queue von TYPO3 eine neue FlashMessage hinzu, mit der man dem Editor Nachrichten über z. B. einen Speichererfolg mitgeben kann. Die standard FlashMessage Queue kann mit `setFlashMessageQueue` geändert werden.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->addFlashMessage('Hier gibt es jede Pizza', 'Lecker Pizza');
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->addFlashMessage('Hier gibt es jede Pizza', 'Lecker Pizza');
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### setFlashMessageQueue
@@ -317,16 +317,16 @@ Fügt der FlashMessage Queue von TYPO3 eine neue FlashMessage hinzu, mit der man
 Standardmäßig wird das `ModulTemplate` mit der TYPO3 Core eigenen FlashMessage Queue initialisiert: `core.template.flashMessages`. Wenn ihr jedoch eure Backendmodule mittels einem Extbase Controller erstellt, lautet der FlashMessage Identifier jedoch: `extbase.flashmessages.[PLUGIN_NAMESPACE]`. FlashMessages, die mit `$this->addFlashMessage()` erstellt werden, werden somit NICHT im Template angezeigt. Darum müsst ihr die Extbase FlashMessage Queue in dem ModuleTemplate zunächst bekannt machen:
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
-        
-        $this->addFlashMessage('Pizza of type Salami was created.');
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
+    
+    $this->addFlashMessage('Pizza of type Salami was created.');
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### setUiBlock
@@ -334,14 +334,14 @@ Standardmäßig wird das `ModulTemplate` mit der TYPO3 Core eigenen FlashMessage
 Standardmäßig erscheint beim Laden von BE Modulen kurz ein Spinner. Das Modul wird kurz abgedunkelt, damit die Editoren nicht schon irgendwo hinklicken können, obwohl das vollständige JavaScript noch nicht geladen ist, und eben dieser sich drehende Ladebalken (Spinner) erscheint für einen Bruchteil einer Sekunde, bevor das Modul dann freigegeben wird. Dieses Verhalten könnt ihr bei Bedarf auch abschalten:
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->setUiBlock(false);
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->setUiBlock(false);
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 ```
 
 ### makeDocHeaderModuleMenu
@@ -349,29 +349,29 @@ Standardmäßig erscheint beim Laden von BE Modulen kurz ein Spinner. Das Modul 
 Im Rahmen der [DocHeader Components](doc-header.md) kommen wir eh noch zu der Erstellung von Menüs, die durch eine Selectbox realisiert wird. Hier in diesem Fall erleichtert uns das `ModuleTemplate` die Menü-Erstellung erheblich. Wenn euer BE-Modul mehrere Unter-Module hat (wie das "Web" oder auch das "Site Management"-Modul), werden die darunter liegenden Module in diesem Menü automatisch zur Verfügung gestellt. Ausgewählt, landet ihr automatisch im Unter-Modul.
 
 ```php
-    public function listAction(): ResponseInterface
-    {
-        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+public function listAction(): ResponseInterface
+{
+    $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        $moduleTemplate->makeDocHeaderModuleMenu([
-            'returnUrl' => (string)$this->coreUriBuilder->buildUriFromRoute('web_cars', [
-                'id' => $this->getPageRecord()['uid'],
-            ])
-        ]);
-        
-        return $moduleTemplate->renderResponse('Cars/List');
-    }
+    $moduleTemplate->makeDocHeaderModuleMenu([
+        'returnUrl' => (string)$this->coreUriBuilder->buildUriFromRoute('web_cars', [
+            'id' => $this->getPageRecord()['uid'],
+        ])
+    ]);
+    
+    return $moduleTemplate->renderResponse('Cars/List');
+}
 
-    private function getPageRecord(): array
-    {
-        $backendUser = $this->getBackendUser();
-        $id = (int)($this->request->getQueryParams()['id'] ?? $this->request->getParsedBody()['id'] ?? 0);
+private function getPageRecord(): array
+{
+    $backendUser = $this->getBackendUser();
+    $id = (int)($this->request->getQueryParams()['id'] ?? $this->request->getParsedBody()['id'] ?? 0);
 
-        return BackendUtility::readPageAccess($id, $backendUser->getPagePermsClause(Permission::PAGE_SHOW)) ?: [];
-    }
+    return BackendUtility::readPageAccess($id, $backendUser->getPagePermsClause(Permission::PAGE_SHOW)) ?: [];
+}
 
-    private function getBackendUser(): BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'];
-    }
+private function getBackendUser(): BackendUserAuthentication
+{
+    return $GLOBALS['BE_USER'];
+}
 ```
