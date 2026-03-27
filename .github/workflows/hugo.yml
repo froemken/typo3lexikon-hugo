@@ -55,12 +55,22 @@ jobs:
         with:
           name: hugo-site-artifact
           path: public
-      - name: Deploy via SFTP
-        uses: samuelmeuli/action-sftp-deploy@v1
-        with:
-          username: ${{ secrets.SSH_USER }}
-          server: ${{ secrets.SSH_HOST }}
-          ssh_private_key: ${{ secrets.SSH_PRIV_KEY }}
-          local_path: public/*
-          remote_path: ${{ secrets.SSH_PATH }}
-          delete_remote_files: true
+      - name: "Deploy via SFTP Mirror (lftp)"
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIV_KEY }}
+          HOST: ${{ secrets.SSH_HOST }}
+          USER: ${{ secrets.SSH_USER }}
+        run: |
+          # Setup SSH directory and store the private key
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # Use lftp to synchronize the local public folder with the remote server.
+          # --reverse: Upload local files to remote
+          # --delete: Remove remote files that no longer exist locally
+          # --parallel=10: Speed up transfer by using multiple connections
+          lftp -u "$USER", sftp://$HOST \
+            -e "set sftp:connect-program 'ssh -a -x -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no'; \
+                mirror --reverse --delete --parallel=10 --verbose public/ ${{ secrets.SSH_PATH }}; \
+                quit"
