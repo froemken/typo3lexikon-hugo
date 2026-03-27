@@ -55,13 +55,12 @@ jobs:
         with:
           name: hugo-site-artifact
           path: public
-      - name: Rsync Hugo Content
-        uses: burnett01/rsync-deployments@7.0.1
+      - name: Deploy via SFTP
+        uses: samuelmeuli/action-sftp-deploy@v1
         with:
-          switches: -avz --delete
-          path: public/
-          remote_path: ~/typo3cms/hugo/public/
-          remote_host: jweiland65.net
-          remote_user: ssh-564464
-          remote_key: ${{ secrets.DEPLOY_KEY }}
-          remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
+          username: ${{ secrets.SSH_USER }}
+          server: ${{ secrets.SSH_HOST }}
+          ssh_private_key: ${{ secrets.SSH_PRIV_KEY }}
+          local_path: public/*
+          remote_path: ${{ secrets.SSH_PATH }}
+          delete_remote_files: true
