@@ -29,9 +29,13 @@ enableRobotsTXT = true
   disableHoverBlockCopyToClipBoard = false
   externalLinkTarget = '_blank'
 
+  # Set to false to prevent exponential build time degradation on large sites.
+  # Enabling collapsible menus can cause builds to take 30+ minutes for sites with many pages.
+  collapsibleMenu = false
+
   # Needs too long to check all these external links while building
   # Activate individually
-  urlExternalCheck=false
+  urlExternalCheck = false
 
   [params.logo]
     direction = 'column'

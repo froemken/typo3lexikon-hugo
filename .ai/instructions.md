@@ -57,3 +57,10 @@ Use the following Hugo shortcodes to represent TYPO3 version support status. Not
     hugo --gc --cleanDestinationDir --minify
     ```
 
+## Performance Optimizations
+
+*   **Collapsible Menu (`collapsibleMenu`):** Always leave `collapsibleMenu` disabled (`false` or unset) globally and in front matter. Enabling it causes exponential build time slowdowns (e.g., up to 30+ minutes for large sites).
+*   **External Link Checking (`urlExternalCheck`):** Keep `urlExternalCheck = false` in `hugo.toml` to avoid network requests during build.
+*   **Asset Minification (`minify`):** Keep `minify` parameter unset in `hugo.toml` under `[params]`. The theme automatically handles minification, serving unminified files locally for fast refresh times, and minifying in production when built with the `hugo --minify` flag.
+*   **Print Output Format:** Keep `print` output format disabled for pages/sections/home (only build standard HTML and RSS) to prevent Hugo from building every page twice.
+*   **Hugo Caching:** Use Hugo version `0.149.0` or higher to benefit from the theme's built-in template/page-tree caching optimizations.
