@@ -47,3 +47,6 @@ Use the following Hugo shortcodes to represent TYPO3 version support status. Not
     hugo --gc --cleanDestinationDir --minify
     ```
 
+## Markdown Formatting Rules
+*   **Headers:** Always leave exactly one empty line after each heading/header (`#`, `##`, `###`, etc.) in all Markdown (`*.md`) files. This ensures clean Hugo rendering and consistent raw source file layout.
+
