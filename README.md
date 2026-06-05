@@ -4,7 +4,7 @@ This is the base repository of my website [TYPO3 Lexikon](https://www.typo3lexik
 
 ## Advantages
 
-- Use the GitHub bugtracker to ask for features or report issues
+- Use the [GitHub bugtracker](https://github.com/froemken/typo3lexikon-hugo/issues) to ask for features or report issues
 - Contribute bug fixes easily
 - Read/write using standard Markdown (`*.md` files)
 - Improved code highlighting
