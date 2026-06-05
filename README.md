@@ -15,9 +15,11 @@ This is the base repository of my website [TYPO3 Lexikon](https://www.typo3lexik
 ## Usage & License
 
 ### Personal and Business Use
+
 You can copy excerpts of the documentation and paste them as a quote, as long as you link back to [TYPO3 Lexikon](https://www.typo3lexikon.de). Copying the complete content of a page or the entire site is not permitted.
 
 ### TYPO3 CMS Community & Documentation Team
+
 Individuals, groups, and companies involved with the [TYPO3 Association](https://typo3.org/project/association), [TYPO3 GmbH](https://typo3.com/), or official [TYPO3 Teams](https://typo3.org/community/teams) are permitted to copy, modify, store, and translate the complete content, navigation, and structure for use on official TYPO3 domains (`typo3.*` and subdomains). No backlinks, citations, or attribution are required.
 
 ## Local Development & Testing
@@ -26,12 +28,14 @@ Individuals, groups, and companies involved with the [TYPO3 Association](https:/
 > The build and sync commands below are for **local testing and manual override only**. Production deployment is fully automated on push to the `main` branch via GitHub Actions.
 
 ### Running a Local Server
+
 Start a hot-reloading local development server:
 ```shell
 hugo server
 ```
 
 ### Local Build & Manual Sync
+
 To compile the static pages locally and optionally synchronize them manually (Note: remote server does not support `rsync` directly, so manual deployments should use SFTP/lftp):
 ```shell
 # Generate optimized HTML files locally into the /public folder
