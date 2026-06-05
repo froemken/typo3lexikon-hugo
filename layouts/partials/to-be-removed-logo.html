@@ -1,0 +1,12 @@
+<a id="R-logo" class="R-default" href="{{ partial "permalink.gotmpl" (dict "to" site.Home) }}">
+  {{- with resources.Get "images/typo3-logo.svg" -}}
+    {{- $svg := .Content | replaceRE `<svg ` `<svg style="height: auto; width: var(--LOGO-IMAGE-width, 6rem);" ` -}}
+    {{- $svg | safeHTML -}}
+  {{- else -}}
+    <img alt="TYPO3 Logo" src="/images/typo3-logo.svg" style="height: auto; width: var(--LOGO-IMAGE-width, 6rem);">
+  {{- end -}}
+</a>
+<div style="color: var(--INTERNAL-MENU-SECTIONS-LINK-color); font-size: 0.85rem; padding: 0.5rem 1rem; text-align: center;">
+    <strong>Hinweis:</strong> Diese Website ist keine offizielle Website der TYPO3 Association.
+    TYPO3® und das TYPO3 Logo sind eingetragene Marken der TYPO3 Association.
+</div>

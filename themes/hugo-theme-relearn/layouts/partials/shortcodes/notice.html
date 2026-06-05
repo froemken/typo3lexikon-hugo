@@ -1,25 +1,23 @@
 {{- $page := .page }}
 {{- if and (not $page) .context }}
   {{- $page = .context }}
-  {{- warnf "%q: DEPRECATED parameter 'context' for shortcode 'notice' found, use 'page' instead; see https://mcshelby.github.io/hugo-theme-relearn/introduction/releasenotes/5/#5-18-0" $page.File.Filename }}
+  {{- $filepath := "[virtual file]" }}{{ with and $page $page.File $page.File.Filename }}{{ $filepath = . }}{{ end }}
+  {{- warnf "%q: DEPRECATED parameter 'context' for shortcode 'notice' found, use 'page' instead; see https://mcshelby.github.io/hugo-theme-relearn/introduction/releasenotes/5/#5-18-0" $filepath }}
 {{- end }}
-{{- $class := .class | default "notices" }}
-{{- $containerstyle := .containerstyle | default "div" }}
-{{- $containerclass := .containerclass | default slice | append "box-content" }}
-{{- $color := .color | default "" }}
 {{- $content := trim .content "\n\r\t " }}
 {{- $hasContent := ne (strings.TrimPrefix "<p>" $content) "" }}
-{{- if not (hasPrefix $content "<") }}
-  {{- $content = printf "<p>\n%s" $content }}
-{{- end }}
 {{- $groupid := .groupid }}
-{{- $style := .style | default "default" }}
-{{- $boxStyle := partial "_relearn/boxStyle.gotmpl" (dict "style" $style "title" .title "icon" .icon) }}
-{{- $title := trim ($boxStyle.title) " " }}
-{{- $icon := trim ($boxStyle.icon) " " }}
-{{- if and $icon (not (findRE ".*?\\bfa-\\w.*?" $icon)) }}
-  {{- $icon = printf "fa-fw fas fa-%s" $icon }}
-{{- end }}
+
+{{- $style := .style | default "" }}
+{{- $color := .color | default "" }}
+{{- $icon := .icon | default "" }}
+{{- $title := .title | default "" }}
+{{- $boxStyle := partial "_relearn/boxStyle.gotmpl" (dict "mode" "notice" "style" $style "color" $color "icon" $icon "title" $title) }}
+{{- $style = $boxStyle.style }}
+{{- $color = $boxStyle.color }}
+{{- $icon = $boxStyle.icon }}
+{{- $title = $boxStyle.title }}
+
 {{- $expander := false }}
 {{- $expanded := .expanded | default "" }}
 {{- if $hasContent }}
@@ -32,11 +30,12 @@
     {{- $expander = true }}
   {{- end }}
 {{- end }}
-{{- $params := .params | default dict }}
-{{- $classes := split (index $params "class" | default "") " " }}
+
+{{- $params := dict }}
+{{- $classes := slice }}
 {{- $classes = $classes | append "box" }}
 {{- $classes = $classes | append "cstyle" }}
-{{- $classes = $classes | append $class }}
+{{- $classes = $classes | append (.class | default "notices") }}
 {{- $classes = $classes | append $style }}
 {{- if $expander }}
   {{- $classes = $classes | append "expand" }}
@@ -44,6 +43,7 @@
   {{- $expanded = true }}
 {{- end }}
 {{- $params = dict "class" (delimit $classes " ") | merge $params }}
+
 {{- if $color }}
   {{- $styles := split (index $params "style" | default "") ";" }}
   {{- $styles = $styles | append (printf "--VARIABLE-BOX-color: %s" $color) }}
@@ -52,14 +52,15 @@
 {{ if $groupid }}
   {{- $params = dict "name" $groupid | merge $params }}
 {{- end }}
+
 {{- with $page }}
   {{- if or $icon $title $hasContent -}}
 <details
   {{- if $expanded }} open{{ end }}
   {{- range $k, $v := $params }}
-      {{- if not (or (in (slice "open" "summary") $k) (strings.HasPrefix $k "on")) }}
-          {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-      {{- end }}
+    {{- if and $v (not (in (slice "open" "summary") $k)) }}
+      {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+    {{- end }}
   {{- end }}>
   <summary class="box-label{{ if and (not $expander) (not $icon) (not $title) }} a11y-only{{ end }}"{{ if not $expander }} tabindex="-1"{{ end }}>{{ if $expander }}
     <i class="expander-icon fa-fw fas fa-chevron-right"></i> {{ end }}{{ if $icon }}
@@ -68,9 +69,9 @@
     <span class="a11y-only">{{ T "Details" }}</span>{{ end }}
   </summary>
     {{- if $hasContent }}
-{{ printf "  <%s class=\"%s\">" $containerstyle (delimit $containerclass " ") | safeHTML }}
+  <div class="box-content">
 {{ $content | safeHTML }}
-{{ printf "  </%s>" $containerstyle | safeHTML }}
+  </div>
     {{- end }}
 </details>
   {{- end }}

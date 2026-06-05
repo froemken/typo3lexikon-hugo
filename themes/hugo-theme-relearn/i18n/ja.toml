@@ -1,6 +1,9 @@
 [Reading-direction]
 other = "ltr"
 
+[Versioning-warning]
+other = 'このページはバージョン{{.pageVersion.title}}を表示しています。現在のバージョンは<a href="{{.latestUrl}}">こちら</a>で確認できます。'
+
 [Search]
 other = "検索"
 
@@ -37,11 +40,17 @@ other = "おっと。ページが見当たりません。 ¯\\_(ツ)_/¯."
 [Go-to-homepage]
 other = "ホームページへ行く"
 
+[home-button]
+other = "Home"
+
 [Edit-this-page]
 other = "編集"
 
 [Show-Markdown]
 other = "マークダウンを表示"
+
+[Show-source]
+other = "ソースコードを表示"
 
 [Print-this-chapter]
 other = "章全体を印刷する"
@@ -51,9 +60,6 @@ other = "更に"
 
 [shortcuts-menuTitle]
 other = "更に"
-
-[Expand-title]
-other = "開く..."
 
 [Navigation-toggle]
 other = "メニュー"
@@ -89,10 +95,10 @@ other = "ヒント"
 other = "警告"
 
 [Copy-to-clipboard]
-other = "クリップボードにコピー"
+other = "テキストをクリップボードにコピー"
 
 [Copied-to-clipboard]
-other = "クリップボードにコピー!"
+other = "テキストをクリップボードにコピーしました!"
 
 [Copy-link-to-clipboard]
 other = "リンクをクリップボードにコピー"
@@ -129,3 +135,9 @@ other = "カテゴリー"
 
 [Details]
 other = "細部"
+
+[Version]
+other = "バージョン"
+
+[Browser-unsupported-feature]
+other = "このブラウザはこの機能をサポートしていません"

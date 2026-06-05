@@ -8,7 +8,7 @@ tags = ['dark', 'dark mode', 'docs', 'light', 'multilingual', 'responsive']
 features = [
   'alerts',
   'badges', 'breadcrumbs', 'boxes', 'buttons',
-  'callouts', 'categories', 'chemical formulae', 'customizable', 'color variants',
+  'callouts', 'card', 'cards', 'categories', 'chemical formulae', 'customizable', 'color variants',
   'dark', 'dark mode', 'docs', 'documentation',
   'expand',
   'favicon', 'file inclusion', 'file system support', 'font awesome', 'front matter cms',
@@ -21,13 +21,14 @@ features = [
   'oas', 'offline usable', 'openapi', 'open graph',
   'print', 'printable',
   'responsive', 'rss', 'rtl',
-  'schema', 'search', 'search page', 'sidebar', 'sitemap', 'subtheme', 'swagger', 'swaggerui', 'syntax highlighting',
-  'table of contents', 'tab', 'tabs', 'tags', 'taxonomy', 'themeable', 'themes', 'toc', 'topbar buttons', 'twitter cards'
+  'schema', 'search', 'search page', 'sidebar', 'sidebar menus', 'sitemap', 'subtheme', 'swagger', 'swaggerui', 'syntax highlighting',
+  'table of contents', 'tab', 'tabs', 'tags', 'task list', 'taxonomy', 'themeable', 'themes', 'toc', 'topbar buttons', 'tree list', 'twitter cards',
+  'versioning'
 ]
 
 [module]
   [module.hugoVersion]
-    min = '0.126.0'
+    min = '0.141.0'
 
 [author]
   name = 'Sören Weber'

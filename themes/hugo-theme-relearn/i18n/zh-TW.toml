@@ -1,6 +1,9 @@
 [Reading-direction]
 other = "ltr"
 
+[Versioning-warning]
+other = '此頁面顯示版本 {{.pageVersion.title}}。當前版本可以在<a href="{{.latestUrl}}">這裡</a>找到。'
+
 [Search]
 other = "搜尋"
 
@@ -37,11 +40,17 @@ other = "這個網頁已經被刪除、移動或從未存在"
 [Go-to-homepage]
 other = "回到首頁"
 
+[home-button]
+other = "Home"
+
 [Edit-this-page]
 other = "編輯網頁"
 
 [Show-Markdown]
 other = "顯示 Markdown"
+
+[Show-source]
+other = "顯示原始程式碼"
 
 [Print-this-chapter]
 other = "列印整章"
@@ -51,9 +60,6 @@ other = "更多"
 
 [shortcuts-menuTitle]
 other = "更多"
-
-[Expand-title]
-other = "展開"
 
 [Navigation-toggle]
 other = "導航"
@@ -89,16 +95,16 @@ other = "提示"
 other = "警告"
 
 [Copy-to-clipboard]
-other = "複製到剪貼板"
+other = "複製文字到剪貼簿"
 
 [Copied-to-clipboard]
-other = "複製到剪貼簿！"
+other = "文字已複製到剪貼簿！"
 
 [Copy-link-to-clipboard]
-other = "將連結複製到剪貼簿"
+other = "複製連結到剪貼簿"
 
 [Link-copied-to-clipboard]
-other = "連結複製到剪貼簿！"
+other = "連結已複製到剪貼簿！"
 
 [Chapter]
 other = "第{{.}}章"
@@ -129,3 +135,9 @@ other = "類別"
 
 [Details]
 other = "詳情"
+
+[Version]
+other = "版本"
+
+[Browser-unsupported-feature]
+other = "此瀏覽器不支援此功能"

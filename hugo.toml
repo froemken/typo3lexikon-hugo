@@ -1,47 +1,64 @@
-baseURL = "https://www.typo3lexikon.de/"
+baseURL = 'https://www.typo3lexikon.de/'
 # canonifyURLs = true
 relativeURLs = false
 
-title = "Stefans TYPO3 Seite"
-languageCode = "de-DE"
-theme = "hugo-theme-relearn"
+title = 'Stefans TYPO3 Seite'
+languageCode = 'de-DE'
+theme = 'hugo-theme-relearn'
 
 [params]
-author.name = "Stefan Froemken"
-author.email = "froemken@gmail.com"
-social.twitter = "StefanFroemken"
-themeVariant = [
-	{ identifier = "zen-auto",      name = "Zen Light/Dark", auto = [ "zen-light", "zen-dark" ] },
-	{ identifier = "zen-light"      },
-	{ identifier = "zen-dark"       },
-	{ identifier = "neon"           }
-]
-enableRobotsTXT = true
-disableBreadcrumb = false
-disableExplicitIndexURLs = true
-disableNextPrev = false
-editURL = "https://github.com/froemken/typo3lexikon-hugo/edit/main/content/"
-disableSearch = false
-disableLandingPageButton = false
-ordersectionsby = "weight"
-showVisitedLinks = false
-disableLanguageSwitchingButton = true
-disableSearchHiddenPages = false
-disableSeoHiddenPages = true
-titleSeparator = "::"
-disableRootBreadcrumb = false
-disableInlineCopyToClipBoard = true
-disableHoverBlockCopyToClipBoard = false
-externalLinkTarget = "_blank"
+  author.name = 'Stefan Froemken'
+  author.email = 'froemken@gmail.com'
+  social.twitter = 'StefanFroemken'
+
+  enableRobotsTXT = true
+  disableBreadcrumb = false
+  disableExplicitIndexURLs = true
+  disableNextPrev = false
+  editURL = 'https://github.com/froemken/typo3lexikon-hugo/edit/main/content/'
+  search.disable = false
+  disableLandingPageButton = false
+  ordersectionsby = 'weight'
+  showVisitedLinks = false
+  disableLanguageSwitchingButton = true
+  disableSearchHiddenPages = false
+  disableSeoHiddenPages = true
+  titleSeparator = '::'
+  disableRootBreadcrumb = false
+  disableInlineCopyToClipBoard = true
+  disableHoverBlockCopyToClipBoard = false
+  externalLinkTarget = '_blank'
+
+  # Needs too long to check all these external links while building
+  # Activate individually
+  urlExternalCheck=false
+
+  [params.logo]
+    direction = 'column'
+    src = '/images/typo3-logo.svg?inlinecontent'
+
+  [[params.themeVariant]]
+    auto = ['zen-light', 'zen-dark']
+    identifier = 'zen-auto'
+    name = 'Zen Light/Dark'
+
+  [[params.themeVariant]]
+    identifier = 'zen-light'
+
+  [[params.themeVariant]]
+    identifier = 'zen-dark'
+
+  [[params.themeVariant]]
+    identifier = 'neon'
 
 [outputs]
-  home = ["html", "rss"]
-#  page = ["html"]
-#  rss = ["rss"]
-#  section = ["html", "rss"]
-#  taxonomy = ["html", "rss"]
-#  term = ["html", "rss"]
+  home = ['html', 'rss']
+  # page = ['html']
+  # rss = ['rss']
+  # section = ['html', 'rss']
+  # taxonomy = ['html', 'rss']
+  # term = ['html', 'rss']
 
-# Allow HTML in Markdown. Mostly needed for "<br>"
+# Allow HTML in Markdown. Mostly needed for '<br>'
 [markup.goldmark.renderer]
-    unsafe = true
+  unsafe = true

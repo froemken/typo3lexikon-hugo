@@ -1,6 +1,9 @@
 [Reading-direction]
 other = "ltr"
 
+[Versioning-warning]
+other = 'Ez az oldal a {{.pageVersion.title}} verziót mutatja. Az aktuális verzió megtalálható <a href="{{.latestUrl}}">itt</a>.'
+
 [Search]
 other = "Keresés"
 
@@ -37,11 +40,17 @@ other = "Hoppá. Úgy tűnik, hogy ez az oldal nem létezik ¯\\_(ツ)_/¯."
 [Go-to-homepage]
 other = "Menj a kezdőlapra"
 
+[home-button]
+other = "Home"
+
 [Edit-this-page]
 other = "Szerkesztés"
 
 [Show-Markdown]
 other = "Markdown megjelenítése"
+
+[Show-source]
+other = "Forráskód megjelenítése"
 
 [Print-this-chapter]
 other = "Teljes fejezet nyomtatása"
@@ -51,9 +60,6 @@ other = "Egyebek"
 
 [shortcuts-menuTitle]
 other = "Egyebek"
-
-[Expand-title]
-other = "Nyiss ki..."
 
 [Navigation-toggle]
 other = "Menü"
@@ -89,10 +95,10 @@ other = "Tipp"
 other = "Figyelem"
 
 [Copy-to-clipboard]
-other = "Vágólapra másolás"
+other = "Szöveg vágólapra másolása"
 
 [Copied-to-clipboard]
-other = "Vágólapra másolva!"
+other = "Szöveg vágólapra másolva!"
 
 [Copy-link-to-clipboard]
 other = "Link vágólapra másolása"
@@ -129,3 +135,9 @@ other = "Kategória"
 
 [Details]
 other = "Részletek"
+
+[Version]
+other = "Verzió"
+
+[Browser-unsupported-feature]
+other = "Ez a böngésző nem támogatja ezt a funkciót"

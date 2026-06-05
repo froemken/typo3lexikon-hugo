@@ -1,6 +1,9 @@
 [Reading-direction]
 other = "ltr"
 
+[Versioning-warning]
+other = 'Această pagină afișează versiunea {{.pageVersion.title}}. Versiunea curentă poate fi găsită <a href="{{.latestUrl}}">aici</a>.'
+
 [Search]
 other = "Caută"
 
@@ -37,11 +40,17 @@ other = "Ups. Se pare că această pagină nu există ¯\\_(ツ)_/¯."
 [Go-to-homepage]
 other = "Mergi la pagina principală"
 
+[home-button]
+other = "Home"
+
 [Edit-this-page]
 other = "Editează"
 
 [Show-Markdown]
 other = "Afișează Markdown"
+
+[Show-source]
+other = "Afișați codul sursă"
 
 [Print-this-chapter]
 other = "Tipărește întregul capitol"
@@ -51,9 +60,6 @@ other = "Mai mult"
 
 [shortcuts-menuTitle]
 other = "Mai mult"
-
-[Expand-title]
-other = "Extinde-mă ..."
 
 [Navigation-toggle]
 other = "Meniu"
@@ -89,10 +95,10 @@ other = "Sfat"
 other = "Avertizare"
 
 [Copy-to-clipboard]
-other = "Copiază în clipboard"
+other = "Copiază textul în clipboard"
 
 [Copied-to-clipboard]
-other = "Copiat în clipboard!"
+other = "Text copiat în clipboard!"
 
 [Copy-link-to-clipboard]
 other = "Copiază linkul în clipboard"
@@ -129,3 +135,9 @@ other = "Categorie"
 
 [Details]
 other = "Detalii"
+
+[Version]
+other = "Versiune"
+
+[Browser-unsupported-feature]
+other = "Acest browser nu acceptă această funcționalitate"

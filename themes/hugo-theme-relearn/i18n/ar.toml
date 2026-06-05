@@ -1,6 +1,9 @@
 [Reading-direction]
 other = "rtl"
 
+[Versioning-warning]
+other = 'تعرض هذه الصفحة الإصدار {{.pageVersion.title}}. يمكن العثور على الإصدار الحالي <a href="{{.latestUrl}}">هنا</a>.'
+
 [Search]
 other = "البحث"
 
@@ -37,11 +40,17 @@ other = ".¯\\_(ツ)_/¯أوبس. يبدو أن هذه الصفحة غير مو�
 [Go-to-homepage]
 other = "الذهاب إلى الصفحة الرئيسية"
 
+[home-button]
+other = "Home"
+
 [Edit-this-page]
 other = "حرر"
 
 [Show-Markdown]
 other = "إظهار Markdown"
+
+[Show-source]
+other = "إظهار شفرة المصدر"
 
 [Print-this-chapter]
 other = "طباعة الفصل بأكمله"
@@ -51,9 +60,6 @@ other = "المزيد"
 
 [shortcuts-menuTitle]
 other = "المزيد"
-
-[Expand-title]
-other = "...قم بتوسيع"
 
 [Navigation-toggle]
 other = "قائمة"
@@ -89,10 +95,10 @@ other = "نصيحة"
 other = "تحذير"
 
 [Copy-to-clipboard]
-other = "نسخ إلى الحافظة"
+other = "نسخ النص إلى الحافظة"
 
 [Copied-to-clipboard]
-other = "نسخ إلى الحافظة!"
+other = "تم نسخ النص إلى الحافظة!"
 
 [Copy-link-to-clipboard]
 other = "نسخ الرابط إلى الحافظة"
@@ -129,3 +135,9 @@ other = "فئة"
 
 [Details]
 other = "التفاصيل"
+
+[Version]
+other = "إصدار"
+
+[Browser-unsupported-feature]
+other = "هذا المتصفح لا يدعم هذه الميزة"
