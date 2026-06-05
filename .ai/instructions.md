@@ -45,6 +45,7 @@ Use the following Hugo shortcodes to represent TYPO3 version support status. Not
 
 ## Markdown-specific Formatting Rules
 *   **Headers:** Always leave exactly one empty line after each heading/header (`#`, `##`, `###`, etc.) in all Markdown (`*.md`) files. This ensures clean Hugo rendering and consistent raw source file layout.
+*   **Code Blocks:** Always leave exactly one empty line before and after each code block (e.g., ` ```shell `) to ensure proper formatting and parsing by Markdown engines.
 
 ## Local Development Commands
 *   **Start Local Server:**

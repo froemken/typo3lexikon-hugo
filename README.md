@@ -30,6 +30,7 @@ Individuals, groups, and companies involved with the [TYPO3 Association](https:/
 ### Running a Local Server
 
 Start a hot-reloading local development server:
+
 ```shell
 hugo server
 ```
@@ -39,6 +40,7 @@ Once started, the local preview of the website is available in your browser at [
 ### Local Build & Manual Sync
 
 To compile the static pages locally and optionally synchronize them manually (Note: remote server does not support `rsync` directly, so manual deployments should use SFTP/lftp):
+
 ```shell
 # Generate optimized HTML files locally into the /public folder
 hugo --gc --cleanDestinationDir --minify
