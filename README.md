@@ -24,7 +24,7 @@ Individuals, groups, and companies involved with the [TYPO3 Association](https:/
 
 ## Local Development & Testing
 
-> [!NOTE]  
+> **Note**  
 > The build and sync commands below are for **local testing and manual override only**. Production deployment is fully automated on push to the `main` branch via GitHub Actions.
 
 ### Running a Local Server
