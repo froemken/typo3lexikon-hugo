@@ -20,3 +20,20 @@ This file contains the configuration specifications and workflows for the typo3l
 
 ## Git Rules
 * **Ignore Files:** `/.hugo_build.lock` (untracked) and `/resources/_gen/` are excluded in `.gitignore`.
+
+## Version Badges Syntax (TYPO3 Versions)
+Use the following Hugo shortcodes to represent TYPO3 version support status:
+
+*   **Supported Since (Green):**
+    ```html
+    {{% badge style="green" icon="angle-double-up" %}}TYPO3 12.4{{% /badge %}}
+    ```
+*   **Deprecated Since (Orange):**
+    ```html
+    {{% badge style="orange" icon="angle-double-up" %}}TYPO3 12.4{{% /badge %}}
+    ```
+*   **Removed Since (Red):**
+    ```html
+    {{% badge style="red" icon="skull-crossbones" %}}TYPO3 13.0{{% /badge %}}
+    ```
+
