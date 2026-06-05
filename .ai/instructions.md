@@ -14,12 +14,18 @@ This file contains the configuration specifications and workflows for the typo3l
 
 ## Deployment & CI/CD
 * **Workflow:** Push to `main` triggers `.github/workflows/hugo.yml` to compile and deploy.
-* **Deployment Method:** Deploys via SFTP mirror (`lftp`). 
+* **Deployment Method:** Deploys via SFTP mirror (`lftp`).
 * **Constraint:** Do not switch to `rsync` (the target host does not support it).
 * **Runner Environment:** Runs on `ubuntu-latest` with checkout/artifact actions supporting Node 24.
 
 ## Git Rules
 * **Ignore Files:** `/.hugo_build.lock` (untracked) and `/resources/_gen/` are excluded in `.gitignore`.
+
+## Project-wide Formatting & File Rules
+These rules apply to all files in the repository (supported by `.editorconfig`):
+*   **Trailing Whitespace:** All trailing whitespace at the end of lines must be removed.
+*   **Line Endings:** Every file must end with a single newline (LF) at the end of the file.
+*   **Consecutive Empty Lines:** A maximum of one consecutive empty line is allowed in all file types.
 
 ## Version Badges Syntax (TYPO3 Versions)
 Use the following Hugo shortcodes to represent TYPO3 version support status. Note that the version numbers below (e.g., 11.5, 12.4, 13.0) are examples and must be updated on each page to reflect the actual TYPO3 version history for that feature:
@@ -37,6 +43,9 @@ Use the following Hugo shortcodes to represent TYPO3 version support status. Not
     {{% badge style="red" icon="skull-crossbones" %}}TYPO3 13.0{{% /badge %}}
     ```
 
+## Markdown-specific Formatting Rules
+*   **Headers:** Always leave exactly one empty line after each heading/header (`#`, `##`, `###`, etc.) in all Markdown (`*.md`) files. This ensures clean Hugo rendering and consistent raw source file layout.
+
 ## Local Development Commands
 *   **Start Local Server:**
     ```shell
@@ -46,7 +55,4 @@ Use the following Hugo shortcodes to represent TYPO3 version support status. Not
     ```shell
     hugo --gc --cleanDestinationDir --minify
     ```
-
-## Markdown Formatting Rules
-*   **Headers:** Always leave exactly one empty line after each heading/header (`#`, `##`, `###`, etc.) in all Markdown (`*.md`) files. This ensures clean Hugo rendering and consistent raw source file layout.
 
