@@ -34,6 +34,8 @@ Start a hot-reloading local development server:
 hugo server
 ```
 
+Once started, the local preview of the website is available in your browser at [http://localhost:1313/](http://localhost:1313/).
+
 ### Local Build & Manual Sync
 
 To compile the static pages locally and optionally synchronize them manually (Note: remote server does not support `rsync` directly, so manual deployments should use SFTP/lftp):
