@@ -5,13 +5,13 @@ relativeURLs = false
 title = 'Stefans TYPO3 Seite'
 languageCode = 'de-DE'
 theme = 'hugo-theme-relearn'
+enableRobotsTXT = true
 
 [params]
   author.name = 'Stefan Froemken'
   author.email = 'froemken@gmail.com'
   social.twitter = 'StefanFroemken'
 
-  enableRobotsTXT = true
   disableBreadcrumb = false
   disableExplicitIndexURLs = true
   disableNextPrev = false
