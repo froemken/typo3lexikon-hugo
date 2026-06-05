@@ -15,7 +15,7 @@ This is the base repository of my website [TYPO3 Lexikon](https://www.typo3lexik
 ## Usage & License
 
 ### Personal and Business Use
-You can copy excerpts of the documentation and paste them as a quote, provided you include a backlink to [TYPO3 Lexikon](https://www.typo3lexikon.de). Copying the complete content of a page or the entire site is not permitted.
+You can copy excerpts of the documentation and paste them as a quote, as long as you link back to [TYPO3 Lexikon](https://www.typo3lexikon.de). Copying the complete content of a page or the entire site is not permitted.
 
 ### TYPO3 CMS Community & Documentation Team
 Individuals, groups, and companies involved with the [TYPO3 Association](https://typo3.org/project/association), [TYPO3 GmbH](https://typo3.com/), or official [TYPO3 Teams](https://typo3.org/community/teams) are permitted to copy, modify, store, and translate the complete content, navigation, and structure for use on official TYPO3 domains (`typo3.*` and subdomains). No backlinks, citations, or attribution are required.
