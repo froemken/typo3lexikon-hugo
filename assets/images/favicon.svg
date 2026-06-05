@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <style>
+    .cover { fill: #ff8700; }
+    .page { fill: #ffffff; }
+    .text { fill: #444444; }
+    @media (prefers-color-scheme: dark) {
+      .page { fill: #2d2d2d; }
+      .text { fill: #dddddd; }
+    }
+  </style>
+  <!-- Book Cover Background (Orange) -->
+  <path class="cover" d="M16 26.5C11 23 5 23 2 25V8C5 6 11 6 16 9.5C21 6 27 6 30 8V25C27 23 21 23 16 26.5z" />
+  
+  <!-- Left Page -->
+  <path class="page" d="M15.5 24C11 21.5 5.5 21.5 3 23V7.5C5.5 6 11 6 15.5 8.5V24z" />
+  
+  <!-- Right Page -->
+  <path class="page" d="M16.5 24C21 21.5 26.5 21.5 29 23V7.5C26.5 6 21 6 16.5 8.5V24z" />
+  
+  <!-- Left Page Lines -->
+  <rect class="text" x="5.5" y="10.5" width="7" height="1.5" rx="0.5" />
+  <rect class="text" x="5.5" y="13.5" width="7" height="1.5" rx="0.5" />
+  <rect class="text" x="5.5" y="16.5" width="7" height="1.5" rx="0.5" />
+  <rect class="text" x="5.5" y="19.5" width="4" height="1.5" rx="0.5" />
+  
+  <!-- Right Page Lines -->
+  <rect class="text" x="19.5" y="10.5" width="7" height="1.5" rx="0.5" />
+  <rect class="text" x="19.5" y="13.5" width="7" height="1.5" rx="0.5" />
+  <rect class="text" x="19.5" y="16.5" width="7" height="1.5" rx="0.5" />
+  <rect class="text" x="19.5" y="19.5" width="4" height="1.5" rx="0.5" />
+</svg>
