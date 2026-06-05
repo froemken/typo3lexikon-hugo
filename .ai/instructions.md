@@ -37,3 +37,13 @@ Use the following Hugo shortcodes to represent TYPO3 version support status. Not
     {{% badge style="red" icon="skull-crossbones" %}}TYPO3 13.0{{% /badge %}}
     ```
 
+## Local Development Commands
+*   **Start Local Server:**
+    ```shell
+    hugo server
+    ```
+*   **Compile Production Build Locally:**
+    ```shell
+    hugo --gc --cleanDestinationDir --minify
+    ```
+
