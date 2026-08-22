@@ -1,0 +1,19 @@
+{{ if .IsHome }}
+{{- $website := dict "@type" "WebSite" "@id" (printf "%s#website" site.BaseURL) "url" site.BaseURL "name" site.Title "description" "Stefan Frömken stellt auf seiner TYPO3-Seite Tutorials zu verschiedenen Themen von TYPO3 vor." "inLanguage" "de-DE" "publisher" (dict "@id" (printf "%s#person" site.BaseURL)) -}}
+{{- $person := dict "@type" "Person" "@id" (printf "%s#person" site.BaseURL) "name" "Stefan Frömken" "jobTitle" "Senior TYPO3 Webdeveloper" "url" site.BaseURL "sameAs" (slice "https://x.com/StefanFroemken" "https://github.com/froemken") -}}
+{{- $schema := dict "@context" "https://schema.org" "@graph" (slice $website $person) -}}
+<script type="application/ld+json">
+{{ $schema | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{ else if .IsPage }}
+{{- $author := dict "@type" "Person" "name" "Stefan Frömken" "jobTitle" "Senior TYPO3 Webdeveloper" "url" site.BaseURL -}}
+{{- $publisher := dict "@type" "Person" "name" "Stefan Frömken" "url" site.BaseURL -}}
+{{- $mainEntity := dict "@type" "WebPage" "@id" .Permalink -}}
+{{- $article := dict "@context" "https://schema.org" "@type" "TechArticle" "headline" .Title "url" .Permalink "mainEntityOfPage" $mainEntity "author" $author "publisher" $publisher "inLanguage" "de-DE" -}}
+{{- if not .Date.IsZero }}{{ $article = merge $article (dict "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+{{- if not .Lastmod.IsZero }}{{ $article = merge $article (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+{{- with (.Description | default .Summary) }}{{ $article = merge $article (dict "description" (. | plainify | chomp)) }}{{ end -}}
+<script type="application/ld+json">
+{{ $article | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{ end }}
