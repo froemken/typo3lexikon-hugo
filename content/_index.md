@@ -1,10 +1,10 @@
 +++
 archetype = "home"
-title = "Stefans TYPO3 Seite"
+title = "TYPO3 Tutorials, Tipps & Extension-Entwicklung"
 linkTitle = "Startseite"
 alwaysopen = true
 ordersectionsby = "weight"
-description = "Stefan Frömken stellt auf seiner TYPO3-Seite Tutorials zu verschiedenen Themen von TYPO3 vor. Einfache Texte und Themen bezogene Bilder runden seine Tipps und Tricks ab"
+description = "Kostenlose TYPO3 Tutorials, Tipps & Tricks von Stefan Frömken. Praxiserprobte Anleitungen zu Extbase, Fluid, TypoScript & TYPO3 Upgrades."
 +++
 
 ## Tutorials, Tipps und Tricks von Stefan Frömken
