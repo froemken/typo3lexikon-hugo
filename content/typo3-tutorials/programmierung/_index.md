@@ -5,3 +5,5 @@ ordersectionsby = "linktitle"
 alwaysopen = false
 aliases = ["programmierung.html"]
 +++
+
+Hier findet ihr praxisnahe Tutorials und Beispiele rund um die TYPO3-Programmierung: von Hooks und FormEngine-Anpassungen bis hin zu individuellen Backend-Erweiterungen und AJAX-Integrationen.

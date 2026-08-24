@@ -4,12 +4,12 @@ date = 2024-01-09T20:49:38+01:00
 aliases = ["hook-ohne-funktion.html"]
 +++
 
-Hier stelle ich euch den Hook `render_preProcess` vor, der sich in der Datei `class.t3lib_pagerenderer.php` befindet. Der Kommentar beinhaltet zwar das Wort `hook`, damit er sich auffinden lässt, aber wirklich aussagefähig ist er nicht. Ich habe den Hook einfach ausgewählt und während ich das hier schreibe, weiß ich selbst noch nicht was er macht.
+Hier schauen wir uns den Hook `render-preProcess` aus der Core-Klasse `class.t3lib_pagerenderer.php` an. Der Kommentar im Code verrät zwar das Wort `hook`, liefert aber zunächst wenig Details zur konkreten Wirkungsweise.
 
-Wenn ich mir die Parameter anschaue, lese ich Worte wie `header`, `js` und `css`. Meine erste Vermutung lässt darauf schließen, das dieser Hook etwas mit den Kopfzeilen unseres HTML-Templates zu tun hat. Evtl. kann man mit diesem Hook eigene `css` bzw. `js` Dateien und/oder JS-Code im Header einfügen.
+Ein Blick auf die übergebenen Parameter mit Bezeichnungen wie `header`, `js` und `css` lässt bereits vermuten: Dieser Hook greift kurz vor der Aufbereitung der HTML-Headerdaten. Damit lassen sich eigene CSS- und JavaScript-Dateien sowie Inline-Code in den Seiten-Header einschleusen.
 
 ```php
-// preRenderHook for possible manuipulation
+// preRenderHook for possible manipulation
 if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'])) {
     $params = [
         'jsLibsCore' => &$jsLibs,
@@ -20,55 +20,65 @@ if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagere
         'headerData' => &$this->headerData,
         'footerData' => &$this->footerData,
         'jsInline' => &$this->jsInline,
-        'cssInline' => &$this->cssInline
-    );
-    
+        'cssInline' => &$this->cssInline,
+    ];
+
     foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'] as $hook) {
         t3lib_div::callUserFunction($hook, $params, $this);
     }
 }
 ```
 
-Der Aufruf über `callUserFunction` weist uns darauf hin, dass wir unseren Eintrag in der `ext_localconf.php` mit einem eigenen Funktionnamen versehen müssen:
+Der Aufruf über `t3lib_div::callUserFunction()` ist hier das entscheidende Signal: Wir sind nicht an einen fest vom Core vorgegebenen Methodennamen gebunden, sondern MÜSSEN in der `ext_localconf.php` unseren eigenen Methodennamen mit angeben.
+
+Die Registrierung in der `ext_localconf.php` erfolgt nach folgendem Schema:
 
 ```php
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][] 
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][]
     = 'EXT:sftesthooks/hooks/class.tx_sftesthooks.php:tx_sftesthooks->includeJS';
 ```
 
-Der Aufruf muss in folgender Struktur erfolgen:
+Das Schema lautet hier:
 
 ```php
-Hook = '[Pfad]:[Objekt]->[Funktionsname]'
+HOOK = '[PFAD]:[Objekt]->[Methodenname]'
 ```
 
-Ich habe mich hier für den Funktionsnamen `includeJS` entschieden, weil ich vorhabe eine nervige Alert-Box auf meine Webseite zu setzen. Ist ja Gott-Sei-Dank nur ein Beispiel. Mal schauen, ob's klappt:
+In unserem Beispiel wählen wir den Methodennamen `includeJS`. Das Ziel: Eine JavaScript-Alert-Box auf der Webseite ausgeben.
 
-Lasst uns in unsere PHP-Datei erstmal Folgendes eintragen:
+Erstellen wir im ersten Schritt unsere Hook-Klasse mit einer Test-Ausgabe:
 
 ```php
 <?php
-class tx_sftesthooks {
-    public function includeJS($params, $pObj) {
+
+class tx_sftesthooks
+{
+    public function includeJS($params, $pObj)
+    {
         print_r($params);
     }
 }
 ```
 
-Wir sehen nach einen ClearCache, dass sich diese Ausgabe nicht nur im Frontend, sondern auch im Backend auswirkt. Weiterhin erkennen wir, dass die Angaben als Arrays fungieren. Mit diesen Informationen bauen wir unsere Datei nun folgendermaßen um:
+Nach dem Leeren des Caches fällt sofort auf: Diese Testausgabe erscheint sowohl im Frontend als auch im Backend, weil der `PageRenderer` in beiden Kontexten zum Einsatz kommt. Außerdem sehen wir im `print_r()`, dass die Parameter als verschachtelte Arrays übergeben werden.
+
+Passen wir den Code an, um die Ausgabe gezielt auf das Frontend zu beschränken:
 
 ```php
 <?php
-class tx_sftesthooks {
-    public function includeJS($params, $pObj) {
+
+class tx_sftesthooks
+{
+    public function includeJS($params, $pObj)
+    {
         if (TYPO3_MODE === 'FE') {
-            $params['jsInline']['nervigeMeldung'] = 'alert("Ich nerve ab jetzt jedes mal, wenn die Webseite aufgerufen wird");';
+            $params['jsInline']['nervigeMeldung'] = 'alert("Ich nerve ab jetzt jedes Mal beim Seitenaufruf");';
         }
     }
 }
 ```
 
-So, ab nun wird der Code nur noch im Frontend ausgeführt und wir fügen unser Script als Array ein. Aber es klappt immer noch nicht. Also müssen wir nochmal einen Blick in den Hook machen und ein wenig herunterscrollen bis wir folgenden Eintrag finden:
+Beim Test zeigt sich jedoch: Die Alert-Box wird noch nicht ausgegeben. Ein tieferer Blick in die nachfolgenden Zeilen des `PageRenderer` offenbart die Ursache:
 
 ```php
 if (count($this->jsInline)) {
@@ -90,17 +100,22 @@ if (count($this->jsInline)) {
 }
 ```
 
-Jetzt sehen wir `$properties['code']`. Na super, noch ein Array! Also ab in unsere PHP-Datei und noch mal ändern:
+Der Core erwartet unter `$properties` ein weiteres Array mit dem Key `code`.
+
+Passen wir unsere Hook-Methode entsprechend an:
 
 ```php
 <?php
-class tx_sftesthooks {
-    function includeJS($params, $pObj) {
+
+class tx_sftesthooks
+{
+    public function includeJS($params, $pObj)
+    {
         if (TYPO3_MODE === 'FE') {
-            $params['jsInline']['nervigeMeldung']['code'] = 'alert("Ich nerve ab jetzt jedes mal, wenn die Webseite aufgerufen wird");';
+            $params['jsInline']['nervigeMeldung']['code'] = 'alert("Ich nerve ab jetzt jedes Mal beim Seitenaufruf");';
         }
     }
 }
 ```
 
-und endlich erscheint die nervige Meldung auf unserer Webseite.
+Mit dieser Struktur wird der JavaScript-Code korrekt in den PageRenderer eingespeist und die Popup-Meldung erscheint wie gewünscht im Frontend.

@@ -6,54 +6,111 @@ alwaysopen = false
 aliases = ["hooks.html"]
 +++
 
-Es gibt eine Erklärung auf Wikipedia.org. Aber ich will es mal mit eigenen Worten versuchen:
+Es gibt zwar eine allgemeine Erklärung auf Wikipedia, aber ich möchte das Thema Hooks in TYPO3 mal mit eigenen Worten aus der Praxis erklären.
 
-Ein Hook ist eine "Unterbrechung" an einer vorgegebenen Stelle im aktuellen Programmablauf, um dann einen Code einer völlig anderen Quelle einzubinden.
+Ein Hook ist im Grunde eine geplante Unterbrechung an einer ganz bestimmten Stelle im Programmablauf. TYPO3 hält an dieser Stelle kurz inne und gibt euch die Möglichkeit, eigenen PHP-Code einzuklinken und auszuführen, bevor der normale Ablauf fortgesetzt wird.
 
-In Bezug auf TYPO3 bedeutet das, dass überall im PHP-Quellcode Hooks vorhanden sind, die Euch dabei helfen eigenen PHP-Quellcode an genau dieser Stelle zu implementieren bzw. einzufügen.
+Im TYPO3-Core und in vielen Extensions sind an unzähligen Stellen solche Hooks eingebaut. Sie helfen euch dabei, TYPO3 nach euren Wünschen zu erweitern, ohne direkt am Core schrauben zu müssen.
 
-Ich sag mal ganz salopp dass es zwei Arten von Hooks gibt. Einmal die Hooks mit denen man bestimmte Funktionen um weitere Funktionalität erweitern kann und zum anderen Hooks mit denen Ihr Inhalte verändern könnt. Ersteres könnte z.B. ein weiteres ContentElement (zusätzlich zu Text, Text mit Bild, Formular, ...) sein mit dem Ihr z.B. einen Text erstellen könnt, der immer rot und fett ist. Zweiteres erhält von dem Hook ein Inhaltselement mit seinen Eigenschaften und Ihr könnt dieses Inhaltselement nun zusätzlich überprüfen oder die Ausgabe diesen Inhaltselementes weiter beeinflussen.
+Ich unterscheide Hooks gerne ganz pragmatisch in zwei Kategorien:
 
-Wo macht ein Hook Sinn?
-Ein Hook macht meist an solchen Stellen Sinn, an denen der Code erweitert werden soll bzw. ein vorhandener Inhalt nachträglich überarbeitet werden soll. Ich mach mal ein paar Beispiele zum besseren Verständnis:
+1. **Hooks zur Funktionserweiterung:** Damit erweitert ihr bestehende Abläufe um zusätzliche Logik. Das könnte zum Beispiel ein neues Inhaltselement sein, das ihr zusätzlich zu den Standard-Elementen wie Text oder Bild bereitstellen wollt.
+2. **Hooks zur Inhaltsveränderung:** Hier bekommt euer Hook ein Datenobjekt oder ein Inhaltselement mit seinen Eigenschaften übergeben. Ihr könnt die Daten prüfen, manipulieren oder die Ausgabe des Elements gezielt anpassen.
 
-In der Extension powermail gibt es derzeit 17 dokumentierte Hooks. Einer davon "unterbricht" die laufende Verarbeitung an der Stelle, an der ein Feld (wie Betreff, eMail, Name) HTML-mäßig generiert wird. Wir können nun diesen Hook nutzen und den Inhalt und/oder auch das Aussehen diesen Feldes beeinflussen (roter Rahmen, beliebigen Text über oder rechts vom Feld).
+## Wann macht ein Hook Sinn?
 
-In der Extension tt_news gibt es vorgefertigte Hooks mit denen weitere Marker für das Template erstellt werden können.
+Ein Hook ist immer dann die richtige Wahl, wenn ihr ein bestehendes Verhalten anpassen oder erweitern wollt, ohne den TYPO3-Core oder fremde Extensions direkt anzufassen.
 
-Nicht nur Extensions, sondern auch der TYPO3-Code selbst beinhaltet massig Hooks, damit Ihr an vorgegebenen Stellen den PHP-Quellcore erweitern könnt. So gibt es dort Hooks, die die Daten vor der Speicherung eines Datensatzes nochmals überprüfen oder auch einen völlig anderen Inhalt in der Datenbank gespeichern können. Ja! Es gibt auch integrierte Hooks, um das Aussehen einzelner Felder im Backend zu verändern.
+Ein paar praktische Beispiele:
 
-Wie finde ich Hooks?
-Wenn Ihr Glück habt, dann sind Hooks in der Dokumentation beschrieben. Wenn Ihr Pech habt, dann ist nirgends etwas beschrieben und Ihr müsst Euch selbst auf die Suche machen. Das ist für Anfänger nicht leicht, denn TYPO3 ist kein 2000 Zeilen CMS.
+In der Extension powermail gab es beispielsweise Hooks, die den Prozess genau in dem Moment unterbrechen, in dem ein Formularfeld als HTML generiert wird. Über den Hook lässt sich dann das Feld manipulieren, etwa um einen roten Rahmen, zusätzliche Attribute oder Hinweistexte einzufügen.
 
-Ich sag mal so: Der Sourcecode von TYPO3 ist manchmal besser dokumentiert als die Dokumentionen, die Ihr im Internet findet. So ist ein Hook sehr oft im Quellcode dokumentiert und Ihr könnt in den Dateien nach dem Wort "hook" suchen. Auf diese Weise kommen alle Hooks Stück für Stück zu Tage. Mit einer Software wie Scriptly von Webocton könnt Ihr auch Dateien eines komplettes Verzeichnisses und deren Unterverzeichnisse nach "hook" durchsuchen lassen. Nahezu alle Kommentare zu den jeweiligen Hooks beschreiben kurz was sie machen. Schaut Euch dazu mal die Datei class.t3lib_tceforms.php im Verzeichnis t3lib an:
+In tt_news existierten Hooks, mit denen sich zusätzliche Marker für das Template-Rendering bereitstellen ließen.
 
-Hier ein Hook, der es Euch ermöglicht eine Funktion auszuführen, die VOR der Erstellung eines Feldes im Backend noch etwas ausführt oder überprüft wie z.B. ob der Inhalt diesen Feldes numerisch ist oder einen timestamp in ein gewünschtes Datumformat konvertiert:
+Neben Extensions bringt auch der TYPO3-Core selbst unzählige Hooks mit. Damit könnt ihr etwa Formulardaten vor dem Speichern in der Datenbank nochmals validieren, Werte umrechnen oder das Erscheinungsbild einzelner Felder im Backend verändern.
 
-// Hook: getSingleField_preProcessforeach ($this->hookObjectsSingleField as $hookObj)    {    if (method_exists($hookObj,'getSingleField_preProcess'))    {        $hookObj->getSingleField_preProcess($table, $field, $row, $altName, $palette, $extra, $pal, $this);    }}
-Hooks werden immer in diesen foreach-Konstellationen erstellt. Es wird also irgendein Array (hier $this->hookObjectsSingleField) durchlaufen und für jeden gefundenen Eintrag wird überprüft, ob sich in diesem Objekt "$hookObj" eine Funktion mit dem Namen "getSingleField_preProcess" befindet. Wenn dem so ist, dann wird die Funktion mit den ganzen Parametern, wie im Beispiel zu sehen ist aufgerufen. Ihr seht aber auch, dass diese Funktion nichts zurück gibt. Das bedeutet für uns, dass wir die Daten, die wir ändern wollen per Referenz in unserer Funktion angeben müssen:
+## Wie findet man Hooks?
 
-function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &pObj) { ...}
-Hier hab ich noch einen Hook aus der Extension TemplaVoila. In diesem Fall wird nicht eine fest vorgegebene Funktion aufgerufen, sondern ein Objekt geladen:
+Wenn ihr Glück habt, ist ein Hook in der Entwickler-Dokumentation sauber beschrieben. Oft müsst ihr euch aber selbst im Quellcode auf die Suche machen.
 
-// First prepare user defined objects (if any) for hooks which extend this function:$hookObjectsArr = array();if (is_array ($TYPO3_CONF_VARS['EXTCONF']['templavoila']['pi1']['renderElementClass'])) {    foreach ($TYPO3_CONF_VARS['EXTCONF']['templavoila']['pi1']['renderElementClass'] as $classRef) {        $hookObjectsArr[] = &t3lib_div::getUserObj($classRef);    }}
-Und noch ein Hook aus der Extension TemplaVoila. Diese Form des Hooks ist meineserachtens die wohl üblichste Variante. Auch ist diese Art im Internet sehr verbreitet und auch in dem Buch von Dmitry Dulepov dokumentiert:
+Der Quellcode von TYPO3 ist glücklicherweise an vielen Stellen gut kommentiert. Entwickler haben Hooks meist direkt im Code dokumentiert. Ihr könnt euer Projekt mit einer IDE oder einem Such-Tool gezielt nach dem Begriff `hook` durchsuchen.
 
-// Call hooksif (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['templavoila']['newcewizard']['forms'])) {    foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['templavoila']['newcewizard']['forms'] as $userFunc) {        $params = array(            'pObj' => &$this,            'elements' => &$elements        );        t3lib_div::callUserFunction($userFunc, $params, $this);    }}  
-Diese Form des Hooks gibt keine Funktionsnamen mehr vor, sondern Ihr könnt hier mit Euren eigenen Funktionsnamen arbeiten. In diesem Beispiel ist auch sehr schön zu sehen, wie mehrere Parameter an Eure Funktion übergeben werden können.
+Schauen wir uns dazu mal ein typisches Beispiel aus der damaligen TCEforms-Verarbeitung an:
 
-Durchsucht also mal die einzelnen Dateien und findet selbst heraus wo noch Hooks zu finden sind und welche Aufgabe sie für Euch ausführen.
+```php
+// Hook: getSingleField_preProcess
+foreach ($this->hookObjectsSingleField as $hookObj) {
+    if (method_exists($hookObj, 'getSingleField_preProcess')) {
+        $hookObj->getSingleField_preProcess($table, $field, $row, $altName, $palette, $extra, $pal, $this);
+    }
+}
+```
 
-Wie nutze ich einen Hook?
-Egal welchen Hook Ihr gerade verwenden wollt, es gibt immer ein Array, das mit $TYPO3_CONF_VARS['SC_OPTIONS'] oder mit $TYPO3_CONF_VARS['EXTCONF'] anfängt. Die SC_OPTION-Variante findet Ihr in den Core-Dateien von TYPO3 und die EXTCONF-Variante ist für Hooks innerhalb von Extensions bestimmt. Evtl. werdet Ihr sagen, dass in meinem 1ten Beispiel von oben aber gar kein SC_OPTION zu finden ist. Da geb ich Euch grundsätzlich recht, aber sucht doch mal in der gleichen Datei nach dem Array "$this->hookObjectsSingleField" und Ihr werdet folgende Zeilen finden:
+Hooks sind im Code fast immer über solche `foreach`-Schleifen aufgebaut. Ein Array (hier `$this->hookObjectsSingleField`) wird durchlaufen. Für jeden Eintrag prüft TYPO3 mit `method_exists()`, ob das Objekt `$hookObj` die Methode `getSingleField_preProcess` besitzt. Ist das der Fall, wird die Methode mit allen Parametern aufgerufen.
 
-$this->hookObjectsSingleField = array();if (is_array ($TYPO3_CONF_VARS['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass']))    {    foreach ($TYPO3_CONF_VARS['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'] as $classRef)    {        $this->hookObjectsSingleField[] = t3lib_div::getUserObj($classRef);    }}
-und siehe da...da ist auch das SC_OPTION. Ihr werdet immer wieder über solche "Fallen" stolpern, von daher will ich Euch möglichst alle Varianten zeigen und Euch auf bestimmte Problemstellen hinweisen. Bei einigen Hooks muss sogar der nachfolgende Code analysiert werden, damit Euer Code auch sauber ausgeführt werden kann.
+Wie ihr seht, gibt diese spezifische Funktion keinen Rückgabewert zurück. Heißt: Wenn ihr Daten verändern wollt, müsst ihr die entsprechenden Parameter in eurer eigenen Methode per Referenz annehmen:
 
-ext_localconf.php
-Um einen Hook verwenden zu können ist es am Einfachsten eine eigene Extension zu erstellen.
+```php
+public function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj)
+{
+    // ...
+}
+```
 
-<?phpif (!defined('TYPO3_MODE')) { die ('Access denied.');}$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'][] = 'EXT:sfmyext/hook/class.tx_sfmyext_preproc.php:tx_sfmyext_preproc';?>
-Alles was links vom Gleichheitszeichen steht habt Ihr weiter oben schon mal gesehen...es ist der gleiche Code (blaue Farbe) mit einem abschließenden [] am Ende. Dieses abschließende [] steht dafür da, um dieses Array mit jedem Aufruf immer weiter füllen zu können. Damit können also auch andere Extensions diesen Hook verwenden und/oder er kann auch innerhalb Eurer Extension mehrfach aufgerufen werden. Vergesst diese [] bitte nicht, ansonsten kann dieser Hook insgesamt nur noch EINMAL verwendet werden. Eine Mehrfachverwendung wäre dann nicht mehr möglich.
+Es gibt auch Hooks, bei denen kein fester Methodenname vorgegeben ist, sondern ein komplettes Benutzerobjekt instanziiert wird. Hier ein Beispiel aus TemplaVoila:
 
-Alles was rechts vom Gleichheitszeichen steht ist ein bisschen davon abhängig, wie der Hook aufgebaut ist: Hook mit vorgegebener Funktion, Hook mit Objektaufruf oder Hook mit selbstdefinierter Funktion. Besucht einfach meine Dokumentationen oben im Inhaltsverzeichnis, die Euch detailierte Informationen dazu zeigen.
+```php
+// First prepare user defined objects (if any) for hooks which extend this function:
+$hookObjectsArr = [];
+if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['templavoila']['pi1']['renderElementClass'])) {
+    foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['templavoila']['pi1']['renderElementClass'] as $classRef) {
+        $hookObjectsArr[] = &t3lib_div::getUserObj($classRef);
+    }
+}
+```
+
+Eine weitere sehr verbreitete Variante arbeitet mit `callUserFunction`. Diese Form begegnet euch im TYPO3-Umfeld extrem häufig:
+
+```php
+// Call hooks
+if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['templavoila']['newcewizard']['forms'])) {
+    foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['templavoila']['newcewizard']['forms'] as $userFunc) {
+        $params = [
+            'pObj' => &$this,
+            'elements' => &$elements,
+        ];
+        t3lib_div::callUserFunction($userFunc, $params, $this);
+    }
+}
+```
+
+Bei dieser Variante schreibt euch der Hook keinen Methodennamen vor. Ihr legt euren eigenen Methodennamen fest und erhaltet alle relevanten Variablen gebündelt in einem `$params`-Array.
+
+## Wie registriert man einen Hook?
+
+Unabhängig von der genauen Variante wird ein Hook immer über ein globales Konfigurations-Array registriert. Für Core-Hooks wird üblicherweise `$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']` verwendet, für Extensions meist `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']`.
+
+Falls ihr euch fragt, wo die Verknüpfung im ersten Beispiel lag: Wenn ihr im Quellcode nach `$this->hookObjectsSingleField` sucht, stoßt ihr auf folgende Initialisierung:
+
+```php
+$this->hookObjectsSingleField = [];
+if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'])) {
+    foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'] as $classRef) {
+        $this->hookObjectsSingleField[] = t3lib_div::getUserObj($classRef);
+    }
+}
+```
+
+Die Registrierung erfolgt typischerweise in der `ext_localconf.php` eurer eigenen Extension:
+
+```php
+<?php
+defined('TYPO3') || die('Access denied.');
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'][]
+    = 'EXT:my_extension/Classes/Hooks/TceformsHook.php:Vendor\\MyExtension\\Hooks\\TceformsHook';
+```
+
+Achtet unbedingt auf die leere eckige Klammer `[]` am Ende. Damit wird eure Klasse an das bestehende Array angehängt. Vergesst ihr die Klammern, überschreibt ihr alle zuvor registrierten Hooks anderer Extensions an dieser Stelle.
+
+Wie eure Hook-Klasse im Detail aufgebaut sein muss, hängt von der jeweiligen Hook-Art ab. Schaut euch dazu die nachfolgenden Kapitel im Inhaltsverzeichnis an.

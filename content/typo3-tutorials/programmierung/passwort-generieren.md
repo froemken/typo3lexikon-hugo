@@ -4,38 +4,38 @@ date = 2024-01-09T20:49:47+01:00
 aliases = ["passwort-generieren.html"]
 +++
 
-Im Folgenden zeige ich euch meine Vorgehensweise, um im Backend von TYPO3 7 LTS einen "Passwort generieren" Button für das Passwort der Backendbenutzer zu erstellen. Der Button soll rechts vom Passwortfeld erscheinen. Mit jedem Klick soll ein AJAX-Call gestartet, der einerseits das Passwort setzt und andererseits das Passwort im Klartext in einem Bootstrap-Panel anzeigt.
+Im Folgenden zeige ich euch meine Vorgehensweise, um im TYPO3-Backend einen Button zur Passwort-Generierung für Backend-Benutzer einzubinden. Der Button soll rechts vom Passwortfeld erscheinen. Bei jedem Klick wird per AJAX ein neues Passwort erzeugt, in das Eingabefeld eingesetzt und zusätzlich im Klartext in einem Panel unterhalb des Feldes angezeigt.
 
-Solche Aufgaben für das Frontend gibt es im Netz wie Sand am Meer, aber im Backend läuft so einiges anders. Mir war wichtig, diese Aufgabe möglichst Core kompatibel, also ohne Tricksen, Biegen und Brechen umzusetzen.
+Lösungen für das Frontend gibt es im Netz wie Sand am Meer. Im Backend läuft die FormEngine jedoch nach ganz eigenen Regeln. Mir war wichtig, die Umsetzung möglichst sauber und Core-konform umzusetzen.
 
 ## Einen Wizard einfügen
 
-Zunächst müsst ihr für das Passwort der `be_users` Tabelle einen weiteren Wizard hinzufügen. Erstellt in eurem SitePackage die Datei `[sitePackage]/Configuration/TCA/Overrides/be_users.php` mit diesem Inhalt:
+Zunächst müsst ihr für das Passwortfeld der Tabelle `be_users` einen zusätzlichen Wizard hinzufügen. Erstellt in eurer Extension bzw. eurem Sitepackage die Datei `Configuration/TCA/Overrides/be_users.php` mit folgendem Inhalt:
 
 ```php
 <?php
-$GLOBALS['TCA']['be_users']['columns']['password']['config']['wizards'] = array(
-    'generatePassword' => array(
+defined('TYPO3') || die('Access denied.');
+
+$GLOBALS['TCA']['be_users']['columns']['password']['config']['wizards'] = [
+    'generatePassword' => [
         'type' => 'userFunc',
-        'userFunc' => \StefanFroemken\SitePackage\Hooks\GeneratePassword::class . '->render',
-    )
-);
+        'userFunc' => \Vendor\MyExt\Hooks\GeneratePassword::class . '->render',
+    ],
+];
 ```
 
-Mit dem TCA Typ `userFunc` und der Angabe einer PHP-Klasse könnt ihr euch nun komplett selbst, um das Rendering eines Wizards kümmern. Erstellt nun die Datei `[SitePackage]/Classes/Hooks/GeneratePassword.php`:
+Mit dem TCA-Typ `userFunc` und der Angabe einer PHP-Klasse könnt ihr euch komplett selbst um das Rendering des Wizards kümmern. Erstellt nun die entsprechende Datei `Classes/Hooks/GeneratePassword.php`:
 
 ```php
 <?php
-namespace JWeiland\MyExt\Hooks;
+
+namespace Vendor\MyExt\Hooks;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * @license www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- */
 class GeneratePassword
 {
     /**
@@ -43,27 +43,24 @@ class GeneratePassword
      *
      * @param array $parentArray
      * @param AbstractFormElement $formElement
-     *
-     * @return string The rendered Wizard
+     * @return string
      */
-    public function render(array $parentArray, AbstractFormElement $formElement)
+    public function render(array $parentArray, AbstractFormElement $formElement): string
     {
-        // render the structure of the panel to show the password after Ajax request
+        // Structure of the panel to show the password after AJAX request
         $parentArray['item'] .= sprintf(
-            '
-              
-                %s
-              
-              
-            ',
+            '<div class="panel panel-default myExtGeneratedPassword" style="margin-top: 5px;">
+                <div class="panel-heading">%s</div>
+                <div class="panel-body"><code></code></div>
+            </div>',
             LocalizationUtility::translate('generatedPassword', 'myExt')
         );
 
-        // render the button
+        // Render the button
         /** @var IconFactory $iconFactory */
         $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
         return sprintf(
-            '%s',
+            '<a href="#" class="btn btn-default myExtGeneratePassword" data-itemuid="%s" data-itemname="%s" title="Generate password">%s</a>',
             $parentArray['uid'],
             $parentArray['itemName'],
             $iconFactory->getIcon('actions-document-synchronize')
@@ -72,44 +69,50 @@ class GeneratePassword
 }
 ```
 
-Was hier nicht zu sehen ist: TYPO3 ruft die `render()` Methode mithilfe von `GeneralUtility::callUserFunction()` auf. Das Besondere daran: Alle Parameter werden als Referenzen übergeben. Das ergibt gleich 2 verschiedene Anwendungsbereiche.
+Was man dem Code nicht direkt ansieht: TYPO3 ruft die Methode `render()` intern mittels `GeneralUtility::callUserFunction()` auf. Das Besondere dabei: Alle Parameter werden als Referenz übergeben. Das eröffnet zwei Möglichkeiten gleichzeitig:
 
-In dem Array `$parentArray` gibt es unter dem Key `item` das vollständige HTML des Passwortfeldes. In meinem Beispiel füge ich ein leeres Bootstrap Panel hinzu. Einzig eine Überschrift habe ich diesem verpasst. In den Panel-Body wird später per JavaScript das Passwort dynamisch eingebunden.
+Im Array `$parentArray` befindet sich unter dem Schlüssel `item` bereits das vollständige HTML des Passwortfeldes. In meinem Beispiel hänge ich dort ein leeres Bootstrap-Panel mit einer übersetzten Überschrift an. In den Panel-Body wird später per JavaScript das generierte Passwort im Klartext eingesetzt.
 
-Den eigentlichen Wizard müsst ihr über den Returnwert realisieren. Ich habe mich hier für ein einfaches Icon entschieden, das ich mithilfe der neuen IconFactory erstelle. Hinzu kommt eine CSS-Klasse und die beiden Werte `uid` und `name` als `data` Attribute auf die ihr später mit z.B. jQuery wieder zugreifen könnt. Gerade beim Editieren von mehreren Backendbenutzern (z.B. inline) ist es wichtig diese Daten zu haben, damit ihr nicht beim Klick auf den Button auf einmal die Passwörter aller geöffneten Benutzer ändert. Aber dazu später mehr.
+Den eigentlichen Wizard-Button liefert ihr über den Return-Wert der Funktion zurück. Ich erstelle hier einen Button mit dem Synchronisations-Icon aus der `IconFactory`. Wichtig sind die HTML5-Data-Attribute `data-itemuid` und `data-itemname`. Darüber kann JavaScript das Zielfeld im Formular eindeutig identifizieren. Das ist besonders dann essenziell, wenn mehrere Backend-Benutzer im gleichen Formular auf einmal bearbeitet werden (beispielsweise bei `inline`-Verknüpfungen). Ohne diese Zuordnung würdet ihr mit einem Klick versehentlich alle Passwortfelder auf der Seite überschreiben.
 
-Leert nach dem Speichern den Systemcache (roter Blitz) oder im Installtool `Flush Caches`. Der Wizard sollte zumindest schon zu sehen sein.
+Nach dem Speichern solltet ihr den Cache im Backend leeren. Der Wizard-Button sollte danach am Passwortfeld zu sehen sein.
 
-## Vorbereitungen für das RequireJS Modul
+## Vorbereitungen für das RequireJS-Modul
 
-Dieser Part hat richtig Zeit gekostet. Es gibt diverse Hooks mit denen ich das JavaScript mithilfe des PageRenderers hätte einbinden können, jedoch gibt es ein Problem, das man nicht sofort bemerkt.
+Dieser Teil hat bei der Entwicklung ordentlich Zeit gekostet. Es gibt zwar verschiedene Hooks, über die man JavaScript mithilfe des `PageRenderer` einbinden könnte, jedoch zeigt sich in der Praxis ein Detailproblem:
 
-Es ist ein gewaltiger Unterschied, ob ihr einen Datensatz über das `List` Module direkt bearbeitet, oder ihr den Datensatz als Teil eines anderen Datensatzes (TCA Typ: inline) bearbeitet. Das Problem bei Typ `inline` ist, dass das komplette HTML über AJAX nachgeladen wird. Wenn ich das JavaScript global einfüge, dann sind dem JavaScript diese neuen Felder nicht bekannt. Binde ich das JavaScript direkt in den `be_users` Datensatz ein, dann klappt das zwar für das direkte Bearbeiten, jedoch nicht, wenn der `be_users` Datensatz über `inline` nachgeladen wird. Das JavaScript ist zwar da, wird aber nicht ausgeführt.
+Es ist ein riesiger Unterschied, ob ein Datensatz direkt im Web-Modul *Liste* bearbeitet wird oder als verschachtelter Kind-Datensatz über den TCA-Typ `inline` geladen wird. Bei `inline`-Feldern wird das HTML nachträglich per AJAX nachgeladen. Wenn das JavaScript global eingebunden ist, kennt es die neu nachgeladenen DOM-Elemente zunächst nicht. Binde ich das JavaScript wiederum direkt im `be_users`-Datensatz ein, funktioniert es zwar beim direkten Bearbeiten, aber nicht beim Nachladen über `inline`. Das JavaScript wird im AJAX-Response zwar geliefert, aber vom Browser nicht ausgeführt.
 
-Erst bei genauer Analyse des AJAX-Requests bin ich auf einen interessanten Wert im `json` aufmerksam geworden: `scriptCall`.
+Bei der Analyse der AJAX-Responses fiel mir im JSON-Objekt das Attribut `scriptCall` auf.
 
-Im FormInlineAjaxController wird dieser Wert erstmalig erstellt und über `mergeChildResultIntoJsonResult()` je nach Eingabefeld immer weiter aufgefüllt. Jedes Eingabefeld in TYPO3 hat grundsätzlich die Möglichkeit über den Array-Key `requireJsModules` diesen `scriptCall` zu befüllen. Problem an der Sache: Die neue Formengine von TYPO3 bietet keinen Hook an, um dieses Array zu befüllen. In Rücksprache mit dem Core gibt es nur eine Lösung: Wir müssen das Rendering des Passwortfeldes komplett überschreiben und dies als eigenen `renderType` registrieren.
+Im `FormInlineAjaxController` wird dieser Wert erstellt und über `mergeChildResultIntoJsonResult()` je nach Eingabefeld befüllt. Jedes Eingabefeld in TYPO3 kann über den Array-Schlüssel `requireJsModules` RequireJS-Module an diesen `scriptCall` übermitteln. Die FormEngine von TYPO3 bietet jedoch keinen Hook an, um dieses Array nachträglich zu erweitern. In Abstimmung mit dem Core bleibt hier der saubere Weg: Wir überschreiben das Rendering des Passwortfeldes über einen eigenen `renderType`.
 
 Fügt dazu in eurer `ext_localconf.php` folgende Zeilen ein:
 
 ```php
-// Add our own form elements, because we need the requireJSmodule for our password generation
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1454580921] = array(
+<?php
+defined('TYPO3') || die('Access denied.');
+
+// Add custom form elements to inject requireJSmodule for password generation
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1454580921] = [
     'nodeName' => 'myExtPassword',
-    'priority' => '70',
-    'class' => \JWeiland\MyExt\Form\Element\InputTextElement::class,
-);
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1454581671] = array(
+    'priority' => 70,
+    'class' => \Vendor\MyExt\Form\Element\InputTextElement::class,
+];
+
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1454581671] = [
     'nodeName' => 'myExtRsaPassword',
-    'priority' => '70',
-    'class' => \JWeiland\MyExt\Form\Element\RsaInputElement::class,
-);
+    'priority' => 70,
+    'class' => \Vendor\MyExt\Form\Element\RsaInputElement::class,
+];
 ```
 
-Mit diesen Zeilen registriert ihr 2 neue renderTypen. 2 deshalb, weil wir je nachdem, ob `rsaauth` installiert ist oder nicht einen anderen renderTypen benötigen. Diese Unterscheidung realisieren wir wieder über unsere vorhin angelegte Datei `[sitePackage]/Configuration/TCA/Overrides/be_users.php`:
+Damit werden zwei neue Node-Namen in der `nodeRegistry` registriert. Zwei deshalb, weil wir je nach Status der Extension `rsaauth` eine unterschiedliche Render-Klasse benötigen. Die Weiche setzen wir in der Datei `Configuration/TCA/Overrides/be_users.php`:
 
 ```php
 <?php
+defined('TYPO3') || die('Access denied.');
+
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rsaauth')) {
     $GLOBALS['TCA']['be_users']['columns']['password']['config']['renderType'] = 'myExtRsaPassword';
 } else {
@@ -117,29 +120,24 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rsaauth')) {
 }
 ```
 
-Hier seht ihr auch wieder die zuvor registrierten nodeNames, die nun als renderTypen eingesetzt werden. Durch diese Angabe brecht ihr aus dem Standardrendering von TYPO3 aus und leitet das Rendering in eure eigenen PHP-Klassen um.
+Durch diese Angabe übernimmt eure eigene Klasse das Rendering des Passwortfeldes.
 
-Kopiert euch die beiden Dateien aus dem Core in ein Verzeichnis eurer Extension:
+Kopiert dazu die beiden Original-Klassen aus dem Core in eure Extension:
 
-```
-sysext/backend/Classes/Form/Element/InputTextElement.php
-sysext/rsaauth/Classes/Form/Element/RsaInputElement.php
-```
+- `sysext/backend/Classes/Form/Element/InputTextElement.php`
+- `sysext/rsaauth/Classes/Form/Element/RsaInputElement.php`
 
-Ich habe bei mir den Pfad vom Original übernommen: `[sitePackage]/Classes/Form/Element/`
+In der Extension liegt die Datei beispielsweise unter `Classes/Form/Element/InputTextElement.php`.
 
-Passt nun die `namespace` Zeilen an eure Extension an und erweitert mit `extends` die Originalklassen. Hier ein Ausschnitt, wie die Datei aussehen könnte:
+Passt den Namespace an eure Extension an und lasst eure Klasse von der jeweiligen Core-Klasse erben:
 
 ```php
 <?php
-namespace JWeiland\MyExt\Form\Element;
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Imaging\Icon;
+namespace Vendor\MyExt\Form\Element;
+
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Core\Utility\StringUtility;
 
 /**
  * Generation of TCEform elements of the type "input type=text"
@@ -147,42 +145,50 @@ use TYPO3\CMS\Core\Utility\StringUtility;
 class InputTextElement extends \TYPO3\CMS\Backend\Form\Element\InputTextElement
 {
     /**
-     * This will render a single-line input form field, possibly with various control/validation features
+     * Render single-line input form field with RequireJS module injection
      *
      * @return array As defined in initializeResultArray() of AbstractNode
      */
-    public function render()
+    public function render(): array
     {
-        /** @var IconFactory $iconFactory */
-        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-        $languageService = $this->getLanguageService();
-
-        $table = $this->data['tableName'];
-        $fieldName = $this->data['fieldName'];
-        $row = $this->data['databaseRow'];
-        $parameterArray = $this->data['parameterArray'];
-        $resultArray = $this->initializeResultArray();
-        $resultArray['requireJsModules'] = array(
-            'TYPO3/CMS/MyExt/GeneratePassword'
-        );
-        $isDateField = false;
-        ...
+        $resultArray = parent::render();
+        $resultArray['requireJsModules'][] = 'TYPO3/CMS/MyExt/GeneratePassword';
+        return $resultArray;
+    }
+}
 ```
 
-Es klingt bescheuert, aber ihr müsst die komplette `render()` Methode aus der Originalklasse kopieren, nur um diese 3 Zeilen für das `requireJsModules` einzufügen.
-
-Ähnlich sieht es in der Datei für das `RsaInputElement` aus. Hier wird bereits ein Modul geladen, das wir entsprechend erweitern müssen:
+Dasselbe Prinzip wenden wir bei der Klasse `RsaInputElement` an:
 
 ```php
-$resultArray['requireJsModules'] = array(
-    'TYPO3/CMS/Rsaauth/RsaEncryptionModule',
-    'TYPO3/CMS/MyExt/GeneratePassword'
-);
+<?php
+
+namespace Vendor\MyExt\Form\Element;
+
+/**
+ * Generation of RSA password input elements with RequireJS module injection
+ */
+class RsaInputElement extends \TYPO3\CMS\Rsaauth\Form\Element\RsaInputElement
+{
+    /**
+     * Render RSA password field with RequireJS module injection
+     *
+     * @return array
+     */
+    public function render(): array
+    {
+        $resultArray = parent::render();
+        $resultArray['requireJsModules'][] = 'TYPO3/CMS/MyExt/GeneratePassword';
+        return $resultArray;
+    }
+}
 ```
 
-## Das JavaScript als RequireJS Modul
+Indem wir `parent::render()` aufrufen und lediglich das RequireJS-Modul an `$resultArray['requireJsModules']` anhängen, vermeiden wir redundanten Code und halten die Lösung wartbar.
 
-TYPO3 bringt von Haus aus [RequireJS](https://requirejs.org/) mit und sucht automatisch in dem Pfad `[SitePackage]/Resources/Public/JavaScript` nach RequireJS Modulen. Die Registrierung eines RequireJS Moduls haben wir bereits im vorherigen Abschnitt durchgeführt. Legt nun eine js-Datei an. Meine heißt `GeneratePassword.js` mit folgendem Inhalt:
+## Das JavaScript als RequireJS-Modul
+
+TYPO3 bringt RequireJS mit und sucht bei Modulen mit dem Prefix `TYPO3/CMS/` in den Verzeichnissen der installierten Extensions. Legt die Datei `Resources/Public/JavaScript/GeneratePassword.js` in eurer Extension an:
 
 ```javascript
 /**
@@ -190,27 +196,28 @@ TYPO3 bringt von Haus aus [RequireJS](https://requirejs.org/) mit und sucht auto
  */
 define("TYPO3/CMS/MyExt/GeneratePassword", ["jquery"], function($) {
     $(function() {
-        // hide all panels
+        // Hide all password panels initially
         $("div.myExtGeneratedPassword").hide();
 
-        // start ajax call onclick
-        $("a.myExtGeneratePassword").on("click", function(event) {
+        // Trigger AJAX call on button click
+        $(document).on("click", "a.myExtGeneratePassword", function(event) {
             event.preventDefault();
             var itemName = $(this).data("itemname");
             var itemUid = $(this).data("itemuid");
+
             $.ajax({
                 url: TYPO3.settings.ajaxUrls['myExtGeneratePassword'],
                 dataType: 'text',
                 cache: false,
                 success: function(response) {
-                    // set new password
+                    // Update form field and cleartext panel
                     $("[data-formengine-input-name='" + itemName + "']").val(response);
                     $("input[name='" + itemName + "']")
                         .siblings("div.myExtGeneratedPassword")
                         .show()
-                        .find("div.panel-body")
-                        .find("code")
+                        .find("div.panel-body code")
                         .text(response);
+
                     TBE_EDITOR.fieldChanged('be_users', itemUid, 'password', itemName);
                 }
             });
@@ -219,101 +226,101 @@ define("TYPO3/CMS/MyExt/GeneratePassword", ["jquery"], function($) {
 });
 ```
 
-Sehr wichtig: Anders als bei Extbase-Extensions müssen eure RequireJS Module mit dem `TYPO3\CMS` Vendornamen registriert werden. Der 2te Parameter ist ein Array von Modulen, das wir für unser Modul zwingend benötigen. In unserem Modul benötigen wir `jquery`, das wir dann im dritten Parameter über `$` in unserem Modul zur Verfügung stellen.
+Über die `data`-Attribute des Wizards steuern wir exakt das passende Passwortfeld an und aktualisieren dessen Wert. Zusätzlich fügen wir das generierte Passwort in den Body des Nachrichtenselements ein und signalisieren TYPO3 über `TBE_EDITOR.fieldChanged()`, dass sich der Feldinhalt geändert hat.
 
-Im Weiteren greift ihr nun auf die `data` Attribute unseres Wizards zu, um dann damit das exakte Passwortfeld ansprechen zu können und das Passwort zu verändern. Außerdem befüllt ihr noch den panel-body und zeigt es an.
+## Das AJAX-Script im Backend
 
-## Das Ajax-Script
-
-Backend AJAX-Scripte sind zunächst in der `ext_localconf.php` zu registrieren: 
+Backend-AJAX-Routen werden in der `ext_localconf.php` registriert:
 
 ```php
+<?php
+defined('TYPO3') || die('Access denied.');
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerAjaxHandler(
     'myExtGeneratePassword',
-    \JWeiland\MyExt\Ajax\GeneratePassword::class . '->generate',
+    \Vendor\MyExt\Ajax\GeneratePassword::class . '->generate',
     true
 );
 ```
 
-Dank des eindeutigen Namens `myExtGeneratePassword` erzeugt TYPO3 für euch völlig automatisch eine vollständige AJAX-Url inkl. HashWerten, die ihr wie oben gesehen mit `TYPO3.settings.ajaxUrls` in eurem AJAX-Call verwenden könnt. Mit dem 2ten Parameter könnt ihr eine PHP-Klasse verknüpfen, die bei dem AJAX-Call aufgerufen werden soll. Meine `GeneratePassword.php` hat folgenden Inhalt:
+Über die Kennung `myExtGeneratePassword` stellt TYPO3 in der JavaScript-Umgebung automatisch die passende URL unter `TYPO3.settings.ajaxUrls['myExtGeneratePassword']` inklusive Sicherheits-Tokens bereit.
+
+Erstellt nun die AJAX-Controller-Klasse `Classes/Ajax/GeneratePassword.php`:
 
 ```php
 <?php
 
-namespace JWeiland\MyExt\Ajax;
+namespace Vendor\MyExt\Ajax;
 
-use JWeiland\MyExt\Configuration\ExtConf;
+use Vendor\MyExt\Configuration\ExtConf;
 use TYPO3\CMS\Core\Http\AjaxRequestHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @license www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- */
-class GeneratePassword {
-
+class GeneratePassword
+{
     /**
-     * Generate a password
+     * Generate password AJAX endpoint
      *
      * @param array $ajaxParameters
      * @param AjaxRequestHandler $ajaxRequestHandler
-     * @return string
+     * @return void
      */
-    public function generate(array $ajaxParameters, AjaxRequestHandler $ajaxRequestHandler)
+    public function generate(array $ajaxParameters, AjaxRequestHandler $ajaxRequestHandler): void
     {
         /** @var ExtConf $extConf */
         $extConf = GeneralUtility::makeInstance(ExtConf::class);
-        $ajaxRequestHandler->setContent(array(
+        $ajaxRequestHandler->setContent([
             $this->generateStrongPassword(
                 $extConf->getPasswordLength(),
                 $extConf->getAllowedPasswordChars()
             )
-        ));
+        ]);
     }
 
     /**
-     * Generate a strong password
-     * This method was inspired by: gist.github.com/tylerhall/521810
+     * Generate a strong password with configurable character sets
      *
      * @param int $length
      * @param string $availableSets
-     *
      * @return string
      */
-    public function generateStrongPassword($length = 12, $availableSets = 'luds')
+    public function generateStrongPassword(int $length = 12, string $availableSets = 'luds'): string
     {
-        $sets = array();
-        if (strpos($availableSets, 'l') !== false) {
+        $sets = [];
+        if (str_contains($availableSets, 'l')) {
             $sets[] = 'abcdefghjkmnpqrstuvwxyz';
         }
-        if (strpos($availableSets, 'u') !== false) {
+        if (str_contains($availableSets, 'u')) {
             $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
         }
-        if (strpos($availableSets, 'd') !== false) {
+        if (str_contains($availableSets, 'd')) {
             $sets[] = '23456789';
         }
-        if (strpos($availableSets, 's') !== false) {
+        if (str_contains($availableSets, 's')) {
             $sets[] = '!@#$%&*?';
         }
+
         $all = '';
         $password = '';
-        foreach ($sets as $set)
-        {
+        foreach ($sets as $set) {
             $password .= $set[array_rand(str_split($set))];
             $all .= $set;
         }
-        $all = str_split($all);
-        for ($i = 0; $i < $length - count($sets); $i++) {
-            $password .= $all[array_rand($all)];
+
+        $allArray = str_split($all);
+        $remainingLength = $length - count($sets);
+        for ($i = 0; $i < $remainingLength; $i++) {
+            $password .= $allArray[array_rand($allArray)];
         }
-        $password = str_shuffle($password);
-        return $password;
+
+        return str_shuffle($password);
     }
 }
 ```
 
 ## Das Passwort konfigurierbar machen
 
-Legt im Rootverzeichnis eurer Extension eine Datei mit dem Namen `ext_conf_template.txt` an. Mit dieser Datei könnt ihr eure Extension über den Extensionmanager konfigurierbar machen:
+Über die Datei `ext_conf_template.txt` im Root-Verzeichnis eurer Extension stellt ihr Konfigurationsoptionen für den Extension-Manager bereit:
 
 ```typo3_typoscript
 # cat=password; type=int+; label = LLL:EXT:myExt/Resources/Private/Language/ExtConf.xlf:passwordLength
@@ -328,13 +335,14 @@ passwordUseDigits = 1
 passwordUseSpecialChars = 1
 ```
 
-### Die Übersetzung: ExtConf.xlf
+### Die Übersetzung in `ExtConf.xlf`
+
+Erstellt die Sprachdatei `Resources/Private/Language/ExtConf.xlf`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
     <file t3:id="1454342620" source-language="en" datatype="plaintext" original="messages" date="2016-02-01T17:03:45Z" product-name="myExt">
-
         <body>
             <trans-unit id="passwordLength">
                 <source>Length of password</source>
@@ -356,72 +364,29 @@ passwordUseSpecialChars = 1
 </xliff>
 ```
 
-### Besserer Zugriff auf die Configuration mit ExtConf
+### Typisierter Zugriff auf die Konfiguration mit `ExtConf`
+
+Für einen sauberen und objektorientierten Zugriff auf die Einstellungen erstellen wir die Service-Klasse `Classes/Configuration/ExtConf.php`:
 
 ```php
 <?php
 
-namespace JWeiland\MyExt\Configuration;
+namespace Vendor\MyExt\Configuration;
 
 use TYPO3\CMS\Core\SingletonInterface;
 
-/**
- * @license www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- */
 class ExtConf implements SingletonInterface
 {
-    /**
-     * passwordLength
-     *
-     * @var int
-     */
-    protected $passwordLength = 12;
-    
-    /**
-     * passwordUseLowerCase
-     *
-     * @var bool
-     */
-    protected $passwordUseLowerCase = true;
-    
-    /**
-     * passwordUseUpperCase
-     *
-     * @var bool
-     */
-    protected $passwordUseUpperCase = true;
-    
-    /**
-     * passwordUseDigits
-     *
-     * @var bool
-     */
-    protected $passwordUseDigits = true;
-    
-    /**
-     * passwordUseSpecialChars
-     *
-     * @var bool
-     */
-    protected $passwordUseSpecialChars = true;
-    
-    /**
-     * allowedPasswordChars
-     *
-     * @var string
-     */
-    protected $allowedPasswordChars = 'luds';
-    
-    /**
-     * constructor of this class
-     * This method reads the global configuration and calls the setter methods.
-     */
+    protected int $passwordLength = 12;
+    protected bool $passwordUseLowerCase = true;
+    protected bool $passwordUseUpperCase = true;
+    protected bool $passwordUseDigits = true;
+    protected bool $passwordUseSpecialChars = true;
+
     public function __construct()
     {
-        // get global configuration
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['my_ext']);
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['my_ext'] ?? '', ['allowed_classes' => false]);
         if (is_array($extConf)) {
-            // call setter method foreach configuration entry
             foreach ($extConf as $key => $value) {
                 $methodName = 'set' . ucfirst($key);
                 if (method_exists($this, $methodName)) {
@@ -430,124 +395,58 @@ class ExtConf implements SingletonInterface
             }
         }
     }
-    
-    /**
-     * Returns the passwordLength
-     *
-     * @return int $passwordLength
-     */
-    public function getPasswordLength()
+
+    public function getPasswordLength(): int
     {
-        if (empty($this->passwordLength)) {
-            return 12;
-        } else {
-            return $this->passwordLength;
-        }
+        return $this->passwordLength > 0 ? $this->passwordLength : 12;
     }
-    
-    /**
-     * Sets the passwordLength
-     *
-     * @param int $passwordLength
-     * @return void
-     */
-    public function setPasswordLength($passwordLength)
+
+    public function setPasswordLength(int|string $passwordLength): void
     {
         $this->passwordLength = (int)$passwordLength;
     }
-    
-    /**
-     * Returns the passwordUseLowerCase
-     *
-     * @return bool $passwordUseLowerCase
-     */
-    public function getPasswordUseLowerCase()
+
+    public function getPasswordUseLowerCase(): bool
     {
         return $this->passwordUseLowerCase;
     }
-    
-    /**
-     * Sets the passwordUseLowerCase
-     *
-     * @param bool $passwordUseLowerCase
-     * @return void
-     */
-    public function setPasswordUseLowerCase($passwordUseLowerCase)
+
+    public function setPasswordUseLowerCase(bool|string $passwordUseLowerCase): void
     {
         $this->passwordUseLowerCase = (bool)$passwordUseLowerCase;
     }
-    
-    /**
-     * Returns the passwordUseUpperCase
-     *
-     * @return bool $passwordUseUpperCase
-     */
-    public function getPasswordUseUpperCase()
+
+    public function getPasswordUseUpperCase(): bool
     {
         return $this->passwordUseUpperCase;
     }
-    
-    /**
-     * Sets the passwordUseUpperCase
-     *
-     * @param bool $passwordUseUpperCase
-     * @return void
-     */
-    public function setPasswordUseUpperCase($passwordUseUpperCase)
+
+    public function setPasswordUseUpperCase(bool|string $passwordUseUpperCase): void
     {
         $this->passwordUseUpperCase = (bool)$passwordUseUpperCase;
     }
-    
-    /**
-     * Returns the passwordUseDigits
-     *
-     * @return bool $passwordUseDigits
-     */
-    public function getPasswordUseDigits()
+
+    public function getPasswordUseDigits(): bool
     {
         return $this->passwordUseDigits;
     }
-    
-    /**
-     * Sets the passwordUseDigits
-     *
-     * @param bool $passwordUseDigits
-     * @return void
-     */
-    public function setPasswordUseDigits($passwordUseDigits)
+
+    public function setPasswordUseDigits(bool|string $passwordUseDigits): void
     {
         $this->passwordUseDigits = (bool)$passwordUseDigits;
     }
-    
-    /**
-     * Returns the passwordUseSpecialChars
-     *
-     * @return bool $passwordUseSpecialChars
-     */
-    public function getPasswordUseSpecialChars()
+
+    public function getPasswordUseSpecialChars(): bool
     {
         return $this->passwordUseSpecialChars;
     }
-    
-    /**
-     * Sets the passwordUseSpecialChars
-     *
-     * @param bool $passwordUseSpecialChars
-     * @return void
-     */
-    public function setPasswordUseSpecialChars($passwordUseSpecialChars)
+
+    public function setPasswordUseSpecialChars(bool|string $passwordUseSpecialChars): void
     {
         $this->passwordUseSpecialChars = (bool)$passwordUseSpecialChars;
     }
-    
-    /**
-     * Returns the allowedPasswordChars
-     *
-     * @return string $allowedPasswordChars
-     *
-     * @throws \Exception
-     */
-    public function getAllowedPasswordChars()
+
+    public function getAllowedPasswordChars(): string
     {
         $allowedPasswordChars = [];
         if ($this->getPasswordUseLowerCase()) {
@@ -562,9 +461,11 @@ class ExtConf implements SingletonInterface
         if ($this->getPasswordUseSpecialChars()) {
             $allowedPasswordChars[] = 's';
         }
+
         if (empty($allowedPasswordChars)) {
-            throw new \Exception('The allowed password chars are not configured in the extension configuration. Set some in the extension manager', 1454665870);
+            throw new \RuntimeException('The allowed password chars are not configured. Check extension manager settings.', 1454665870);
         }
+
         return implode('', $allowedPasswordChars);
     }
 }
